@@ -1,4 +1,4 @@
-[gd_resource type="Resource" format=3 uid="uid://domh45urchay3"]
+[gd_resource type="Resource" script_class="PlayerClass" format=3 uid="uid://domh45urchay3"]
 
 [ext_resource type="Script" uid="uid://dviw3iwulqtp" path="res://scripts/player/player_class.gd" id="1_m2d56"]
 

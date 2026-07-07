@@ -6,7 +6,7 @@ var direction : Vector2 = Vector2.ZERO
 
 
 # Called every physics tick
-func _physics_process(delta: float) -> void:
+func _process(delta: float) -> void:
 	# Get an input vector and modify velocity of player based on it
 	direction = Input.get_vector("left", "right", "up", "down")
 	velocity = direction * player_class.speed

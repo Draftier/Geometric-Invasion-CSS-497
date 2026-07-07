@@ -2,13 +2,34 @@
 
 [ext_resource type="PackedScene" uid="uid://bqcpjm6w37etq" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Resource" uid="uid://domh45urchay3" path="res://assets/resources/player/destroyer.tres" id="2_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://cp837cm6qinkj" path="res://scenes/enemy.tscn" id="3_lnu2h"]
 
 [node name="Game" type="Node2D" unique_id=1466998741]
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=1966486117]
+offset_left = -499.0
+offset_top = -224.00002
+offset_right = -399.0
+offset_bottom = -163.00002
+scale = Vector2(5, 5)
+color = Color(0.42754805, 1, 1, 0.22900002)
+
+[node name="ColorRect3" type="ColorRect" parent="." unique_id=321701160]
+offset_left = 0.9999924
+offset_top = -223.99998
+offset_right = 100.99999
+offset_bottom = -162.99998
+scale = Vector2(5, 5)
+color = Color(0.5705642, 0.044830933, 0.6164011, 0.22900002)
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="." unique_id=468229809]
 color = Color(0.6633989, 0.67117625, 0.47537822, 1)
 
 [node name="Player" parent="." unique_id=1651887187 instance=ExtResource("1_uwrxv")]
+position = Vector2(0, -3)
 player_class = ExtResource("2_yqjtg")
 
 [node name="Bullets" type="Node2D" parent="." unique_id=666204858]
+
+[node name="Enemy" parent="." unique_id=1367146779 instance=ExtResource("3_lnu2h")]
+position = Vector2(-1, -29)

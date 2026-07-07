@@ -15,6 +15,7 @@ radius = 7.0
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_g2els"]
 
 [node name="Player" type="CharacterBody2D" unique_id=1651887187]
+collision_mask = 10
 script = ExtResource("1_g2els")
 player_class = SubResource("Resource_qhqgy")
 

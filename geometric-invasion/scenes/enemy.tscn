@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://cp837cm6qinkj"]
+
+[ext_resource type="Texture2D" uid="uid://dtb2vka5e01d3" path="res://assets/sprites/enemy.png" id="1_7p1mj"]
+[ext_resource type="Script" uid="uid://p2i60h7gnk8k" path="res://scripts/enemy/enemy.gd" id="1_md0e3"]
+[ext_resource type="Shader" uid="uid://cqv7cjdn8x0b5" path="res://shaders/enemy.tres" id="2_4ra3w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8tegq"]
+size = Vector2(14, 14)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iywne"]
+shader = ExtResource("2_4ra3w")
+shader_parameter/Color = Color(1, 1, 1, 1)
+shader_parameter/Progress = 1.0
+
+[node name="Enemy" type="Area2D" unique_id=1367146779]
+position = Vector2(0, 1)
+collision_layer = 2
+collision_mask = 13
+script = ExtResource("1_md0e3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1199752919]
+shape = SubResource("RectangleShape2D_8tegq")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1252295741]
+material = SubResource("ShaderMaterial_iywne")
+texture = ExtResource("1_7p1mj")

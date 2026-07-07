@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var speed = 100
+@export var speed = 250
 var direction 
 
 # Will utilize to play some sort of animation on instantiation
@@ -19,4 +19,11 @@ func setup(pos: Vector2, dir: Vector2) -> void:
 
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+	queue_free()
+
+
+func _on_area_entered(area: Area2D) -> void:
+	print(area)
+	if "hit" in area:
+		area.hit()
 	queue_free()
