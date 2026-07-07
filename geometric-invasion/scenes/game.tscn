@@ -1,14 +1,14 @@
 [gd_scene format=3 uid="uid://btytpnf13ov48"]
 
 [ext_resource type="PackedScene" uid="uid://bqcpjm6w37etq" path="res://scenes/player.tscn" id="1_uwrxv"]
+[ext_resource type="Resource" uid="uid://domh45urchay3" path="res://assets/resources/player/destroyer.tres" id="2_yqjtg"]
 
 [node name="Game" type="Node2D" unique_id=1466998741]
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=660561797]
-offset_left = -578.0
-offset_top = -323.0
-offset_right = 574.0
-offset_bottom = 326.0
-color = Color(0.42745098, 1, 1, 1)
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="." unique_id=468229809]
+color = Color(0.6633989, 0.67117625, 0.47537822, 1)
 
 [node name="Player" parent="." unique_id=1651887187 instance=ExtResource("1_uwrxv")]
+player_class = ExtResource("2_yqjtg")
+
+[node name="Bullets" type="Node2D" parent="." unique_id=666204858]
