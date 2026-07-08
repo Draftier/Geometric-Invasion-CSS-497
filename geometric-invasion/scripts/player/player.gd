@@ -10,14 +10,18 @@ func _process(delta: float) -> void:
 	# Get an input vector and modify velocity of player based on it
 	direction = Input.get_vector("left", "right", "up", "down")
 	velocity = direction * player_class.speed
-	# Apply velocity to player
-	move_and_slide()
+	
 	
 	# Fire bullets from player guns if shoot button held
 	if Input.is_action_pressed("shoot"):
 		$Gun.shoot()
 		$Gun2.shoot()
 	
+	if Input.is_action_pressed("slow"):
+		velocity = direction * player_class.speed / 2
+	
+	# Apply velocity to player
+	move_and_slide()
 	
 # Learned this function in another tutorial and read about it being useful for input to UI or menus
 # Since this function is not called every frame/physics tick
