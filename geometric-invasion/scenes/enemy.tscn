@@ -2,7 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://dtb2vka5e01d3" path="res://assets/sprites/enemy.png" id="1_7p1mj"]
 [ext_resource type="Script" uid="uid://p2i60h7gnk8k" path="res://scripts/enemy/enemy.gd" id="1_md0e3"]
-[ext_resource type="Shader" uid="uid://cqv7cjdn8x0b5" path="res://shaders/enemy.tres" id="2_4ra3w"]
+[ext_resource type="Shader" uid="uid://cqv7cjdn8x0b5" path="res://shaders/flash.tres" id="2_4ra3w"]
+[ext_resource type="Texture2D" uid="uid://du835wqb2j21b" path="res://assets/sprites/bitmap.png" id="4_5uy6h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8tegq"]
 size = Vector2(14, 14)
@@ -29,5 +30,9 @@ texture = ExtResource("1_7p1mj")
 position = Vector2(0, -1)
 
 [node name="ShootTimer" type="Timer" parent="." unique_id=1139685173]
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=305277508]
+energy = 20.65
+texture = ExtResource("4_5uy6h")
 
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

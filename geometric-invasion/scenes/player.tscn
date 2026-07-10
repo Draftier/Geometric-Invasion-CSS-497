@@ -4,6 +4,8 @@
 [ext_resource type="Script" uid="uid://ciep42dbk0hr" path="res://scripts/player/player.gd" id="1_g2els"]
 [ext_resource type="Script" uid="uid://dviw3iwulqtp" path="res://scripts/player/player_class.gd" id="2_dqkch"]
 [ext_resource type="PackedScene" uid="uid://c6x6lwc5i2t0i" path="res://scenes/ShootPoint.tscn" id="3_qhqgy"]
+[ext_resource type="Shader" uid="uid://ccvumau4xgwhx" path="res://shaders/flicker.gdshader" id="4_tuyoq"]
+[ext_resource type="Texture2D" uid="uid://rjf6qb8ty32e" path="res://assets/sprites/eplosion_1.png" id="6_tuyoq"]
 
 [sub_resource type="Resource" id="Resource_qhqgy"]
 script = ExtResource("2_dqkch")
@@ -14,20 +16,117 @@ radius = 5.0
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_g2els"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fjrip"]
+shader = ExtResource("4_tuyoq")
+shader_parameter/flash_color = Color(1, 1, 1, 0)
+shader_parameter/flash_pct = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qlg0r"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjrip"]
+atlas = ExtResource("6_tuyoq")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_smehm"]
+atlas = ExtResource("6_tuyoq")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ur7pv"]
+atlas = ExtResource("6_tuyoq")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y4r1p"]
+atlas = ExtResource("6_tuyoq")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d2wvv"]
+atlas = ExtResource("6_tuyoq")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d8ny1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qlg0r")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fjrip")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_smehm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ur7pv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y4r1p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d2wvv")
+}],
+"loop": 0,
+"name": &"explosion",
+"speed": 7.0
+}]
+
+[sub_resource type="Animation" id="Animation_tuyoq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/flash_pct")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_fjrip"]
+resource_name = "flash"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/flash_pct")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.8999999, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.50000002375, 0.0, 0.50000002375, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_smehm"]
+_data = {
+&"RESET": SubResource("Animation_tuyoq"),
+&"flash": SubResource("Animation_fjrip")
+}
+
 [node name="Player" type="CharacterBody2D" unique_id=1651887187]
 collision_mask = 10
+motion_mode = 1
 script = ExtResource("1_g2els")
 player_class = SubResource("Resource_qhqgy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=37728273]
 shape = SubResource("CircleShape2D_u8vuu")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1562362491]
-texture = ExtResource("1_3vyb7")
-
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1316585369]
+zoom = Vector2(5, 5)
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=1359110295]
+position = Vector2(1, 2)
 texture = SubResource("NoiseTexture2D_g2els")
 
 [node name="Gun" parent="." unique_id=1731799014 instance=ExtResource("3_qhqgy")]
@@ -35,3 +134,15 @@ position = Vector2(-4, -4)
 
 [node name="Gun2" parent="." unique_id=1962489092 instance=ExtResource("3_qhqgy")]
 position = Vector2(6, -4)
+
+[node name="InvulnerabilityTimer" type="Timer" parent="." unique_id=126532848]
+wait_time = 5.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=919492480]
+material = SubResource("ShaderMaterial_fjrip")
+sprite_frames = SubResource("SpriteFrames_d8ny1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=486387434]
+libraries/ = SubResource("AnimationLibrary_smehm")
+
+[connection signal="timeout" from="InvulnerabilityTimer" to="." method="_on_invulnerability_timer_timeout"]

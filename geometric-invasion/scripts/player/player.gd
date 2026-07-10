@@ -3,6 +3,8 @@ extends CharacterBody2D
 
 var direction : Vector2 = Vector2.ZERO
 @export var player_class : PlayerClass
+var lives = 2
+var invulnerable = false
 
 
 # Called every physics tick
@@ -23,7 +25,34 @@ func _process(delta: float) -> void:
 	# Apply velocity to player
 	move_and_slide()
 	
+	if invulnerable == true:
+
+		var timer = get_tree().create_timer(5.0)
+		$AnimationPlayer.play("flash")
+		await timer.timeout
+		$AnimationPlayer.stop()
+	
 # Learned this function in another tutorial and read about it being useful for input to UI or menus
 # Since this function is not called every frame/physics tick
 func _unhandled_input(event: InputEvent) -> void:
 	pass
+
+# Function that allows the player to take damage
+func take_damage() -> void:
+	print("hit")
+	if invulnerable == false:
+		lives -= 1
+		var timer = get_tree().create_timer(1)
+		$AnimatedSprite2D.play("explosion")
+		await timer.timeout
+		if lives <= 0:
+			queue_free()
+		invulnerable = true
+		$AnimatedSprite2D.play("default")
+		$InvulnerabilityTimer.start()			
+	else:
+		return
+
+
+func _on_invulnerability_timer_timeout() -> void:
+	invulnerable = false

@@ -1,16 +1,17 @@
 class_name basic_enemy
 extends Area2D
 
-const bullet_scene = preload("res://scenes/player_bullet.tscn")
+const bullet_scene = preload("res://scenes/bullet_2.tscn")
 @onready var shoot_timer = $ShootTimer
 @onready var rotater = $Rotater
 
 const rotate_speed : int = 500
-const shooter_timer_wait_time : float = 0.2
+const shooter_timer_wait_time : float = 0.1
 const spawn_point_count = 4
 const radius = 16
+const move_speed = 10
 
-@export var health = 5
+@export var health = 100
 @export var path : Path2D
 
 func _ready() -> void:
@@ -29,6 +30,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	var new_rotation = rotater.rotation_degrees + rotate_speed * delta
 	rotater.rotation_degrees = fmod(new_rotation, 360)
+	position += move_speed * Vector2.RIGHT * delta
 	
 
 func hit() -> void:
@@ -36,8 +38,8 @@ func hit() -> void:
 	if health <= 0:
 		queue_free()
 	var tween = create_tween()
-	tween.tween_property($Sprite2D.material, 'shader_parameter/Progress', 0.0, 0.1)
-	tween.tween_property($Sprite2D.material, 'shader_parameter/Progress', 1.0, 0.2)	
+	tween.tween_property($Sprite2D.material, 'shader_parameter/Progress', 0.0, 0.01)
+	tween.tween_property($Sprite2D.material, 'shader_parameter/Progress', 1.0, 0.02)	
 
 
 func _on_shoot_timer_timeout() -> void:

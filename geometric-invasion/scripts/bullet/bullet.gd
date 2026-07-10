@@ -10,7 +10,7 @@ func _ready() -> void:
 # Called every physics tick
 func _physics_process(delta: float) -> void:
 	# Move the bullet up
-	position += transform.x * speed * delta
+	position += Vector2.UP * speed * delta
 	
 # Setup the bullet to be shot in the direction of the gun
 func setup(pos: Vector2, dir: Vector2) -> void:
@@ -23,8 +23,7 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 
 
 func _on_area_entered(area: Area2D) -> void:
-	# print(area)
-	# if "hit" in area:
-	# 	area.hit()
-	# queue_free()
+	if "hit" in area:
+		area.hit()
+		queue_free()
 	pass
