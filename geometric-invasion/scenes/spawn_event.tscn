@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bojjd0xvcw0pk"]
+
+[ext_resource type="Script" uid="uid://bewu02jnvwcgy" path="res://scripts/event/spawn_event.gd" id="1_hffdm"]
+
+[node name="SpawnEvent" type="Node" unique_id=1771177156]
+script = ExtResource("1_hffdm")

@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 var direction : Vector2 = Vector2.ZERO
 @export var player_class : PlayerClass
-var lives = 2
+var lives = 1000
 var invulnerable = false
 
 
@@ -42,7 +42,7 @@ func take_damage() -> void:
 	print("hit")
 	if invulnerable == false:
 		lives -= 1
-		var timer = get_tree().create_timer(1)
+		var timer = get_tree().create_timer(0.7)
 		$AnimatedSprite2D.play("explosion")
 		await timer.timeout
 		if lives <= 0:

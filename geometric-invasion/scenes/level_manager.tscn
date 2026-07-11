@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://cjye6s0e01omf"]
+
+[ext_resource type="Script" uid="uid://b2nxf0ct0x4gn" path="res://scripts/level_manager/level_manager.gd" id="1_06fa7"]
+
+[node name="LevelManager" type="Node" unique_id=1305954196]
+script = ExtResource("1_06fa7")
+
+[node name="ObstacleSpawners" type="Node" parent="." unique_id=1994234290]
+
+[node name="SpriteSpawners" type="Node" parent="." unique_id=479129674]
+
+[node name="LevelTimer" type="Timer" parent="." unique_id=1173292609]
+wait_time = 120.0
+
+[connection signal="timeout" from="LevelTimer" to="." method="_on_level_timer_timeout"]
