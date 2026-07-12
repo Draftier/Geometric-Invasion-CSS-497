@@ -19,7 +19,9 @@ func shoot() -> void:
 	# Fire bullet then reset can_shoot flag so that we can keep bullet fire rate within timer time
 	if can_shoot == true:
 		var player_bullet = PLAYER_BULLET.instantiate() as Area2D
-		player_bullet.setup($Muzzle.position, Vector2.UP)
+		player_bullet.speed = 1000
+		player_bullet.global_position = $Muzzle.position
+		player_bullet.global_rotation = $Muzzle.global_rotation
 		add_child(player_bullet)
 		$FireRateTimer.start()
 		can_shoot = false

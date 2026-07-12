@@ -1,10 +1,23 @@
 class_name Player
 extends CharacterBody2D
 
+# TODO add implementation for player classes perhaps different health or move speed for calss
+@export var player_class : PlayerClass 
+
+# Initial direction the player is moving at (moving no where)
 var direction : Vector2 = Vector2.ZERO
-@export var player_class : PlayerClass
-var lives = 1000
-var invulnerable = false
+
+# Lives set to 1000 for testing
+var lives : int = 1000
+
+# Flag variable to track if the player is invulnerable
+var invulnerable : bool = false
+
+# Number of guns
+@export var num_guns : int
+
+func _ready() -> void:
+	pass
 
 
 # Called every physics tick
@@ -13,11 +26,10 @@ func _process(delta: float) -> void:
 	direction = Input.get_vector("left", "right", "up", "down")
 	velocity = direction * player_class.speed
 	
-	
 	# Fire bullets from player guns if shoot button held
 	if Input.is_action_pressed("shoot"):
-		$Gun.shoot()
-		$Gun2.shoot()
+		for i in $guns.get_children():
+			i.shoot()
 	
 	if Input.is_action_pressed("slow"):
 		velocity = direction * player_class.speed / 2
@@ -26,7 +38,6 @@ func _process(delta: float) -> void:
 	move_and_slide()
 	
 	if invulnerable == true:
-
 		var timer = get_tree().create_timer(5.0)
 		$AnimationPlayer.play("flash")
 		await timer.timeout

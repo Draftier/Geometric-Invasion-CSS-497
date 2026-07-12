@@ -9,6 +9,7 @@ stats = ExtResource("2_2ypsg")
 
 [node name="Muzzle" type="Marker2D" parent="." unique_id=2003817388]
 position = Vector2(-1, 3)
+rotation = -1.5707964
 
 [node name="FireRateTimer" type="Timer" parent="." unique_id=2951010]
 wait_time = 0.15

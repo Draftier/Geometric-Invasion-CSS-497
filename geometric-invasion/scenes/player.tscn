@@ -11,9 +11,6 @@
 script = ExtResource("2_dqkch")
 metadata/_custom_type_script = "uid://dviw3iwulqtp"
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_u8vuu"]
-radius = 3.0
-
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_g2els"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fjrip"]
@@ -113,26 +110,28 @@ _data = {
 &"flash": SubResource("Animation_fjrip")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_u8vuu"]
+radius = 4.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1tcrw"]
+radius = 9.0
+
 [node name="Player" type="CharacterBody2D" unique_id=1651887187]
-collision_mask = 10
+collision_mask = 16
 motion_mode = 1
 script = ExtResource("1_g2els")
 player_class = SubResource("Resource_qhqgy")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=37728273]
-shape = SubResource("CircleShape2D_u8vuu")
-
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1316585369]
+zoom = Vector2(2, 2)
+limit_left = -191
+limit_top = -281
+limit_right = 188
+limit_bottom = 294
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=1359110295]
 position = Vector2(1, 2)
 texture = SubResource("NoiseTexture2D_g2els")
-
-[node name="Gun" parent="." unique_id=1731799014 instance=ExtResource("3_qhqgy")]
-position = Vector2(-4, -4)
-
-[node name="Gun2" parent="." unique_id=1962489092 instance=ExtResource("3_qhqgy")]
-position = Vector2(6, -4)
 
 [node name="InvulnerabilityTimer" type="Timer" parent="." unique_id=126532848]
 wait_time = 5.0
@@ -143,5 +142,22 @@ sprite_frames = SubResource("SpriteFrames_d8ny1")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=486387434]
 libraries/ = SubResource("AnimationLibrary_smehm")
+
+[node name="guns" type="Node2D" parent="." unique_id=1613688656]
+
+[node name="Gun" parent="guns" unique_id=1731799014 instance=ExtResource("3_qhqgy")]
+position = Vector2(-4, -4)
+
+[node name="Gun2" parent="guns" unique_id=1962489092 instance=ExtResource("3_qhqgy")]
+position = Vector2(6, -4)
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=1005235134]
+collision_mask = 22
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=37728273]
+shape = SubResource("CircleShape2D_u8vuu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1493186045]
+shape = SubResource("CircleShape2D_1tcrw")
 
 [connection signal="timeout" from="InvulnerabilityTimer" to="." method="_on_invulnerability_timer_timeout"]

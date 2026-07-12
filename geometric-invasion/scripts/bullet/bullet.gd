@@ -1,7 +1,7 @@
 extends Area2D
 
 @export var speed = 250
-var direction 
+
 
 # Will utilize to play some sort of animation on instantiation
 func _ready() -> void:
@@ -10,20 +10,15 @@ func _ready() -> void:
 # Called every physics tick
 func _physics_process(delta: float) -> void:
 	# Move the bullet up
-	position += Vector2.UP * speed * delta
+	position += transform.x * speed * delta
 	
-# Setup the bullet to be shot in the direction of the gun
-func setup(pos: Vector2, dir: Vector2) -> void:
-	global_position = pos
-	direction = dir
-
-
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	queue_free()
 
-
 func _on_area_entered(area: Area2D) -> void:
-	if "hit" in area:
-		area.hit()
-		queue_free()
+	if "take_damage" in area.get_parent():
+		area.get_parent().take_damage()
+	if "take_damage" in area:
+		area.take_damage()
+	queue_free()
 	pass
