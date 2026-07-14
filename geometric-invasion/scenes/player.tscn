@@ -3,7 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://da74rc5288inq" path="res://assets/sprites/player.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://ciep42dbk0hr" path="res://scripts/player/player.gd" id="1_g2els"]
 [ext_resource type="Script" uid="uid://dviw3iwulqtp" path="res://scripts/player/player_class.gd" id="2_dqkch"]
-[ext_resource type="PackedScene" uid="uid://c6x6lwc5i2t0i" path="res://scenes/ShootPoint.tscn" id="3_qhqgy"]
 [ext_resource type="Shader" uid="uid://ccvumau4xgwhx" path="res://shaders/flicker.gdshader" id="4_tuyoq"]
 [ext_resource type="Texture2D" uid="uid://rjf6qb8ty32e" path="res://assets/sprites/eplosion_1.png" id="6_tuyoq"]
 
@@ -144,12 +143,6 @@ sprite_frames = SubResource("SpriteFrames_d8ny1")
 libraries/ = SubResource("AnimationLibrary_smehm")
 
 [node name="guns" type="Node2D" parent="." unique_id=1613688656]
-
-[node name="Gun" parent="guns" unique_id=1731799014 instance=ExtResource("3_qhqgy")]
-position = Vector2(-4, -4)
-
-[node name="Gun2" parent="guns" unique_id=1962489092 instance=ExtResource("3_qhqgy")]
-position = Vector2(6, -4)
 
 [node name="HurtBox" type="Area2D" parent="." unique_id=1005235134]
 collision_mask = 22
