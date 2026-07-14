@@ -5,10 +5,6 @@
 [node name="LevelManager" type="Node" unique_id=1305954196]
 script = ExtResource("1_06fa7")
 
-[node name="ObstacleSpawners" type="Node" parent="." unique_id=1994234290]
-
-[node name="SpriteSpawners" type="Node" parent="." unique_id=479129674]
-
 [node name="LevelTimer" type="Timer" parent="." unique_id=1173292609]
 wait_time = 120.0
 

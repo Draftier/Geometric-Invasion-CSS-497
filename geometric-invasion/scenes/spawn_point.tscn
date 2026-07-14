@@ -6,3 +6,4 @@
 script = ExtResource("1_ebynj")
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=1386965850]
+visible = false

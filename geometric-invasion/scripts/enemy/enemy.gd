@@ -22,8 +22,7 @@ const bullet_scene = preload("res://scenes/obstacle_bullet_base.tscn")
 @export var move_speed = 10
 
 @export var health = 100
-@export var path : PathFollow2D
-@export var free_on_path_complete : bool = true
+
 
 func _ready() -> void:
 	# Calculate the step distance between each spawn point around the enemy
@@ -44,18 +43,7 @@ func _ready() -> void:
 	shoot_timer.start()
 	
 func _process(delta: float) -> void:
-	# Calculate new rotations for the pivot(rotater) each frame
-	var new_rotation = rotater.rotation_degrees + rotate_speed * delta
-	# Apply the rotate to the rotater, make sure to use float modulo to wrap around 360
-	rotater.rotation_degrees = fmod(new_rotation, 360)
-	
-	# Have the enemy follow a path at a certain speed
-	path.progress_ratio += delta * move_speed / 8
-	
-	# When path done follow free the enemy
-	if path.progress_ratio >= 1.0 and free_on_path_complete:
-		queue_free()
-	
+	rotate_pivot(delta)
 
 # Function to calculate health and hit upon getting hit by player bullet
 func take_damage() -> void:
@@ -78,4 +66,9 @@ func _on_shoot_timer_timeout() -> void:
 		bullet.speed = 250
 		bullet.position = s.global_position
 		bullet.rotation = s.global_rotation
-		
+
+func rotate_pivot(delta) -> void:
+	# Calculate new rotations for the pivot(rotater) each frame
+	var new_rotation = rotater.rotation_degrees + rotate_speed * delta
+	# Apply the rotate to the rotater, make sure to use float modulo to wrap around 360
+	rotater.rotation_degrees = fmod(new_rotation, 360)

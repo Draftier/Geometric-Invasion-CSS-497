@@ -18,6 +18,7 @@ func _on_fire_rate_timer_timeout() -> void:
 func shoot() -> void:
 	# Fire bullet then reset can_shoot flag so that we can keep bullet fire rate within timer time
 	if can_shoot == true:
+		# Instantiate the bullet shot by player, set speed, positiona, and rotation and start firerate timer
 		var player_bullet = PLAYER_BULLET.instantiate() as Area2D
 		player_bullet.speed = 1000
 		player_bullet.global_position = $Muzzle.position
