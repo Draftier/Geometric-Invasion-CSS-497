@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://domjpwtkv78nv"]
+
+[ext_resource type="Script" uid="uid://dlnfay7bq62ao" path="res://scripts/menus/main_menu.gd" id="1_l6cm7"]
+
+[node name="Main menu" type="CanvasLayer" unique_id=591634332]
+script = ExtResource("1_l6cm7")
+
+[node name="StartButton" type="Button" parent="." unique_id=1638651055]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -266.0
+offset_top = -100.5
+offset_right = 266.0
+offset_bottom = 100.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Start game"
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Geometric Invasion"
-run/main_scene="uid://btytpnf13ov48"
+run/main_scene="uid://domjpwtkv78nv"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
