@@ -6,17 +6,27 @@
 script = ExtResource("1_l6cm7")
 
 [node name="StartButton" type="Button" parent="." unique_id=1638651055]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -266.0
-offset_top = -100.5
-offset_right = 266.0
-offset_bottom = 100.5
+anchors_preset = -1
+anchor_left = 0.3376736
+anchor_top = 0.25617284
+anchor_right = 0.6623264
+anchor_bottom = 0.4351852
 grow_horizontal = 2
 grow_vertical = 2
 text = "Start game"
+metadata/_edit_use_anchors_ = true
+
+[node name="QuitButton" type="Button" parent="." unique_id=595023204]
+anchors_preset = -1
+anchor_left = 0.3376736
+anchor_top = 0.54320985
+anchor_right = 0.6623264
+anchor_bottom = 0.7222222
+offset_top = 3.0517578e-05
+grow_horizontal = 2
+grow_vertical = 2
+text = "Quit to desktop"
+metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]

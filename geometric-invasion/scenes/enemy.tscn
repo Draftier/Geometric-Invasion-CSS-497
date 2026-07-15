@@ -32,7 +32,7 @@ position = Vector2(0, -1)
 [node name="ShootTimer" type="Timer" parent="." unique_id=1139685173]
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=305277508]
-energy = 20.65
+energy = 0.5
 texture = ExtResource("4_5uy6h")
 
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

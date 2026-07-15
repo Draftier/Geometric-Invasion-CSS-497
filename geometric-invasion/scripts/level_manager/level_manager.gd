@@ -47,7 +47,6 @@ func execute_event(event : Spawn_Event) -> void:
 	
 	pass
 	
-
 # To use custom sort to sort events I create a custom callable
 func sort_events_ascending(a : Spawn_Event, b : Spawn_Event) -> bool:
 	if a != null and b != null:
