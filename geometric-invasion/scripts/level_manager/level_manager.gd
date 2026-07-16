@@ -1,58 +1,74 @@
 extends Node
 
+# Variables to set after scene, spawners, events, and time to complete level
 @export var end_change_scene : PackedScene
 @export var spawners : Array[Node]
 @export var events : Array[Spawn_Event]
 @export var level_time : float
 
+# Utilized to index the event array
 var event_index = 0
+# Utilize to track the current time
 var current_time
 
 # Variables to store bullets
-var cur_bullet_count : int = 0
 var max_bullet_count : int = 5000
 var bullets : Array [ Bullet ]
-var bullet_index : int = 0
 
+# Preloading basic bullets for initial pooling
 const basic_enemy_bullet = preload("res://scenes/obstacle_bullet_base.tscn")
 const basic_player_bullet = preload("res://scenes/player_bullet.tscn")
 
+# Function to ad bullets to the object pool
 func add_to_pool(bullet: Bullet) -> void:
 	bullet.reset()
 	bullets.append(bullet)
 	
-
+# Function to pull a bullet from the pool
 func pull_from_pool(type : String) -> Bullet:
 	var object: Bullet
+	# Check if pool is empty or not empty, either way check type of bullet
 	if bullets.is_empty():
 		if type == "enemy":
 			object = basic_enemy_bullet.instantiate()
 		elif type == "player":
 			object = basic_player_bullet.instantiate()
 	else:
+		# Iteratively go through pool and find a bullet related to request type
 		for i in range(0, bullets.size()):
 			if bullets[i].shooter == null:
 				print("Pool bugged")
+			# When bullet type matches set reference to it and remove it from pool
 			if bullets[i].shooter == type:
 				object = bullets[i]
 				bullets.remove_at(i)
 				break
+	# Unpause calculation from bullet being pulled from pool
 	object.set_process(true)
 	object.set_physics_process(true)
 	object.visible = true
+	
+	# Return reference to bullet
 	return object
 
-func _ready() -> void:
+func initialize_pool() -> void:
+	# Loop to initialize the object pool whilst interleaving player and enemy bullets
 	for i in range(0, max_bullet_count / 2):
-		print(i)
+		# Initialization for enemy bullets
 		var bullet : Bullet = basic_enemy_bullet.instantiate()
 		bullet.shooter = "enemy"
 		add_to_pool(bullet)
 		get_tree().root.add_child(bullet)
+		
+		# Initialization for player bullets
 		var player_bullet = basic_player_bullet.instantiate()
 		player_bullet.shooter = "player"
 		add_to_pool(player_bullet)
 		get_tree().root.add_child(player_bullet)
+
+func _ready() -> void:
+	# Call to initialize pool
+	initialize_pool()
 		
 	#Store the time in the timer
 	$LevelTimer.wait_time = level_time
@@ -62,6 +78,7 @@ func _ready() -> void:
 	
 	# Sort the events by the time they occur
 	events.sort_custom(sort_events_ascending)
+	
 	# Start the timer
 	$LevelTimer.start()
 	
@@ -71,11 +88,17 @@ func _process(delta: float) -> void:
 	current_time = (($LevelTimer.get_time_left() - $LevelTimer.wait_time) * -1)
 	
 	# Iterate and execute events through the events every frame
+	# This means events that have the same time will be executed within the same frame
 	if(events.size() - event_index > 0 and events.size() != 0):
+		# Loop through events
 		for i in events.size():
+			# Check if event should occur and execute if it does
 			if events[i].time >= current_time as int:
 				execute_event(events[i])
 			event_index += 1
+	
+	# Debug to print out framerate
+	# TODO change to logging system in future
 	print(Engine.get_frames_per_second())
 
 # At end of level change scene
