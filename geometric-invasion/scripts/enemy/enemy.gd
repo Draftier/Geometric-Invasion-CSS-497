@@ -63,7 +63,7 @@ func take_damage() -> void:
 # Each time timer goes out shoot a bullet for each bullet spawn point in scene
 func _on_shoot_timer_timeout() -> void:
 	for s in rotater.get_children():
-		var bullet = manager.pull_from_pool() as Bullet
+		var bullet = manager.pull_from_pool("enemy") as Bullet
 		#var bullet = bullet_scene.instantiate()
 		#get_tree().root.add_child(bullet)
 		bullet.speed = 250

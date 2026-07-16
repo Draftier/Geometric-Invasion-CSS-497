@@ -2,6 +2,7 @@ class_name Bullet
 extends Area2D
 
 @export var speed = 250
+@export var shooter : String
 
 @onready var level_manager = get_tree().get_first_node_in_group("level_manager")
 

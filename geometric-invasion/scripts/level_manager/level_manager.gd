@@ -10,36 +10,49 @@ var current_time
 
 # Variables to store bullets
 var cur_bullet_count : int = 0
-var max_bullet_count : int = 1750
+var max_bullet_count : int = 5000
 var bullets : Array [ Bullet ]
 var bullet_index : int = 0
 
-const bullet_scene = preload("res://scenes/obstacle_bullet_base.tscn")
+const basic_enemy_bullet = preload("res://scenes/obstacle_bullet_base.tscn")
+const basic_player_bullet = preload("res://scenes/player_bullet.tscn")
 
 func add_to_pool(bullet: Bullet) -> void:
 	bullet.reset()
 	bullets.append(bullet)
 	
 
-func pull_from_pool() -> Bullet:
+func pull_from_pool(type : String) -> Bullet:
 	var object: Bullet
 	if bullets.is_empty():
-		object = bullet_scene.instantiate()
+		if type == "enemy":
+			object = basic_enemy_bullet.instantiate()
+		elif type == "player":
+			object = basic_player_bullet.instantiate()
 	else:
-		object = bullets[0]
-		bullets.remove_at(0)
+		for i in range(0, bullets.size()):
+			if bullets[i].shooter == null:
+				print("Pool bugged")
+			if bullets[i].shooter == type:
+				object = bullets[i]
+				bullets.remove_at(i)
+				break
 	object.set_process(true)
 	object.set_physics_process(true)
 	object.visible = true
 	return object
 
 func _ready() -> void:
-	for i in max_bullet_count:
-		var bullet : Bullet = bullet_scene.instantiate()
-		
+	for i in range(0, max_bullet_count / 2):
+		print(i)
+		var bullet : Bullet = basic_enemy_bullet.instantiate()
+		bullet.shooter = "enemy"
 		add_to_pool(bullet)
-		
 		get_tree().root.add_child(bullet)
+		var player_bullet = basic_player_bullet.instantiate()
+		player_bullet.shooter = "player"
+		add_to_pool(player_bullet)
+		get_tree().root.add_child(player_bullet)
 		
 	#Store the time in the timer
 	$LevelTimer.wait_time = level_time
