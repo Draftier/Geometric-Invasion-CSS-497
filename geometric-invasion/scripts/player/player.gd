@@ -38,10 +38,10 @@ func _process(delta: float) -> void:
 	move_and_slide()
 	
 	if invulnerable == true:
-		var timer = get_tree().create_timer(5.0)
 		$AnimationPlayer.play("flash")
-		await timer.timeout
+	else:
 		$AnimationPlayer.stop()
+	
 	
 # Learned this function in another tutorial and read about it being useful for input to UI or menus
 # Since this function is not called every frame/physics tick

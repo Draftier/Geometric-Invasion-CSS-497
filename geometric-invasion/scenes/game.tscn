@@ -67,8 +67,7 @@ loop = false
 position = Vector2(-2.180191, -2.290577)
 rotation = -1.0824624
 path = NodePath("..")
-shooter_timer_wait_time = 0.01
-spawn_point_count = 2
+spawn_point_count = 20
 
 [node name="PlayerDefaultShootingStyle" parent="." unique_id=1651887187 instance=ExtResource("1_iywne")]
 
