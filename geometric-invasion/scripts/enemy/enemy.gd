@@ -24,6 +24,8 @@ const bullet_scene = preload("res://scenes/obstacle_bullet_base.tscn")
 @export var health = 100
 
 
+@onready var manager = get_tree().get_first_node_in_group("level_manager")
+
 func _ready() -> void:
 	# Calculate the step distance between each spawn point around the enemy
 	var step = 2 * PI / spawn_point_count
@@ -61,8 +63,9 @@ func take_damage() -> void:
 # Each time timer goes out shoot a bullet for each bullet spawn point in scene
 func _on_shoot_timer_timeout() -> void:
 	for s in rotater.get_children():
-		var bullet = bullet_scene.instantiate()
-		get_tree().root.add_child(bullet)
+		var bullet = manager.pull_from_pool() as Bullet
+		#var bullet = bullet_scene.instantiate()
+		#get_tree().root.add_child(bullet)
 		bullet.speed = 250
 		bullet.position = s.global_position
 		bullet.rotation = s.global_rotation

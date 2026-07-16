@@ -50,9 +50,9 @@ func _unhandled_input(event: InputEvent) -> void:
 
 # Function that allows the player to take damage
 func take_damage() -> void:
-	print("hit")
+	#print("hit")
 	if invulnerable == false:
-		lives -= 1
+		#lives -= 1
 		var timer = get_tree().create_timer(0.7)
 		$AnimatedSprite2D.play("explosion")
 		await timer.timeout

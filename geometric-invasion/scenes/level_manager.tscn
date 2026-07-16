@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b2nxf0ct0x4gn" path="res://scripts/level_manager/level_manager.gd" id="1_06fa7"]
 
-[node name="LevelManager" type="Node" unique_id=1305954196]
+[node name="LevelManager" type="Node" unique_id=1305954196 groups=["level_manager"]]
 script = ExtResource("1_06fa7")
 
 [node name="LevelTimer" type="Timer" parent="." unique_id=1173292609]

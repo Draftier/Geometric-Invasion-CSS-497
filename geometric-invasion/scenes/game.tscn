@@ -39,8 +39,7 @@ metadata/_edit_horizontal_guides_ = [-281.0, 294.0]
 [node name="PauseMenu" parent="." unique_id=1058867629 instance=ExtResource("1_u5sy4")]
 visible = false
 
-[node name="LevelManager" parent="." unique_id=1305954196 node_paths=PackedStringArray("spawners") instance=ExtResource("2_gee14")]
-spawners = [null]
+[node name="LevelManager" parent="." unique_id=1305954196 instance=ExtResource("2_gee14")]
 level_time = 120.0
 
 [node name="Background" type="TileMapLayer" parent="." unique_id=1758883545]
@@ -68,6 +67,8 @@ loop = false
 position = Vector2(-2.180191, -2.290577)
 rotation = -1.0824624
 path = NodePath("..")
+shooter_timer_wait_time = 0.01
+spawn_point_count = 10
 
 [node name="PlayerDefaultShootingStyle" parent="." unique_id=1651887187 instance=ExtResource("1_iywne")]
 
