@@ -1,5 +1,6 @@
 [gd_scene format=4 uid="uid://btytpnf13ov48"]
 
+[ext_resource type="PackedScene" uid="uid://cp837cm6qinkj" path="res://scenes/enemy.tscn" id="1_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://u1mg53l5kgsv" path="res://scenes/player_default_shooting_style.tscn" id="1_iywne"]
 [ext_resource type="PackedScene" uid="uid://d043xpjj4wac0" path="res://scenes/pause_menu.tscn" id="1_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://cjye6s0e01omf" path="res://scenes/level_manager.tscn" id="2_gee14"]
@@ -7,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bvt77d3gapc08" path="res://assets/sprites/background_1.png" id="4_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://d02ey725i8t81" path="res://scenes/obstacle_bullet_base.tscn" id="5_iywne"]
 [ext_resource type="PackedScene" uid="uid://dciaijg0embcp" path="res://scenes/pathed_enemy.tscn" id="6_p57ef"]
+[ext_resource type="Script" uid="uid://r8sg2ki5fssr" path="res://scripts/enemy/pathed_enemy.gd" id="7_gee14"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iywne"]
 texture = ExtResource("4_lbhrr")
@@ -63,11 +65,19 @@ position = Vector2(-59, -193)
 rotation = 1.0824624
 loop = false
 
-[node name="Pathed_Enemy" parent="Path2D/PathFollow2D" unique_id=1367146779 node_paths=PackedStringArray("path") instance=ExtResource("6_p57ef")]
+[node name="Pathed_Enemy" parent="Path2D/PathFollow2D" unique_id=530033119 node_paths=PackedStringArray("path") instance=ExtResource("6_p57ef")]
 position = Vector2(-2.180191, -2.290577)
 rotation = -1.0824624
+script = ExtResource("7_gee14")
 path = NodePath("..")
-spawn_point_count = 20
+free_on_path_complete = false
+rotate_speed = 500
+shooter_timer_wait_time = 1.0
+spawn_point_count = 1
+radius = 16
+move_speed = 10
+movement = ""
+is_rotate_shoot = false
 
 [node name="PlayerDefaultShootingStyle" parent="." unique_id=1651887187 instance=ExtResource("1_iywne")]
 
@@ -96,3 +106,9 @@ shape = SubResource("RectangleShape2D_iywne")
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Borders/left_right" unique_id=2038551322]
 position = Vector2(300, 9)
 shape = SubResource("RectangleShape2D_iywne")
+
+[node name="Enemy" parent="Borders" unique_id=1367146779 instance=ExtResource("1_0tnpc")]
+position = Vector2(2, -28)
+speed = 30
+direction = "down"
+equation = "sin"

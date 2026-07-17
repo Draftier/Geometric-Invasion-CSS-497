@@ -20,6 +20,9 @@ const bullet_scene = preload("res://scenes/obstacle_bullet_base.tscn")
 @export var spawn_point_count = 4
 @export var radius = 16
 @export var move_speed = 10
+@export var movement : String
+@export var distance_to_move : float
+@export var is_rotate_shoot : bool = true
 
 @export var health = 100
 
@@ -45,7 +48,8 @@ func _ready() -> void:
 	shoot_timer.start()
 	
 func _process(delta: float) -> void:
-	rotate_pivot(delta)
+	if is_rotate_shoot:
+		rotate_pivot(delta)
 
 # Function to calculate health and hit upon getting hit by player bullet
 func take_damage() -> void:

@@ -20,10 +20,14 @@ func shoot() -> void:
 	# Fire bullet then reset can_shoot flag so that we can keep bullet fire rate within timer time
 	if can_shoot == true:
 		# Instantiate the bullet shot by player, set speed, positiona, and rotation and start firerate timer
-		var player_bullet = level_manager.pull_from_pool("player")
-		player_bullet.speed = 2000
-		player_bullet.global_position = $Muzzle.global_position
-		player_bullet.global_rotation = $Muzzle.global_rotation
-		#add_child(player_bullet)
+		var bullet
+		if get_parent().is_in_group("player"):
+			bullet = level_manager.pull_from_pool("player")
+		else:
+			bullet = level_manager.pull_from_pool("enemy")
+		bullet.speed = 2000
+		bullet.global_position = $Muzzle.global_position
+		bullet.global_rotation = $Muzzle.global_rotation
+		#add_child(bullet)
 		$FireRateTimer.start()
 		can_shoot = false

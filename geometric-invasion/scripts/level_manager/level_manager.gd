@@ -6,6 +6,7 @@ extends Node
 @export var events : Array[Spawn_Event]
 @export var level_time : float
 
+
 # Utilized to index the event array
 var event_index = 0
 # Utilize to track the current time
@@ -111,7 +112,6 @@ func execute_event(event : Spawn_Event) -> void:
 		if i.id == event.spawner:
 			i.spawn(event)
 	print(event.time)
-	
 	pass
 	
 # To use custom sort to sort events I create a custom callable
