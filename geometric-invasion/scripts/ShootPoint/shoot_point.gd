@@ -21,7 +21,7 @@ func shoot() -> void:
 	if can_shoot == true:
 		# Instantiate the bullet shot by player, set speed, positiona, and rotation and start firerate timer
 		var bullet
-		if get_parent().is_in_group("player"):
+		if get_parent().get_parent().is_in_group("player"):
 			bullet = level_manager.pull_from_pool("player")
 		else:
 			bullet = level_manager.pull_from_pool("enemy")

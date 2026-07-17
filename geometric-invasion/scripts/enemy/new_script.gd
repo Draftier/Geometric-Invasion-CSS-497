@@ -9,7 +9,7 @@ extends Area2D
 @export var bullet_scene : PackedScene
 
 # Initialize the shoot timer and rotater at ready
-@onready var free_timer = $FreeTimer
+# @onready var free_timer = $FreeTimer
 @onready var manager = get_tree().get_first_node_in_group("level_manager")
 
 # Allow shooter and rotater values to be edited in editor to add easier time for editing enemy behavior
@@ -34,9 +34,6 @@ func _ready() -> void:
 	elif direction == "down":
 		direction_vector = Vector2.DOWN
 	
-	
-		pass
-	
 func _process(delta: float) -> void:
 	move_body(delta)
 	
@@ -60,5 +57,7 @@ func move_body(delta) -> void:
 	else:
 		if equation == "sin":
 			direction_vector = direction_vector.rotated(sin(0.0 * 8.0) * 0.3)
+		elif equation == "cosin":
+			direction_vector = direction_vector.rotated(cos(0.0 * 8.0) * 0.3)
 		position += direction_vector * speed * delta
 	pass
