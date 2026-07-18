@@ -107,6 +107,6 @@ shape = SubResource("RectangleShape2D_iywne")
 position = Vector2(300, 9)
 shape = SubResource("RectangleShape2D_iywne")
 
-[node name="Enemy" parent="Borders" unique_id=1367146779 instance=ExtResource("1_0tnpc")]
+[node name="Enemy" parent="." unique_id=1367146779 instance=ExtResource("1_0tnpc")]
 position = Vector2(103, -137)
 bullet_scene = ExtResource("5_iywne")

@@ -20,6 +20,7 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	level_manager.add_to_pool(self)
 
 func _on_area_entered(area: Area2D) -> void:
+	print(area)
 	if area.is_in_group("player"):
 		area.get_parent().take_damage()
 	elif area.is_in_group("enemy"):
@@ -33,6 +34,7 @@ func _on_area_entered(area: Area2D) -> void:
 	level_manager.add_to_pool(self)
 
 func reset() -> void:
+	self.set_block_signals(true)
 	self.set_process(false)
 	self.set_physics_process(false)
 	self.visible = false

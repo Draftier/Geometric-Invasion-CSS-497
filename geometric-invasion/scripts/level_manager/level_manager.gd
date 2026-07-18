@@ -48,6 +48,7 @@ func pull_from_pool(type : String) -> Bullet:
 	object.set_process(true)
 	object.set_physics_process(true)
 	object.visible = true
+	object.set_block_signals(false)
 	
 	# Return reference to bullet
 	return object
@@ -100,7 +101,7 @@ func _process(delta: float) -> void:
 	
 	# Debug to print out framerate
 	# TODO change to logging system in future
-	print(Engine.get_frames_per_second())
+	# print(Engine.get_frames_per_second())
 
 # At end of level change scene
 func _on_level_timer_timeout() -> void:
