@@ -5,7 +5,12 @@ extends Node
 @export var spawners : Array[Node]
 @export var events : Array[Spawn_Event]
 @export var level_time : float
+
+# Temp variables for playtest to track enemies on screen
 @export var enemies : Array[basic_enemy]
+var num_enemies
+
+signal victory
 
 # Utilized to index the event array
 var event_index = 0
@@ -62,8 +67,8 @@ func initialize_pool() -> void:
 		add_to_pool(bullet)
 		get_tree().root.add_child(bullet)
 		
-		# Interleave a player bullet every 4 enemy bullets
-		if (i + 1 ) % 4 == 0:
+		# Interleave a player bullet every 2 enemy bullets
+		if (i + 1 ) % 2 == 0:
 			# Initialization for player bullets
 			var player_bullet = basic_player_bullet.instantiate()
 			player_bullet.shooter = "player"
@@ -71,8 +76,13 @@ func initialize_pool() -> void:
 			get_tree().root.add_child(player_bullet)
 
 func _ready() -> void:
+	
+	print(get_tree().paused)
 	# Call to initialize pool
 	call_deferred("initialize_pool")
+	
+	# Temporarily count the number of enemies
+	num_enemies = enemies.size()
 		
 	#Store the time in the timer
 	$LevelTimer.wait_time = level_time
@@ -85,7 +95,6 @@ func _ready() -> void:
 	
 	# Start the timer
 	$LevelTimer.start()
-	
 	
 func _process(delta: float) -> void:
 	# Calculate the current time every frame
@@ -101,10 +110,6 @@ func _process(delta: float) -> void:
 				execute_event(events[i])
 			event_index += 1
 	
-	# Temporary code for basic playtest of movement and such
-	if enemies.size() == 0:
-		pass
-	
 	# Debug to print out framerate
 	# TODO change to logging system in future
 	print(Engine.get_frames_per_second())
@@ -113,10 +118,6 @@ func _process(delta: float) -> void:
 func _on_level_timer_timeout() -> void:
 	pass # Replace with function body.
 	
-
-func change_to_victory_scene() -> void:
-	
-	pass
 	
 	
 # Function to execute an event
@@ -133,3 +134,7 @@ func sort_events_ascending(a : Spawn_Event, b : Spawn_Event) -> bool:
 		if a.time < b.time:
 			return true
 	return false
+
+
+func _on_rotater_shoot_enemy_death() -> void:
+	num_enemies -= 1

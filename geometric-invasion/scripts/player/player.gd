@@ -1,6 +1,9 @@
 class_name Player
 extends CharacterBody2D
 
+# Signal for player death
+signal death
+
 # TODO add implementation for player classes perhaps different health or move speed for calss
 @export var player_class : PlayerClass 
 
@@ -8,13 +11,11 @@ extends CharacterBody2D
 var direction : Vector2 = Vector2.ZERO
 
 # Lives set to 1000 for testing
-var lives : int = 1000
+@export var lives : int = 3
 
 # Flag variable to track if the player is invulnerable
 var invulnerable : bool = false
 
-# Number of guns
-@export var num_guns : int
 
 func _ready() -> void:
 	pass
@@ -52,12 +53,13 @@ func _unhandled_input(event: InputEvent) -> void:
 func take_damage() -> void:
 	#print("hit")
 	if invulnerable == false:
-		#lives -= 1
+		lives -= 1
 		var timer = get_tree().create_timer(0.7)
 		$AnimatedSprite2D.play("explosion")
 		await timer.timeout
 		if lives <= 0:
-			queue_free()
+			death.emit()
+			hide()
 		invulnerable = true
 		$AnimatedSprite2D.play("default")
 		$InvulnerabilityTimer.start()			

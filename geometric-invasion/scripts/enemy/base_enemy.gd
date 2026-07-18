@@ -6,6 +6,9 @@ extends Area2D
 # TODO Consider making pathing based on set mathematical directions given by resources since pathing could get painful
 # Depending on how levels are going to be designed
 
+# Temp death signal for playatest
+signal death
+
 # Initialize the shoot timer and rotater at ready
 # @onready var free_timer = $FreeTimer
 @onready var manager = get_tree().get_first_node_in_group("level_manager")
@@ -50,6 +53,7 @@ func take_damage() -> void:
 	
 	# If health zero then free
 	if health <= 0:
+		death.emit()
 		queue_free()
 	# If health not zero then set progress of flash shader
 	var tween = create_tween()
