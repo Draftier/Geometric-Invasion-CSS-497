@@ -20,10 +20,15 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	level_manager.add_to_pool(self)
 
 func _on_area_entered(area: Area2D) -> void:
-	if "take_damage" in area.get_parent():
+	if area.is_in_group("player"):
 		area.get_parent().take_damage()
-	if "take_damage" in area:
+	elif area.is_in_group("enemy"):
 		area.take_damage()
+	
+	#if "take_damage" in area.get_parent():
+	#	area.get_parent().take_damage()
+	#if "take_damage" in area:
+	#	area.take_damage()
 	#queue_free()
 	level_manager.add_to_pool(self)
 

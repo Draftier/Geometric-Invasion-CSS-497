@@ -110,6 +110,3 @@ shape = SubResource("RectangleShape2D_iywne")
 [node name="Enemy" parent="Borders" unique_id=1367146779 instance=ExtResource("1_0tnpc")]
 position = Vector2(103, -137)
 bullet_scene = ExtResource("5_iywne")
-speed = 30
-direction = "down"
-equation = "cos"

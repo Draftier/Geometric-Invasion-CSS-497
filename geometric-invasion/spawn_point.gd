@@ -1,6 +1,7 @@
 extends Node
 
 @export var id : int
+@onready var manager = get_tree().get_first_node_in_group("level_manager")
 
 func spawn(event : Spawn_Event) -> void:
 	print("hi")

@@ -6,3 +6,4 @@ extends Node
 @export var obstacle_pattern : Array[PackedScene]
 @export var spawner : int
 @export var num_enemies : int
+@export var time_between_spawns : float

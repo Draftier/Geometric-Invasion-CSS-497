@@ -69,7 +69,7 @@ func initialize_pool() -> void:
 
 func _ready() -> void:
 	# Call to initialize pool
-	initialize_pool()
+	call_deferred("initialize_pool")
 		
 	#Store the time in the timer
 	$LevelTimer.wait_time = level_time

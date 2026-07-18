@@ -14,11 +14,14 @@ shader = ExtResource("2_4ra3w")
 shader_parameter/Color = Color(1, 1, 1, 1)
 shader_parameter/Progress = 1.0
 
-[node name="Enemy" type="Area2D" unique_id=1367146779]
-position = Vector2(0, 1)
+[node name="Enemy" type="Area2D" unique_id=1367146779 groups=["enemy"]]
+position = Vector2(507, 227)
 collision_layer = 2
 collision_mask = 9
 script = ExtResource("1_5uy6h")
+speed = 100
+direction = "down"
+equation = "sin"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1199752919]
 shape = SubResource("RectangleShape2D_8tegq")
@@ -36,4 +39,7 @@ position = Vector2(0, -1)
 energy = 0.5
 texture = ExtResource("4_5uy6h")
 
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=247689940]
+
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

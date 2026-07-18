@@ -22,7 +22,7 @@ extends Area2D
 @export var equation : String = "None"
 
 var direction_vector
-var time
+var time : float = 0.0
 
 func _ready() -> void:
 	if direction == "right":
@@ -35,6 +35,7 @@ func _ready() -> void:
 		direction_vector = Vector2.DOWN
 	
 func _process(delta: float) -> void:
+	time += delta
 	move_body(delta)
 	
 
@@ -55,9 +56,18 @@ func move_body(delta) -> void:
 	if path != null:
 		path.progress_ratio += delta * speed / 8
 	else:
+		var function_direction
+		var angle
 		if equation == "sin":
-			direction_vector = direction_vector.rotated(sin(0.0 * 8.0) * 0.3)
+			angle = sin(time * 1.5) * 50
+			function_direction = direction_vector.rotated(deg_to_rad(angle))
+			pass
 		elif equation == "cosin":
-			direction_vector = direction_vector.rotated(cos(0.0 * 8.0) * 0.3)
-		position += direction_vector * speed * delta
+			function_direction = direction_vector.rotated(cos(0.0 * 8.0) * 0.3)
+			pass
+		position += function_direction * speed * delta
 	pass
+
+
+func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+	queue_free()
