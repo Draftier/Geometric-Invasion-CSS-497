@@ -5,7 +5,7 @@ extends Node
 @export var spawners : Array[Node]
 @export var events : Array[Spawn_Event]
 @export var level_time : float
-
+@export var enemies : Array[basic_enemy]
 
 # Utilized to index the event array
 var event_index = 0
@@ -13,7 +13,7 @@ var event_index = 0
 var current_time
 
 # Variables to store bullets
-var max_bullet_count : int = 5000
+var max_bullet_count : int = 1000
 var bullets : Array [ Bullet ]
 
 # Preloading basic bullets for initial pooling
@@ -55,18 +55,20 @@ func pull_from_pool(type : String) -> Bullet:
 
 func initialize_pool() -> void:
 	# Loop to initialize the object pool whilst interleaving player and enemy bullets
-	for i in range(0, max_bullet_count / 2):
+	for i in range(0, max_bullet_count):
 		# Initialization for enemy bullets
 		var bullet : Bullet = basic_enemy_bullet.instantiate()
 		bullet.shooter = "enemy"
 		add_to_pool(bullet)
 		get_tree().root.add_child(bullet)
 		
-		# Initialization for player bullets
-		var player_bullet = basic_player_bullet.instantiate()
-		player_bullet.shooter = "player"
-		add_to_pool(player_bullet)
-		get_tree().root.add_child(player_bullet)
+		# Interleave a player bullet every 4 enemy bullets
+		if (i + 1 ) % 4 == 0:
+			# Initialization for player bullets
+			var player_bullet = basic_player_bullet.instantiate()
+			player_bullet.shooter = "player"
+			add_to_pool(player_bullet)
+			get_tree().root.add_child(player_bullet)
 
 func _ready() -> void:
 	# Call to initialize pool
@@ -99,13 +101,23 @@ func _process(delta: float) -> void:
 				execute_event(events[i])
 			event_index += 1
 	
+	# Temporary code for basic playtest of movement and such
+	if enemies.size() == 0:
+		pass
+	
 	# Debug to print out framerate
 	# TODO change to logging system in future
-	# print(Engine.get_frames_per_second())
+	print(Engine.get_frames_per_second())
 
 # At end of level change scene
 func _on_level_timer_timeout() -> void:
 	pass # Replace with function body.
+	
+
+func change_to_victory_scene() -> void:
+	
+	pass
+	
 	
 # Function to execute an event
 func execute_event(event : Spawn_Event) -> void:
