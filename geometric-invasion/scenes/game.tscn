@@ -6,7 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://cjye6s0e01omf" path="res://scenes/level_manager.tscn" id="2_gee14"]
 [ext_resource type="Texture2D" uid="uid://dhr2fi5xwbms0" path="res://assets/sprites/dark_blue.png" id="3_p57ef"]
 [ext_resource type="Texture2D" uid="uid://bvt77d3gapc08" path="res://assets/sprites/background_1.png" id="4_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://bpouseiggfiit" path="res://scenes/fixed_shoot_enemy.tscn" id="6_gee14"]
 [ext_resource type="PackedScene" uid="uid://cu4vxxsdf4l7r" path="res://scenes/rotater_shoot_enemy.tscn" id="8_gee14"]
+[ext_resource type="PackedScene" uid="uid://d02ey725i8t81" path="res://scenes/obstacle_bullet_base.tscn" id="9_0tnpc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iywne"]
 texture = ExtResource("4_lbhrr")
@@ -73,9 +75,17 @@ shape = SubResource("RectangleShape2D_iywne")
 position = Vector2(300, 9)
 shape = SubResource("RectangleShape2D_iywne")
 
-[node name="Enemy" parent="." unique_id=1367146779 instance=ExtResource("1_0tnpc")]
+[node name="Enemy" parent="." unique_id=848328079 instance=ExtResource("1_0tnpc")]
 position = Vector2(103, -137)
 
 [node name="Rotater_Shoot_Enemy" parent="." unique_id=1705948068 instance=ExtResource("8_gee14")]
 position = Vector2(-1, -146)
 rotate_speed = 20
+
+[node name="Enemy2" parent="." unique_id=1367146779 instance=ExtResource("6_gee14")]
+position = Vector2(168, -105)
+bullet = ExtResource("9_0tnpc")
+shoot_timer_wait_time = 0.5
+speed = 100
+direction = "down"
+equation = ""

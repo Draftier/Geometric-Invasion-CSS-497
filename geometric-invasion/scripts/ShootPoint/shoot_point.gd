@@ -1,7 +1,5 @@
 class_name ShootPoint
 extends Node2D
-
-const PLAYER_BULLET = preload("uid://iie43arv0boo")
 @export var stats : ShootPointStats
 @onready var level_manager = get_tree().get_first_node_in_group("level_manager")
 
