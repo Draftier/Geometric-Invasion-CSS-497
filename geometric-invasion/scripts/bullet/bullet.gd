@@ -21,7 +21,7 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	# TODO after quit fix bug where when user goes back into game and framerate is low
 	# Probably due to something with the object pool
 	# This is done as when user quits and scene changes, bullets are still trying to get into object pool?
-	if is_instance_valid(level_manager):
+	if level_manager != null:
 		level_manager.add_to_pool(self)
 
 func _on_area_entered(area: Area2D) -> void:

@@ -8,4 +8,7 @@ script = ExtResource("1_06fa7")
 [node name="LevelTimer" type="Timer" parent="." unique_id=1173292609]
 wait_time = 120.0
 
+[node name="Pool" type="Node" parent="." unique_id=1705030930]
+
+[connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
 [connection signal="timeout" from="LevelTimer" to="." method="_on_level_timer_timeout"]

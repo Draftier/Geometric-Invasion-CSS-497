@@ -117,3 +117,5 @@ position = Vector2(2, 78)
 [connection signal="victory" from="LevelManager" to="PauseMenu" method="_on_level_manager_victory"]
 [connection signal="death" from="Rotater_Shoot_Enemy" to="LevelManager" method="_on_rotater_shoot_enemy_death"]
 [connection signal="death" from="PlayerDefaultShootingStyle" to="PauseMenu" method="_on_player_default_shooting_style_death"]
+
+[editable path="LevelManager"]

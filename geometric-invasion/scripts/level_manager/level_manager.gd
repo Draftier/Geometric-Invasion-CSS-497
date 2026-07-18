@@ -10,6 +10,8 @@ extends Node
 @export var enemies : Array[basic_enemy]
 var num_enemies
 
+@onready var pool_node = $Pool
+
 signal victory
 
 # Utilized to index the event array
@@ -65,7 +67,7 @@ func initialize_pool() -> void:
 		var bullet : Bullet = basic_enemy_bullet.instantiate()
 		bullet.shooter = "enemy"
 		add_to_pool(bullet)
-		get_tree().root.add_child(bullet)
+		pool_node.add_child(bullet)
 		
 		# Interleave a player bullet every 2 enemy bullets
 		if (i + 1 ) % 2 == 0:
@@ -73,7 +75,7 @@ func initialize_pool() -> void:
 			var player_bullet = basic_player_bullet.instantiate()
 			player_bullet.shooter = "player"
 			add_to_pool(player_bullet)
-			get_tree().root.add_child(player_bullet)
+			pool_node.add_child(player_bullet)
 
 func _ready() -> void:
 	
@@ -138,3 +140,8 @@ func sort_events_ascending(a : Spawn_Event, b : Spawn_Event) -> bool:
 
 func _on_rotater_shoot_enemy_death() -> void:
 	num_enemies -= 1
+
+
+func _on_tree_exiting() -> void:
+	for i in pool_node.get_children():
+		i.queue_free()
