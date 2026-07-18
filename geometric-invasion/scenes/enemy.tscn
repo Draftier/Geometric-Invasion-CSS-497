@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cp837cm6qinkj"]
 
-[ext_resource type="Script" uid="uid://pqste00swnss" path="res://scripts/enemy/new_script.gd" id="1_5uy6h"]
+[ext_resource type="Script" uid="uid://pqste00swnss" path="res://scripts/enemy/base_enemy.gd" id="1_5uy6h"]
 [ext_resource type="Texture2D" uid="uid://dtb2vka5e01d3" path="res://assets/sprites/enemy.png" id="1_7p1mj"]
 [ext_resource type="Shader" uid="uid://cqv7cjdn8x0b5" path="res://shaders/flash.tres" id="2_4ra3w"]
 [ext_resource type="Texture2D" uid="uid://du835wqb2j21b" path="res://assets/sprites/bitmap.png" id="4_5uy6h"]
@@ -17,7 +17,7 @@ shader_parameter/Progress = 1.0
 [node name="Enemy" type="Area2D" unique_id=1367146779 groups=["enemy"]]
 position = Vector2(507, 227)
 collision_layer = 2
-collision_mask = 9
+collision_mask = 5
 script = ExtResource("1_5uy6h")
 speed = 100
 direction = "down"
@@ -30,16 +30,11 @@ shape = SubResource("RectangleShape2D_8tegq")
 material = SubResource("ShaderMaterial_iywne")
 texture = ExtResource("1_7p1mj")
 
-[node name="Rotater" type="Node2D" parent="." unique_id=539069543]
-position = Vector2(0, -1)
-
-[node name="ShootTimer" type="Timer" parent="." unique_id=1139685173]
-
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=305277508]
 energy = 0.5
 texture = ExtResource("4_5uy6h")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=247689940]
 
-[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

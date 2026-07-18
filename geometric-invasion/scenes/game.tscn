@@ -6,9 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cjye6s0e01omf" path="res://scenes/level_manager.tscn" id="2_gee14"]
 [ext_resource type="Texture2D" uid="uid://dhr2fi5xwbms0" path="res://assets/sprites/dark_blue.png" id="3_p57ef"]
 [ext_resource type="Texture2D" uid="uid://bvt77d3gapc08" path="res://assets/sprites/background_1.png" id="4_lbhrr"]
-[ext_resource type="PackedScene" uid="uid://d02ey725i8t81" path="res://scenes/obstacle_bullet_base.tscn" id="5_iywne"]
-[ext_resource type="PackedScene" uid="uid://dciaijg0embcp" path="res://scenes/pathed_enemy.tscn" id="6_p57ef"]
-[ext_resource type="Script" uid="uid://r8sg2ki5fssr" path="res://scripts/enemy/pathed_enemy.gd" id="7_gee14"]
+[ext_resource type="PackedScene" uid="uid://cu4vxxsdf4l7r" path="res://scenes/rotater_shoot_enemy.tscn" id="8_gee14"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iywne"]
 texture = ExtResource("4_lbhrr")
@@ -22,12 +20,6 @@ texture = ExtResource("3_p57ef")
 sources/0 = SubResource("TileSetAtlasSource_iywne")
 sources/1 = SubResource("TileSetAtlasSource_u5sy4")
 
-[sub_resource type="Curve2D" id="Curve2D_d8ny1"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, -59, -193, 0, 0, 0, 0, -42, -161, 0, 0, 0, 0, -42, -128, 0, 0, 0, 0, -56, -93, 0, 0, 0, 0, -22, -49, 0, 0, 0, 0, -64, -7)
-}
-point_count = 6
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d8ny1"]
 size = Vector2(646, 21)
 
@@ -36,7 +28,7 @@ size = Vector2(20, 618)
 
 [node name="Game" type="Node2D" unique_id=1466998741]
 metadata/_edit_vertical_guides_ = [-289.0, 239.0]
-metadata/_edit_horizontal_guides_ = [-281.0, 294.0]
+metadata/_edit_horizontal_guides_ = [-162.0, 163.0]
 
 [node name="PauseMenu" parent="." unique_id=1058867629 instance=ExtResource("1_u5sy4")]
 visible = false
@@ -53,32 +45,6 @@ color = Color(0.6509804, 0.64705884, 0.6313726, 1)
 
 [node name="Bullets" type="Node2D" parent="." unique_id=666204858]
 
-[node name="bullet_2" parent="." unique_id=2052516261 instance=ExtResource("5_iywne")]
-position = Vector2(-1, -43)
-speed = 10
-
-[node name="Path2D" type="Path2D" parent="." unique_id=483374397]
-curve = SubResource("Curve2D_d8ny1")
-
-[node name="PathFollow2D" type="PathFollow2D" parent="Path2D" unique_id=1084742317]
-position = Vector2(-59, -193)
-rotation = 1.0824624
-loop = false
-
-[node name="Pathed_Enemy" parent="Path2D/PathFollow2D" unique_id=530033119 node_paths=PackedStringArray("path") instance=ExtResource("6_p57ef")]
-position = Vector2(-2.180191, -2.290577)
-rotation = -1.0824624
-script = ExtResource("7_gee14")
-path = NodePath("..")
-free_on_path_complete = false
-rotate_speed = 500
-shooter_timer_wait_time = 1.0
-spawn_point_count = 1
-radius = 16
-move_speed = 10
-movement = ""
-is_rotate_shoot = false
-
 [node name="PlayerDefaultShootingStyle" parent="." unique_id=1651887187 instance=ExtResource("1_iywne")]
 
 [node name="Borders" type="Node2D" parent="." unique_id=83428441]
@@ -88,11 +54,11 @@ collision_layer = 16
 collision_mask = 21
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/top_bottom" unique_id=1249229360]
-position = Vector2(0, -293.5)
+position = Vector2(0, -174)
 shape = SubResource("RectangleShape2D_d8ny1")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Borders/top_bottom" unique_id=973272431]
-position = Vector2(-12, 309)
+position = Vector2(-12, 175)
 shape = SubResource("RectangleShape2D_d8ny1")
 
 [node name="left_right" type="StaticBody2D" parent="Borders" unique_id=2066459629]
@@ -109,4 +75,7 @@ shape = SubResource("RectangleShape2D_iywne")
 
 [node name="Enemy" parent="." unique_id=1367146779 instance=ExtResource("1_0tnpc")]
 position = Vector2(103, -137)
-bullet_scene = ExtResource("5_iywne")
+
+[node name="Rotater_Shoot_Enemy" parent="." unique_id=1705948068 instance=ExtResource("8_gee14")]
+position = Vector2(-1, -146)
+rotate_speed = 20

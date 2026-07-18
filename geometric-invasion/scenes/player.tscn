@@ -124,9 +124,9 @@ player_class = SubResource("Resource_qhqgy")
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1316585369]
 zoom = Vector2(2, 2)
 limit_left = -191
-limit_top = -281
+limit_top = -162
 limit_right = 188
-limit_bottom = 294
+limit_bottom = 163
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=1359110295]
 position = Vector2(1, 2)
