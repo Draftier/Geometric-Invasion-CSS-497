@@ -112,6 +112,7 @@ func _process(delta: float) -> void:
 				execute_event(events[i])
 			event_index += 1
 	
+	
 	# Debug to print out framerate
 	# TODO change to logging system in future
 	print(Engine.get_frames_per_second())

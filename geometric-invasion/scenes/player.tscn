@@ -153,4 +153,14 @@ shape = SubResource("CircleShape2D_u8vuu")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1493186045]
 shape = SubResource("CircleShape2D_1tcrw")
 
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2130673927]
+follow_viewport_enabled = true
+
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=562683868]
+offset_left = -282.0
+offset_top = -154.0
+offset_right = -234.0
+offset_bottom = -131.0
+text = "Lives: 3"
+
 [connection signal="timeout" from="InvulnerabilityTimer" to="." method="_on_invulnerability_timer_timeout"]

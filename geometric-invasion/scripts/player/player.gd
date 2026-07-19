@@ -18,6 +18,7 @@ var invulnerable : bool = false
 
 
 func _ready() -> void:
+	$CanvasLayer/Label.text = "Lives : " + str(lives)
 	pass
 
 
@@ -42,6 +43,8 @@ func _process(delta: float) -> void:
 		$AnimationPlayer.play("flash")
 	else:
 		$AnimationPlayer.stop()
+		
+	
 	
 	
 # Learned this function in another tutorial and read about it being useful for input to UI or menus
@@ -54,12 +57,14 @@ func take_damage() -> void:
 	#print("hit")
 	if invulnerable == false:
 		lives -= 1
+		$CanvasLayer/Label.text = "Lives : " + str(lives)
 		var timer = get_tree().create_timer(0.7)
 		$AnimatedSprite2D.play("explosion")
 		await timer.timeout
 		if lives <= 0:
 			death.emit()
 			hide()
+			self.set_process(false)
 		invulnerable = true
 		$AnimatedSprite2D.play("default")
 		$InvulnerabilityTimer.start()			
