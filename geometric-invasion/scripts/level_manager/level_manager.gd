@@ -115,6 +115,10 @@ func _process(delta: float) -> void:
 	# Debug to print out framerate
 	# TODO change to logging system in future
 	print(Engine.get_frames_per_second())
+	
+	# Lazy way to initiate victory scene (Temporary)
+	if num_enemies == 0:
+		victory.emit()
 
 # At end of level change scene
 func _on_level_timer_timeout() -> void:

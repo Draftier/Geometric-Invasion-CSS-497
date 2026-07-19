@@ -9,7 +9,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8tegq"]
 size = Vector2(14, 11)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tvfqf"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ewk4g"]
 resource_local_to_scene = true
 shader = ExtResource("2_ewk4g")
 shader_parameter/Color = Color(1, 1, 1, 1)
@@ -19,9 +19,8 @@ shader_parameter/Progress = 1.0
 script = ExtResource("2_it82r")
 bullet = null
 shoot_timer_wait_time = 0.0
-speed = 10
-direction = ""
-equation = "None"
+direction = "none"
+equation = "none"
 
 [node name="CollisionShape2D" parent="." index="0" unique_id=1199752919 groups=["enemy"]]
 
@@ -30,7 +29,7 @@ position = Vector2(-1, -13.5)
 shape = SubResource("RectangleShape2D_8tegq")
 
 [node name="Sprite2D" parent="." index="2" unique_id=1252295741]
-material = SubResource("ShaderMaterial_tvfqf")
+material = SubResource("ShaderMaterial_ewk4g")
 
 [node name="Sprite2D2" type="Sprite2D" parent="." index="3" unique_id=1532253900]
 position = Vector2(-1, -16)

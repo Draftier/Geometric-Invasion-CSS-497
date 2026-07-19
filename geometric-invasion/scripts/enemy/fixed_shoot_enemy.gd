@@ -20,7 +20,7 @@ func _ready() -> void:
 	
 func _process(delta: float) -> void:
 	# Do parent class move function
-	super.move_body(delta)
+	super._process(delta)
 
 
 func _on_shoot_timer_timeout() -> void:

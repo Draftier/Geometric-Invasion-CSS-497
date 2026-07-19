@@ -43,3 +43,8 @@ func _on_level_manager_victory() -> void:
 	get_node("RestartButton").show()
 	get_node("FinishLabel").text = "You won"
 	get_node("FinishLabel").show()
+
+
+func _on_restart_button_pressed() -> void:
+	pause_game()
+	get_tree().reload_current_scene()

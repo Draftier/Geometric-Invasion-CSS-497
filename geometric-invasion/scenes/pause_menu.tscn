@@ -69,6 +69,6 @@ grow_horizontal = 2
 text = "You won!"
 
 [connection signal="pressed" from="ResumeButton" to="." method="_on_resume_button_pressed"]
-[connection signal="pressed" from="RestartButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="QuitToMenu" to="." method="_on_quit_to_menu_pressed"]
 [connection signal="pressed" from="QuitToDesktop" to="." method="_on_quit_to_desktop_pressed"]

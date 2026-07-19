@@ -55,7 +55,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	# Do same process as before
-	self.move_body(delta)
+	super._process(delta)
 	
 	# Then rotate shoot point pivots
 	rotate_pivot(delta)
