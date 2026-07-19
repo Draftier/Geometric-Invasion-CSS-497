@@ -161,6 +161,5 @@ offset_left = -282.0
 offset_top = -154.0
 offset_right = -234.0
 offset_bottom = -131.0
-text = "Lives: 3"
 
 [connection signal="timeout" from="InvulnerabilityTimer" to="." method="_on_invulnerability_timer_timeout"]

@@ -30,7 +30,8 @@ func _on_quit_to_desktop_pressed() -> void:
 
 
 func _on_player_default_shooting_style_death() -> void:
-	pause_game()
+	get_tree().paused = true
+	show()
 	get_node("ResumeButton").hide()
 	get_node("RestartButton").show()
 	get_node("FinishLabel").text = "You lost!"
@@ -38,7 +39,9 @@ func _on_player_default_shooting_style_death() -> void:
 
 
 func _on_level_manager_victory() -> void:
-	pause_game()
+	# pause_game()
+	get_tree().paused = true
+	show()
 	get_node("ResumeButton").hide()
 	get_node("RestartButton").show()
 	get_node("FinishLabel").text = "You won"

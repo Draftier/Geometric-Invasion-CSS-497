@@ -75,7 +75,8 @@ shape = SubResource("RectangleShape2D_iywne")
 [node name="Rotater_Shoot_Enemy" parent="." unique_id=1705948068 instance=ExtResource("8_gee14")]
 position = Vector2(-6, -11)
 rotate_speed = 20
-shooter_timer_wait_time = 0.5
+shooter_timer_wait_time = 0.2
+spawn_point_count = 8
 
 [node name="Enemy" parent="." unique_id=1367146779 instance=ExtResource("6_gee14")]
 position = Vector2(159, -108)
