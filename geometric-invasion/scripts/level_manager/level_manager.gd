@@ -78,8 +78,6 @@ func initialize_pool() -> void:
 			pool_node.add_child(player_bullet)
 
 func _ready() -> void:
-	
-	print(get_tree().paused)
 	# Call to initialize pool
 	call_deferred("initialize_pool")
 	
