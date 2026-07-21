@@ -1,7 +1,11 @@
 extends CanvasLayer
 
+@onready var player = get_node("../Player")
+
 func _ready() -> void:
+	player.connect("death", _on_player_death)
 	hide()
+	
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):
@@ -29,7 +33,7 @@ func _on_quit_to_desktop_pressed() -> void:
 	get_tree().quit()
 
 
-func _on_player_default_shooting_style_death() -> void:
+func _on_player_death() -> void:
 	get_tree().paused = true
 	show()
 	get_node("ResumeButton").hide()

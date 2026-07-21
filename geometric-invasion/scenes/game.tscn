@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dhr2fi5xwbms0" path="res://assets/sprites/dark_blue.png" id="3_p57ef"]
 [ext_resource type="Texture2D" uid="uid://bvt77d3gapc08" path="res://assets/sprites/background_1.png" id="4_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://bpouseiggfiit" path="res://scenes/fixed_shoot_enemy.tscn" id="6_gee14"]
-[ext_resource type="PackedScene" uid="uid://cystnc86mplqy" path="res://scenes/player_shooting_style_two.tscn" id="7_u5sy4"]
+[ext_resource type="PackedScene" uid="uid://u1mg53l5kgsv" path="res://scenes/player_default_shooting_style.tscn" id="6_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://cu4vxxsdf4l7r" path="res://scenes/rotater_shoot_enemy.tscn" id="8_gee14"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iywne"]
@@ -78,6 +78,9 @@ rotate_speed = 20
 shooter_timer_wait_time = 0.2
 spawn_point_count = 8
 
+[node name="Player" parent="." unique_id=1651887187 instance=ExtResource("6_u5sy4")]
+position = Vector2(-1, 114)
+
 [node name="Enemy" parent="." unique_id=1367146779 instance=ExtResource("6_gee14")]
 position = Vector2(159, -108)
 rotation = 3.1415927
@@ -119,9 +122,6 @@ speed = 20
 health = 20
 direction = "down"
 equation = "sin"
-
-[node name="PlayerShootingStyleTwo" parent="." unique_id=1651887187 instance=ExtResource("7_u5sy4")]
-position = Vector2(-17, 85)
 
 [connection signal="victory" from="LevelManager" to="PauseMenu" method="_on_level_manager_victory"]
 [connection signal="death" from="Rotater_Shoot_Enemy" to="LevelManager" method="_on_rotater_shoot_enemy_death"]
