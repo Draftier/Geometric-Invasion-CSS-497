@@ -52,8 +52,9 @@ func take_damage() -> void:
 	health -= 1
 	
 	# If health zero then free
-	if health <= 0:
-		death.emit.call_deferred()
+	if health == 0:
+		# death.emit.call_deferred()
+		death.emit()
 		queue_free()
 	# If health not zero then set progress of flash shader
 	var tween = create_tween()
