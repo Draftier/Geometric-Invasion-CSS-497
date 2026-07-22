@@ -1,5 +1,7 @@
 extends Node
 
+
+
 # Variables to set after scene, spawners, events, and time to complete level
 @export var end_change_scene : PackedScene
 @export var spawners : Array[Node]
@@ -81,8 +83,13 @@ func _ready() -> void:
 	# Call to initialize pool
 	call_deferred("initialize_pool")
 	
+	# Connect enemy death signals
+	for i in enemies:
+		i.connect("death", _on_enemy_death)
+	
 	# Temporarily count the number of enemies
 	num_enemies = enemies.size()
+	print(enemies.size())
 		
 	#Store the time in the timer
 	$LevelTimer.wait_time = level_time
@@ -95,6 +102,8 @@ func _ready() -> void:
 	
 	# Start the timer
 	$LevelTimer.start()
+	
+	
 	
 func _process(delta: float) -> void:
 	# Calculate the current time every frame
@@ -113,7 +122,7 @@ func _process(delta: float) -> void:
 	
 	# Debug to print out framerate
 	# TODO change to logging system in future
-	print(Engine.get_frames_per_second())
+	# print(Engine.get_frames_per_second())
 	
 	# Lazy way to initiate victory scene (Temporary)
 	if num_enemies == 0:
@@ -140,11 +149,11 @@ func sort_events_ascending(a : Spawn_Event, b : Spawn_Event) -> bool:
 			return true
 	return false
 
-
-func _on_rotater_shoot_enemy_death() -> void:
-	num_enemies -= 1
-
-
 func _on_tree_exiting() -> void:
 	for i in pool_node.get_children():
 		i.queue_free()
+
+
+func _on_enemy_death() -> void:
+	num_enemies -= 1
+	print(num_enemies)

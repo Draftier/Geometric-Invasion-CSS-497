@@ -53,7 +53,7 @@ func take_damage() -> void:
 	
 	# If health zero then free
 	if health <= 0:
-		death.emit()
+		death.emit.call_deferred()
 		queue_free()
 	# If health not zero then set progress of flash shader
 	var tween = create_tween()
@@ -85,6 +85,7 @@ func move_body(delta) -> void:
 
 # If the enemy exits the screen then free it
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+	death.emit()
 	queue_free()
 
 

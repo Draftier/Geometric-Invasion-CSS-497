@@ -24,5 +24,5 @@ func _process(delta: float) -> void:
 
 
 func _on_shoot_timer_timeout() -> void:
-	print("fire")
+	# print("fire")
 	shoot_point.shoot()
