@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b83hpbe227thj" path="res://scripts/bullet/bullet.gd" id="1_vgagr"]
 [ext_resource type="Texture2D" uid="uid://blwmetdipeqh6" path="res://assets/sprites/bullet_2.png" id="2_caht2"]
+[ext_resource type="Script" uid="uid://dhan5ja6q4fjx" path="res://scripts/hurt_and_hit_box/hitbox.gd" id="3_q52o3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v4deb"]
 radius = 6.0
@@ -14,7 +15,11 @@ script = ExtResource("1_vgagr")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=905764174]
 texture = ExtResource("2_caht2")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1786711591]
+[node name="Hitbox" type="Area2D" parent="Sprite2D" unique_id=280840225]
+script = ExtResource("3_q52o3")
+metadata/_custom_type_script = "uid://dhan5ja6q4fjx"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Hitbox" unique_id=1786711591]
 shape = SubResource("CircleShape2D_v4deb")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1619883727]

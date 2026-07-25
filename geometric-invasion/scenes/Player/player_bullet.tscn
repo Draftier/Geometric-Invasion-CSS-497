@@ -3,21 +3,24 @@
 [ext_resource type="Texture2D" uid="uid://bore6o1rxng48" path="res://assets/sprites/player_bullet_placeholder.png" id="1_4g3gs"]
 [ext_resource type="Script" uid="uid://b83hpbe227thj" path="res://scripts/bullet/bullet.gd" id="1_46jqs"]
 [ext_resource type="Texture2D" uid="uid://du835wqb2j21b" path="res://assets/sprites/bitmap.png" id="3_0cue5"]
+[ext_resource type="Script" uid="uid://dhan5ja6q4fjx" path="res://scripts/hurt_and_hit_box/hitbox.gd" id="3_gynd6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1tcrw"]
 radius = 3.0
 height = 12.0
 
-[node name="Bullet" type="Area2D" unique_id=1404794027]
+[node name="Bullet" type="Node2D" unique_id=1647006678]
 scale = Vector2(0.15, 0.15)
-collision_layer = 4
-collision_mask = 10
 script = ExtResource("1_46jqs")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=593106910]
 texture = ExtResource("1_4g3gs")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=583624272]
+[node name="Hitbox" type="Area2D" parent="Sprite2D" unique_id=1017809863]
+script = ExtResource("3_gynd6")
+metadata/_custom_type_script = "uid://dhan5ja6q4fjx"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Hitbox" unique_id=583624272]
 position = Vector2(0, -2)
 shape = SubResource("CapsuleShape2D_1tcrw")
 
@@ -30,5 +33,4 @@ rect = Rect2(-8, -10, 16, 20)
 energy = 0.2
 texture = ExtResource("3_0cue5")
 
-[connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
