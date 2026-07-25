@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://bpouseiggfiit"]
 
-[ext_resource type="PackedScene" uid="uid://cp837cm6qinkj" path="res://scenes/enemy.tscn" id="1_rsql2"]
+[ext_resource type="PackedScene" uid="uid://cp837cm6qinkj" path="res://scenes/Enemy/enemy.tscn" id="1_rsql2"]
 [ext_resource type="Shader" uid="uid://cqv7cjdn8x0b5" path="res://shaders/flash.tres" id="2_ewk4g"]
 [ext_resource type="Script" uid="uid://ymhw8e3m6rtc" path="res://scripts/enemy/fixed_shoot_enemy.gd" id="2_it82r"]
 [ext_resource type="Texture2D" uid="uid://c385nsnydbv5l" path="res://assets/sprites/enemy_gun.png" id="3_it82r"]
-[ext_resource type="PackedScene" uid="uid://c6x6lwc5i2t0i" path="res://scenes/ShootPoint.tscn" id="4_rsql2"]
+[ext_resource type="PackedScene" uid="uid://c6x6lwc5i2t0i" path="res://scenes/ShootPoint/ShootPoint.tscn" id="4_rsql2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8tegq"]
 size = Vector2(14, 11)

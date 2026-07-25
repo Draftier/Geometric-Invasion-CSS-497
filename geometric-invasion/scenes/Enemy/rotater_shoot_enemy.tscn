@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://cu4vxxsdf4l7r"]
 
-[ext_resource type="PackedScene" uid="uid://cp837cm6qinkj" path="res://scenes/enemy.tscn" id="1_ofwuk"]
+[ext_resource type="PackedScene" uid="uid://cp837cm6qinkj" path="res://scenes/Enemy/enemy.tscn" id="1_ofwuk"]
 [ext_resource type="Script" uid="uid://cmghxkb54ap6j" path="res://scripts/enemy/rotater_shoot_enemy.gd" id="2_ukbsx"]
-[ext_resource type="PackedScene" uid="uid://d02ey725i8t81" path="res://scenes/obstacle_bullet_base.tscn" id="3_ukbsx"]
+[ext_resource type="PackedScene" uid="uid://d02ey725i8t81" path="res://scenes/Enemy/obstacle_bullet_base.tscn" id="3_ukbsx"]
 [ext_resource type="Shader" uid="uid://cqv7cjdn8x0b5" path="res://shaders/flash.tres" id="3_wj5wt"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ukbsx"]

@@ -26,8 +26,8 @@ var max_bullet_count : int = 1000
 var bullets : Array [ Bullet ]
 
 # Preloading basic bullets for initial pooling
-const basic_enemy_bullet = preload("res://scenes/obstacle_bullet_base.tscn")
-const basic_player_bullet = preload("res://scenes/player_bullet.tscn")
+const basic_enemy_bullet = preload("res://scenes/Enemy/obstacle_bullet_base.tscn")
+const basic_player_bullet = preload("res://scenes/Player/player_bullet.tscn")
 
 # Function to ad bullets to the object pool
 func add_to_pool(bullet: Bullet) -> void:

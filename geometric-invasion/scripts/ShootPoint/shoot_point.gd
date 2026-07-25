@@ -23,6 +23,7 @@ func shoot() -> void:
 			bullet = level_manager.pull_from_pool("player")
 		else:
 			bullet = level_manager.pull_from_pool("enemy")
+		
 		bullet.speed = 2000
 		bullet.global_position = $Muzzle.global_position
 		bullet.global_rotation = $Muzzle.global_rotation

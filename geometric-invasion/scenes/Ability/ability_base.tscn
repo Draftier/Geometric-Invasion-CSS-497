@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://wccxcd2hq02v"]
+
+[node name="ability_base" type="Area2D" unique_id=579209498]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=399183369]
+position = Vector2(0, -68.5)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1089709479]
