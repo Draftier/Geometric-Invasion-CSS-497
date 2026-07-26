@@ -4,9 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dtb2vka5e01d3" path="res://assets/sprites/enemy.png" id="1_7p1mj"]
 [ext_resource type="Shader" uid="uid://cqv7cjdn8x0b5" path="res://shaders/flash.tres" id="2_4ra3w"]
 [ext_resource type="Texture2D" uid="uid://du835wqb2j21b" path="res://assets/sprites/bitmap.png" id="4_5uy6h"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8tegq"]
-size = Vector2(14, 14)
+[ext_resource type="Script" uid="uid://12171bvbqp8w" path="res://scripts/hurt_and_hit_box/hurtbox.gd" id="4_grfqg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iywne"]
 resource_local_to_scene = true
@@ -14,21 +12,30 @@ shader = ExtResource("2_4ra3w")
 shader_parameter/Color = Color(1, 1, 1, 1)
 shader_parameter/Progress = 1.0
 
-[node name="Enemy" type="Area2D" unique_id=1367146779 groups=["enemy"]]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8tegq"]
+size = Vector2(14, 14)
+
+[node name="Enemy" type="Area2D" unique_id=1407150366 groups=["enemy"]]
 position = Vector2(507, 227)
-collision_layer = 2
-collision_mask = 5
 script = ExtResource("1_5uy6h")
 speed = 100
 direction = "down"
 equation = "sin"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1199752919]
-shape = SubResource("RectangleShape2D_8tegq")
-
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1252295741]
 material = SubResource("ShaderMaterial_iywne")
 texture = ExtResource("1_7p1mj")
+
+[node name="Hurtbox" type="Area2D" parent="Sprite2D" unique_id=725762865]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("4_grfqg")
+col_layer = 2
+col_mask = 3
+metadata/_custom_type_script = "uid://12171bvbqp8w"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Hurtbox" unique_id=1199752919]
+shape = SubResource("RectangleShape2D_8tegq")
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=305277508]
 energy = 0.5
@@ -36,5 +43,4 @@ texture = ExtResource("4_5uy6h")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=247689940]
 
-[connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
