@@ -1,17 +1,13 @@
+# This class represents a hurtbox used to detect what hitbo has interacted with an entity
+# And check if that hitbox should interact with this entity
+# Collision masks and layers changed in editor for ease of use
 class_name Hurtbox
 extends Area2D
 
-# These variables are here to set an optional initial collision layer and mask, by default both on 0
-# Make sure the col layer and mask complement each other 
-@export var col_layer : int = 0
-@export var col_mask : int = 0
 
 # Func used to initailize values, use ready over init for values that are in inspector tree
 # Initialize col layer and mask on area2d and connect signal for hurtbox to deal damage to hitbox
 func _ready() -> void:
-	collision_layer = col_layer
-	collision_mask = col_mask
-	
 	area_entered.connect(_on_area_entered)
 	
 
@@ -20,10 +16,9 @@ func _on_area_entered(hitbox: Hitbox) -> void:
 	# Initial check to see if null
 	if hitbox == null:
 		return
+	#print(owner)
 	
 	
-		
-	# print(owner)
 	# Checks to see if owner node has any function that hurtbox can dish out
 	if owner.has_method("take_damage"):
 		owner.take_damage()

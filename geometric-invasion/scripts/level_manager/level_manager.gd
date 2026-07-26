@@ -22,7 +22,7 @@ var event_index = 0
 var current_time
 
 # Variables to store bullets
-var max_bullet_count : int = 1000
+var max_bullet_count : int = 640
 var bullets : Array [ Bullet ]
 
 # Preloading basic bullets for initial pooling
@@ -45,6 +45,8 @@ func pull_from_pool(type : String) -> Bullet:
 			object = basic_player_bullet.instantiate()
 	else:
 		# Iteratively go through pool and find a bullet related to request type
+		# TODO transition to different pools for different objects since starvation occurs
+		# And since it's better to seperate them due to different object interactions
 		for i in range(0, bullets.size()):
 			if bullets[i].shooter == null:
 				print("Pool bugged")
