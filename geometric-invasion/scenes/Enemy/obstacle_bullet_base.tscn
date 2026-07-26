@@ -3,27 +3,38 @@
 [ext_resource type="Script" uid="uid://b83hpbe227thj" path="res://scripts/bullet/bullet.gd" id="1_vgagr"]
 [ext_resource type="Texture2D" uid="uid://blwmetdipeqh6" path="res://assets/sprites/bullet_2.png" id="2_caht2"]
 [ext_resource type="Script" uid="uid://dhan5ja6q4fjx" path="res://scripts/hurt_and_hit_box/hitbox.gd" id="3_q52o3"]
+[ext_resource type="Script" uid="uid://12171bvbqp8w" path="res://scripts/hurt_and_hit_box/hurtbox.gd" id="4_be6pq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v4deb"]
 radius = 6.0
 
-[node name="obstacle_bullet_base" type="Area2D" unique_id=2052516261]
+[node name="obstacle_bullet_base" type="Node2D" unique_id=963541856]
 scale = Vector2(0.5, 0.5)
-collision_layer = 4
 script = ExtResource("1_vgagr")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=905764174]
 texture = ExtResource("2_caht2")
 
 [node name="Hitbox" type="Area2D" parent="Sprite2D" unique_id=280840225]
-collision_layer = 32
+collision_layer = 4
+collision_mask = 0
+monitoring = false
 script = ExtResource("3_q52o3")
+damage = 1
 metadata/_custom_type_script = "uid://dhan5ja6q4fjx"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Hitbox" unique_id=1786711591]
 shape = SubResource("CircleShape2D_v4deb")
 
+[node name="Hurtbox" type="Area2D" parent="Sprite2D" unique_id=1620675658]
+collision_layer = 8
+monitorable = false
+script = ExtResource("4_be6pq")
+metadata/_custom_type_script = "uid://12171bvbqp8w"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Hurtbox" unique_id=1149197893]
+shape = SubResource("CircleShape2D_v4deb")
+
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1619883727]
 
-[connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

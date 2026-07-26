@@ -22,7 +22,7 @@ var event_index = 0
 var current_time
 
 # Variables to store bullets
-var max_bullet_count : int = 640
+var max_bullet_count : int = 1000
 var bullets : Array [ Bullet ]
 
 # Preloading basic bullets for initial pooling
@@ -61,6 +61,12 @@ func pull_from_pool(type : String) -> Bullet:
 	object.visible = true
 	object.set_block_signals(false)
 	
+	if type == "player":
+		object.bullet_hitbox.monitorable = true
+	elif type == "enemy":
+		object.bullet_hurtbox.monitoring = true
+		object.bullet_hitbox.monitorable = true
+	
 	# Return reference to bullet
 	return object
 
@@ -70,16 +76,17 @@ func initialize_pool() -> void:
 		# Initialization for enemy bullets
 		var bullet : Bullet = basic_enemy_bullet.instantiate()
 		bullet.shooter = "enemy"
-		add_to_pool(bullet)
 		pool_node.add_child(bullet)
+		add_to_pool(bullet)
 		
 		# Interleave a player bullet every 2 enemy bullets
 		if (i + 1 ) % 2 == 0:
 			# Initialization for player bullets
 			var player_bullet = basic_player_bullet.instantiate()
 			player_bullet.shooter = "player"
-			add_to_pool(player_bullet)
 			pool_node.add_child(player_bullet)
+			add_to_pool(player_bullet)
+			
 
 func _ready() -> void:
 	# Call to initialize pool

@@ -5,6 +5,7 @@
 [ext_resource type="Shader" uid="uid://cqv7cjdn8x0b5" path="res://shaders/flash.tres" id="2_4ra3w"]
 [ext_resource type="Texture2D" uid="uid://du835wqb2j21b" path="res://assets/sprites/bitmap.png" id="4_5uy6h"]
 [ext_resource type="Script" uid="uid://12171bvbqp8w" path="res://scripts/hurt_and_hit_box/hurtbox.gd" id="4_grfqg"]
+[ext_resource type="Script" uid="uid://dhan5ja6q4fjx" path="res://scripts/hurt_and_hit_box/hitbox.gd" id="5_eacat"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iywne"]
 resource_local_to_scene = true
@@ -15,7 +16,7 @@ shader_parameter/Progress = 1.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8tegq"]
 size = Vector2(14, 14)
 
-[node name="Enemy" type="Area2D" unique_id=1407150366 groups=["enemy"]]
+[node name="Enemy" type="Node2D" unique_id=682992089 groups=["enemy"]]
 position = Vector2(507, 227)
 script = ExtResource("1_5uy6h")
 speed = 100
@@ -27,12 +28,23 @@ material = SubResource("ShaderMaterial_iywne")
 texture = ExtResource("1_7p1mj")
 
 [node name="Hurtbox" type="Area2D" parent="Sprite2D" unique_id=725762865]
-collision_layer = 2
-collision_mask = 5
+collision_layer = 8
+monitorable = false
 script = ExtResource("4_grfqg")
 metadata/_custom_type_script = "uid://12171bvbqp8w"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Hurtbox" unique_id=1199752919]
+shape = SubResource("RectangleShape2D_8tegq")
+
+[node name="Hitbox" type="Area2D" parent="Sprite2D" unique_id=1414706671]
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+script = ExtResource("5_eacat")
+damage = 1
+metadata/_custom_type_script = "uid://dhan5ja6q4fjx"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Hitbox" unique_id=667564901]
 shape = SubResource("RectangleShape2D_8tegq")
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=305277508]

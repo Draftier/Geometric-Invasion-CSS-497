@@ -38,6 +38,7 @@ func _process(delta: float) -> void:
 	
 	# Apply velocity to player
 	move_and_slide()
+	print(get_slide_collision_count())
 	
 	if invulnerable == true:
 		$AnimationPlayer.play("flash")
@@ -57,10 +58,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	pass
 
 # Function that allows the player to take damage
-func take_damage() -> void:
+func take_damage(damage : int) -> void:
 	#print("hit")
 	if invulnerable == false and lives > 0:
-		lives -= 1
+		lives -= damage
 		invulnerable = true
 		$CanvasLayer/Label.text = "Lives : " + str(lives)
 		var timer = get_tree().create_timer(0.7)

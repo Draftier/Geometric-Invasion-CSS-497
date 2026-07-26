@@ -5,7 +5,6 @@ class_name Ability
 @export var data : Ability_Resource
 
 var is_charged : bool = true
-var ability_duration : float = 5.0
 
 # Function to activate the ability
 func activate() -> void:
@@ -19,7 +18,7 @@ func activate() -> void:
 	self.visible = true
 	
 	# Allow ability to run for duration and after discharge the ability
-	await get_tree().create_timer(ability_duration).timeout
+	await get_tree().create_timer(data.active_time).timeout
 	discharge()
 	
 # Function to check if we can activate ability

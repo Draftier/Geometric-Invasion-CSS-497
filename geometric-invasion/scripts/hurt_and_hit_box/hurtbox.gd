@@ -1,6 +1,5 @@
 # This class represents a hurtbox used to detect what hitbo has interacted with an entity
 # And check if that hitbox should interact with this entity
-# Collision masks and layers changed in editor for ease of use
 class_name Hurtbox
 extends Area2D
 
@@ -13,6 +12,7 @@ func _ready() -> void:
 
 # Function to check what hitbox the hurtbox has detected and deal damage to the hitbox
 func _on_area_entered(hitbox: Hitbox) -> void:
+	# print(owner)
 	# Initial check to see if null
 	if hitbox == null:
 		return
@@ -21,11 +21,10 @@ func _on_area_entered(hitbox: Hitbox) -> void:
 	
 	# Checks to see if owner node has any function that hurtbox can dish out
 	if owner.has_method("take_damage"):
-		owner.take_damage()
+		owner.take_damage(hitbox.damage)
 		if hitbox.owner is Bullet:
 			hitbox.owner.level_manager.call_deferred("add_to_pool", hitbox.owner)
-	elif owner.has_method("destroy"):
-		owner.destroy()
-	
-	
+	elif hitbox.owner is Ability:
+		if hitbox.owner.data.name == "laser" or hitbox.owner.data.name == "shield":
+			hitbox.owner.queue_free()
 	pass

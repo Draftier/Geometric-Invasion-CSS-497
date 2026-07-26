@@ -1,5 +1,5 @@
 class_name basic_enemy
-extends Area2D
+extends Node2D
 
 # TODO Make it so that bullet scenes can be varied
 # TODO Tie many variables to a class that inherits some variables, but has things like a rotater
@@ -47,9 +47,9 @@ func _process(delta: float) -> void:
 	
 
 # Function to calculate health and hit upon getting hit by player bullet
-func take_damage() -> void:
+func take_damage(damage : int) -> void:
 	# Subtract one  health
-	health -= 1
+	health -= damage
 	
 	# If health zero then free
 	if health == 0:
@@ -88,10 +88,3 @@ func move_body(delta) -> void:
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	death.emit()
 	queue_free()
-
-
-func _on_area_entered(area: Area2D) -> void:
-	# If the enemy hits the player, make player and enemy take damage
-	if area.get_parent().is_in_group("player"):
-		area.get_parent().take_damage()
-		self.take_damage()

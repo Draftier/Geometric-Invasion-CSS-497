@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c6x6lwc5i2t0i"]
 
 [ext_resource type="Script" uid="uid://4ee0y7owecqv" path="res://scripts/ShootPoint/shoot_point.gd" id="1_p8ncb"]
-[ext_resource type="Resource" uid="uid://rrw2fycu0cb3" path="res://assets/resources/shoot_point/fast_shoot_point.tres" id="2_2ypsg"]
+[ext_resource type="Resource" uid="uid://rrw2fycu0cb3" path="res://resources/shoot_point/fast_shoot_point.tres" id="2_2ypsg"]
 
 [node name="ShootPoint" type="Node2D" unique_id=1529614615]
 script = ExtResource("1_p8ncb")

@@ -9,7 +9,7 @@
 radius = 3.0
 height = 12.0
 
-[node name="Bullet" type="Area2D" unique_id=513227016]
+[node name="Bullet" type="Node2D" unique_id=1218242445]
 scale = Vector2(0.15, 0.15)
 script = ExtResource("1_46jqs")
 
@@ -17,11 +17,9 @@ script = ExtResource("1_46jqs")
 texture = ExtResource("1_4g3gs")
 
 [node name="Hitbox" type="Area2D" parent="Sprite2D" unique_id=1017809863]
-collision_layer = 4
-collision_mask = 2
+collision_mask = 0
+monitoring = false
 script = ExtResource("3_gynd6")
-col_layer = 3
-col_mask = 2
 metadata/_custom_type_script = "uid://dhan5ja6q4fjx"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Hitbox" unique_id=583624272]
