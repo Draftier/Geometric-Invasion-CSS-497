@@ -29,6 +29,7 @@ texture = ExtResource("1_7p1mj")
 
 [node name="Hurtbox" type="Area2D" parent="Sprite2D" unique_id=725762865]
 collision_layer = 8
+collision_mask = 129
 monitorable = false
 script = ExtResource("4_grfqg")
 metadata/_custom_type_script = "uid://12171bvbqp8w"

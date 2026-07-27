@@ -16,6 +16,8 @@ var direction : Vector2 = Vector2.ZERO
 # Flag variable to track if the player is invulnerable
 var invulnerable : bool = false
 
+# Variable to store current ability
+@onready var ability : Ability = $laser_ability
 
 func _ready() -> void:
 	$CanvasLayer/Label.text = "Lives : " + str(lives)
@@ -36,9 +38,13 @@ func _process(delta: float) -> void:
 	if Input.is_action_pressed("slow"):
 		velocity = direction * player_class.speed / 2
 	
+	if Input.is_action_just_pressed("ability"):
+		print("Trying to activate ability")
+		if ability.can_activate():
+			ability.activate()
+	
 	# Apply velocity to player
 	move_and_slide()
-	print(get_slide_collision_count())
 	
 	if invulnerable == true:
 		$AnimationPlayer.play("flash")

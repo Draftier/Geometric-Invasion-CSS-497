@@ -3,8 +3,14 @@ extends Node
 class_name Ability
 
 @export var data : Ability_Resource
+@export var is_charged : bool = true
 
-var is_charged : bool = true
+@onready var ability_hitbox : Hitbox = $Sprite2D/Hitbox
+
+# Disable ability at start
+func _ready() -> void:
+	ability_hitbox.monitorable = false
+	ability_hitbox.monitoring = false
 
 # Function to activate the ability
 func activate() -> void:
@@ -16,6 +22,9 @@ func activate() -> void:
 	# Active the ability and make it visible
 	self.set_block_signals(false)
 	self.visible = true
+	
+	ability_hitbox.monitorable = true
+	ability_hitbox.monitoring = true
 	
 	# Allow ability to run for duration and after discharge the ability
 	await get_tree().create_timer(data.active_time).timeout
@@ -35,4 +44,8 @@ func charge() -> void:
 func discharge() -> void:
 	self.set_block_signals(true)
 	self.visible = false
+	
+	self.ability_hitbox.monitorable = false
+	self.ability_hitbox.monitoring = false
+
 	is_charged = false

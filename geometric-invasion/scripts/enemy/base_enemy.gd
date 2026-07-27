@@ -48,8 +48,11 @@ func _process(delta: float) -> void:
 
 # Function to calculate health and hit upon getting hit by player bullet
 func take_damage(damage : int) -> void:
-	# Subtract one  health
-	health -= damage
+	# Subtract one  health	
+	if health - damage < 0:
+		health = 0
+	else:
+		health -= damage
 	
 	# If health zero then free
 	if health == 0:
