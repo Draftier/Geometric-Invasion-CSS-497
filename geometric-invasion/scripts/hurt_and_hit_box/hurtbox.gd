@@ -17,7 +17,7 @@ func _on_area_entered(hitbox: Hitbox) -> void:
 	if hitbox == null:
 		return
 		
-	# Checks to see if owner node has function to take damage or if
+	# Checks to see if owner node has function to take damage orif
 	# There's another interaction with owner node that is detailed in if statement
 	# If owner of hitbox is not ability then check if it can take damage if so dish out damage
 	if owner.has_method("take_damage") and hitbox.owner is not Ability:

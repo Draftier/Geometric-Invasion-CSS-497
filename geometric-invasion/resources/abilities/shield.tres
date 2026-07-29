@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Ability_Resource" format=3 uid="uid://djauqcfsnn51a"]
+
+[ext_resource type="PackedScene" uid="uid://wccxcd2hq02v" path="res://scenes/Ability/ability_base.tscn" id="1_j2s4t"]
+[ext_resource type="Script" uid="uid://dnq5eqlemi7n0" path="res://scripts/ability/ability_resource_data.gd" id="2_j72ck"]
+
+[resource]
+script = ExtResource("2_j72ck")
+ability_name = "shield"
+ability_scene = ExtResource("1_j2s4t")
+metadata/_custom_type_script = "uid://dnq5eqlemi7n0"
