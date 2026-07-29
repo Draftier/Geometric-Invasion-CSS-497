@@ -3,11 +3,11 @@
 [ext_resource type="Texture2D" uid="uid://da74rc5288inq" path="res://assets/sprites/player.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://ciep42dbk0hr" path="res://scripts/player/player.gd" id="1_g2els"]
 [ext_resource type="Resource" uid="uid://domh45urchay3" path="res://resources/player/destroyer.tres" id="2_a06cl"]
-[ext_resource type="PackedScene" uid="uid://dx2f5c8kxa4vu" path="res://scenes/Ability/laser_ability.tscn" id="3_dl1wr"]
 [ext_resource type="Shader" uid="uid://ccvumau4xgwhx" path="res://shaders/flicker.gdshader" id="4_tuyoq"]
 [ext_resource type="Script" uid="uid://12171bvbqp8w" path="res://scripts/hurt_and_hit_box/hurtbox.gd" id="6_hvfru"]
 [ext_resource type="Texture2D" uid="uid://rjf6qb8ty32e" path="res://assets/sprites/eplosion_1.png" id="6_tuyoq"]
 [ext_resource type="Script" uid="uid://dhan5ja6q4fjx" path="res://scripts/hurt_and_hit_box/hitbox.gd" id="7_dl1wr"]
+[ext_resource type="PackedScene" uid="uid://k1v15hxm7uxj" path="res://scenes/Ability/ability_laser.tscn" id="8_dl1wr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a06cl"]
 radius = 9.0
@@ -121,9 +121,6 @@ motion_mode = 1
 script = ExtResource("1_g2els")
 player_class = ExtResource("2_a06cl")
 
-[node name="laser_ability" parent="." unique_id=1059193591 instance=ExtResource("3_dl1wr")]
-visible = false
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1493186045]
 shape = SubResource("CircleShape2D_a06cl")
 
@@ -177,5 +174,7 @@ offset_left = -282.0
 offset_top = -154.0
 offset_right = -234.0
 offset_bottom = -131.0
+
+[node name="ability_laser" parent="." unique_id=1059193591 instance=ExtResource("8_dl1wr")]
 
 [connection signal="timeout" from="InvulnerabilityTimer" to="." method="_on_invulnerability_timer_timeout"]

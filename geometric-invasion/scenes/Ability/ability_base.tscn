@@ -1,16 +1,6 @@
 [gd_scene format=3 uid="uid://wccxcd2hq02v"]
 
 [ext_resource type="Script" uid="uid://brikicp42amp6" path="res://scripts/ability/ability_base.gd" id="1_i1pgg"]
-[ext_resource type="Script" uid="uid://dhan5ja6q4fjx" path="res://scripts/hurt_and_hit_box/hitbox.gd" id="1_o4hci"]
 
 [node name="ability_base" type="Node2D" unique_id=1059193591]
 script = ExtResource("1_i1pgg")
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1089709479]
-
-[node name="Hitbox" type="Area2D" parent="Sprite2D" unique_id=1499273841]
-script = ExtResource("1_o4hci")
-metadata/_custom_type_script = "uid://dhan5ja6q4fjx"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Hitbox" unique_id=399183369]
-position = Vector2(0, -68.5)

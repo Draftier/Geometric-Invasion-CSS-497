@@ -5,12 +5,14 @@ class_name Ability
 @export var data : Ability_Resource
 @export var is_charged : bool = true
 
-@onready var ability_hitbox : Hitbox = $Sprite2D/Hitbox
+var ability_monitor : bool = false
+
+#@onready var ability_hitbox : Hitbox = $Sprite2D/Hitbox
 
 # Disable ability at start
-func _ready() -> void:
-	ability_hitbox.monitorable = false
-	ability_hitbox.monitoring = false
+#func _ready() -> void:
+	#ability_hitbox.monitorable = false
+	#ability_hitbox.monitoring = false
 
 # Function to activate the ability
 func activate() -> void:
@@ -23,8 +25,10 @@ func activate() -> void:
 	self.set_block_signals(false)
 	self.visible = true
 	
-	ability_hitbox.monitorable = true
-	ability_hitbox.monitoring = true
+	# Make it so that physics server checks for collision masks and layers
+	#ability_hitbox.monitorable = true
+	#ability_hitbox.monitoring = true
+	ability_monitor = true
 	
 	# Allow ability to run for duration and after discharge the ability
 	await get_tree().create_timer(data.active_time).timeout
@@ -45,7 +49,11 @@ func discharge() -> void:
 	self.set_block_signals(true)
 	self.visible = false
 	
-	self.ability_hitbox.monitorable = false
-	self.ability_hitbox.monitoring = false
-
+	# Make it so that physics server does not check for collision masks and layers
+	#self.ability_hitbox.monitorable = false
+	#self.ability_hitbox.monitoring = false
+	
+	ability_monitor = false
+	
+	# Disable ability charge
 	is_charged = false

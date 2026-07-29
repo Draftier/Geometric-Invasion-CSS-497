@@ -17,7 +17,7 @@ var direction : Vector2 = Vector2.ZERO
 var invulnerable : bool = false
 
 # Variable to store current ability
-@onready var ability : Ability = $laser_ability
+@onready var ability : Ability = $ability_laser
 
 func _ready() -> void:
 	$CanvasLayer/Label.text = "Lives : " + str(lives)

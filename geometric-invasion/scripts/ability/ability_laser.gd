@@ -1,0 +1,40 @@
+@tool
+extends Ability
+
+@onready var ray_cast : RayCast2D = $RayCast2D
+@onready var line_2d: Line2D = $RayCast2D/Line2D
+@onready var collision_shape : CollisionShape2D = $RayCast2D/Hitbox/CollisionShape2D
+
+@export var color : Color = Color.WHITE: set = set_color
+
+var cast_speed : float = 7000.0
+var max_length : float = -2000.0
+
+func _ready() -> void:
+	set_color(color)
+
+
+func _physics_process(delta: float) -> void:
+	ray_cast.target_position.y = move_toward(
+		ray_cast.target_position.y,
+		max_length,
+		cast_speed * delta
+	)
+	
+	var laser_end_position := ray_cast.target_position
+	
+	ray_cast.force_raycast_update()
+	
+	if ray_cast.is_colliding():
+		laser_end_position = ray_cast.to_local(ray_cast.get_collision_point())
+	line_2d.set_point_position(1, laser_end_position)
+	
+	# Scale the collision shape to go towards the raycast
+	collision_shape.shape.size.y = laser_end_position.length()
+	collision_shape.position.y = -laser_end_position.length() / 2
+
+func set_color(new_color: Color) -> void:
+	color = new_color
+	if line_2d == null:
+		return
+	line_2d.modulate = new_color

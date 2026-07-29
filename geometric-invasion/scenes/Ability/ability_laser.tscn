@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://k1v15hxm7uxj"]
+
+[ext_resource type="PackedScene" uid="uid://wccxcd2hq02v" path="res://scenes/Ability/ability_base.tscn" id="1_ujilm"]
+[ext_resource type="Script" uid="uid://xfj76lsnndqb" path="res://scripts/ability/ability_laser.gd" id="2_qdf2t"]
+[ext_resource type="Resource" uid="uid://dcvn0xsql2of5" path="res://resources/abilities/laser.tres" id="3_a2jug"]
+[ext_resource type="Script" uid="uid://dhan5ja6q4fjx" path="res://scripts/hurt_and_hit_box/hitbox.gd" id="4_32jri"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d8ny1"]
+size = Vector2(10, 110)
+
+[node name="ability_laser" unique_id=1059193591 instance=ExtResource("1_ujilm")]
+script = ExtResource("2_qdf2t")
+color = Color(1, 1, 1, 1)
+data = ExtResource("3_a2jug")
+
+[node name="RayCast2D" type="RayCast2D" parent="." index="0" unique_id=344906584]
+target_position = Vector2(0, -104)
+collision_mask = 32
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="Line2D" type="Line2D" parent="RayCast2D" index="0" unique_id=444543113]
+points = PackedVector2Array(0, 0, 0, 100)
+begin_cap_mode = 1
+end_cap_mode = 2
+
+[node name="Hitbox" type="Area2D" parent="RayCast2D" index="1" unique_id=1793830565]
+collision_layer = 128
+collision_mask = 8
+script = ExtResource("4_32jri")
+metadata/_custom_type_script = "uid://dhan5ja6q4fjx"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RayCast2D/Hitbox" index="0" unique_id=632185010]
+position = Vector2(0, -50)
+shape = SubResource("RectangleShape2D_d8ny1")
