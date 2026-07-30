@@ -7,7 +7,6 @@
 [ext_resource type="Script" uid="uid://12171bvbqp8w" path="res://scripts/hurt_and_hit_box/hurtbox.gd" id="6_hvfru"]
 [ext_resource type="Texture2D" uid="uid://rjf6qb8ty32e" path="res://assets/sprites/eplosion_1.png" id="6_tuyoq"]
 [ext_resource type="Script" uid="uid://dhan5ja6q4fjx" path="res://scripts/hurt_and_hit_box/hitbox.gd" id="7_dl1wr"]
-[ext_resource type="PackedScene" uid="uid://ry7sdp1yowic" path="res://scenes/Ability/shield_ability.tscn" id="8_dl1wr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a06cl"]
 radius = 9.0
@@ -174,7 +173,5 @@ offset_left = -282.0
 offset_top = -154.0
 offset_right = -234.0
 offset_bottom = -131.0
-
-[node name="ability_shield" parent="." unique_id=1059193591 instance=ExtResource("8_dl1wr")]
 
 [connection signal="timeout" from="InvulnerabilityTimer" to="." method="_on_invulnerability_timer_timeout"]

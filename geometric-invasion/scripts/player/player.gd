@@ -17,12 +17,14 @@ var direction : Vector2 = Vector2.ZERO
 var invulnerable : bool = false
 
 # Variable to store current ability
-@onready var ability : Ability = $ability_laser
+@export var ability_scene : PackedScene
+var ability : Ability
 
 func _ready() -> void:
 	$CanvasLayer/Label.text = "Lives : " + str(lives)
+	ability = ability_scene.instantiate()
+	add_child(ability)
 	pass
-
 
 # Called every physics tick
 func _process(delta: float) -> void:
@@ -41,6 +43,7 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("ability"):
 		print("Trying to activate ability")
 		if ability.can_activate():
+			print("activating")
 			ability.activate()
 	
 	# Apply velocity to player

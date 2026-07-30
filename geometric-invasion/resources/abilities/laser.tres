@@ -8,5 +8,5 @@
 script = ExtResource("1_g52c8")
 ability_name = "laser"
 ability_scene = SubResource("PackedScene_wwtew")
-active_time = 5.0
+active_time = 10.0
 metadata/_custom_type_script = "uid://dnq5eqlemi7n0"

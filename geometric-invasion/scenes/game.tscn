@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bpouseiggfiit" path="res://scenes/Enemy/fixed_shoot_enemy.tscn" id="6_gee14"]
 [ext_resource type="PackedScene" uid="uid://u1mg53l5kgsv" path="res://scenes/Player/player_default_shooting_style.tscn" id="6_u5sy4"]
 [ext_resource type="Script" uid="uid://dviw3iwulqtp" path="res://scripts/player/player_class.gd" id="7_gee14"]
+[ext_resource type="PackedScene" uid="uid://k1v15hxm7uxj" path="res://scenes/Ability/ability_laser.tscn" id="8_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://cu4vxxsdf4l7r" path="res://scenes/Enemy/rotater_shoot_enemy.tscn" id="8_gee14"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iywne"]
@@ -88,6 +89,7 @@ spawn_point_count = 8
 position = Vector2(-1, 114)
 player_class = SubResource("Resource_qhqgy")
 lives = 10
+ability_scene = ExtResource("8_0tnpc")
 
 [node name="Enemy" parent="." unique_id=1367146779 instance=ExtResource("6_gee14")]
 position = Vector2(159, -108)
