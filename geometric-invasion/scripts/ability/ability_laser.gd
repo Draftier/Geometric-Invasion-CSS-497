@@ -42,13 +42,10 @@ func fire_ability(delta : float) -> void:
 	hitbox.monitorable = is_active
 	hitbox.monitoring = is_active
 	
-	self.visible = true
 
 func discharge() -> void:
 	super.discharge()
-	
-	self.visible = false
-	
+		
 	hitbox.monitorable = is_active
 	hitbox.monitoring = is_active
 

@@ -5,7 +5,6 @@ class_name Ability
 @export var data : Ability_Resource
 @export var is_charged : bool = true
 
-
 var is_active : bool = false
 
 #@onready var ability_hitbox : Hitbox = $Sprite2D/Hitbox

@@ -1,11 +1,13 @@
 [gd_scene format=3 uid="uid://ry7sdp1yowic"]
 
 [ext_resource type="PackedScene" uid="uid://wccxcd2hq02v" path="res://scenes/Ability/ability_base.tscn" id="1_ww1nf"]
-[ext_resource type="Resource" uid="uid://djauqcfsnn51a" path="res://resources/abilities/shield.tres" id="2_m8n1s"]
+[ext_resource type="Script" uid="uid://cjhgw8af0l7xx" path="res://scripts/ability/ability_shield.gd" id="2_m8n1s"]
 [ext_resource type="Script" uid="uid://dhan5ja6q4fjx" path="res://scripts/hurt_and_hit_box/hitbox.gd" id="2_uqwh8"]
+[ext_resource type="Resource" uid="uid://djauqcfsnn51a" path="res://resources/abilities/shield.tres" id="3_m8n1s"]
 
 [node name="ability_shield" unique_id=1059193591 instance=ExtResource("1_ww1nf")]
-data = ExtResource("2_m8n1s")
+script = ExtResource("2_m8n1s")
+data = ExtResource("3_m8n1s")
 
 [node name="Polygon2D" type="Polygon2D" parent="." index="0" unique_id=1338341271]
 polygon = PackedVector2Array(-17, -8, -1, -13, 19, -13, 18, -8, 0, -8, -16, -4)
