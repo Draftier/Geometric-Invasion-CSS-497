@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://iie43arv0boo"]
 
 [ext_resource type="Texture2D" uid="uid://bore6o1rxng48" path="res://assets/sprites/player_bullet_placeholder.png" id="1_4g3gs"]
-[ext_resource type="Script" uid="uid://b83hpbe227thj" path="res://scripts/bullet/bullet.gd" id="1_46jqs"]
+[ext_resource type="Script" uid="uid://wixb3n00cmjx" path="res://scripts/bullet/player_bullet.gd" id="1_gynd6"]
 [ext_resource type="Texture2D" uid="uid://du835wqb2j21b" path="res://assets/sprites/bitmap.png" id="3_0cue5"]
 [ext_resource type="Script" uid="uid://dhan5ja6q4fjx" path="res://scripts/hurt_and_hit_box/hitbox.gd" id="3_gynd6"]
 
@@ -9,9 +9,9 @@
 radius = 3.0
 height = 12.0
 
-[node name="Bullet" type="Node2D" unique_id=1218242445]
+[node name="PlayerBullet" type="Node2D" unique_id=1218242445]
 scale = Vector2(0.15, 0.15)
-script = ExtResource("1_46jqs")
+script = ExtResource("1_gynd6")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=593106910]
 texture = ExtResource("1_4g3gs")

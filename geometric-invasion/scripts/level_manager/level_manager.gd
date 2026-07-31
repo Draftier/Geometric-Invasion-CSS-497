@@ -1,3 +1,4 @@
+class_name Level_Manager
 extends Node
 
 # Variables to set after scene, spawners, events, and time to complete level

@@ -8,11 +8,13 @@ extends Node2D
 @onready var level_manager = get_tree().get_first_node_in_group("level_manager")
 
 @onready var bullet_hitbox = $Sprite2D/Hitbox
-@onready var bullet_hurtbox = get_node_or_null("Sprite2D/Hurtbox")
+#@onready var bullet_hurtbox = get_node_or_null("Sprite2D/Hurtbox")
+
+signal exited_screen
 
 # Will utilize to play some sort of animation on instantiation
 func _ready() -> void: 
-	pass
+	bullet_hitbox.connect("hit", _on_hit)
 
 # Called every physics tick
 func _physics_process(delta: float) -> void:
@@ -27,34 +29,25 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	# This is done as when user quits and scene changes, bullets are still trying to get into object pool?
 	if level_manager != null:
 		level_manager.add_to_pool(self)
-
-func _on_area_entered(area: Area2D) -> void:
-	#if area.get_parent().is_in_group("player"):
-		#area.get_parent().take_damage()
-	#elif area.is_in_group("enemy"):
-		#area.take_damage()
-	
-	#if "take_damage" in area.get_parent():
-	#	area.get_parent().take_damage()
-	#if "take_damage" in area:
-	#	area.take_damage()
-	#queue_free()
-	# level_manager.call_deferred("add_to_pool", self)
-	# level_manager.add_to_pool(self)
-	pass
+		
+	exited_screen.emit(self)
 
 func reset() -> void:
-	self.set_block_signals(true)
-	self.set_process(false)
-	self.set_physics_process(false)
-	
-	# Modifying monitoring of hitbox and hurtbox trying to see if this improves performance
-	if bullet_hurtbox != null:
-		bullet_hurtbox.monitoring = false
-		bullet_hurtbox.monitorable = false
-	
-	bullet_hitbox.monitoring = false
-	bullet_hitbox.monitorable = false
-	
-	self.visible = false
-	self.speed = 0
+	pass
+	#self.set_block_signals(true)
+	#self.set_process(false)
+	#self.set_physics_process(false)
+	#
+	## Modifying monitoring of hitbox and hurtbox trying to see if this improves performance
+	#if bullet_hurtbox != null:
+		#bullet_hurtbox.monitoring = false
+		#bullet_hurtbox.monitorable = false
+	#
+	#bullet_hitbox.monitoring = false
+	#bullet_hitbox.monitorable = false
+	#
+	#self.visible = false
+	#self.speed = 0
+
+func _on_hit() -> void:
+	pass

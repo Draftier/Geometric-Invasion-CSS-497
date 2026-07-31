@@ -3,7 +3,6 @@
 class_name Hurtbox
 extends Area2D
 
-
 # Func used to initailize values, use ready over init for values that are in inspector tree
 # Connect signal for hurtbox to deal damage to hitbox
 func _ready() -> void:
@@ -17,22 +16,26 @@ func _on_area_entered(hitbox: Hitbox) -> void:
 	if hitbox == null:
 		return
 		
+	print(hitbox.owner)
+	hitbox._on_hit()
 	# Checks to see if owner node has function to take damage orif
 	# There's another interaction with owner node that is detailed in if statement
 	# If owner of hitbox is not ability then check if it can take damage if so dish out damage
 	if owner.has_method("take_damage") and hitbox.owner is not Ability:
 		owner.take_damage(hitbox.damage)
 		# If owner of hitbox is a bullet then add that bullet to the pool
-		if hitbox.owner is Bullet:
-			hitbox.owner.level_manager.call_deferred("add_to_pool", hitbox.owner)
+		#if hitbox.owner is Bullet:
+			#hitbox.owner.level_manager.call_deferred("add_to_pool", hitbox.owner)
 	# If the owner of the hitbox is an ability then do different checks
 	elif hitbox.owner is Ability:
 		# Check if ability is laser or shield since both laser and shield delete bullets
 		if hitbox.owner.data.ability_name == "laser" or hitbox.owner.data.ability_name == "shield":
 			# If ability comes into contact with bullet then add bullet back to pool
 			if owner is Bullet:
-				owner.level_manager.call_deferred("add_to_pool", owner)
+				#owner.level_manager.call_deferred("add_to_pool", owner)
+				PoolManager.return_to_enemy_pool(owner)
+			print(hitbox.owner.data.ability_name)
 			# If ability comes into contact with enemy then instantly kill enemy
-			elif owner is basic_enemy:
+			if owner is basic_enemy:
 				owner.take_damage(999)
 	pass

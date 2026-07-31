@@ -1,6 +1,7 @@
 class_name ShootPoint
 extends Node2D
 @export var stats : ShootPointStats
+@export var shooter : String = ""
 @onready var level_manager = get_tree().get_first_node_in_group("level_manager")
 
 # Variable used to track whether or not point can fire another bullet within timer
@@ -19,14 +20,21 @@ func shoot() -> void:
 	if can_shoot == true:
 		# Instantiate the bullet shot by player, set speed, positiona, and rotation and start firerate timer
 		var bullet
-		if get_parent().get_parent().is_in_group("player"):
-			bullet = level_manager.pull_from_pool("player")
+		#if get_parent().get_parent().is_in_group("player"):
+			#bullet = level_manager.pull_from_pool("player")
+		#else:
+			#bullet = level_manager.pull_from_pool("enemy")
+		
+		if shooter == "player":
+			bullet = PoolManager.give_player_bullet()
 		else:
-			bullet = level_manager.pull_from_pool("enemy")
+			bullet = PoolManager.give_enemy_bullet()
+		
 		
 		bullet.speed = 2000
 		bullet.global_position = $Muzzle.global_position
 		bullet.global_rotation = $Muzzle.global_rotation
+		bullet.activate()
 		#add_child(bullet)
 		$FireRateTimer.start()
 		can_shoot = false

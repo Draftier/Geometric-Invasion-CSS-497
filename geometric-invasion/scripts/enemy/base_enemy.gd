@@ -11,7 +11,6 @@ signal death
 
 # Initialize the shoot timer and rotater at ready
 # @onready var free_timer = $FreeTimer
-@onready var manager = get_tree().get_first_node_in_group("level_manager")
 
 # Allow shooter and rotater values to be edited in editor to add easier time for editing enemy behavior
 # Consider making a class and resources that have different values for specific enemy types

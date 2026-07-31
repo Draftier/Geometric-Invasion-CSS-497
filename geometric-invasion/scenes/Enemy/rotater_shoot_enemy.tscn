@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://d02ey725i8t81" path="res://scenes/Enemy/obstacle_bullet_base.tscn" id="3_ukbsx"]
 [ext_resource type="Shader" uid="uid://cqv7cjdn8x0b5" path="res://shaders/flash.tres" id="3_wj5wt"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ukbsx"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q1f2k"]
 resource_local_to_scene = true
 shader = ExtResource("3_wj5wt")
 shader_parameter/Color = Color(1, 1, 1, 1)
@@ -22,11 +22,11 @@ speed = 10
 direction = ""
 equation = "None"
 
-[node name="Sprite2D" parent="." index="1" unique_id=1252295741]
-material = SubResource("ShaderMaterial_ukbsx")
+[node name="Sprite2D" parent="." index="0" unique_id=1252295741]
+material = SubResource("ShaderMaterial_q1f2k")
 
-[node name="Rotater" type="Node2D" parent="." index="4" unique_id=1939589730]
+[node name="Rotater" type="Node2D" parent="." index="3" unique_id=1939589730]
 
-[node name="ShootTimer" type="Timer" parent="." index="5" unique_id=1901480178]
+[node name="ShootTimer" type="Timer" parent="." index="4" unique_id=1901480178]
 
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://cutw3vbksk1lv"]
+
+[ext_resource type="Script" uid="uid://c3kgd6frxxhxc" path="res://scenes/Pools/pool_manager.gd" id="1_omxlj"]
+[ext_resource type="Script" uid="uid://2p7xdn8rosd7" path="res://scripts/Pooling/pool.gd" id="2_psedc"]
+[ext_resource type="PackedScene" uid="uid://iie43arv0boo" path="res://scenes/Player/player_bullet.tscn" id="3_fvd53"]
+[ext_resource type="PackedScene" uid="uid://d02ey725i8t81" path="res://scenes/Enemy/obstacle_bullet_base.tscn" id="4_id1ti"]
+
+[node name="PoolManager" type="Node2D" unique_id=365144408]
+script = ExtResource("1_omxlj")
+
+[node name="PlayerBulletPool" type="Node" parent="." unique_id=314793696]
+unique_name_in_owner = true
+script = ExtResource("2_psedc")
+bullet = ExtResource("3_fvd53")
+metadata/_custom_type_script = "uid://2p7xdn8rosd7"
+
+[node name="EnemyBulletPool" type="Node" parent="." unique_id=2098312797]
+unique_name_in_owner = true
+script = ExtResource("2_psedc")
+bullet = ExtResource("4_id1ti")
+metadata/_custom_type_script = "uid://2p7xdn8rosd7"

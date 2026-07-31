@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://da74rc5288inq" path="res://assets/sprites/player.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://ciep42dbk0hr" path="res://scripts/player/player.gd" id="1_g2els"]
 [ext_resource type="Resource" uid="uid://domh45urchay3" path="res://resources/player/destroyer.tres" id="2_a06cl"]
+[ext_resource type="PackedScene" uid="uid://k1v15hxm7uxj" path="res://scenes/Ability/ability_laser.tscn" id="3_dl1wr"]
 [ext_resource type="Shader" uid="uid://ccvumau4xgwhx" path="res://shaders/flicker.gdshader" id="4_tuyoq"]
 [ext_resource type="Script" uid="uid://12171bvbqp8w" path="res://scripts/hurt_and_hit_box/hurtbox.gd" id="6_hvfru"]
 [ext_resource type="Texture2D" uid="uid://rjf6qb8ty32e" path="res://assets/sprites/eplosion_1.png" id="6_tuyoq"]
@@ -119,6 +120,7 @@ collision_mask = 32
 motion_mode = 1
 script = ExtResource("1_g2els")
 player_class = ExtResource("2_a06cl")
+ability_scene = ExtResource("3_dl1wr")
 
 [node name="WholeCollisionBox" type="Area2D" parent="." unique_id=1308904982]
 collision_layer = 64

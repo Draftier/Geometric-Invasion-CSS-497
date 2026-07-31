@@ -27,7 +27,8 @@ func _on_resume_button_pressed() -> void:
 
 func _on_quit_to_menu_pressed() -> void:
 	get_tree().paused = false
-	get_tree().call_deferred("change_scene_to_file", "res://scenes/main_menu.tscn")
+	PoolManager.destroy_pools()
+	get_tree().call_deferred("change_scene_to_file", "res://scenes/UI/main_menu.tscn")
 
 func _on_quit_to_desktop_pressed() -> void:
 	get_tree().quit()

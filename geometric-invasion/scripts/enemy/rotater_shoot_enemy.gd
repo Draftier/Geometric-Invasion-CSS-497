@@ -33,7 +33,8 @@ func rotate_pivot(delta) -> void:
 # Function to shoot bullets per timer
 func _on_shoot_timer_timeout() -> void:
 	for s in rotater.get_children():
-		var bullet = manager.pull_from_pool("enemy") as Bullet
+		#var bullet = manager.pull_from_pool("enemy") as Bullet
+		var bullet = PoolManager.give_enemy_bullet()
 		bullet.speed = 250
 		bullet.position = s.global_position
 		bullet.rotation = s.global_rotation

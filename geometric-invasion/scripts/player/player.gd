@@ -81,7 +81,6 @@ func take_damage(damage : int) -> void:
 	else:
 		return
 
-
 func _on_invulnerability_timer_timeout() -> void:
 	invulnerable = false
 	

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://d02ey725i8t81"]
 
-[ext_resource type="Script" uid="uid://b83hpbe227thj" path="res://scripts/bullet/bullet.gd" id="1_vgagr"]
+[ext_resource type="Script" uid="uid://bk73m0ixedgp1" path="res://scripts/bullet/enemy_bullet.gd" id="1_be6pq"]
 [ext_resource type="Texture2D" uid="uid://blwmetdipeqh6" path="res://assets/sprites/bullet_2.png" id="2_caht2"]
 [ext_resource type="Script" uid="uid://dhan5ja6q4fjx" path="res://scripts/hurt_and_hit_box/hitbox.gd" id="3_q52o3"]
 [ext_resource type="Script" uid="uid://12171bvbqp8w" path="res://scripts/hurt_and_hit_box/hurtbox.gd" id="4_be6pq"]
@@ -10,7 +10,7 @@ radius = 6.0
 
 [node name="obstacle_bullet_base" type="Node2D" unique_id=963541856]
 scale = Vector2(0.5, 0.5)
-script = ExtResource("1_vgagr")
+script = ExtResource("1_be6pq")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=905764174]
 texture = ExtResource("2_caht2")
@@ -27,6 +27,7 @@ metadata/_custom_type_script = "uid://dhan5ja6q4fjx"
 shape = SubResource("CircleShape2D_v4deb")
 
 [node name="Hurtbox" type="Area2D" parent="Sprite2D" unique_id=1620675658]
+unique_name_in_owner = true
 collision_layer = 8
 collision_mask = 128
 monitorable = false

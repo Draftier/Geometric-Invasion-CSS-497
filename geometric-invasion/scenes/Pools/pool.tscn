@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://ciqerwf2jqmai"]
+
+[ext_resource type="Script" uid="uid://2p7xdn8rosd7" path="res://scripts/Pooling/pool.gd" id="1_27bf1"]
+
+[node name="Pool" type="Node" unique_id=1693751398]
+script = ExtResource("1_27bf1")
