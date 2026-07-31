@@ -74,6 +74,7 @@ ability={
 2d_physics/layer_6="borders"
 2d_physics/layer_7="player_box"
 2d_physics/layer_8="player ability"
+2d_physics/layer_9="pickup"
 
 [physics]
 

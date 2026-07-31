@@ -120,7 +120,11 @@ motion_mode = 1
 script = ExtResource("1_g2els")
 player_class = ExtResource("2_a06cl")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1493186045]
+[node name="WholeCollisionBox" type="Area2D" parent="." unique_id=1308904982]
+collision_layer = 64
+collision_mask = 256
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WholeCollisionBox" unique_id=1493186045]
 shape = SubResource("CircleShape2D_a06cl")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1316585369]
@@ -174,4 +178,5 @@ offset_top = -154.0
 offset_right = -234.0
 offset_bottom = -131.0
 
+[connection signal="body_entered" from="WholeCollisionBox" to="." method="_on_whole_collision_box_body_entered"]
 [connection signal="timeout" from="InvulnerabilityTimer" to="." method="_on_invulnerability_timer_timeout"]

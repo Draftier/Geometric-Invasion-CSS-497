@@ -22,9 +22,13 @@ signal death
 @export var direction : String
 @export var equation : String = "None"
 
+# Variable that stores the packed scene for ability pickup
+@export var power_up_charge : PackedScene
+
 # Store direction vector and current time
 var direction_vector
 var time : float = 0.0
+var is_dead : bool = false
 
 func _ready() -> void:
 	# Initialize the direction based on inspector values
@@ -55,9 +59,17 @@ func take_damage(damage : int) -> void:
 		health -= damage
 	
 	# If health zero then free
-	if health == 0:
+	if health == 0 and is_dead == false:
 		# death.emit.call_deferred()
+		is_dead = true
 		death.emit()
+		print("dying")
+		
+		if randf() < 0.5:
+			var power_up = power_up_charge.instantiate()
+			power_up.position = self.position
+			get_parent().call_deferred("add_child", power_up)
+		
 		queue_free()
 	# If health not zero then set progress of flash shader
 	var tween = create_tween()

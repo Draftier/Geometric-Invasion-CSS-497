@@ -1,7 +1,5 @@
 extends Node
 
-
-
 # Variables to set after scene, spawners, events, and time to complete level
 @export var end_change_scene : PackedScene
 @export var spawners : Array[Node]
@@ -165,4 +163,4 @@ func _on_tree_exiting() -> void:
 
 func _on_enemy_death() -> void:
 	num_enemies -= 1
-	print(num_enemies)
+	# print(num_enemies)

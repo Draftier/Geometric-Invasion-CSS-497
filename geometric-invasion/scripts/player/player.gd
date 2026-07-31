@@ -85,3 +85,8 @@ func take_damage(damage : int) -> void:
 func _on_invulnerability_timer_timeout() -> void:
 	invulnerable = false
 	
+
+func _on_whole_collision_box_body_entered(body: Node2D) -> void:
+	print("Picked up charge")
+	ability.charge()
+	body.queue_free()
