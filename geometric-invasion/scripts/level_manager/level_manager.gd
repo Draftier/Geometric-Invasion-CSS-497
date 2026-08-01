@@ -20,72 +20,6 @@ var event_index = 0
 # Utilize to track the current time
 var current_time
 
-# Variables to store bullets
-var max_bullet_count : int = 1000
-var bullets : Array [ Bullet ]
-
-# Preloading basic bullets for initial pooling
-const basic_enemy_bullet = preload("res://scenes/Enemy/obstacle_bullet_base.tscn")
-const basic_player_bullet = preload("res://scenes/Player/player_bullet.tscn")
-
-# Function to ad bullets to the object pool
-func add_to_pool(bullet: Bullet) -> void:
-	bullet.reset()
-	bullets.append(bullet)
-	
-# Function to pull a bullet from the pool
-func pull_from_pool(type : String) -> Bullet:
-	var object: Bullet
-	# Check if pool is empty or not empty, either way check type of bullet
-	if bullets.is_empty():
-		if type == "enemy":
-			object = basic_enemy_bullet.instantiate()
-		elif type == "player":
-			object = basic_player_bullet.instantiate()
-	else:
-		# Iteratively go through pool and find a bullet related to request type
-		# TODO transition to different pools for different objects since starvation occurs
-		# And since it's better to seperate them due to different object interactions
-		for i in range(0, bullets.size()):
-			if bullets[i].shooter == null:
-				print("Pool bugged")
-			# When bullet type matches set reference to it and remove it from pool
-			if bullets[i].shooter == type:
-				object = bullets[i]
-				bullets.remove_at(i)
-				break
-	# Unpause calculation from bullet being pulled from pool
-	object.set_process(true)
-	object.set_physics_process(true)
-	object.visible = true
-	object.set_block_signals(false)
-	
-	if type == "player":
-		object.bullet_hitbox.monitorable = true
-	elif type == "enemy":
-		object.bullet_hurtbox.monitoring = true
-		object.bullet_hitbox.monitorable = true
-	
-	# Return reference to bullet
-	return object
-
-func initialize_pool() -> void:
-	# Loop to initialize the object pool whilst interleaving player and enemy bullets
-	for i in range(0, max_bullet_count):
-		# Initialization for enemy bullets
-		var bullet : Bullet = basic_enemy_bullet.instantiate()
-		bullet.shooter = "enemy"
-		pool_node.add_child(bullet)
-		add_to_pool(bullet)
-		
-		# Interleave a player bullet every 2 enemy bullets
-		if (i + 1 ) % 2 == 0:
-			# Initialization for player bullets
-			var player_bullet = basic_player_bullet.instantiate()
-			player_bullet.shooter = "player"
-			pool_node.add_child(player_bullet)
-			add_to_pool(player_bullet)
-			
 
 func _ready() -> void:
 	# Call to initialize pool
@@ -139,7 +73,6 @@ func _process(delta: float) -> void:
 # At end of level change scene
 func _on_level_timer_timeout() -> void:
 	pass # Replace with function body.
-	
 	
 	
 # Function to execute an event

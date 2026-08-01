@@ -6,8 +6,10 @@ extends Node
 @export var ui: UI
 
 var player : Player
+var level
 
 func _ready() -> void:
+	
 	pass
 	
 

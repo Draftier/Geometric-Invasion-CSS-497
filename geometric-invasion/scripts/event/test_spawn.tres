@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Spawn_Event" format=3 uid="uid://b0d6juwxwdprd"]
+
+[ext_resource type="PackedScene" uid="uid://bpouseiggfiit" path="res://scenes/Enemy/fixed_shoot_enemy.tscn" id="1_dtymd"]
+[ext_resource type="Script" uid="uid://bewu02jnvwcgy" path="res://scripts/event/spawn_event_data.gd" id="1_x0fx4"]
+
+[resource]
+script = ExtResource("1_x0fx4")
+enemies = Array[PackedScene]([ExtResource("1_dtymd")])
+spawner = 1
+number_of_times_to_spawn = 5
+time_between_spawns = 0.1
+metadata/_custom_type_script = "uid://bewu02jnvwcgy"
