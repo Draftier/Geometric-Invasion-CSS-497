@@ -9,6 +9,8 @@
 size = Vector2(10, 2000)
 
 [node name="ability_laser" unique_id=1059193591 instance=ExtResource("1_ujilm")]
+visible = false
+position = Vector2(0, -10)
 script = ExtResource("2_qdf2t")
 color = Color(1, 1, 1, 1)
 data = ExtResource("3_a2jug")
@@ -27,6 +29,8 @@ end_cap_mode = 2
 [node name="Hitbox" type="Area2D" parent="RayCast2D" index="1" unique_id=1793830565]
 collision_layer = 128
 collision_mask = 8
+monitoring = false
+monitorable = false
 script = ExtResource("4_32jri")
 metadata/_custom_type_script = "uid://dhan5ja6q4fjx"
 
