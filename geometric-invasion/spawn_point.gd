@@ -25,6 +25,7 @@ func execute_spawn_event(event : Spawn_Event) -> void:
 			var enemy = i.enemy.instantiate()
 			enemy.movement_events = i.enemy_movement_pattern
 			enemy.global_position = global_position
+			enemy.rotation_degrees = i.rotation
 			get_parent().add_child.call_deferred(enemy)
 			var timer = get_tree().create_timer(event.time_between_spawns)
 			await timer.timeout

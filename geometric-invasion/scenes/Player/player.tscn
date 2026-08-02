@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://rjf6qb8ty32e" path="res://assets/sprites/eplosion_1.png" id="6_tuyoq"]
 [ext_resource type="Script" uid="uid://dhan5ja6q4fjx" path="res://scripts/hurt_and_hit_box/hitbox.gd" id="7_dl1wr"]
 [ext_resource type="Texture2D" uid="uid://uvk4s6j4ws4c" path="res://assets/sprites/circle_1.png" id="9_wwtew"]
+[ext_resource type="FontFile" uid="uid://dihhulpjs1064" path="res://assets/fonts/PixelOperator8.ttf" id="10_uxo23"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a06cl"]
 radius = 9.0
@@ -185,6 +186,7 @@ offset_left = -282.0
 offset_top = -154.0
 offset_right = -234.0
 offset_bottom = -131.0
+theme_override_fonts/font = ExtResource("10_uxo23")
 
 [connection signal="body_entered" from="WholeCollisionBox" to="." method="_on_whole_collision_box_body_entered"]
 [connection signal="timeout" from="InvulnerabilityTimer" to="." method="_on_invulnerability_timer_timeout"]

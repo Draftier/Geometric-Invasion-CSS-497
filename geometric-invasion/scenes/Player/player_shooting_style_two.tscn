@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://c6x6lwc5i2t0i" path="res://scenes/ShootPoint/ShootPoint.tscn" id="2_wclc1"]
 
 [node name="Player" unique_id=1651887187 groups=["player"] instance=ExtResource("1_dkbgf")]
+lives = 10
 
 [node name="ShootPoint" parent="guns" parent_id_path=PackedInt32Array(1613688656) index="0" unique_id=1529614615 instance=ExtResource("2_wclc1")]
 position = Vector2(1, -10)

@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://c6x6lwc5i2t0i" path="res://scenes/ShootPoint/ShootPoint.tscn" id="2_8wkqb"]
 
 [node name="Player" unique_id=1651887187 groups=["player"] instance=ExtResource("1_7r64s")]
+lives = 10
 metadata/_edit_lock_ = true
 
 [node name="ShootPoint2" parent="guns" parent_id_path=PackedInt32Array(1613688656) index="0" unique_id=1529614615 instance=ExtResource("2_8wkqb")]
