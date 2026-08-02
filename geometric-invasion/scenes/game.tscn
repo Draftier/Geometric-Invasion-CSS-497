@@ -4,10 +4,38 @@
 [ext_resource type="Script" uid="uid://cejwab54dw4r5" path="res://scripts/game.gd" id="1_vtaks"]
 [ext_resource type="PackedScene" uid="uid://cjye6s0e01omf" path="res://scenes/Managers/level_manager.tscn" id="2_gee14"]
 [ext_resource type="Texture2D" uid="uid://dhr2fi5xwbms0" path="res://assets/sprites/dark_blue.png" id="3_p57ef"]
+[ext_resource type="Script" uid="uid://bewu02jnvwcgy" path="res://scripts/event/spawn_event_data.gd" id="4_kvpfn"]
 [ext_resource type="Texture2D" uid="uid://bvt77d3gapc08" path="res://assets/sprites/background_1.png" id="4_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://bpouseiggfiit" path="res://scenes/Enemy/fixed_shoot_enemy.tscn" id="6_gee14"]
+[ext_resource type="PackedScene" uid="uid://cp837cm6qinkj" path="res://scenes/Enemy/enemy.tscn" id="6_kvuet"]
+[ext_resource type="Script" uid="uid://thlx0gtur2d4" path="res://scripts/enemy/enemy_movement_data.gd" id="7_trtic"]
 [ext_resource type="Resource" uid="uid://c641j6jfn477v" path="res://resources/events/test_movement_data_two.tres" id="8_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://cu4vxxsdf4l7r" path="res://scenes/Enemy/rotater_shoot_enemy.tscn" id="8_gee14"]
+[ext_resource type="Script" uid="uid://cpbp4ohcaqwle" path="res://spawn_point.gd" id="9_0tnpc"]
+[ext_resource type="Script" uid="uid://c4twyssjo6an2" path="res://scripts/event/spawn.gd" id="12_dinhu"]
+
+[sub_resource type="Resource" id="Resource_ir15t"]
+script = ExtResource("7_trtic")
+movement_dict = Dictionary[String, float]({
+"down": 1.0
+})
+leave_screen = true
+metadata/_custom_type_script = "uid://thlx0gtur2d4"
+
+[sub_resource type="Resource" id="Resource_trtic"]
+script = ExtResource("12_dinhu")
+enemy = ExtResource("6_kvuet")
+enemy_movement_pattern = SubResource("Resource_ir15t")
+number_of_enemies = 5
+metadata/_custom_type_script = "uid://c4twyssjo6an2"
+
+[sub_resource type="Resource" id="Resource_kvuet"]
+script = ExtResource("4_kvpfn")
+spawner = 1
+time_between_spawns = 3.0
+time_to_occur = 20.0
+spawns = Array[ExtResource("12_dinhu")]([SubResource("Resource_trtic")])
+metadata/_custom_type_script = "uid://bewu02jnvwcgy"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vtaks"]
 texture = ExtResource("4_lbhrr")
@@ -27,6 +55,11 @@ size = Vector2(646, 21)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iywne"]
 size = Vector2(20, 618)
 
+[sub_resource type="Resource" id="Resource_gdvp7"]
+script = ExtResource("4_kvpfn")
+spawner = 1
+metadata/_custom_type_script = "uid://bewu02jnvwcgy"
+
 [node name="Game" type="Node" unique_id=717147830]
 script = ExtResource("1_vtaks")
 metadata/_edit_vertical_guides_ = [-289.0, 239.0]
@@ -35,7 +68,9 @@ metadata/_edit_horizontal_guides_ = [-162.0, 163.0]
 [node name="PauseMenu" parent="." unique_id=1058867629 instance=ExtResource("1_u5sy4")]
 visible = false
 
-[node name="LevelManager" parent="." unique_id=1305954196 node_paths=PackedStringArray("enemies") instance=ExtResource("2_gee14")]
+[node name="LevelManager" parent="." unique_id=1305954196 node_paths=PackedStringArray("spawners", "enemies") instance=ExtResource("2_gee14")]
+spawners = [NodePath("../EnemySpawnPoint")]
+events = Array[ExtResource("4_kvpfn")]([SubResource("Resource_kvuet")])
 level_time = 120.0
 enemies = [NodePath("../Rotater_Shoot_Enemy"), NodePath("../Enemy"), NodePath("../Enemy2"), NodePath("../Enemy3"), NodePath("../Enemy4"), NodePath("../Enemy5"), NodePath("../Enemy6")]
 
@@ -131,6 +166,14 @@ equation = "sin"
 
 [node name="SpawnPoint" type="Marker2D" parent="." unique_id=732362670]
 position = Vector2(-6, 130)
+
+[node name="EnemySpawnPoint" type="Node2D" parent="." unique_id=966124853]
+position = Vector2(1, -214)
+script = ExtResource("9_0tnpc")
+id = 1
+spawn_interval = 1.0
+event = SubResource("Resource_gdvp7")
+metadata/_custom_type_script = "uid://cpbp4ohcaqwle"
 
 [connection signal="victory" from="LevelManager" to="PauseMenu" method="_on_level_manager_victory"]
 

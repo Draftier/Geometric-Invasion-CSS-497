@@ -46,6 +46,12 @@ func _process(delta: float) -> void:
 	# Store current time for possible function calculations
 	time += delta
 	
+	if function_direction == null:
+		print("function direction null")
+	elif speed == null:
+		print("speed null")
+	
+	
 	# Move the enemy
 	global_position += function_direction * speed * delta
 	

@@ -76,7 +76,7 @@ func _on_level_timer_timeout() -> void:
 func execute_event(event : Spawn_Event) -> void:
 	for i in spawners:
 		if i.id == event.spawner:
-			i.spawn(event)
+			i.execute_spawn_event(event)
 	print(event.time_to_occur)
 	pass
 	
