@@ -70,7 +70,7 @@ focus_neighbor_top = NodePath("../Singleplayer")
 focus_neighbor_bottom = NodePath("../QuitButton")
 focus_next = NodePath("../QuitButton")
 focus_previous = NodePath("../Singleplayer")
-text = "Multiplayer
+text = "Multiplayer (To be done)
 "
 metadata/_edit_use_anchors_ = true
 
@@ -87,7 +87,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="TutorialButton" type="Button" parent="MarginContainer/VBoxContainer/ButtonsVbox" unique_id=1411541682]
 layout_mode = 2
-text = "Tutorial"
+text = "Tutorial (To be done)"
 
 [node name="ControlsButton" type="Button" parent="MarginContainer/VBoxContainer/ButtonsVbox" unique_id=1898276927]
 layout_mode = 2
