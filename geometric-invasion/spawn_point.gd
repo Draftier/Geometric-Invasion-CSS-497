@@ -10,7 +10,6 @@ var num = 0
 
 # Function to spawn enemies given a spawn event
 func spawn(event : Spawn_Event) -> void:
-	
 	# For the number of times we want to spawn this set of enemies
 	for i in event.number_of_times_to_spawn:
 		# For each enemy 

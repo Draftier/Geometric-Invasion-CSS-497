@@ -8,6 +8,11 @@ extends Node2D
 
 # Temp death signal for playatest
 signal death
+signal movement_finished
+
+# Movement and attack resources that enemies will utilize
+@export var movement_events : EnemyMovementData
+@export var attack_events : EnemyAttackData
 
 # Initialize the shoot timer and rotater at ready
 # @onready var free_timer = $FreeTimer
@@ -28,25 +33,35 @@ signal death
 var direction_vector
 var time : float = 0.0
 var is_dead : bool = false
+var screen : Vector2 = get_viewport_rect().size
+var target_pos : Vector2
 
 func _ready() -> void:
-	# Initialize the direction based on inspector values
-	if direction == "right":
-		direction_vector = Vector2.RIGHT
-	elif direction == "left":
-		direction_vector = Vector2.LEFT
-	elif direction == "up":
-		direction_vector = Vector2.UP
-	elif direction == "down":
-		direction_vector = Vector2.DOWN
-	else:
-		direction_vector = Vector2.ZERO
+	## Initialize the direction based on inspector values
+	#if direction == "right":
+		#direction_vector = Vector2.RIGHT
+	#elif direction == "left":
+		#direction_vector = Vector2.LEFT
+	#elif direction == "up":
+		#direction_vector = Vector2.UP
+	#elif direction == "down":
+		#direction_vector = Vector2.DOWN
+	#else:
+		#direction_vector = Vector2.ZERO
+	# Figure out the current direction and distance by reading movement event
+	execute_movement_events()
+	pass
 	
 func _process(delta: float) -> void:
 	# Store current time for possible function calculations
 	time += delta
+	
 	# Move the enemy
-	move_body(delta)
+	global_position += direction_vector * speed * delta
+	print(global_position)
+	if  global_position == target_pos:
+		print("reached pos")
+		movement_finished.emit()
 	
 
 # Function to calculate health and hit upon getting hit by player bullet
@@ -102,3 +117,34 @@ func move_body(delta) -> void:
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	death.emit()
 	queue_free()
+
+func execute_movement_events() -> void:
+	for i in movement_events.movement_dict:
+		#distance_to_move = movement_events[i] * screen_size
+			# Initialize the direction based on inspector values
+		if i == "right" or i == "left":
+			distance_to_move = movement_events.movement_dict[i] * screen.x
+			if i == "right":
+				direction_vector = Vector2.RIGHT
+			elif i == "left":
+				direction_vector = Vector2.LEFT
+		elif i == "up" or i == "down":
+			distance_to_move = movement_events.movement_dict[i] * screen.y
+			if i == "up":
+				direction_vector = Vector2.UP
+			elif i == "down":
+				direction_vector = Vector2.DOWN
+		else:
+			direction_vector = Vector2.ZERO
+		target_pos = self.position + direction_vector.normalized() * distance_to_move
+		# Variables to store initial direction and angle
+		var function_direction = direction_vector
+		var angle
+		if movement_events.function == "sin":
+			angle = sin(time * 1.5) * 50
+			function_direction = direction_vector.rotated(deg_to_rad(angle))
+		print(target_pos)
+		await movement_finished
+		
+func leave_screen() -> void:
+	pass

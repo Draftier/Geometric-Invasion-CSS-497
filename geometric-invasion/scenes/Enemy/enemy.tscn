@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dtb2vka5e01d3" path="res://assets/sprites/enemy.png" id="1_7p1mj"]
 [ext_resource type="Shader" uid="uid://cqv7cjdn8x0b5" path="res://shaders/flash.tres" id="2_4ra3w"]
 [ext_resource type="PackedScene" uid="uid://dea3ckmfpjcym" path="res://scenes/Ability/ability_pickup.tscn" id="2_ixhtt"]
+[ext_resource type="Resource" uid="uid://ga4xkpr5vuh7" path="res://resources/events/test_movement_data.tres" id="2_wfr8x"]
 [ext_resource type="Texture2D" uid="uid://du835wqb2j21b" path="res://assets/sprites/bitmap.png" id="4_5uy6h"]
 [ext_resource type="Script" uid="uid://12171bvbqp8w" path="res://scripts/hurt_and_hit_box/hurtbox.gd" id="4_grfqg"]
 [ext_resource type="Script" uid="uid://dhan5ja6q4fjx" path="res://scripts/hurt_and_hit_box/hitbox.gd" id="5_eacat"]
@@ -20,6 +21,7 @@ size = Vector2(14, 14)
 [node name="Enemy" type="Node2D" unique_id=682992089 groups=["enemy"]]
 position = Vector2(507, 227)
 script = ExtResource("1_5uy6h")
+movement_events = ExtResource("2_wfr8x")
 speed = 100
 direction = "down"
 equation = "sin"

@@ -21,10 +21,7 @@ var event_index = 0
 var current_time
 
 
-func _ready() -> void:
-	# Call to initialize pool
-	call_deferred("initialize_pool")
-	
+func _ready() -> void:	
 	# Connect enemy death signals
 	for i in enemies:
 		i.connect("death", _on_enemy_death)
@@ -57,7 +54,7 @@ func _process(delta: float) -> void:
 		# Loop through events
 		for i in events.size():
 			# Check if event should occur and execute if it does
-			if events[i].time >= current_time as int:
+			if events[i].time_to_occur >= current_time as int:
 				execute_event(events[i])
 			event_index += 1
 	
@@ -80,13 +77,13 @@ func execute_event(event : Spawn_Event) -> void:
 	for i in spawners:
 		if i.id == event.spawner:
 			i.spawn(event)
-	print(event.time)
+	print(event.time_to_occur)
 	pass
 	
 # To use custom sort to sort events I create a custom callable
 func sort_events_ascending(a : Spawn_Event, b : Spawn_Event) -> bool:
 	if a != null and b != null:
-		if a.time < b.time:
+		if a.time_to_occur < b.time_to_occur:
 			return true
 	return false
 
