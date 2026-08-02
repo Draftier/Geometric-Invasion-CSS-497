@@ -27,11 +27,12 @@ func shoot() -> void:
 		
 		if shooter == "player":
 			bullet = PoolManager.give_player_bullet()
+			bullet.speed = 2000
 		else:
 			bullet = PoolManager.give_enemy_bullet()
+			bullet.speed = 100
 		
 		
-		bullet.speed = 2000
 		bullet.global_position = $Muzzle.global_position
 		bullet.global_rotation = $Muzzle.global_rotation
 		bullet.activate()

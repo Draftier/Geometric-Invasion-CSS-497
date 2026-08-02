@@ -1,6 +1,5 @@
 extends CanvasLayer
 
-@onready var player = get_node("")
 
 func _ready() -> void:
 	hide()

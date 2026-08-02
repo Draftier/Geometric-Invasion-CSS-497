@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dhr2fi5xwbms0" path="res://assets/sprites/dark_blue.png" id="3_p57ef"]
 [ext_resource type="Texture2D" uid="uid://bvt77d3gapc08" path="res://assets/sprites/background_1.png" id="4_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://bpouseiggfiit" path="res://scenes/Enemy/fixed_shoot_enemy.tscn" id="6_gee14"]
+[ext_resource type="Resource" uid="uid://c641j6jfn477v" path="res://resources/events/test_movement_data_two.tres" id="8_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://cu4vxxsdf4l7r" path="res://scenes/Enemy/rotater_shoot_enemy.tscn" id="8_gee14"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vtaks"]
@@ -84,31 +85,36 @@ spawn_point_count = 8
 position = Vector2(159, -108)
 rotation = -3.1415925
 shoot_timer_wait_time = 1.1
+speed = 50
 health = 20
 
 [node name="Enemy2" parent="." unique_id=1178207838 instance=ExtResource("6_gee14")]
 position = Vector2(78, -113)
 rotation = -3.1415925
 shoot_timer_wait_time = 1.2
+speed = 50
 health = 20
 
 [node name="Enemy3" parent="." unique_id=154528625 instance=ExtResource("6_gee14")]
 position = Vector2(-60, -118)
 rotation = -3.1415925
 shoot_timer_wait_time = 1.3
+speed = 50
 health = 20
 
 [node name="Enemy4" parent="." unique_id=2110015904 instance=ExtResource("6_gee14")]
 position = Vector2(-180, -122)
 rotation = -3.1415925
 shoot_timer_wait_time = 1.4
+speed = 50
 health = 20
 
 [node name="Enemy5" parent="." unique_id=1787899574 instance=ExtResource("6_gee14")]
 position = Vector2(-233, -124)
 rotation = 1.5707964
 shoot_timer_wait_time = 0.8
-speed = 20
+movement_events = ExtResource("8_0tnpc")
+speed = 50
 health = 20
 direction = "down"
 equation = "sin"
@@ -117,7 +123,8 @@ equation = "sin"
 position = Vector2(203, -111)
 rotation = -1.5707964
 shoot_timer_wait_time = 0.88
-speed = 20
+movement_events = ExtResource("8_0tnpc")
+speed = 50
 health = 20
 direction = "down"
 equation = "sin"

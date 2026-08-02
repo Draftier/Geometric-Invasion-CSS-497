@@ -129,6 +129,7 @@ func execute_movement_events() -> void:
 	if movement_events.leave_screen == true:
 		leave_screen()
 	elif movement_events.wrap == true:
+		execute_movement_events()
 		pass
 		
 	

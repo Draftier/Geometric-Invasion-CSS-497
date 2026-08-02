@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="EnemyMovementData" format=3 uid="uid://c641j6jfn477v"]
+
+[ext_resource type="Script" uid="uid://thlx0gtur2d4" path="res://scripts/enemy/enemy_movement_data.gd" id="1_okv1j"]
+
+[resource]
+script = ExtResource("1_okv1j")
+movement_dict = Dictionary[String, float]({
+"down": 1.0
+})
+function = "sin"
+leave_screen = true
+metadata/_custom_type_script = "uid://thlx0gtur2d4"
