@@ -38,18 +38,7 @@ var target_pos : Vector2
 var function_direction
 
 func _ready() -> void:
-	## Initialize the direction based on inspector values
-	#if direction == "right":
-		#direction_vector = Vector2.RIGHT
-	#elif direction == "left":
-		#direction_vector = Vector2.LEFT
-	#elif direction == "up":
-		#direction_vector = Vector2.UP
-	#elif direction == "down":
-		#direction_vector = Vector2.DOWN
-	#else:
-		#direction_vector = Vector2.ZERO
-	# Figure out the current direction and distance by reading movement event
+	# Run the movement events as a coroutine
 	execute_movement_events()
 	pass
 	
@@ -60,7 +49,8 @@ func _process(delta: float) -> void:
 	# Move the enemy
 	global_position += function_direction * speed * delta
 	
-	
+	# Check if global position is about equal to target pos
+	# If so then movement is finished
 	if  round(global_position) == round(target_pos):
 		movement_finished.emit()
 	
@@ -91,71 +81,57 @@ func take_damage(damage : int) -> void:
 	tween.tween_property($Sprite2D.material, 'shader_parameter/Progress', 0.0, 0.01)
 	tween.tween_property($Sprite2D.material, 'shader_parameter/Progress', 1.0, 0.02)	
 
-# Function to move the enemy body based on path or direction and function
-func move_body(delta) -> void:
-	# If there's a given path then follow the path
-	if path != null:
-		path.progress_ratio += delta * speed / 8
-	else:
-		# Otherwise check if there's an equation
-		
-		# Variables to store initial direction and angle
-		var function_direction = direction_vector
-		var angle
-		
-		# Check what equation we want to apply and apply it
-		if equation == "sin":
-			angle = sin(time * 1.5) * 50
-			function_direction = direction_vector.rotated(deg_to_rad(angle))
-		elif equation == "cosin":
-			# This code is currently broken ignore this
-			function_direction = direction_vector.rotated(cos(0.0 * 8.0) * 0.3)
-		
-		# Move the enemy based on direction speed and delta
-		position += function_direction * speed * delta
 
 # If the enemy exits the screen then free it
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	death.emit()
 	queue_free()
 
+
 func execute_movement_events() -> void:
 	for i in movement_events.movement_dict:
-		#distance_to_move = movement_events[i] * screen_size
-		print(i)
-			# Initialize the direction based on inspector values
+		# Check the current direction key
 		if i == "right" or i == "left":
-			print("Percentage of screen to move: " , movement_events.movement_dict[i])
-			print("Screen x: ", screen.x)
+			# Multiply the distance to move by the screen size
 			distance_to_move = movement_events.movement_dict[i] * screen.x
 			if i == "right":
 				direction_vector = Vector2.RIGHT
 			elif i == "left":
 				direction_vector = Vector2.LEFT
-				print("Setting direction vector: ", direction_vector)
 		elif i == "up" or i == "down":
+			# Multiply the distance to move by the screen size
 			distance_to_move = movement_events.movement_dict[i] * screen.y
-			print("Percentage of screen to move: " , movement_events.movement_dict[i])
-			print("Screen x: ", screen.y)
 			if i == "up":
 				direction_vector = Vector2.UP
 			elif i == "down":
 				direction_vector = Vector2.DOWN
 		else:
 			direction_vector = Vector2.ZERO
+		# Figure out the target position based on the distance to move and cur direction vector
 		target_pos = self.position + direction_vector.normalized() * distance_to_move
+		
 		# Variables to store initial direction and angle
 		function_direction = direction_vector
 		var angle
+		
+		# If we want sine wave then set sine offset
 		if movement_events.function == "sin":
 			angle = sin(time * 1.5) * 50
 			function_direction = direction_vector.rotated(deg_to_rad(angle))
-		print("Target pos: ", target_pos)
-		print(direction_vector)
+		
+		# Wait for current movement to finish then do next movement
 		await movement_finished
 
+	# Stop moving
 	function_direction = Vector2.ZERO
 	
+	# Check if we want to loop or leave screen
+	if movement_events.leave_screen == true:
+		leave_screen()
+	elif movement_events.wrap == true:
+		pass
+		
 	
 func leave_screen() -> void:
-	pass
+	# Move using previous direction vector until out of screen
+	function_direction = direction_vector

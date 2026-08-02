@@ -9,11 +9,12 @@ func _ready() -> void:
 	focus_button()
 
 func _on_start_button_pressed() -> void:
-	game_start.emit()
-	PoolManager.init_pools()
-	call_deferred("change_scene")
-	hide()
-	
+	#game_start.emit()
+	#PoolManager.init_pools()
+	#call_deferred("change_scene")
+	$MarginContainer/RootMenu.visible = false
+	$MarginContainer/CustomizationChildMenu.visible = true
+	pass
 
 func change_scene() -> void:
 	get_tree().change_scene_to_file("res://scenes/game.tscn")
@@ -38,11 +39,31 @@ func _on_tutorial_button_pressed() -> void:
 
 
 func _on_controls_button_pressed() -> void:
-	$MarginContainer/VBoxContainer/TitleLabel.visible = false
+	$MarginContainer/RootMenu/TitleLabel.visible = false
 	%ButtonsVbox.visible = false
 	%ControlsVbox.visible = true
 
 func _on_back_button_pressed() -> void:
-	$MarginContainer/VBoxContainer/TitleLabel.visible = true
+	$MarginContainer/RootMenu/TitleLabel.visible = true
 	%ButtonsVbox.visible = true
 	%ControlsVbox.visible = false
+
+func _on_start_game_button_pressed() -> void:
+	game_start.emit()
+	PoolManager.init_pools()
+	call_deferred("change_scene")
+
+
+func _on_shoot_forward_and_side_pressed() -> void:
+	Global.player =  load("res://scenes/Player/player_shooting_style_two.tscn")
+	print(Global.player)
+
+func _on_shoot_forward_pressed() -> void:
+	Global.player = load("res://scenes/Player/player_default_shooting_style.tscn")
+	
+
+func _on_laser_button_pressed() -> void:
+	Global.ability = load("res://scenes/Ability/ability_laser.tscn")
+
+func _on_shield_button_pressed() -> void:
+	Global.ability = load("res://scenes/Ability/shield_ability.tscn")

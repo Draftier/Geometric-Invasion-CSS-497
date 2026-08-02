@@ -1,4 +1,4 @@
 extends Node
 
-var player : Player
-var ability : Ability_Resource
+var player : PackedScene = load("res://scenes/Player/player_default_shooting_style.tscn")
+var ability : PackedScene = load("res://scenes/Ability/ability_laser.tscn")

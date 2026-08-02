@@ -7,11 +7,14 @@
 
 [node name="ShootPoint" parent="guns" parent_id_path=PackedInt32Array(1613688656) index="0" unique_id=1529614615 instance=ExtResource("2_wclc1")]
 position = Vector2(1, -10)
+shooter = "player"
 
 [node name="ShootPoint4" parent="guns" parent_id_path=PackedInt32Array(1613688656) index="1" unique_id=1889203407 instance=ExtResource("2_wclc1")]
 position = Vector2(1.0000005, 4)
 rotation = 4.537856
+shooter = "player"
 
 [node name="ShootPoint5" parent="guns" parent_id_path=PackedInt32Array(1613688656) index="2" unique_id=1132670403 instance=ExtResource("2_wclc1")]
 position = Vector2(-1, 6)
 rotation = -4.537856
+shooter = "player"

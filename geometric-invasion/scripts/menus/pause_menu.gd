@@ -1,9 +1,8 @@
 extends CanvasLayer
 
-@onready var player = get_node("../Player")
+@onready var player = get_node("")
 
 func _ready() -> void:
-	player.connect("death", _on_player_death)
 	hide()
 	
 
@@ -56,3 +55,6 @@ func _on_level_manager_victory() -> void:
 func _on_restart_button_pressed() -> void:
 	pause_game()
 	get_tree().reload_current_scene()
+	
+func player_connect(player : Player) -> void:
+	player.connect("death", _on_player_death)

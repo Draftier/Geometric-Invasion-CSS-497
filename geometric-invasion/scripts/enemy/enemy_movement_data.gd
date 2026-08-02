@@ -8,4 +8,5 @@ class_name EnemyMovementData
 @export var function : String
 
 # Var to check if we want movement to loop
-@export var loop : bool
+@export var wrap : bool
+@export var leave_screen : bool
