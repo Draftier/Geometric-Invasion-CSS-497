@@ -38,7 +38,7 @@ theme_override_constants/margin_bottom = 32
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=7999211]
+[node name="TitleLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=7999211]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 32
@@ -85,5 +85,32 @@ focus_previous = NodePath(".")
 text = "Quit to desktop"
 metadata/_edit_use_anchors_ = true
 
+[node name="TutorialButton" type="Button" parent="MarginContainer/VBoxContainer/ButtonsVbox" unique_id=1411541682]
+layout_mode = 2
+text = "Tutorial"
+
+[node name="ControlsButton" type="Button" parent="MarginContainer/VBoxContainer/ButtonsVbox" unique_id=1898276927]
+layout_mode = 2
+text = "Controls"
+
+[node name="ControlsVbox" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1091340424]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ControlsVbox" unique_id=370476361]
+layout_mode = 2
+text = "Hold Z to shoot
+Hold Shift to slow down
+Press X to activate ability"
+horizontal_alignment = 1
+
+[node name="BackButton" type="Button" parent="MarginContainer/VBoxContainer/ControlsVbox" unique_id=1198401134]
+layout_mode = 2
+text = "Back"
+
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonsVbox/Singleplayer" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonsVbox/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonsVbox/TutorialButton" to="." method="_on_tutorial_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonsVbox/ControlsButton" to="." method="_on_controls_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ControlsVbox/BackButton" to="." method="_on_back_button_pressed"]

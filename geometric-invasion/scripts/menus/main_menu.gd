@@ -30,3 +30,19 @@ func focus_button() -> void:
 		var button : Button = buttons_vbox.get_child(0)
 		if button is Button:
 			button.grab_focus()
+
+
+func _on_tutorial_button_pressed() -> void:
+	get_tree().change_scene_to_file("res:://scenes/tutorial.tscn")
+	pass # Replace with function body.
+
+
+func _on_controls_button_pressed() -> void:
+	$MarginContainer/VBoxContainer/TitleLabel.visible = false
+	%ButtonsVbox.visible = false
+	%ControlsVbox.visible = true
+
+func _on_back_button_pressed() -> void:
+	$MarginContainer/VBoxContainer/TitleLabel.visible = true
+	%ButtonsVbox.visible = true
+	%ControlsVbox.visible = false
