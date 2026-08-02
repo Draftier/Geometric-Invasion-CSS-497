@@ -5,7 +5,8 @@
 [resource]
 script = ExtResource("1_3wsdb")
 movement_dict = Dictionary[String, float]({
-"right": 0.3,
-"up": 0.3
+"down": 0.1,
+"left": 0.1,
+"up": 0.1
 })
 metadata/_custom_type_script = "uid://thlx0gtur2d4"

@@ -33,7 +33,7 @@ signal movement_finished
 var direction_vector
 var time : float = 0.0
 var is_dead : bool = false
-var screen : Vector2 = get_viewport_rect().size
+@onready var screen : Vector2 = get_viewport_rect().size
 var target_pos : Vector2
 
 func _ready() -> void:
@@ -58,9 +58,9 @@ func _process(delta: float) -> void:
 	
 	# Move the enemy
 	global_position += direction_vector * speed * delta
-	print(global_position)
-	if  global_position == target_pos:
-		print("reached pos")
+	
+	
+	if  round(global_position) == round(target_pos):
 		movement_finished.emit()
 	
 
@@ -121,15 +121,21 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 func execute_movement_events() -> void:
 	for i in movement_events.movement_dict:
 		#distance_to_move = movement_events[i] * screen_size
+		print(i)
 			# Initialize the direction based on inspector values
 		if i == "right" or i == "left":
+			print("Percentage of screen to move: " , movement_events.movement_dict[i])
+			print("Screen x: ", screen.x)
 			distance_to_move = movement_events.movement_dict[i] * screen.x
 			if i == "right":
 				direction_vector = Vector2.RIGHT
 			elif i == "left":
 				direction_vector = Vector2.LEFT
+				print("Setting direction vector: ", direction_vector)
 		elif i == "up" or i == "down":
 			distance_to_move = movement_events.movement_dict[i] * screen.y
+			print("Percentage of screen to move: " , movement_events.movement_dict[i])
+			print("Screen x: ", screen.y)
 			if i == "up":
 				direction_vector = Vector2.UP
 			elif i == "down":
@@ -143,8 +149,12 @@ func execute_movement_events() -> void:
 		if movement_events.function == "sin":
 			angle = sin(time * 1.5) * 50
 			function_direction = direction_vector.rotated(deg_to_rad(angle))
-		print(target_pos)
+		print("Target pos: ", target_pos)
+		print(direction_vector)
 		await movement_finished
-		
+
+	direction_vector = Vector2.ZERO
+	
+	
 func leave_screen() -> void:
 	pass
