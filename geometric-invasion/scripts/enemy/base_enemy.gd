@@ -35,6 +35,7 @@ var time : float = 0.0
 var is_dead : bool = false
 @onready var screen : Vector2 = get_viewport_rect().size
 var target_pos : Vector2
+var function_direction
 
 func _ready() -> void:
 	## Initialize the direction based on inspector values
@@ -57,7 +58,7 @@ func _process(delta: float) -> void:
 	time += delta
 	
 	# Move the enemy
-	global_position += direction_vector * speed * delta
+	global_position += function_direction * speed * delta
 	
 	
 	if  round(global_position) == round(target_pos):
@@ -144,7 +145,7 @@ func execute_movement_events() -> void:
 			direction_vector = Vector2.ZERO
 		target_pos = self.position + direction_vector.normalized() * distance_to_move
 		# Variables to store initial direction and angle
-		var function_direction = direction_vector
+		function_direction = direction_vector
 		var angle
 		if movement_events.function == "sin":
 			angle = sin(time * 1.5) * 50
@@ -153,7 +154,7 @@ func execute_movement_events() -> void:
 		print(direction_vector)
 		await movement_finished
 
-	direction_vector = Vector2.ZERO
+	function_direction = Vector2.ZERO
 	
 	
 func leave_screen() -> void:

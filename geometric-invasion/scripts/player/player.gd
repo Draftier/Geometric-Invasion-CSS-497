@@ -75,8 +75,10 @@ func take_damage(damage : int) -> void:
 		$CanvasLayer/Label.text = "Lives : " + str(lives)
 		var timer = get_tree().create_timer(0.7)
 		$AnimatedSprite2D.play("explosion")
+		$AnimatedSprite2D/Circle1.visible = false
 		await timer.timeout
 		$AnimatedSprite2D.play("default")
+		$AnimatedSprite2D/Circle1.visible = true
 		$InvulnerabilityTimer.start()			
 	else:
 		return

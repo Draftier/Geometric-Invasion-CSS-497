@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://12171bvbqp8w" path="res://scripts/hurt_and_hit_box/hurtbox.gd" id="6_hvfru"]
 [ext_resource type="Texture2D" uid="uid://rjf6qb8ty32e" path="res://assets/sprites/eplosion_1.png" id="6_tuyoq"]
 [ext_resource type="Script" uid="uid://dhan5ja6q4fjx" path="res://scripts/hurt_and_hit_box/hitbox.gd" id="7_dl1wr"]
+[ext_resource type="Texture2D" uid="uid://uvk4s6j4ws4c" path="res://assets/sprites/circle_1.png" id="9_wwtew"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a06cl"]
 radius = 9.0
@@ -146,6 +147,11 @@ wait_time = 5.0
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=919492480]
 material = SubResource("ShaderMaterial_fjrip")
 sprite_frames = SubResource("SpriteFrames_d8ny1")
+
+[node name="Circle1" type="Sprite2D" parent="AnimatedSprite2D" unique_id=794718962]
+position = Vector2(-3.8146973e-06, -3.8146973e-06)
+scale = Vector2(0.02580646, 0.02580646)
+texture = ExtResource("9_wwtew")
 
 [node name="Hitbox" type="Area2D" parent="AnimatedSprite2D" unique_id=1759807793]
 collision_mask = 0
