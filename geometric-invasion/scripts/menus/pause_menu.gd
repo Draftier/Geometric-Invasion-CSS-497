@@ -53,6 +53,8 @@ func _on_level_manager_victory() -> void:
 
 func _on_restart_button_pressed() -> void:
 	pause_game()
+	PoolManager.destroy_pools()
+	PoolManager.init_pools()
 	get_tree().reload_current_scene()
 	
 func player_connect(player : Player) -> void:
