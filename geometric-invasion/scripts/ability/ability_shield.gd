@@ -11,3 +11,9 @@ func _ready() -> void:
 func fire_ability(delta : float) -> void:
 	hitbox.monitorable = is_active
 	hitbox.monitoring = is_active
+
+func discharge() -> void:
+	super.discharge()
+	
+	hitbox.monitorable = is_active
+	hitbox.monitoring = is_active
