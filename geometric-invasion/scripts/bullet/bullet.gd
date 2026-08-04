@@ -14,7 +14,7 @@ signal exited_screen
 
 # Will utilize to play some sort of animation on instantiation
 func _ready() -> void: 
-	bullet_hitbox.connect("hit", _on_hit)
+	pass
 
 # Called every physics tick
 func _physics_process(delta: float) -> void:
@@ -31,23 +31,3 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 		level_manager.add_to_pool(self)
 		
 	exited_screen.emit(self)
-
-func reset() -> void:
-	pass
-	#self.set_block_signals(true)
-	#self.set_process(false)
-	#self.set_physics_process(false)
-	#
-	## Modifying monitoring of hitbox and hurtbox trying to see if this improves performance
-	#if bullet_hurtbox != null:
-		#bullet_hurtbox.monitoring = false
-		#bullet_hurtbox.monitorable = false
-	#
-	#bullet_hitbox.monitoring = false
-	#bullet_hitbox.monitorable = false
-	#
-	#self.visible = false
-	#self.speed = 0
-
-func _on_hit() -> void:
-	pass

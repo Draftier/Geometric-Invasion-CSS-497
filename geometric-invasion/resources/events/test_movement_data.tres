@@ -8,5 +8,6 @@ movement_dict = Dictionary[String, float]({
 "left": 0.05,
 "right": 0.05
 })
+function = "sin"
 wrap = true
 metadata/_custom_type_script = "uid://thlx0gtur2d4"

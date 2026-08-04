@@ -122,9 +122,11 @@ func execute_movement_events() -> void:
 		
 		# If we want sine wave then set sine offset
 		if movement_events.function == "sin":
-			angle = sin(time * 1.5) * 50
+			var amplitude = 0.1
+			var frequency = 0.01
+			#while sin(time * frequency)
+			angle = sin(time * 1.5) * 2
 			function_direction = direction_vector.rotated(deg_to_rad(angle))
-		
 		# Wait for current movement to finish then do next movement
 		await movement_finished
 
