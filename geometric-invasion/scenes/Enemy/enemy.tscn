@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://dmjfjfilssxt6" path="res://scripts/enemy/movement_base.gd" id="2_ixhtt"]
 [ext_resource type="Script" uid="uid://c8u5b5y0i25wp" path="res://scripts/enemy/directional_movement.gd" id="3_ebm38"]
 [ext_resource type="Texture2D" uid="uid://du835wqb2j21b" path="res://assets/sprites/bitmap.png" id="4_5uy6h"]
+[ext_resource type="Script" uid="uid://bho4wgornhjo7" path="res://scripts/enemy/curve_movement.gd" id="4_fx0l5"]
 [ext_resource type="Script" uid="uid://12171bvbqp8w" path="res://scripts/hurt_and_hit_box/hurtbox.gd" id="4_grfqg"]
 [ext_resource type="Script" uid="uid://thlx0gtur2d4" path="res://scripts/enemy/enemy_movement_data.gd" id="4_q0kbr"]
 [ext_resource type="Script" uid="uid://dhan5ja6q4fjx" path="res://scripts/hurt_and_hit_box/hitbox.gd" id="5_eacat"]
@@ -22,9 +23,20 @@ direction = "up"
 distance = 0.3
 metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
 
+[sub_resource type="Curve2D" id="Curve2D_q0kbr"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0)
+}
+point_count = 1
+
+[sub_resource type="Resource" id="Resource_pg6jp"]
+script = ExtResource("4_fx0l5")
+curve_to_move = SubResource("Curve2D_q0kbr")
+metadata/_custom_type_script = "uid://bho4wgornhjo7"
+
 [sub_resource type="Resource" id="Resource_eacat"]
 script = ExtResource("4_q0kbr")
-movement_array = Array[ExtResource("2_ixhtt")]([SubResource("Resource_ixhtt"), SubResource("Resource_ebm38")])
+movement_array = Array[ExtResource("2_ixhtt")]([SubResource("Resource_ixhtt"), SubResource("Resource_ebm38"), SubResource("Resource_pg6jp")])
 wrap = true
 metadata/_custom_type_script = "uid://thlx0gtur2d4"
 

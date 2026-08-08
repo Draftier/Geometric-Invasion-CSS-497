@@ -121,6 +121,7 @@ func execute_movement_events() -> void:
 		target_pos = self.position + direction_vector.normalized() * distance_to_move
 		print(distance_to_move)
 		print(target_pos)
+		
 		# Variables to store initial direction and angle
 		function_direction = direction_vector
 		cur_event = i
@@ -128,7 +129,6 @@ func execute_movement_events() -> void:
 		
 		
 		# Wait for current movement to finish then do next movement		
-		
 		await movement_finished
 
 	# Stop moving
