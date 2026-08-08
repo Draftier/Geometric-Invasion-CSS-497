@@ -10,26 +10,16 @@
 [ext_resource type="Script" uid="uid://thlx0gtur2d4" path="res://scripts/enemy/enemy_movement_data.gd" id="4_q0kbr"]
 [ext_resource type="Script" uid="uid://dhan5ja6q4fjx" path="res://scripts/hurt_and_hit_box/hitbox.gd" id="5_eacat"]
 
-[sub_resource type="Curve" id="Curve_ebm38"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5121951, 0.50561804), 0.0, 0.0, 0, 0, Vector2(1, 0.46067423), 0.0, 0.0, 0, 0]
-point_count = 3
-
 [sub_resource type="Resource" id="Resource_ixhtt"]
 script = ExtResource("3_ebm38")
 direction = "down"
 distance = 0.3
-curve = SubResource("Curve_ebm38")
 metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
-
-[sub_resource type="Curve" id="Curve_q0kbr"]
-_data = [Vector2(0.107317075, 1), 0.0, 0.0, 0, 0, Vector2(0.9658537, 1), 0.0, 0.0, 0, 0]
-point_count = 2
 
 [sub_resource type="Resource" id="Resource_ebm38"]
 script = ExtResource("3_ebm38")
 direction = "up"
 distance = 0.3
-curve = SubResource("Curve_q0kbr")
 metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
 
 [sub_resource type="Resource" id="Resource_eacat"]

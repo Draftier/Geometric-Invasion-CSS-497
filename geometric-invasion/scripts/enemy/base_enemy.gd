@@ -44,6 +44,7 @@ var temp_speed : float
 
 func _ready() -> void:
 	# Run the movement events as a coroutine
+	temp_speed = speed
 	execute_movement_events()
 	pass
 	
@@ -60,9 +61,9 @@ func _process(delta: float) -> void:
 	
 	#if movement_events.function != null:
 		#apply_offset()
-	distance_traveled_progress = (distance_to_move - global_position.distance_to(target_pos)) / distance_to_move
-	
-	temp_speed = speed * cur_event.curve.sample(distance_traveled_progress)
+	if cur_event.curve != null:
+		distance_traveled_progress = (distance_to_move - global_position.distance_to(target_pos)) / distance_to_move
+		temp_speed = speed * cur_event.curve.sample(distance_traveled_progress)
 	
 	print(temp_speed)
 	
