@@ -10,36 +10,31 @@ extends Node2D
 signal death
 signal movement_finished
 
+@onready var screen : Vector2 = get_viewport_rect().size
+
 # Movement and attack resources that enemies will utilize
 @export var movement_events : EnemyMovementData
 @export var attack_events : EnemyAttackData
 
-# Initialize the shoot timer and rotater at ready
-# @onready var free_timer = $FreeTimer
-
-# Allow shooter and rotater values to be edited in editor to add easier time for editing enemy behavior
-# Consider making a class and resources that have different values for specific enemy types
+# Variables to controll full speed, health, and move distance
 @export var speed = 10
-@export var distance_to_move : float
 @export var health = 100
-@export var path : PathFollow2D
-@export var direction : String
-@export var equation : String = "None"
-
 # Variable that stores the packed scene for ability pickup
 @export var power_up_charge : PackedScene
 
-# Store direction vector and current time
+# Movement variables 
 var direction_vector
-var time : float = 0.0
-var is_dead : bool = false
-@onready var screen : Vector2 = get_viewport_rect().size
 var target_pos : Vector2
 var function_direction
+var distance_to_move : float
 
+# Death and time state variables
+var time : float = 0.0
+var is_dead : bool = false
+
+# Changing variables
 var cur_event : Movement
 var distance_traveled_progress : float
-
 var temp_speed : float
 
 func _ready() -> void:
@@ -52,20 +47,10 @@ func _process(delta: float) -> void:
 	# Store current time for possible function calculations
 	time += delta
 	
-	if function_direction == null:
-		print("function direction null")
-	elif speed == null:
-		print("speed null")
-	
-	
-	
-	#if movement_events.function != null:
-		#apply_offset()
+	# If there's a speed curve then sample the curve based on distance traveled and take speed from curve
 	if cur_event.curve != null:
 		distance_traveled_progress = (distance_to_move - global_position.distance_to(target_pos)) / distance_to_move
 		temp_speed = speed * cur_event.curve.sample(distance_traveled_progress)
-	
-	print(temp_speed)
 	
 	# Move the enemy
 	global_position += function_direction * temp_speed * delta
@@ -155,16 +140,6 @@ func execute_movement_events() -> void:
 	elif movement_events.wrap == true:
 		execute_movement_events()
 		pass
-
-func apply_offset() -> void:
-	# If we want sine wave then set sine offset
-		if movement_events.function == "sin":
-			var amplitude = 0.1
-			var frequency = 0.01
-			#while sin(time * frequency)
-			var angle = sin(time * 1.5) * 2
-			function_direction = direction_vector.rotated(deg_to_rad(angle))
-			#print(global_position)
 
 func leave_screen() -> void:
 	# Move using previous direction vector until out of screen
