@@ -1,29 +1,34 @@
 [gd_resource type="Resource" script_class="EnemyMovementData" format=3 uid="uid://ga4xkpr5vuh7"]
 
 [ext_resource type="Script" uid="uid://thlx0gtur2d4" path="res://scripts/enemy/enemy_movement_data.gd" id="1_3wsdb"]
-[ext_resource type="Script" uid="uid://c8u5b5y0i25wp" path="res://scripts/enemy/movement.gd" id="1_ecion"]
+[ext_resource type="Script" uid="uid://c8u5b5y0i25wp" path="res://scripts/enemy/directional_movement.gd" id="1_ecion"]
+
+[sub_resource type="Curve" id="Curve_yp057"]
+_data = [Vector2(0.17560975, 0.04494381), 0.0, 0.0, 0, 0, Vector2(0.53658533, 0.57303375), 0.0, 0.0, 0, 0, Vector2(0.99512196, 1), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="Resource" id="Resource_wfr8x"]
 script = ExtResource("1_ecion")
-movement = "left"
-distance = 0.05
+direction = "down"
+distance = 0.5
+curve = SubResource("Curve_yp057")
 metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
 
 [sub_resource type="Resource" id="Resource_ebm38"]
 script = ExtResource("1_ecion")
-movement = "down"
+direction = "left"
 distance = 0.05
 metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
 
 [sub_resource type="Resource" id="Resource_q0kbr"]
 script = ExtResource("1_ecion")
-movement = "right"
+direction = "up"
 distance = 0.05
 metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
 
 [sub_resource type="Resource" id="Resource_fx0l5"]
 script = ExtResource("1_ecion")
-movement = "up"
+direction = "right"
 distance = 0.05
 metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
 

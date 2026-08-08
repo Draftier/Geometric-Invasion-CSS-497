@@ -37,6 +37,11 @@ var is_dead : bool = false
 var target_pos : Vector2
 var function_direction
 
+var cur_event : Movement
+var distance_traveled_progress : float
+
+var temp_speed : float
+
 func _ready() -> void:
 	# Run the movement events as a coroutine
 	execute_movement_events()
@@ -52,11 +57,18 @@ func _process(delta: float) -> void:
 		print("speed null")
 	
 	
+	
 	#if movement_events.function != null:
 		#apply_offset()
+	distance_traveled_progress = (distance_to_move - global_position.distance_to(target_pos)) / distance_to_move
+	
+	temp_speed = speed * cur_event.curve.sample(distance_traveled_progress)
+	
+	print(temp_speed)
 	
 	# Move the enemy
-	global_position += function_direction * speed * delta
+	global_position += function_direction * temp_speed * delta
+	
 	
 	# Check if global position is about equal to target pos
 	# If so then movement is finished
@@ -100,29 +112,32 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 
 func execute_movement_events() -> void:
 	for i in movement_events.movement_array:
-		# Check the current direction key
-		if i.movement == "right" or i.movement == "left":
-			# Multiply the distance to move by the screen size
-			distance_to_move = i.distance * screen.x
-			if i.movement == "right":
-				direction_vector = Vector2.RIGHT
-			elif i.movement == "left":
-				direction_vector = Vector2.LEFT
-		elif i.movement == "up" or i.movement == "down":
-			# Multiply the distance to move by the screen size
-			distance_to_move = i.distance * screen.y
-			if i.movement == "up":
-				direction_vector = Vector2.UP
-			elif i.movement == "down":
-				direction_vector = Vector2.DOWN
-		else:
-			direction_vector = Vector2.ZERO
+		# Check if the event is directional or bezier curve based
+		if i is DirectionalMovement:
+			# Check the current direction key
+			if i.direction == "right" or i.direction == "left":
+				# Multiply the distance to move by the screen size
+				distance_to_move = i.distance * screen.x
+				if i.direction == "right":
+					direction_vector = Vector2.RIGHT
+				elif i.direction == "left":
+					direction_vector = Vector2.LEFT
+			elif i.direction == "up" or i.direction == "down":
+				# Multiply the distance to move by the screen size
+				distance_to_move = i.distance * screen.y
+				if i.direction == "up":
+					direction_vector = Vector2.UP
+				elif i.direction == "down":
+					direction_vector = Vector2.DOWN
+			else:
+				direction_vector = Vector2.ZERO
 		# Figure out the target position based on the distance to move and cur direction vector
 		target_pos = self.position + direction_vector.normalized() * distance_to_move
 		print(distance_to_move)
 		print(target_pos)
 		# Variables to store initial direction and angle
 		function_direction = direction_vector
+		cur_event = i
 		var angle
 		
 		

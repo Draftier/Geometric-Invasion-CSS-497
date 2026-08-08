@@ -2,7 +2,7 @@ extends Resource
 class_name EnemyMovementData
 
 # Dictionary that stores movement string and distance to travel
-@export var movement_array : Array[movement] = []
+@export var movement_array : Array[Movement] = []
 
 # String that stores what function the enemy will path the distance with
 @export var function : String

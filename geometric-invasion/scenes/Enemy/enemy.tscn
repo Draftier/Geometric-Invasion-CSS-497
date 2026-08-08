@@ -3,11 +3,40 @@
 [ext_resource type="Script" uid="uid://pqste00swnss" path="res://scripts/enemy/base_enemy.gd" id="1_5uy6h"]
 [ext_resource type="Texture2D" uid="uid://dtb2vka5e01d3" path="res://assets/sprites/enemy.png" id="1_7p1mj"]
 [ext_resource type="Shader" uid="uid://cqv7cjdn8x0b5" path="res://shaders/flash.tres" id="2_4ra3w"]
-[ext_resource type="PackedScene" uid="uid://dea3ckmfpjcym" path="res://scenes/Ability/ability_pickup.tscn" id="2_ixhtt"]
-[ext_resource type="Resource" uid="uid://ga4xkpr5vuh7" path="res://resources/events/test_movement_data.tres" id="2_wfr8x"]
+[ext_resource type="Script" uid="uid://dmjfjfilssxt6" path="res://scripts/enemy/movement_base.gd" id="2_ixhtt"]
+[ext_resource type="Script" uid="uid://c8u5b5y0i25wp" path="res://scripts/enemy/directional_movement.gd" id="3_ebm38"]
 [ext_resource type="Texture2D" uid="uid://du835wqb2j21b" path="res://assets/sprites/bitmap.png" id="4_5uy6h"]
 [ext_resource type="Script" uid="uid://12171bvbqp8w" path="res://scripts/hurt_and_hit_box/hurtbox.gd" id="4_grfqg"]
+[ext_resource type="Script" uid="uid://thlx0gtur2d4" path="res://scripts/enemy/enemy_movement_data.gd" id="4_q0kbr"]
 [ext_resource type="Script" uid="uid://dhan5ja6q4fjx" path="res://scripts/hurt_and_hit_box/hitbox.gd" id="5_eacat"]
+
+[sub_resource type="Curve" id="Curve_ebm38"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5121951, 0.50561804), 0.0, 0.0, 0, 0, Vector2(1, 0.46067423), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Resource" id="Resource_ixhtt"]
+script = ExtResource("3_ebm38")
+direction = "down"
+distance = 0.3
+curve = SubResource("Curve_ebm38")
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Curve" id="Curve_q0kbr"]
+_data = [Vector2(0.107317075, 1), 0.0, 0.0, 0, 0, Vector2(0.9658537, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_ebm38"]
+script = ExtResource("3_ebm38")
+direction = "up"
+distance = 0.3
+curve = SubResource("Curve_q0kbr")
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_eacat"]
+script = ExtResource("4_q0kbr")
+movement_array = Array[ExtResource("2_ixhtt")]([SubResource("Resource_ixhtt"), SubResource("Resource_ebm38")])
+wrap = true
+metadata/_custom_type_script = "uid://thlx0gtur2d4"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iywne"]
 resource_local_to_scene = true
@@ -21,11 +50,8 @@ size = Vector2(14, 14)
 [node name="Enemy" type="Node2D" unique_id=682992089 groups=["enemy"]]
 position = Vector2(507, 227)
 script = ExtResource("1_5uy6h")
-movement_events = ExtResource("2_wfr8x")
+movement_events = SubResource("Resource_eacat")
 speed = 100
-direction = "down"
-equation = "sin"
-power_up_charge = ExtResource("2_ixhtt")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1252295741]
 material = SubResource("ShaderMaterial_iywne")

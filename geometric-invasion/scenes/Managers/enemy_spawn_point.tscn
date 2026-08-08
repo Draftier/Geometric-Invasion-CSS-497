@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://c4twyssjo6an2" path="res://scripts/event/spawn.gd" id="3_wm8f7"]
 [ext_resource type="PackedScene" uid="uid://cp837cm6qinkj" path="res://scenes/Enemy/enemy.tscn" id="4_oowrx"]
 [ext_resource type="Script" uid="uid://thlx0gtur2d4" path="res://scripts/enemy/enemy_movement_data.gd" id="5_56ox8"]
-[ext_resource type="Script" uid="uid://c8u5b5y0i25wp" path="res://scripts/enemy/movement.gd" id="5_wm8f7"]
+[ext_resource type="Script" uid="uid://c8u5b5y0i25wp" path="res://scripts/enemy/directional_movement.gd" id="5_wm8f7"]
 
 [sub_resource type="Resource" id="Resource_0i752"]
 script = ExtResource("5_56ox8")
