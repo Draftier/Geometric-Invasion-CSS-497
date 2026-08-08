@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://d02ey725i8t81" path="res://scenes/Enemy/obstacle_bullet_base.tscn" id="4_id1ti"]
 
 [node name="PoolManager" type="Node2D" unique_id=365144408]
+z_index = 1000
 script = ExtResource("1_omxlj")
 
 [node name="PlayerBulletPool" type="Node" parent="." unique_id=314793696]

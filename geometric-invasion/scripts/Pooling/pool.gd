@@ -1,4 +1,6 @@
 # This class represents a basic object pool that currently only pools objects of the bullet class
+# TODO Track a bullet if it's active and re add that bullet to the pool if reloading or leaving scene
+# This could help with performance by making it so that users don't constantly reinitialize the pool
 extends Node
 class_name ObjectPool
 
@@ -12,10 +14,10 @@ var bullets : Array [ Bullet ]
 # Function to add bullets to the object pool
 func add_to_pool(bullet: Bullet) -> void:
 	bullet.reset()
-	
+	get_instance_id()
 	# We reparent the bullet to make sure it appears correctly in scene tree
 	# Without this the bullet is visually invisible
-	bullet.set_deferred("reparent", self)
+	# bullet.set_deferred("reparent", self)
 	bullets.append(bullet)
 
 # Function to initialize the pool with max num of objects
@@ -23,6 +25,7 @@ func initialize_pool() -> void:
 	# Destroy any past pool to make sure that we don't go past max bullet count
 	destroy_pool()
 	# Loop to initialize the object pool whilst interleaving player and enemy bullets
+	# Check if the array actually changes in size
 	for i in range(0, max_bullet_count):
 		# Start adding bullets to the pool
 			var bullet = bullet.instantiate()
@@ -44,7 +47,7 @@ func pull_from_pool() -> Bullet:
 	bullet.activate()
 	
 	# Send bullet to the game scene
-	bullet.reparent(get_tree().current_scene)
+	# bullet.reparent(get_tree().current_scene)
 	
 	return bullet
 

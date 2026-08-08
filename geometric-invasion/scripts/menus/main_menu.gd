@@ -61,7 +61,6 @@ func _on_shoot_forward_and_side_pressed() -> void:
 func _on_shoot_forward_pressed() -> void:
 	Global.player = load("res://scenes/Player/player_default_shooting_style.tscn")
 	
-
 func _on_laser_button_pressed() -> void:
 	Global.ability = load("res://scenes/Ability/ability_laser.tscn")
 

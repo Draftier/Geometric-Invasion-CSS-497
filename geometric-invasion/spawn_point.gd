@@ -10,20 +10,11 @@ var num = 0
 
 # Function to spawn enemies given a spawn event
 func execute_spawn_event(event : Spawn_Event) -> void:
-	# For the number of times we want to spawn this set of enemies
-	#for i in event.number_of_times_to_spawn:
-		## For each enemy 
-		#for j in event.enemies:
-			## Spawn them and wait 
-			#var obstacle = j.instantiate()
-			#get_parent().add_child.call_deferred(obstacle)
-			#var timer = get_tree().create_timer(event.time_between_spawns)
-			#await timer.timeout
-	
 	for i in event.spawns:
 		for j in i.number_of_enemies:
 			var enemy = i.enemy.instantiate()
 			enemy.movement_events = i.enemy_movement_pattern
+			print(i.enemy_movement_pattern.movement_dict)
 			enemy.global_position = global_position
 			enemy.rotation_degrees = i.rotation
 			get_parent().add_child.call_deferred(enemy)
