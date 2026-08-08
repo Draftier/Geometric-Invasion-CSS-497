@@ -52,6 +52,9 @@ func _process(delta: float) -> void:
 		print("speed null")
 	
 	
+	#if movement_events.function != null:
+		#apply_offset()
+	
 	# Move the enemy
 	global_position += function_direction * speed * delta
 	
@@ -59,6 +62,7 @@ func _process(delta: float) -> void:
 	# If so then movement is finished
 	if  round(global_position) == round(target_pos):
 		movement_finished.emit()
+	
 	
 
 # Function to calculate health and hit upon getting hit by player bullet
@@ -95,39 +99,35 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 
 
 func execute_movement_events() -> void:
-	for i in movement_events.movement_dict:
+	for i in movement_events.movement_array:
 		# Check the current direction key
-		if i == "right" or i == "left":
+		if i.movement == "right" or i.movement == "left":
 			# Multiply the distance to move by the screen size
-			distance_to_move = movement_events.movement_dict[i] * screen.x
-			if i == "right":
+			distance_to_move = i.distance * screen.x
+			if i.movement == "right":
 				direction_vector = Vector2.RIGHT
-			elif i == "left":
+			elif i.movement == "left":
 				direction_vector = Vector2.LEFT
-		elif i == "up" or i == "down":
+		elif i.movement == "up" or i.movement == "down":
 			# Multiply the distance to move by the screen size
-			distance_to_move = movement_events.movement_dict[i] * screen.y
-			if i == "up":
+			distance_to_move = i.distance * screen.y
+			if i.movement == "up":
 				direction_vector = Vector2.UP
-			elif i == "down":
+			elif i.movement == "down":
 				direction_vector = Vector2.DOWN
 		else:
 			direction_vector = Vector2.ZERO
 		# Figure out the target position based on the distance to move and cur direction vector
 		target_pos = self.position + direction_vector.normalized() * distance_to_move
-		
+		print(distance_to_move)
+		print(target_pos)
 		# Variables to store initial direction and angle
 		function_direction = direction_vector
 		var angle
 		
-		# If we want sine wave then set sine offset
-		if movement_events.function == "sin":
-			var amplitude = 0.1
-			var frequency = 0.01
-			#while sin(time * frequency)
-			angle = sin(time * 1.5) * 2
-			function_direction = direction_vector.rotated(deg_to_rad(angle))
-		# Wait for current movement to finish then do next movement
+		
+		# Wait for current movement to finish then do next movement		
+		
 		await movement_finished
 
 	# Stop moving
@@ -139,8 +139,17 @@ func execute_movement_events() -> void:
 	elif movement_events.wrap == true:
 		execute_movement_events()
 		pass
-		
-	
+
+func apply_offset() -> void:
+	# If we want sine wave then set sine offset
+		if movement_events.function == "sin":
+			var amplitude = 0.1
+			var frequency = 0.01
+			#while sin(time * frequency)
+			var angle = sin(time * 1.5) * 2
+			function_direction = direction_vector.rotated(deg_to_rad(angle))
+			#print(global_position)
+
 func leave_screen() -> void:
 	# Move using previous direction vector until out of screen
 	function_direction = direction_vector
