@@ -2,6 +2,13 @@
 
 [ext_resource type="Texture2D" uid="uid://h688hsh4ax6m" path="res://icon.svg" id="1_8uh7m"]
 [ext_resource type="Script" uid="uid://dky5qv5tj4i01" path="res://test.gd" id="2_6uqi0"]
+[ext_resource type="Script" uid="uid://b41wph8phx6qg" path="res://test_resource.gd" id="3_6uqi0"]
+
+[sub_resource type="Resource" id="Resource_vbegm"]
+script = ExtResource("3_6uqi0")
+x_percent = 0.2
+y_percent = 0.3
+metadata/_custom_type_script = "uid://b41wph8phx6qg"
 
 [node name="Node2D" type="Node2D" unique_id=1645698705]
 
@@ -9,3 +16,4 @@
 position = Vector2(219, 480)
 texture = ExtResource("1_8uh7m")
 script = ExtResource("2_6uqi0")
+point_array = Array[ExtResource("3_6uqi0")]([SubResource("Resource_vbegm")])
