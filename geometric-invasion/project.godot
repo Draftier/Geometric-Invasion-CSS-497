@@ -24,7 +24,7 @@ PoolManager="*uid://cutw3vbksk1lv"
 
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
-window/vsync/vsync_mode=0
+window/vsync/vsync_mode=2
 
 [input]
 
