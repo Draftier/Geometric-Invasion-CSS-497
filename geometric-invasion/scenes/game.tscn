@@ -37,13 +37,11 @@ size = Vector2(20, 618)
 
 [sub_resource type="Resource" id="Resource_nhfu3"]
 script = ExtResource("9_ca42v")
-direction = "left"
 distance = 0.05
 metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
 
 [sub_resource type="Resource" id="Resource_4o8i3"]
 script = ExtResource("9_ca42v")
-direction = "right"
 distance = 0.05
 metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
 
@@ -54,7 +52,7 @@ metadata/_custom_type_script = "uid://thlx0gtur2d4"
 
 [sub_resource type="Resource" id="Resource_1kice"]
 script = ExtResource("9_ca42v")
-direction = "down"
+direction = 1
 distance = 0.05
 metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
 
@@ -81,7 +79,6 @@ metadata/_custom_type_script = "uid://bewu02jnvwcgy"
 
 [sub_resource type="Resource" id="Resource_ca42v"]
 script = ExtResource("9_ca42v")
-direction = "down"
 distance = 0.9
 metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
 

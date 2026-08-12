@@ -11,7 +11,7 @@ var player : Player
 var level
 
 func _ready() -> void:
-	var player : Player = Global.player.instantiate()
+	player = Global.player.instantiate()
 	player.ability_scene =  Global.ability
 	player.global_position = $SpawnPoint.global_position
 	add_child(player)

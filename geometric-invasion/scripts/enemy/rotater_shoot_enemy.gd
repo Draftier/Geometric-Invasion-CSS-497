@@ -5,7 +5,6 @@ extends "res://scripts/enemy/base_enemy.gd"
 @onready var shoot_timer = $ShootTimer
 
 # Allow exports of values related to rotater, shoot_timer, and 
-@export var bullet : PackedScene
 @export var rotate_speed : int
 @export var shooter_timer_wait_time : float = 0.1
 @export var spawn_point_count = 4

@@ -44,7 +44,7 @@ func _ready() -> void:
 	
 	
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# Calculate the current time every frame
 	current_time = (($LevelTimer.get_time_left() - $LevelTimer.wait_time) * -1)
 	

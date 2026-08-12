@@ -3,7 +3,7 @@ class_name EnemySpawnPoint
 
 @export var id : int
 @export var spawn_interval : float
-@export var event : Spawn_Event
+#@export var event : Spawn_Event
 
 var num = 0
 

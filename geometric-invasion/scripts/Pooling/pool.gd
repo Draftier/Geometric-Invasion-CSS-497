@@ -38,15 +38,12 @@ func pull_from_pool() -> Bullet:
 	var bullet: Bullet
 	# Check if pool is empty or not empty, either way check type of bullet
 	if bullets.is_empty():
-		bullet.instantiate()
+		bullet = bullet_scene.instantiate()
 	else:
 		bullet = bullets[0]
 		bullets.remove_at(0)
 	# Unpause calculation from bullet being pulled from pool
 	bullet.activate()
-	
-	# Send bullet to the game scene
-	# bullet.reparent(get_tree().current_scene)
 	
 	return bullet
 
