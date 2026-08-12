@@ -7,8 +7,10 @@
 [ext_resource type="Script" uid="uid://c8u5b5y0i25wp" path="res://scripts/enemy/directional_movement.gd" id="3_ebm38"]
 [ext_resource type="Texture2D" uid="uid://du835wqb2j21b" path="res://assets/sprites/bitmap.png" id="4_5uy6h"]
 [ext_resource type="Script" uid="uid://12171bvbqp8w" path="res://scripts/hurt_and_hit_box/hurtbox.gd" id="4_grfqg"]
+[ext_resource type="Script" uid="uid://beg1vql3x734k" path="res://scripts/enemy/point.gd" id="4_pg6jp"]
 [ext_resource type="Script" uid="uid://thlx0gtur2d4" path="res://scripts/enemy/enemy_movement_data.gd" id="4_q0kbr"]
 [ext_resource type="Script" uid="uid://dhan5ja6q4fjx" path="res://scripts/hurt_and_hit_box/hitbox.gd" id="5_eacat"]
+[ext_resource type="Script" uid="uid://bho4wgornhjo7" path="res://scripts/enemy/curve_movement.gd" id="5_lkp36"]
 [ext_resource type="PackedScene" uid="uid://dea3ckmfpjcym" path="res://scenes/Ability/ability_pickup.tscn" id="6_fx0l5"]
 
 [sub_resource type="Resource" id="Resource_ixhtt"]
@@ -29,9 +31,36 @@ direction = 3
 distance = 0.05
 metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
 
+[sub_resource type="Resource" id="Resource_fx0l5"]
+script = ExtResource("4_pg6jp")
+x_percent = 0.05
+y_percent = 0.1
+metadata/_custom_type_script = "uid://beg1vql3x734k"
+
+[sub_resource type="Resource" id="Resource_pg6jp"]
+script = ExtResource("4_pg6jp")
+x_percent = 0.05
+metadata/_custom_type_script = "uid://beg1vql3x734k"
+
+[sub_resource type="Curve" id="Curve_fxkbx"]
+_data = [Vector2(0.15340908, 0.17977536), 0.0, 0.0, 0, 0, Vector2(0.5113637, 0.55056185), 0.0, 0.0, 0, 0, Vector2(1, 0.11235964), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Resource" id="Resource_3e887"]
+script = ExtResource("5_lkp36")
+point_array = Array[ExtResource("4_pg6jp")]([SubResource("Resource_fx0l5"), SubResource("Resource_pg6jp")])
+speed_curve = SubResource("Curve_fxkbx")
+metadata/_custom_type_script = "uid://bho4wgornhjo7"
+
+[sub_resource type="Resource" id="Resource_lkp36"]
+script = ExtResource("3_ebm38")
+distance = 0.3
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
 [sub_resource type="Resource" id="Resource_eacat"]
 script = ExtResource("4_q0kbr")
-movement_array = Array[ExtResource("2_ixhtt")]([SubResource("Resource_ixhtt"), SubResource("Resource_ebm38"), SubResource("Resource_q0kbr")])
+movement_array = Array[ExtResource("2_ixhtt")]([SubResource("Resource_ixhtt"), SubResource("Resource_ebm38"), SubResource("Resource_q0kbr"), SubResource("Resource_3e887"), SubResource("Resource_lkp36")])
+leave_screen = true
 metadata/_custom_type_script = "uid://thlx0gtur2d4"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iywne"]

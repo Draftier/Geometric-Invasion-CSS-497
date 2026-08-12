@@ -22,14 +22,14 @@ signal movement_finished
 # Variable that stores the packed scene for ability pickup
 @export var power_up_charge : PackedScene
 
-# Movement variables 
+# Movement variables for directional movmeent
 var direction_vector
 var target_pos : Vector2
 var function_direction
 var distance_to_move : float
 
 # Death and time state variables
-var time : float = 0.0
+var curve_time : float = 0.0
 var is_dead : bool = false
 
 # Changing variables
@@ -43,24 +43,33 @@ func _ready() -> void:
 	execute_movement_events()
 	pass
 	
-func _process(delta: float) -> void:
-	# Store current time for possible function calculations
-	time += delta
+func _physics_process(delta: float) -> void:
+	if cur_event is DirectionalMovement:
+		# If there's a speed curve then sample the curve based on distance traveled and take speed from curve
+		if cur_event != null and cur_event.speed_curve != null:
+			distance_traveled_progress = (distance_to_move - global_position.distance_to(target_pos)) / distance_to_move
+			temp_speed = speed * cur_event.speed_curve.sample(distance_traveled_progress)
+		
+		# Move the enemy
+		global_position += function_direction * temp_speed * delta
+		
+		
+		# Check if global position is about equal to target pos
+		# If so then movement is finished
+		if  global_position.distance_to(target_pos) < 1.0:
+			print("Directional end pos:" ,global_position)
+			movement_finished.emit()
+			
+	elif cur_event is CurveMovement:
+		if round(position) != round(cur_event.target_pos):
+			global_position = set_curved_movement(cur_event, clamp(curve_time * cur_event.speed_curve.sample(global_position.length() / cur_event.estimated_curve_length), 0.0, 1.0))
+			curve_time += delta
+		else:
+			curve_time = 0
+			movement_finished.emit()
+		pass
 	
-	# If there's a speed curve then sample the curve based on distance traveled and take speed from curve
-	if cur_event != null and cur_event.curve != null:
-		distance_traveled_progress = (distance_to_move - global_position.distance_to(target_pos)) / distance_to_move
-		temp_speed = speed * cur_event.curve.sample(distance_traveled_progress)
-	
-	# Move the enemy
-	global_position += function_direction * temp_speed * delta
-	
-	
-	# Check if global position is about equal to target pos
-	# If so then movement is finished
-	if  round(global_position) == round(target_pos):
-		movement_finished.emit()
-	
+
 	
 
 # Function to calculate health and hit upon getting hit by player bullet
@@ -98,30 +107,11 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 
 func execute_movement_events() -> void:
 	for i in movement_events.movement_array:
-		# Check the direction type enum
-		match i.direction:
-			DirectionalMovement.direction_type.UP, DirectionalMovement.direction_type.DOWN:
-				# Claculate distance based off percentage of screen
-				distance_to_move = i.distance * screen.y
-				if i.direction == DirectionalMovement.direction_type.UP:
-					direction_vector = Vector2.UP
-				elif i.direction == DirectionalMovement.direction_type.DOWN:
-					direction_vector = Vector2.DOWN
-			DirectionalMovement.direction_type.LEFT, DirectionalMovement.direction_type.RIGHT:
-				# Claculate distance based off percentage of screen
-				distance_to_move = i.distance * screen.x
-				if i.direction == DirectionalMovement.direction_type.LEFT:
-					direction_vector = Vector2.LEFT
-				elif i.direction == DirectionalMovement.direction_type.RIGHT:
-					direction_vector = Vector2.RIGHT
-			_:
-				direction_vector = Vector2.ZERO
-		# Calculate the target position of the current movement
-		target_pos = self.position + direction_vector.normalized() * distance_to_move
-		
-		
-		# Variables to store initial direction and angle
-		function_direction = direction_vector
+		# If is directional movement then set relevant vars for directional movement
+		if i is DirectionalMovement:
+			set_directional_movement(i)
+		elif i is CurveMovement:
+			i.normalize_points(self, screen)
 		cur_event = i
 		
 		
@@ -138,18 +128,43 @@ func execute_movement_events() -> void:
 		execute_movement_events()
 		pass
 
+func set_directional_movement(movement : DirectionalMovement) -> void:
+	# Check the direction type enum
+		match movement.direction:
+			DirectionalMovement.direction_type.UP, DirectionalMovement.direction_type.DOWN:
+				# Claculate distance based off percentage of screen
+				distance_to_move = movement.distance * screen.y
+				if movement.direction == DirectionalMovement.direction_type.UP:
+					direction_vector = Vector2.UP
+				elif movement.direction == DirectionalMovement.direction_type.DOWN:
+					direction_vector = Vector2.DOWN
+			DirectionalMovement.direction_type.LEFT, DirectionalMovement.direction_type.RIGHT:
+				# Claculate distance based off percentage of screen
+				distance_to_move = movement.distance * screen.x
+				if movement.direction == DirectionalMovement.direction_type.LEFT:
+					direction_vector = Vector2.LEFT
+				elif movement.direction == DirectionalMovement.direction_type.RIGHT:
+					direction_vector = Vector2.RIGHT
+			_:
+				direction_vector = Vector2.ZERO
+		# Calculate the target position of the current movement
+		target_pos = self.position + direction_vector.normalized() * distance_to_move
+		
+		# Variables to store initial direction and angle
+		function_direction = direction_vector
+
 func leave_screen() -> void:
 	# Move using previous direction vector until out of screen
 	function_direction = direction_vector
 
-## Function to take percentages of points and have them be vector2's with pixel values of screen
-#func normalize_points() -> void:
-	## Add the initial position to beginning of vector
-	#normalized_vec2_array.append(global_position)
-	## Iterate through all points and multiply the percent given by x and y screen size
-	#for i in point_array:
-		#var temp_vec = Vector2(global_position.x + (i.x_percent * screen.x), global_position.y + (i.y_percent * screen.y))
-		#normalized_vec2_array.append(temp_vec)
-		## Add to curve length 
-		#estimated_curve_length += temp_vec.length()
-		#pass
+func set_curved_movement(movement : CurveMovement, t : float) -> Vector2:
+	
+	var temp_array : Array[Vector2] = []
+	
+	for i in range(movement.normalized_vec2_array.size()):
+		if i + 1 < movement.normalized_vec2_array.size():
+			var temp : Vector2 = movement.normalized_vec2_array[i].lerp(movement.normalized_vec2_array[i+1], t)
+			temp_array.append(temp)
+	
+	var to_return = temp_array[0].lerp(temp_array[temp_array.size()-1], t)
+	return to_return

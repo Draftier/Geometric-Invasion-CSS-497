@@ -79,6 +79,9 @@ func _physics_process(delta: float) -> void:
 		
 		# Interpolate the global position by the returned vector2, with a time affected by the speed curve clamped between 0.0 and 1.0
 		global_position = _bezier_array(normalized_vec2_array, clamp(time * speed_curve.sample(global_position.length() / estimated_curve_length), 0.0, 1.0))
+		#print(global_position.length())
+		#print(estimated_curve_length)
+		print(_bezier_array(normalized_vec2_array, clamp(time * speed_curve.sample(global_position.length() / estimated_curve_length), 0.0, 1.0)))
 		
 		# Other global_position interpolations for testing
 		#global_position = _bezier_array(normalized_vec2_array, time * speed_curve.sample(global_position.length() / estimated_curve_length))

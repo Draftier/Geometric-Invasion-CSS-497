@@ -1,4 +1,4 @@
 extends Resource
 class_name Movement
 
-@export var curve : Curve
+@export var speed_curve : Curve
