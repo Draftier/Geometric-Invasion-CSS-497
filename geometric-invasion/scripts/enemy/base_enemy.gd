@@ -48,7 +48,7 @@ func _process(delta: float) -> void:
 	time += delta
 	
 	# If there's a speed curve then sample the curve based on distance traveled and take speed from curve
-	if cur_event.curve != null:
+	if cur_event != null and cur_event.curve != null:
 		distance_traveled_progress = (distance_to_move - global_position.distance_to(target_pos)) / distance_to_move
 		temp_speed = speed * cur_event.curve.sample(distance_traveled_progress)
 	
@@ -98,34 +98,31 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 
 func execute_movement_events() -> void:
 	for i in movement_events.movement_array:
-		# Check if the event is directional or bezier curve based
-		if i is DirectionalMovement:
-			# Check the current direction key
-			if i.direction == "right" or i.direction == "left":
-				# Multiply the distance to move by the screen size
-				distance_to_move = i.distance * screen.x
-				if i.direction == "right":
-					direction_vector = Vector2.RIGHT
-				elif i.direction == "left":
-					direction_vector = Vector2.LEFT
-			elif i.direction == "up" or i.direction == "down":
-				# Multiply the distance to move by the screen size
+		# Check the direction type enum
+		match i.direction:
+			DirectionalMovement.direction_type.UP, DirectionalMovement.direction_type.DOWN:
+				# Claculate distance based off percentage of screen
 				distance_to_move = i.distance * screen.y
-				if i.direction == "up":
+				if i.direction == DirectionalMovement.direction_type.UP:
 					direction_vector = Vector2.UP
-				elif i.direction == "down":
+				elif i.direction == DirectionalMovement.direction_type.DOWN:
 					direction_vector = Vector2.DOWN
-			else:
+			DirectionalMovement.direction_type.LEFT, DirectionalMovement.direction_type.RIGHT:
+				# Claculate distance based off percentage of screen
+				distance_to_move = i.distance * screen.x
+				if i.direction == DirectionalMovement.direction_type.LEFT:
+					direction_vector = Vector2.LEFT
+				elif i.direction == DirectionalMovement.direction_type.RIGHT:
+					direction_vector = Vector2.RIGHT
+			_:
 				direction_vector = Vector2.ZERO
-		# Figure out the target position based on the distance to move and cur direction vector
+		# Calculate the target position of the current movement
 		target_pos = self.position + direction_vector.normalized() * distance_to_move
-		print(distance_to_move)
-		print(target_pos)
+		
 		
 		# Variables to store initial direction and angle
 		function_direction = direction_vector
 		cur_event = i
-		var angle
 		
 		
 		# Wait for current movement to finish then do next movement		
@@ -137,10 +134,22 @@ func execute_movement_events() -> void:
 	# Check if we want to loop or leave screen
 	if movement_events.leave_screen == true:
 		leave_screen()
-	elif movement_events.wrap == true:
+	elif movement_events.wrap_movements == true:
 		execute_movement_events()
 		pass
 
 func leave_screen() -> void:
 	# Move using previous direction vector until out of screen
 	function_direction = direction_vector
+
+## Function to take percentages of points and have them be vector2's with pixel values of screen
+#func normalize_points() -> void:
+	## Add the initial position to beginning of vector
+	#normalized_vec2_array.append(global_position)
+	## Iterate through all points and multiply the percent given by x and y screen size
+	#for i in point_array:
+		#var temp_vec = Vector2(global_position.x + (i.x_percent * screen.x), global_position.y + (i.y_percent * screen.y))
+		#normalized_vec2_array.append(temp_vec)
+		## Add to curve length 
+		#estimated_curve_length += temp_vec.length()
+		#pass

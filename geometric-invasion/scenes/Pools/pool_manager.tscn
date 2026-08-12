@@ -12,11 +12,11 @@ script = ExtResource("1_omxlj")
 [node name="PlayerBulletPool" type="Node" parent="." unique_id=314793696]
 unique_name_in_owner = true
 script = ExtResource("2_psedc")
-bullet = ExtResource("3_fvd53")
+bullet_scene = ExtResource("3_fvd53")
 metadata/_custom_type_script = "uid://2p7xdn8rosd7"
 
 [node name="EnemyBulletPool" type="Node" parent="." unique_id=2098312797]
 unique_name_in_owner = true
 script = ExtResource("2_psedc")
-bullet = ExtResource("4_id1ti")
+bullet_scene = ExtResource("4_id1ti")
 metadata/_custom_type_script = "uid://2p7xdn8rosd7"

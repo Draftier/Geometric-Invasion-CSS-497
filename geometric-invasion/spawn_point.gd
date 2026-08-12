@@ -14,7 +14,6 @@ func execute_spawn_event(event : Spawn_Event) -> void:
 		for j in i.number_of_enemies:
 			var enemy = i.enemy.instantiate()
 			enemy.movement_events = i.enemy_movement_pattern
-			print(i.enemy_movement_pattern.movement_dict)
 			enemy.global_position = global_position
 			enemy.rotation_degrees = i.rotation
 			get_parent().add_child.call_deferred(enemy)

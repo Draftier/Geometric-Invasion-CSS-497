@@ -12,8 +12,8 @@ extends Node2D
 
 signal exited_screen
 
-# Will utilize to play some sort of animation on instantiation
-func _ready() -> void: 
+func _ready() -> void:
+	bullet_hitbox.connect("hit", _on_hit)
 	pass
 
 # Called every physics tick
@@ -31,3 +31,5 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 		level_manager.add_to_pool(self)
 		
 	exited_screen.emit(self)
+func _on_hit() -> void:
+	pass

@@ -1,4 +1,6 @@
 extends Movement
 class_name CurveMovement
 
-@export var curve_to_move : Curve2D
+# Points used to move around the curve
+@export var x_percent : float
+@export var y_percent : float

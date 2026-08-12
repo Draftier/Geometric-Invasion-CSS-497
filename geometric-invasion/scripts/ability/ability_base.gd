@@ -71,5 +71,5 @@ func _physics_process(delta: float) -> void:
 	if is_active:
 		fire_ability(delta)
 
-func fire_ability(delta : float) -> void:
+func fire_ability(_delta : float) -> void:
 	pass

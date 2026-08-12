@@ -5,19 +5,18 @@ extends Node
 class_name ObjectPool
 
 # Bullet scene that we pool
-@export var bullet : PackedScene
+@export var bullet_scene : PackedScene
 
 # Variables to store bullets and the max number of objects in pool
 @export var max_bullet_count : int = 1000
 var bullets : Array [ Bullet ]
 
 # Function to add bullets to the object pool
-func add_to_pool(bullet: Bullet) -> void:
+func add_to_pool(bullet : Bullet) -> void:
 	bullet.reset()
 	get_instance_id()
 	# We reparent the bullet to make sure it appears correctly in scene tree
 	# Without this the bullet is visually invisible
-	# bullet.set_deferred("reparent", self)
 	bullets.append(bullet)
 
 # Function to initialize the pool with max num of objects
@@ -28,7 +27,7 @@ func initialize_pool() -> void:
 	# Check if the array actually changes in size
 	for i in range(0, max_bullet_count):
 		# Start adding bullets to the pool
-			var bullet = bullet.instantiate()
+			var bullet = bullet_scene.instantiate()
 			add_child(bullet)
 			# Connect bullet exit signal to pool so that when bullet exits screen bullet is repooled
 			bullet.connect("exited_screen", _on_bullet_exit_screen)

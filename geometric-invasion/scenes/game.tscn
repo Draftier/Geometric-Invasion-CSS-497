@@ -12,7 +12,9 @@
 [ext_resource type="Resource" uid="uid://c641j6jfn477v" path="res://resources/events/test_movement_data_two.tres" id="8_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://cu4vxxsdf4l7r" path="res://scenes/Enemy/rotater_shoot_enemy.tscn" id="8_gee14"]
 [ext_resource type="Script" uid="uid://cpbp4ohcaqwle" path="res://spawn_point.gd" id="9_0tnpc"]
+[ext_resource type="Script" uid="uid://c8u5b5y0i25wp" path="res://scripts/enemy/directional_movement.gd" id="9_ca42v"]
 [ext_resource type="Script" uid="uid://c4twyssjo6an2" path="res://scripts/event/spawn.gd" id="12_dinhu"]
+[ext_resource type="Script" uid="uid://dmjfjfilssxt6" path="res://scripts/enemy/movement_base.gd" id="13_ir15t"]
 [ext_resource type="FontFile" uid="uid://dihhulpjs1064" path="res://assets/fonts/PixelOperator8.ttf" id="14_trtic"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vtaks"]
@@ -33,11 +35,32 @@ size = Vector2(646, 21)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iywne"]
 size = Vector2(20, 618)
 
+[sub_resource type="Resource" id="Resource_nhfu3"]
+script = ExtResource("9_ca42v")
+direction = "left"
+distance = 0.05
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_4o8i3"]
+script = ExtResource("9_ca42v")
+direction = "right"
+distance = 0.05
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_qcmcn"]
+script = ExtResource("7_trtic")
+movement_array = Array[ExtResource("13_ir15t")]([SubResource("Resource_nhfu3"), SubResource("Resource_4o8i3")])
+metadata/_custom_type_script = "uid://thlx0gtur2d4"
+
+[sub_resource type="Resource" id="Resource_1kice"]
+script = ExtResource("9_ca42v")
+direction = "down"
+distance = 0.05
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
 [sub_resource type="Resource" id="Resource_ir15t"]
 script = ExtResource("7_trtic")
-movement_dict = Dictionary[String, float]({
-"down": 1.0
-})
+movement_array = Array[ExtResource("13_ir15t")]([SubResource("Resource_1kice")])
 leave_screen = true
 metadata/_custom_type_script = "uid://thlx0gtur2d4"
 
@@ -57,17 +80,21 @@ spawns = Array[ExtResource("12_dinhu")]([SubResource("Resource_trtic")])
 metadata/_custom_type_script = "uid://bewu02jnvwcgy"
 
 [sub_resource type="Resource" id="Resource_ca42v"]
+script = ExtResource("9_ca42v")
+direction = "down"
+distance = 0.9
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_264po"]
 script = ExtResource("7_trtic")
-movement_dict = Dictionary[String, float]({
-"up": 1.1
-})
+movement_array = Array[ExtResource("13_ir15t")]([SubResource("Resource_ca42v")])
 leave_screen = true
 metadata/_custom_type_script = "uid://thlx0gtur2d4"
 
 [sub_resource type="Resource" id="Resource_rysoc"]
 script = ExtResource("12_dinhu")
 enemy = ExtResource("6_gee14")
-enemy_movement_pattern = SubResource("Resource_ca42v")
+enemy_movement_pattern = SubResource("Resource_264po")
 number_of_enemies = 5
 rotation = -90.0
 metadata/_custom_type_script = "uid://c4twyssjo6an2"
@@ -166,18 +193,14 @@ shoot_timer_wait_time = 0.8
 movement_events = ExtResource("8_0tnpc")
 speed = 50
 health = 20
-direction = "down"
-equation = "sin"
 
 [node name="Enemy6" parent="." unique_id=173122041 instance=ExtResource("6_gee14")]
 position = Vector2(203, -111)
 rotation = -1.5707964
 shoot_timer_wait_time = 0.88
-movement_events = ExtResource("8_0tnpc")
+movement_events = SubResource("Resource_qcmcn")
 speed = 50
 health = 20
-direction = "down"
-equation = "sin"
 
 [node name="SpawnPoint" type="Marker2D" parent="." unique_id=732362670]
 position = Vector2(-6, 130)

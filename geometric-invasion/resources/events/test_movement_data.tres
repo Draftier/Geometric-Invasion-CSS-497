@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://thlx0gtur2d4" path="res://scripts/enemy/enemy_movement_data.gd" id="1_3wsdb"]
 [ext_resource type="Script" uid="uid://c8u5b5y0i25wp" path="res://scripts/enemy/directional_movement.gd" id="1_ecion"]
+[ext_resource type="Script" uid="uid://dmjfjfilssxt6" path="res://scripts/enemy/movement_base.gd" id="1_yp057"]
 
 [sub_resource type="Curve" id="Curve_yp057"]
 _data = [Vector2(0.17560975, 0.04494381), 0.0, 0.0, 0, 0, Vector2(0.53658533, 0.57303375), 0.0, 0.0, 0, 0, Vector2(0.99512196, 1), 0.0, 0.0, 0, 0]
@@ -34,6 +35,6 @@ metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
 
 [resource]
 script = ExtResource("1_3wsdb")
-movement_array = Array[ExtResource("1_ecion")]([SubResource("Resource_wfr8x"), SubResource("Resource_ebm38"), SubResource("Resource_q0kbr"), SubResource("Resource_fx0l5")])
+movement_array = Array[ExtResource("1_yp057")]([SubResource("Resource_wfr8x"), SubResource("Resource_ebm38"), SubResource("Resource_q0kbr"), SubResource("Resource_fx0l5")])
 wrap = true
 metadata/_custom_type_script = "uid://thlx0gtur2d4"

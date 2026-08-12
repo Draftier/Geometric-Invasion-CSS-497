@@ -19,12 +19,12 @@ func _ready() -> void:
 	
 	set_color(color)
 	
-func fire_ability(delta : float) -> void:
+func fire_ability(_delta : float) -> void:
 	
 	ray_cast.target_position.y = move_toward(
 		ray_cast.target_position.y,
 		max_length,
-		cast_speed * delta
+		cast_speed * _delta
 	)
 	
 	var laser_end_position := ray_cast.target_position

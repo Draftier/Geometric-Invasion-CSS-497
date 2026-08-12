@@ -27,7 +27,7 @@ func _ready() -> void:
 	pass
 
 # Called every physics tick
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# Get an input vector and modify velocity of player based on it
 	direction = Input.get_vector("left", "right", "up", "down")
 	velocity = direction * player_class.speed
@@ -59,12 +59,6 @@ func _process(delta: float) -> void:
 			hide()
 			self.set_process(false)
 	
-	
-	
-# Learned this function in another tutorial and read about it being useful for input to UI or menus
-# Since this function is not called every frame/physics tick
-func _unhandled_input(event: InputEvent) -> void:
-	pass
 
 # Function that allows the player to take damage
 func take_damage(damage : int) -> void:
