@@ -53,9 +53,9 @@ func _ready() -> void:
 	# Start the shooting timer
 	shoot_timer.start()
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	# Do same process as before
-	super._process(delta)
+	super._physics_process(delta)
 	
 	# Then rotate shoot point pivots
 	rotate_pivot(delta)

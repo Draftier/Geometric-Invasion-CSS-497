@@ -62,15 +62,15 @@ func _physics_process(delta: float) -> void:
 			
 	elif cur_event is CurveMovement:
 		if round(position) != round(cur_event.target_pos):
-			global_position = set_curved_movement(cur_event, clamp(curve_time * cur_event.speed_curve.sample(global_position.length() / cur_event.estimated_curve_length), 0.0, 1.0))
+			if cur_event.speed_curve != null:
+				global_position = set_curved_movement(cur_event, clamp(curve_time * cur_event.speed_curve.sample(global_position.length() / cur_event.estimated_curve_length), 0.0, 1.0))
+			else:
+				global_position = set_curved_movement(cur_event, clamp(curve_time, 0.0, 1.0))
 			curve_time += delta
 		else:
 			curve_time = 0
 			movement_finished.emit()
 		pass
-	
-
-	
 
 # Function to calculate health and hit upon getting hit by player bullet
 func take_damage(damage : int) -> void:

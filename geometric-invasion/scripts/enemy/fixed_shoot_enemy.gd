@@ -18,9 +18,9 @@ func _ready() -> void:
 	
 	shoot_timer.start()
 	
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	# Do parent class move function
-	super._process(delta)
+	super._physics_process(delta)
 
 
 func _on_shoot_timer_timeout() -> void:

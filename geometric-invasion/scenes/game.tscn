@@ -13,6 +13,8 @@
 [ext_resource type="PackedScene" uid="uid://cu4vxxsdf4l7r" path="res://scenes/Enemy/rotater_shoot_enemy.tscn" id="8_gee14"]
 [ext_resource type="Script" uid="uid://cpbp4ohcaqwle" path="res://spawn_point.gd" id="9_0tnpc"]
 [ext_resource type="Script" uid="uid://c8u5b5y0i25wp" path="res://scripts/enemy/directional_movement.gd" id="9_ca42v"]
+[ext_resource type="Script" uid="uid://beg1vql3x734k" path="res://scripts/enemy/point.gd" id="9_ssvqc"]
+[ext_resource type="Script" uid="uid://bho4wgornhjo7" path="res://scripts/enemy/curve_movement.gd" id="10_264po"]
 [ext_resource type="Script" uid="uid://c4twyssjo6an2" path="res://scripts/event/spawn.gd" id="12_dinhu"]
 [ext_resource type="Script" uid="uid://dmjfjfilssxt6" path="res://scripts/enemy/movement_base.gd" id="13_ir15t"]
 [ext_resource type="FontFile" uid="uid://dihhulpjs1064" path="res://assets/fonts/PixelOperator8.ttf" id="14_trtic"]
@@ -34,6 +36,85 @@ size = Vector2(646, 21)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iywne"]
 size = Vector2(20, 618)
+
+[sub_resource type="Curve" id="Curve_e1j6l"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5, 0.8651686), 0.0, 0.0, 0, 0, Vector2(0.9943182, 0.37078655), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Resource" id="Resource_bt5mj"]
+script = ExtResource("9_ca42v")
+direction = 1
+distance = 0.2
+speed_curve = SubResource("Curve_e1j6l")
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Curve" id="Curve_ssvqc"]
+_data = [Vector2(0.14772727, 0.41573036), 0.0, 0.0, 0, 0, Vector2(0.5056818, 1), 0.0, 0.0, 0, 0, Vector2(0.98295456, 0.4044944), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Resource" id="Resource_bhx41"]
+script = ExtResource("9_ca42v")
+distance = 0.1
+speed_curve = SubResource("Curve_ssvqc")
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_suyxu"]
+script = ExtResource("9_ssvqc")
+x_percent = 0.1
+y_percent = 0.3
+metadata/_custom_type_script = "uid://beg1vql3x734k"
+
+[sub_resource type="Resource" id="Resource_sgl2t"]
+script = ExtResource("9_ssvqc")
+x_percent = 0.2
+metadata/_custom_type_script = "uid://beg1vql3x734k"
+
+[sub_resource type="Curve" id="Curve_264po"]
+_data = [Vector2(0.26704544, 0.8876405), 0.0, 0.0, 0, 0, Vector2(0.6136364, 0.41573036), 0.0, 0.0, 0, 0, Vector2(0.95454544, 0.9887641), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Resource" id="Resource_sww3w"]
+script = ExtResource("10_264po")
+point_array = Array[ExtResource("9_ssvqc")]([SubResource("Resource_suyxu"), SubResource("Resource_sgl2t")])
+speed_curve = SubResource("Curve_264po")
+metadata/_custom_type_script = "uid://bho4wgornhjo7"
+
+[sub_resource type="Resource" id="Resource_5newe"]
+script = ExtResource("7_trtic")
+movement_array = Array[ExtResource("13_ir15t")]([SubResource("Resource_bt5mj"), SubResource("Resource_bhx41"), SubResource("Resource_sww3w")])
+metadata/_custom_type_script = "uid://thlx0gtur2d4"
+
+[sub_resource type="Resource" id="Resource_kmnlx"]
+script = ExtResource("9_ca42v")
+direction = 1
+distance = 0.5
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_egg0y"]
+script = ExtResource("9_ssvqc")
+x_percent = 0.05
+y_percent = 0.1
+metadata/_custom_type_script = "uid://beg1vql3x734k"
+
+[sub_resource type="Resource" id="Resource_0ww3c"]
+script = ExtResource("9_ssvqc")
+x_percent = 0.1
+metadata/_custom_type_script = "uid://beg1vql3x734k"
+
+[sub_resource type="Curve" id="Curve_nlm5o"]
+_data = [Vector2(0.09659091, 0.70786524), 0.0, 0.0, 0, 0, Vector2(0.5227273, 0.28089893), 0.0, 0.0, 0, 0, Vector2(1, 0.6966293), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Resource" id="Resource_rf4g2"]
+script = ExtResource("10_264po")
+point_array = Array[ExtResource("9_ssvqc")]([SubResource("Resource_egg0y"), SubResource("Resource_0ww3c")])
+speed_curve = SubResource("Curve_nlm5o")
+metadata/_custom_type_script = "uid://bho4wgornhjo7"
+
+[sub_resource type="Resource" id="Resource_5k7sd"]
+script = ExtResource("7_trtic")
+movement_array = Array[ExtResource("13_ir15t")]([SubResource("Resource_kmnlx"), SubResource("Resource_rf4g2")])
+metadata/_custom_type_script = "uid://thlx0gtur2d4"
 
 [sub_resource type="Resource" id="Resource_nhfu3"]
 script = ExtResource("9_ca42v")
@@ -173,6 +254,7 @@ health = 20
 position = Vector2(-60, -118)
 rotation = -3.1415925
 shoot_timer_wait_time = 1.3
+movement_events = SubResource("Resource_5newe")
 speed = 50
 health = 20
 
@@ -180,6 +262,7 @@ health = 20
 position = Vector2(-180, -122)
 rotation = -3.1415925
 shoot_timer_wait_time = 1.4
+movement_events = SubResource("Resource_5k7sd")
 speed = 50
 health = 20
 
@@ -227,7 +310,7 @@ metadata/_custom_type_script = "uid://cpbp4ohcaqwle"
 spawners = [NodePath("../EnemySpawnPoint"), NodePath("../EnemySpawnPoint2")]
 events = Array[ExtResource("4_kvpfn")]([SubResource("Resource_kvuet"), SubResource("Resource_ssvqc")])
 level_time = 30.0
-enemies = [NodePath("../Rotater_Shoot_Enemy"), NodePath("../Enemy"), NodePath("../Enemy2"), NodePath("../Enemy3"), NodePath("../Enemy4"), NodePath("../Enemy5"), NodePath("../Enemy6")]
+enemies = [null, null, null, null, null, null, null]
 
 [node name="Label" parent="LevelManager" index="2" unique_id=405150559]
 offset_left = -282.0

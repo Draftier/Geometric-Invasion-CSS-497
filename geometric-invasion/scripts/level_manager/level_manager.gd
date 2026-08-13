@@ -22,13 +22,13 @@ var current_time
 
 
 func _ready() -> void:	
-	# Connect enemy death signals
-	for i in enemies:
-		i.connect("death", _on_enemy_death)
+	## Connect enemy death signals
+	#for i in enemies:
+		#i.connect("death", _on_enemy_death)
 	
-	# Temporarily count the number of enemies
-	num_enemies = enemies.size()
-	print(enemies.size())
+	## Temporarily count the number of enemies
+	#num_enemies = enemies.size()
+	#print(enemies.size())
 		
 	#Store the time in the timer
 	$LevelTimer.wait_time = level_time

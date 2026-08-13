@@ -1,35 +1,9 @@
 [gd_scene format=3 uid="uid://cwgbofk3joax"]
 
 [ext_resource type="Script" uid="uid://cpbp4ohcaqwle" path="res://spawn_point.gd" id="1_ebynj"]
-[ext_resource type="Script" uid="uid://bewu02jnvwcgy" path="res://scripts/event/spawn_event_data.gd" id="2_cc8ia"]
-[ext_resource type="Script" uid="uid://c4twyssjo6an2" path="res://scripts/event/spawn.gd" id="3_wm8f7"]
-[ext_resource type="PackedScene" uid="uid://cp837cm6qinkj" path="res://scenes/Enemy/enemy.tscn" id="4_oowrx"]
-[ext_resource type="Script" uid="uid://thlx0gtur2d4" path="res://scripts/enemy/enemy_movement_data.gd" id="5_56ox8"]
-[ext_resource type="Script" uid="uid://dmjfjfilssxt6" path="res://scripts/enemy/movement_base.gd" id="5_wm8f7"]
-
-[sub_resource type="Resource" id="Resource_0i752"]
-script = ExtResource("5_56ox8")
-leave_screen = true
-metadata/_custom_type_script = "uid://thlx0gtur2d4"
-
-[sub_resource type="Resource" id="Resource_ynoba"]
-script = ExtResource("3_wm8f7")
-enemy = ExtResource("4_oowrx")
-enemy_movement_pattern = SubResource("Resource_0i752")
-number_of_enemies = 5
-metadata/_custom_type_script = "uid://c4twyssjo6an2"
-
-[sub_resource type="Resource" id="Resource_gdvp7"]
-script = ExtResource("2_cc8ia")
-spawner = 1
-time_between_spawns = 2.0
-time_to_occur = 2.0
-spawns = Array[ExtResource("3_wm8f7")]([SubResource("Resource_ynoba")])
-metadata/_custom_type_script = "uid://bewu02jnvwcgy"
 
 [node name="SpawnPoint" type="Node2D" unique_id=1123772553]
 position = Vector2(556, 299)
 script = ExtResource("1_ebynj")
 id = 1
 spawn_interval = 1.0
-event = SubResource("Resource_gdvp7")
