@@ -153,10 +153,6 @@ func set_directional_movement(movement : DirectionalMovement) -> void:
 		# Variables to store initial direction and angle
 		function_direction = direction_vector
 
-func leave_screen() -> void:
-	# Move using previous direction vector until out of screen
-	function_direction = direction_vector
-
 func set_curved_movement(movement : CurveMovement, t : float) -> Vector2:
 	
 	var temp_array : Array[Vector2] = []
@@ -168,3 +164,11 @@ func set_curved_movement(movement : CurveMovement, t : float) -> Vector2:
 	
 	var to_return = temp_array[0].lerp(temp_array[temp_array.size()-1], t)
 	return to_return
+
+func leave_screen() -> void:
+	# Move using previous direction vector until out of screen
+	function_direction = direction_vector
+	
+func execute_attack_events() -> void:
+	
+	pass

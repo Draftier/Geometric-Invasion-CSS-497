@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://lha1c308vq6j"]
+
+[ext_resource type="Texture2D" uid="uid://h688hsh4ax6m" path="res://icon.svg" id="1_d7ven"]
+[ext_resource type="Script" uid="uid://bg7ka1615oja3" path="res://emitter_test.gd" id="1_yn2kh"]
+[ext_resource type="PackedScene" uid="uid://d02ey725i8t81" path="res://scenes/Enemy/obstacle_bullet_base.tscn" id="2_jq3ym"]
+
+[node name="emitter_test" type="Node2D" unique_id=1019809325]
+position = Vector2(534, 353)
+script = ExtResource("1_yn2kh")
+bullet = ExtResource("2_jq3ym")
+
+[node name="Icon" type="Sprite2D" parent="." unique_id=268234599]
+position = Vector2(18.999998, 0.99999994)
+scale = Vector2(0.6640625, 0.6640625)
+texture = ExtResource("1_d7ven")
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=694606557]
+
+[node name="Timer" type="Timer" parent="." unique_id=220793777]
+wait_time = 0.05
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

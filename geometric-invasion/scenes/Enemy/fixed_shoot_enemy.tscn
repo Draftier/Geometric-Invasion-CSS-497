@@ -19,8 +19,6 @@ size = Vector2(14, 11)
 script = ExtResource("2_it82r")
 bullet = null
 shoot_timer_wait_time = 1.5
-direction = "none"
-equation = "none"
 
 [node name="Sprite2D" parent="." index="0" unique_id=1252295741]
 material = SubResource("ShaderMaterial_jmhqc")

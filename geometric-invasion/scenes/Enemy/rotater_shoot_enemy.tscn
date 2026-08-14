@@ -2,10 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://cp837cm6qinkj" path="res://scenes/Enemy/enemy.tscn" id="1_ofwuk"]
 [ext_resource type="Script" uid="uid://cmghxkb54ap6j" path="res://scripts/enemy/rotater_shoot_enemy.gd" id="2_ukbsx"]
-[ext_resource type="PackedScene" uid="uid://d02ey725i8t81" path="res://scenes/Enemy/obstacle_bullet_base.tscn" id="3_ukbsx"]
 [ext_resource type="Shader" uid="uid://cqv7cjdn8x0b5" path="res://shaders/flash.tres" id="3_wj5wt"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_q1f2k"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hyd6s"]
 resource_local_to_scene = true
 shader = ExtResource("3_wj5wt")
 shader_parameter/Color = Color(1, 1, 1, 1)
@@ -13,17 +12,14 @@ shader_parameter/Progress = 1.0
 
 [node name="Rotater_Shoot_Enemy" unique_id=1367146779 instance=ExtResource("1_ofwuk")]
 script = ExtResource("2_ukbsx")
-bullet = ExtResource("3_ukbsx")
 rotate_speed = 0
 shooter_timer_wait_time = 0.1
 spawn_point_count = 4
 radius = 16
 speed = 10
-direction = ""
-equation = "None"
 
 [node name="Sprite2D" parent="." index="0" unique_id=1252295741]
-material = SubResource("ShaderMaterial_q1f2k")
+material = SubResource("ShaderMaterial_hyd6s")
 
 [node name="Rotater" type="Node2D" parent="." index="3" unique_id=1939589730]
 

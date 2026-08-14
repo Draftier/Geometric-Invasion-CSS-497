@@ -37,6 +37,43 @@ size = Vector2(646, 21)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iywne"]
 size = Vector2(20, 618)
 
+[sub_resource type="Curve" id="Curve_8xu4i"]
+_data = [Vector2(0.0056818128, 0.7415731), 0.0, 0.0, 0, 0, Vector2(0.48863637, 0.516854), 0.0, 0.0, 0, 0, Vector2(0.92613643, 0.9662922), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Resource" id="Resource_vx3tf"]
+script = ExtResource("9_ca42v")
+direction = 1
+distance = 0.2
+speed_curve = SubResource("Curve_8xu4i")
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_1q8se"]
+script = ExtResource("9_ssvqc")
+x_percent = -0.1
+y_percent = 0.3
+metadata/_custom_type_script = "uid://beg1vql3x734k"
+
+[sub_resource type="Resource" id="Resource_gce0c"]
+script = ExtResource("9_ssvqc")
+x_percent = -0.2
+metadata/_custom_type_script = "uid://beg1vql3x734k"
+
+[sub_resource type="Resource" id="Resource_jubrh"]
+script = ExtResource("10_264po")
+point_array = Array[ExtResource("9_ssvqc")]([SubResource("Resource_1q8se"), SubResource("Resource_gce0c")])
+metadata/_custom_type_script = "uid://bho4wgornhjo7"
+
+[sub_resource type="Resource" id="Resource_ssvqc"]
+script = ExtResource("9_ca42v")
+distance = 0.5
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_xkxo5"]
+script = ExtResource("7_trtic")
+movement_array = Array[ExtResource("13_ir15t")]([SubResource("Resource_vx3tf"), SubResource("Resource_jubrh"), SubResource("Resource_ssvqc")])
+metadata/_custom_type_script = "uid://thlx0gtur2d4"
+
 [sub_resource type="Curve" id="Curve_e1j6l"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5, 0.8651686), 0.0, 0.0, 0, 0, Vector2(0.9943182, 0.37078655), 0.0, 0.0, 0, 0]
 point_count = 3
@@ -177,7 +214,7 @@ number_of_enemies = 5
 rotation = -90.0
 metadata/_custom_type_script = "uid://c4twyssjo6an2"
 
-[sub_resource type="Resource" id="Resource_ssvqc"]
+[sub_resource type="Resource" id="Resource_37s47"]
 script = ExtResource("4_kvpfn")
 spawner = 2
 time_between_spawns = 2.5
@@ -232,14 +269,16 @@ shape = SubResource("RectangleShape2D_iywne")
 
 [node name="Rotater_Shoot_Enemy" parent="." unique_id=1705948068 instance=ExtResource("8_gee14")]
 position = Vector2(-6, -11)
-rotate_speed = 20
 shooter_timer_wait_time = 0.2
-spawn_point_count = 8
+spawn_point_count = 2
+radius = 2
+health = 10
 
 [node name="Enemy" parent="." unique_id=1367146779 instance=ExtResource("6_gee14")]
 position = Vector2(159, -108)
 rotation = -3.1415925
 shoot_timer_wait_time = 1.1
+movement_events = SubResource("Resource_xkxo5")
 speed = 50
 health = 20
 
@@ -308,7 +347,7 @@ metadata/_custom_type_script = "uid://cpbp4ohcaqwle"
 
 [node name="LevelManager" parent="." unique_id=1305954196 node_paths=PackedStringArray("spawners", "enemies") instance=ExtResource("2_gee14")]
 spawners = [NodePath("../EnemySpawnPoint"), NodePath("../EnemySpawnPoint2")]
-events = Array[ExtResource("4_kvpfn")]([SubResource("Resource_kvuet"), SubResource("Resource_ssvqc")])
+events = Array[ExtResource("4_kvpfn")]([SubResource("Resource_kvuet"), SubResource("Resource_37s47")])
 level_time = 30.0
 enemies = [null, null, null, null, null, null, null]
 
