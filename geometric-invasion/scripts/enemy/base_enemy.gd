@@ -41,10 +41,15 @@ func _ready() -> void:
 	# Run the movement events as a coroutine
 	temp_speed = speed
 	execute_movement_events()
+	
+	
+
 	pass
 	
 func _physics_process(delta: float) -> void:
 	# Check if the current movement event is directional or curved
+	print("global position: ", self.global_position)
+	print("target position: ", target_pos)
 	if cur_event is DirectionalMovement:
 		# If direction then check speed curve and move specified distance in direction at speed of current sampled speed curve
 		# If there's a speed curve then sample the curve based on distance traveled and take speed from curve
@@ -55,13 +60,16 @@ func _physics_process(delta: float) -> void:
 		# Move the enemy
 		global_position += function_direction * temp_speed * delta
 		
-		
+		#print("Current position: ", global_position)
+		#print("Target position: ", target_pos)
 		# Check if global position is about equal to target pos
 		# If so then movement is finished
 		if  global_position.distance_to(target_pos) < 1.0:
-			print("Directional end pos:" ,global_position)
+			#print("Directional end pos:" ,global_position)
 			movement_finished.emit()
-			
+		
+		#if round(global_position) == round(target_pos):
+			#movement_finished.emit()
 	# If curved movement, then check if the current position is not equal to target position at end of curve
 	elif cur_event is CurveMovement:
 		# If current position not equal to target pos at end of curve
@@ -126,17 +134,20 @@ func execute_movement_events() -> void:
 			i.normalize_points(self, screen)
 		cur_event = i
 		
-		
+		# Check if the current movement event is null
+		assert(i != null, "Current movement event is null")
 		# Wait for current movement to finish then do next movement		
 		await movement_finished
-
+		print("moveement finished")
+	print("movements finished: ")
 	# Stop moving
 	function_direction = Vector2.ZERO
-	
+		
 	# Check if we want to loop or leave screen
 	if movement_events.leave_screen == true:
 		leave_screen()
 	elif movement_events.wrap_movements == true:
+		print("Executing movement events again")
 		execute_movement_events()
 		pass
 
@@ -160,7 +171,9 @@ func set_directional_movement(movement : DirectionalMovement) -> void:
 			_:
 				direction_vector = Vector2.ZERO
 		# Calculate the target position of the current movement
-		target_pos = self.position + direction_vector.normalized() * distance_to_move
+		target_pos = self.global_position + (direction_vector.normalized() * distance_to_move)
+		print(target_pos)
+		#var test = direction_vector.normalized() * distance_to_move
 		
 		# Variables to store initial direction and angle
 		function_direction = direction_vector

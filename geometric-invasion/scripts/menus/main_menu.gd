@@ -50,7 +50,6 @@ func _on_back_button_pressed() -> void:
 
 func _on_start_game_button_pressed() -> void:
 	game_start.emit()
-	PoolManager.init_pools()
 	call_deferred("change_scene")
 
 

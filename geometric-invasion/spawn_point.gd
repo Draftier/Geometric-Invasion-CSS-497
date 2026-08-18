@@ -7,6 +7,9 @@ class_name EnemySpawnPoint
 
 var num = 0
 
+func _ready() -> void:
+	#PoolManager.init_pools()
+	pass
 
 # Function to spawn enemies given a spawn event
 func execute_spawn_event(event : Spawn_Event) -> void:

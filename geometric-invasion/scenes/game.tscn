@@ -288,8 +288,8 @@ spawns = Array[ExtResource("12_dinhu")]([SubResource("Resource_rysoc")])
 metadata/_custom_type_script = "uid://bewu02jnvwcgy"
 
 [sub_resource type="Curve" id="Curve_bt5mj"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.28089893), 0.0, 0.0, 0, 0]
-point_count = 2
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.8958334, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="Resource" id="Resource_js0lu"]
 script = ExtResource("9_ca42v")
@@ -299,7 +299,7 @@ speed_curve = SubResource("Curve_bt5mj")
 metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
 
 [sub_resource type="Curve" id="Curve_pl11u"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.32584274), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.97916675, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Resource" id="Resource_gxtfn"]
@@ -311,7 +311,7 @@ metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
 
 [sub_resource type="Resource" id="Resource_twgab"]
 script = ExtResource("7_trtic")
-movement_array = Array[ExtResource("13_ir15t")]([SubResource("Resource_js0lu"), SubResource("Resource_gxtfn"), null])
+movement_array = Array[ExtResource("13_ir15t")]([SubResource("Resource_js0lu"), SubResource("Resource_gxtfn")])
 wrap_movements = true
 metadata/_custom_type_script = "uid://thlx0gtur2d4"
 

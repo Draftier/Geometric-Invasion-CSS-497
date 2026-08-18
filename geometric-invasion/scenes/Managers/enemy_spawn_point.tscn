@@ -5,5 +5,3 @@
 [node name="SpawnPoint" type="Node2D" unique_id=1123772553]
 position = Vector2(556, 299)
 script = ExtResource("1_ebynj")
-id = 1
-spawn_interval = 1.0

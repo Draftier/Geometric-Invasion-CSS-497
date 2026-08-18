@@ -6,6 +6,9 @@ extends Node2D
 @onready var enemy_bullet_pool : ObjectPool = %EnemyBulletPool
 @onready var emitter_pool : ObjectPool = %EmitterPool
 
+func _ready() -> void:
+	init_pools()
+
 # These functions get bullets from their respective pool
 func give_player_bullet() -> Bullet:
 	return player_bullet_pool.pull_from_pool()

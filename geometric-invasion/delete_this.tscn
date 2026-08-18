@@ -9,23 +9,19 @@
 [sub_resource type="Resource" id="Resource_1a23g"]
 script = ExtResource("3_7b7m2")
 direction = 2
-distance = 0.5
+distance = 0.2
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_qa1gc"]
+script = ExtResource("3_7b7m2")
+direction = 3
+distance = 0.2
 metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
 
 [sub_resource type="Resource" id="Resource_7b7m2"]
 script = ExtResource("4_1a23g")
-movement_array = Array[ExtResource("2_ykydf")]([SubResource("Resource_1a23g")])
-metadata/_custom_type_script = "uid://thlx0gtur2d4"
-
-[sub_resource type="Resource" id="Resource_spnbt"]
-script = ExtResource("3_7b7m2")
-direction = 3
-distance = 0.5
-metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
-
-[sub_resource type="Resource" id="Resource_4te4a"]
-script = ExtResource("4_1a23g")
-movement_array = Array[ExtResource("2_ykydf")]([SubResource("Resource_spnbt")])
+movement_array = Array[ExtResource("2_ykydf")]([SubResource("Resource_1a23g"), SubResource("Resource_qa1gc")])
+wrap_movements = true
 metadata/_custom_type_script = "uid://thlx0gtur2d4"
 
 [node name="Node2D" type="Node2D" unique_id=1312807682]
@@ -38,8 +34,3 @@ position = Vector2(543, 308)
 position = Vector2(664, 304)
 spawn_point_count = 8
 movement_events = SubResource("Resource_7b7m2")
-
-[node name="Rotater_Shoot_Enemy2" parent="." unique_id=933205845 instance=ExtResource("2_qa1gc")]
-position = Vector2(424, 304)
-spawn_point_count = 8
-movement_events = SubResource("Resource_4te4a")
