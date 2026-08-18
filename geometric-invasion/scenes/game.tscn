@@ -220,13 +220,13 @@ metadata/_custom_type_script = "uid://thlx0gtur2d4"
 
 [sub_resource type="Resource" id="Resource_2eb2s"]
 script = ExtResource("9_ssvqc")
-x_percent = 0.2
-y_percent = 1.0
+x_percent = 0.1
+y_percent = 0.5
 metadata/_custom_type_script = "uid://beg1vql3x734k"
 
 [sub_resource type="Resource" id="Resource_o0ty1"]
 script = ExtResource("9_ssvqc")
-x_percent = 0.4
+x_percent = 0.2
 metadata/_custom_type_script = "uid://beg1vql3x734k"
 
 [sub_resource type="Curve" id="Curve_qcmcn"]
@@ -287,6 +287,50 @@ time_to_occur = 10.0
 spawns = Array[ExtResource("12_dinhu")]([SubResource("Resource_rysoc")])
 metadata/_custom_type_script = "uid://bewu02jnvwcgy"
 
+[sub_resource type="Curve" id="Curve_bt5mj"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.28089893), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_js0lu"]
+script = ExtResource("9_ca42v")
+direction = 3
+distance = 0.5
+speed_curve = SubResource("Curve_bt5mj")
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Curve" id="Curve_pl11u"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.32584274), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_gxtfn"]
+script = ExtResource("9_ca42v")
+direction = 2
+distance = 0.4
+speed_curve = SubResource("Curve_pl11u")
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_twgab"]
+script = ExtResource("7_trtic")
+movement_array = Array[ExtResource("13_ir15t")]([SubResource("Resource_js0lu"), SubResource("Resource_gxtfn"), null])
+wrap_movements = true
+metadata/_custom_type_script = "uid://thlx0gtur2d4"
+
+[sub_resource type="Resource" id="Resource_02fa5"]
+script = ExtResource("12_dinhu")
+enemy = ExtResource("6_gee14")
+enemy_movement_pattern = SubResource("Resource_twgab")
+number_of_enemies = 10
+rotation = 180.0
+metadata/_custom_type_script = "uid://c4twyssjo6an2"
+
+[sub_resource type="Resource" id="Resource_nepv3"]
+script = ExtResource("4_kvpfn")
+spawner = 4
+time_between_spawns = 1.5
+time_to_occur = 5.0
+spawns = Array[ExtResource("12_dinhu")]([SubResource("Resource_02fa5")])
+metadata/_custom_type_script = "uid://bewu02jnvwcgy"
+
 [node name="Game" type="Node" unique_id=717147830]
 script = ExtResource("1_vtaks")
 metadata/_edit_vertical_guides_ = [-289.0, 239.0]
@@ -339,7 +383,7 @@ shooter_timer_wait_time = 0.2
 spawn_point_count = 8
 radius = 2
 movement_events = SubResource("Resource_e1j6l")
-health = 10
+health = 1000
 
 [node name="Enemy" parent="." unique_id=1367146779 instance=ExtResource("6_gee14")]
 position = Vector2(159, -108)
@@ -398,6 +442,20 @@ id = 1
 spawn_interval = 1.0
 metadata/_custom_type_script = "uid://cpbp4ohcaqwle"
 
+[node name="EnemySpawnPoint4" type="Node2D" parent="." unique_id=961822767]
+position = Vector2(-377, -70)
+script = ExtResource("9_0tnpc")
+id = 4
+spawn_interval = 1.0
+metadata/_custom_type_script = "uid://cpbp4ohcaqwle"
+
+[node name="EnemySpawnPoint5" type="Node2D" parent="." unique_id=1344813384]
+position = Vector2(377, -60)
+script = ExtResource("9_0tnpc")
+id = 5
+spawn_interval = 1.0
+metadata/_custom_type_script = "uid://cpbp4ohcaqwle"
+
 [node name="EnemySpawnPoint2" type="Node2D" parent="." unique_id=916848794]
 position = Vector2(184, 220)
 script = ExtResource("9_0tnpc")
@@ -413,8 +471,8 @@ spawn_interval = 1.0
 metadata/_custom_type_script = "uid://cpbp4ohcaqwle"
 
 [node name="LevelManager" parent="." unique_id=1305954196 node_paths=PackedStringArray("spawners", "enemies") instance=ExtResource("2_gee14")]
-spawners = [NodePath("../EnemySpawnPoint"), NodePath("../EnemySpawnPoint2")]
-events = Array[ExtResource("4_kvpfn")]([SubResource("Resource_kvuet"), SubResource("Resource_37s47")])
+spawners = [NodePath("../EnemySpawnPoint"), NodePath("../EnemySpawnPoint2"), NodePath("../EnemySpawnPoint4"), NodePath("../EnemySpawnPoint5")]
+events = Array[ExtResource("4_kvpfn")]([SubResource("Resource_kvuet"), SubResource("Resource_37s47"), SubResource("Resource_nepv3")])
 level_time = 30.0
 enemies = [null, null, null, null, null, null, null]
 

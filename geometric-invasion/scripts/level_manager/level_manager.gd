@@ -46,16 +46,15 @@ func _ready() -> void:
 	
 func _process(_delta: float) -> void:
 	# Calculate the current time every frame
-	current_time = (($LevelTimer.get_time_left() - $LevelTimer.wait_time) * -1)
+	current_time = (($LevelTimer.time_left - $LevelTimer.wait_time) * -1)
 	
 	# Iterate and execute events through the events every frame
 	# This means events that have the same time will be executed within the same frame
 	if(events.size() - event_index > 0 and events.size() != 0):
-		# Loop through events
-		for i in events.size():
-			# Check if event should occur and execute if it does
-			if events[i].time_to_occur >= current_time as int:
-				execute_event(events[i])
+		## Loop through events
+		if events[event_index].time_to_occur <= current_time:
+			print("Current_time: ", current_time)
+			execute_event(events[event_index])
 			event_index += 1
 	
 	$Label.text = "Time left: " + str($LevelTimer.time_left as int)
