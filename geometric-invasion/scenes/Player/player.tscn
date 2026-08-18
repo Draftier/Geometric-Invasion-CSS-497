@@ -182,6 +182,7 @@ libraries/ = SubResource("AnimationLibrary_smehm")
 [node name="guns" type="Node2D" parent="." unique_id=1613688656]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2130673927]
+visible = false
 follow_viewport_enabled = true
 
 [node name="Label" type="Label" parent="CanvasLayer" unique_id=562683868]

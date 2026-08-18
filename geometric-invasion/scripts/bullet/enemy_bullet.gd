@@ -2,6 +2,8 @@ extends Bullet
 
 @onready var bullet_hurtbox = %Hurtbox
 
+@export var emitter : emitter_test
+
 func _ready() -> void:
 	super._ready()
 	self.reset()
@@ -36,6 +38,9 @@ func activate() -> void:
 	self.set_block_signals(false)
 	self.bullet_hitbox.monitorable = true
 	self.bullet_hurtbox.monitoring = true
+	
+	if emitter != null:
+		add_child(emitter)
 
 func _on_hit() -> void:
 	PoolManager.return_to_enemy_pool(self)

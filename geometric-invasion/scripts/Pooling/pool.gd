@@ -12,7 +12,7 @@ class_name ObjectPool
 var bullets : Array [ Bullet ]
 
 # Function to add bullets to the object pool
-func add_to_pool(bullet : Bullet) -> void:
+func add_to_pool(bullet : Node) -> void:
 	bullet.reset()
 	get_instance_id()
 	# We reparent the bullet to make sure it appears correctly in scene tree
@@ -34,8 +34,8 @@ func initialize_pool() -> void:
 			add_to_pool(bullet)
 
 # Function to pull bullets from the pool
-func pull_from_pool() -> Bullet:
-	var bullet: Bullet
+func pull_from_pool() -> Node:
+	var bullet: Node
 	# Check if pool is empty or not empty, either way check type of bullet
 	if bullets.is_empty():
 		bullet = bullet_scene.instantiate()
@@ -48,7 +48,7 @@ func pull_from_pool() -> Bullet:
 	return bullet
 
 # Function to add bullet to pool when bullet exits screen
-func _on_bullet_exit_screen(bullet : Bullet) -> void:
+func _on_bullet_exit_screen(bullet : Node) -> void:
 	add_to_pool(bullet)
 
 # Function to go through all bullets and get them out of pool

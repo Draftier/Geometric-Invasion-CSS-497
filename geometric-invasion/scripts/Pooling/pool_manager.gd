@@ -4,6 +4,7 @@ extends Node2D
 # These are the pools that the manager is managing
 @onready var player_bullet_pool : ObjectPool = %PlayerBulletPool
 @onready var enemy_bullet_pool : ObjectPool = %EnemyBulletPool
+@onready var emitter_pool : ObjectPool = %EmitterPool
 
 # These functions get bullets from their respective pool
 func give_player_bullet() -> Bullet:
@@ -18,6 +19,9 @@ func return_to_player_pool(bullet : Bullet) -> void:
 	
 func return_to_enemy_pool(bullet : Bullet) -> void:
 	enemy_bullet_pool.call_deferred("add_to_pool", bullet)
+
+func give_emitter() -> emitter_test:
+	return emitter_pool.pull_from_pool()
 	
 # These functions are utilized to destroy and initiailize pools upon level loading
 func destroy_pools() -> void:
@@ -27,3 +31,4 @@ func destroy_pools() -> void:
 func init_pools() -> void:
 	enemy_bullet_pool.initialize_pool()
 	player_bullet_pool.initialize_pool()
+	#emitter_pool.initialize_pool()

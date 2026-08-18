@@ -54,7 +54,13 @@ func _on_shoot_timer_timeout() -> void:
 		bullet.rotation = s.global_rotation
 	
 
-func _ready() -> void:
+func _ready() -> void:	
+	#speed = 400
+	#PoolManager.init_pools()
+	
+	#$Camera2D.global_position = self.global_position
+	#$Camera2D.reparent(get_tree().current_scene)
+	#
 	# Do same ready as parent
 	super._ready()
 	

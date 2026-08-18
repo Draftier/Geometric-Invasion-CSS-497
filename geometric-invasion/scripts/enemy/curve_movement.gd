@@ -1,8 +1,12 @@
+# This class represents a curved movement
 extends Movement
 class_name CurveMovement
 
+# Vector of normalized points based on screen size
 var normalized_vec2_array : Array[Vector2] = []
+# Estimated curve length to help track how far into curve object is 
 var estimated_curve_length : float = 0.0
+# Estimate target position based on last normalized point of curve
 var target_pos : Vector2
 
 @export var point_array : Array[Point] = []

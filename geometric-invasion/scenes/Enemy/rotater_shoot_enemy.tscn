@@ -2,24 +2,46 @@
 
 [ext_resource type="PackedScene" uid="uid://cp837cm6qinkj" path="res://scenes/Enemy/enemy.tscn" id="1_ofwuk"]
 [ext_resource type="Script" uid="uid://cmghxkb54ap6j" path="res://scripts/enemy/rotater_shoot_enemy.gd" id="2_ukbsx"]
+[ext_resource type="Script" uid="uid://dmjfjfilssxt6" path="res://scripts/enemy/movement_base.gd" id="3_6cvjy"]
 [ext_resource type="Shader" uid="uid://cqv7cjdn8x0b5" path="res://shaders/flash.tres" id="3_wj5wt"]
+[ext_resource type="Script" uid="uid://c8u5b5y0i25wp" path="res://scripts/enemy/directional_movement.gd" id="4_dckj1"]
+[ext_resource type="Script" uid="uid://thlx0gtur2d4" path="res://scripts/enemy/enemy_movement_data.gd" id="5_v1lex"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hyd6s"]
+[sub_resource type="Resource" id="Resource_q1f2k"]
+script = ExtResource("4_dckj1")
+direction = 2
+distance = 0.05
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_4lg1g"]
+script = ExtResource("4_dckj1")
+direction = 3
+distance = 0.05
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_hyd6s"]
+script = ExtResource("5_v1lex")
+movement_array = Array[ExtResource("3_6cvjy")]([SubResource("Resource_q1f2k"), SubResource("Resource_4lg1g")])
+metadata/_custom_type_script = "uid://thlx0gtur2d4"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6cvjy"]
 resource_local_to_scene = true
 shader = ExtResource("3_wj5wt")
 shader_parameter/Color = Color(1, 1, 1, 1)
 shader_parameter/Progress = 1.0
 
 [node name="Rotater_Shoot_Enemy" unique_id=1367146779 instance=ExtResource("1_ofwuk")]
+position = Vector2(1007, 321)
 script = ExtResource("2_ukbsx")
-rotate_speed = 0
+rotate_speed = 200
 shooter_timer_wait_time = 0.1
-spawn_point_count = 4
+spawn_point_count = 16
 radius = 16
+movement_events = SubResource("Resource_hyd6s")
 speed = 10
 
 [node name="Sprite2D" parent="." index="0" unique_id=1252295741]
-material = SubResource("ShaderMaterial_hyd6s")
+material = SubResource("ShaderMaterial_6cvjy")
 
 [node name="Rotater" type="Node2D" parent="." index="3" unique_id=1939589730]
 

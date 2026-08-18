@@ -44,7 +44,9 @@ func _ready() -> void:
 	pass
 	
 func _physics_process(delta: float) -> void:
+	# Check if the current movement event is directional or curved
 	if cur_event is DirectionalMovement:
+		# If direction then check speed curve and move specified distance in direction at speed of current sampled speed curve
 		# If there's a speed curve then sample the curve based on distance traveled and take speed from curve
 		if cur_event != null and cur_event.speed_curve != null:
 			distance_traveled_progress = (distance_to_move - global_position.distance_to(target_pos)) / distance_to_move
@@ -60,14 +62,21 @@ func _physics_process(delta: float) -> void:
 			print("Directional end pos:" ,global_position)
 			movement_finished.emit()
 			
+	# If curved movement, then check if the current position is not equal to target position at end of curve
 	elif cur_event is CurveMovement:
+		# If current position not equal to target pos at end of curve
 		if round(position) != round(cur_event.target_pos):
+			# Check if we have a set speed curve
 			if cur_event.speed_curve != null:
+				# If we have a speed curve move along the bezier curve with sampled speed based on speed curve
 				global_position = set_curved_movement(cur_event, clamp(curve_time * cur_event.speed_curve.sample(global_position.length() / cur_event.estimated_curve_length), 0.0, 1.0))
 			else:
+				# If no speed curve, move based on time taken to move through curve
 				global_position = set_curved_movement(cur_event, clamp(curve_time, 0.0, 1.0))
+			# Update the time value for curve
 			curve_time += delta
 		else:
+			# Reset curve time to 0 after enemy is about in the target position
 			curve_time = 0
 			movement_finished.emit()
 		pass
@@ -110,6 +119,7 @@ func execute_movement_events() -> void:
 		# If is directional movement then set relevant vars for directional movement
 		if i is DirectionalMovement:
 			set_directional_movement(i)
+		# If is curved movement then set relevant vars for curved movement via screen size and self global pos
 		elif i is CurveMovement:
 			i.normalize_points(self, screen)
 		cur_event = i
@@ -153,15 +163,19 @@ func set_directional_movement(movement : DirectionalMovement) -> void:
 		# Variables to store initial direction and angle
 		function_direction = direction_vector
 
+# This function lerps through the points given in the point array for the curved movemment
 func set_curved_movement(movement : CurveMovement, t : float) -> Vector2:
-	
+	# Temp array to store prev lerped values
 	var temp_array : Array[Vector2] = []
 	
+	# Loop through the given point array and lerp cur point by point after it
 	for i in range(movement.normalized_vec2_array.size()):
 		if i + 1 < movement.normalized_vec2_array.size():
+			# Then add lerped point to temp array for return
 			var temp : Vector2 = movement.normalized_vec2_array[i].lerp(movement.normalized_vec2_array[i+1], t)
 			temp_array.append(temp)
-	
+
+	# Return the final interpolated point
 	var to_return = temp_array[0].lerp(temp_array[temp_array.size()-1], t)
 	return to_return
 
