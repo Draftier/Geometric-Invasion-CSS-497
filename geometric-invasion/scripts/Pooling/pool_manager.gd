@@ -20,8 +20,8 @@ func return_to_player_pool(bullet : Bullet) -> void:
 func return_to_enemy_pool(bullet : Bullet) -> void:
 	enemy_bullet_pool.call_deferred("add_to_pool", bullet)
 
-func give_emitter() -> emitter_test:
-	return emitter_pool.pull_from_pool()
+#func give_emitter() -> emitter_test:
+	#return emitter_pool.pull_from_pool()
 	
 # These functions are utilized to destroy and initiailize pools upon level loading
 func destroy_pools() -> void:

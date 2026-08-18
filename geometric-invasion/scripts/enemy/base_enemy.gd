@@ -78,7 +78,9 @@ func _physics_process(delta: float) -> void:
 		else:
 			# Reset curve time to 0 after enemy is about in the target position
 			curve_time = 0
+			cur_event.normalized_vec2_array.clear()
 			movement_finished.emit()
+			
 		pass
 
 # Function to calculate health and hit upon getting hit by player bullet

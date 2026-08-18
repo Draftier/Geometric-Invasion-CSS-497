@@ -55,7 +55,7 @@ func _on_shoot_timer_timeout() -> void:
 	
 
 func _ready() -> void:	
-	#speed = 400
+	speed = 100
 	#PoolManager.init_pools()
 	
 	#$Camera2D.global_position = self.global_position
