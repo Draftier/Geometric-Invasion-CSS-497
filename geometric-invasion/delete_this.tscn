@@ -1,36 +1,3 @@
 [gd_scene format=3 uid="uid://d28h2dxhlnoyv"]
 
-[ext_resource type="PackedScene" uid="uid://cu4vxxsdf4l7r" path="res://scenes/Enemy/rotater_shoot_enemy.tscn" id="2_qa1gc"]
-[ext_resource type="Script" uid="uid://dmjfjfilssxt6" path="res://scripts/enemy/movement_base.gd" id="2_ykydf"]
-[ext_resource type="Script" uid="uid://c8u5b5y0i25wp" path="res://scripts/enemy/directional_movement.gd" id="3_7b7m2"]
-[ext_resource type="Script" uid="uid://thlx0gtur2d4" path="res://scripts/enemy/enemy_movement_data.gd" id="4_1a23g"]
-[ext_resource type="PackedScene" uid="uid://u1mg53l5kgsv" path="res://scenes/Player/player_default_shooting_style.tscn" id="6_ykydf"]
-
-[sub_resource type="Resource" id="Resource_1a23g"]
-script = ExtResource("3_7b7m2")
-direction = 2
-distance = 0.2
-metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
-
-[sub_resource type="Resource" id="Resource_qa1gc"]
-script = ExtResource("3_7b7m2")
-direction = 3
-distance = 0.2
-metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
-
-[sub_resource type="Resource" id="Resource_7b7m2"]
-script = ExtResource("4_1a23g")
-movement_array = Array[ExtResource("2_ykydf")]([SubResource("Resource_1a23g"), SubResource("Resource_qa1gc")])
-wrap_movements = true
-metadata/_custom_type_script = "uid://thlx0gtur2d4"
-
 [node name="Node2D" type="Node2D" unique_id=1312807682]
-position = Vector2(-544, -312)
-
-[node name="Player" parent="." unique_id=1651887187 instance=ExtResource("6_ykydf")]
-position = Vector2(543, 308)
-
-[node name="Rotater_Shoot_Enemy" parent="." unique_id=1367146779 instance=ExtResource("2_qa1gc")]
-position = Vector2(664, 304)
-spawn_point_count = 8
-movement_events = SubResource("Resource_7b7m2")

@@ -37,6 +37,8 @@ var cur_event : Movement
 var distance_traveled_progress : float
 var temp_speed : float
 
+var points_copy : Array[Vector2]
+
 func _ready() -> void:
 	# Run the movement events as a coroutine
 	temp_speed = speed
@@ -86,7 +88,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			# Reset curve time to 0 after enemy is about in the target position
 			curve_time = 0
-			cur_event.normalized_vec2_array.clear()
+			#cur_event.normalized_vec2_array.clear()
 			movement_finished.emit()
 			
 		pass
@@ -138,8 +140,7 @@ func execute_movement_events() -> void:
 		assert(i != null, "Current movement event is null")
 		# Wait for current movement to finish then do next movement		
 		await movement_finished
-		print("moveement finished")
-	print("movements finished: ")
+
 	# Stop moving
 	function_direction = Vector2.ZERO
 		

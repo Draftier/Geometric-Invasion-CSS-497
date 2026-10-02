@@ -27,9 +27,10 @@ func execute_spawn_event(event : Spawn_Event) -> void:
 			var timer = get_tree().create_timer(event.time_between_spawns)
 			await timer.timeout
 		pass
+	print("spawning")
 
 # Process to check if logic works
 #func _process(delta: float) -> void:
-	#num += 1
-	#if num == 1:
-		#execute_spawn_event(event)
+	##num += 1
+	##if num == 1:
+		##execute_spawn_event(event)

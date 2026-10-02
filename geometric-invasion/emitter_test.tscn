@@ -21,7 +21,7 @@ radians = 0.3
 metadata/_custom_type_script = "uid://fossju3a42ni"
 
 [node name="emitter_test" type="Node2D" unique_id=1019809325]
-position = Vector2(534, 353)
+position = Vector2(234, 193)
 script = ExtResource("1_yn2kh")
 change_in_angle = 1.047
 num_spawn_points = 2
@@ -32,8 +32,8 @@ bullet = ExtResource("2_jq3ym")
 
 [node name="Icon" type="Sprite2D" parent="." unique_id=268234599]
 visible = false
-position = Vector2(18.999998, 0.99999994)
-scale = Vector2(0.6640625, 0.6640625)
+position = Vector2(-1, 0.99999994)
+scale = Vector2(0.4, 0.4)
 texture = ExtResource("1_d7ven")
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=694606557]

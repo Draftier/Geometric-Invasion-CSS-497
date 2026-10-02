@@ -6,15 +6,17 @@
 
 [sub_resource type="Resource" id="Resource_qfa5p"]
 script = ExtResource("2_qcmcn")
-distance = 0.05
+direction = 1
+distance = 0.4
 metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
 
 [sub_resource type="Resource" id="Resource_6i32g"]
 script = ExtResource("2_qcmcn")
-distance = 0.05
+distance = 0.3
 metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
 
 [resource]
 script = ExtResource("1_okv1j")
 movement_array = Array[ExtResource("1_0hbtu")]([SubResource("Resource_qfa5p"), SubResource("Resource_6i32g")])
+wrap_movements = true
 metadata/_custom_type_script = "uid://thlx0gtur2d4"
