@@ -53,15 +53,22 @@ func _on_start_game_button_pressed() -> void:
 	call_deferred("change_scene")
 
 
-func _on_shoot_forward_and_side_pressed() -> void:
-	Global.player =  load("res://scenes/Player/player_shooting_style_two.tscn")
-	print(Global.player)
 
-func _on_shoot_forward_pressed() -> void:
-	Global.player = load("res://scenes/Player/player_default_shooting_style.tscn")
-	
-func _on_laser_button_pressed() -> void:
-	Global.ability = load("res://scenes/Ability/ability_laser.tscn")
+func _on_multiplayer_not_implemented_pressed() -> void:
+	$MarginContainer/RootMenu/TitleLabel.visible = false
+	%ButtonsVbox.visible = false
+	$MarginContainer/MultiplayerMenu.visible = true
+	pass # Replace with function body.
 
-func _on_shield_button_pressed() -> void:
-	Global.ability = load("res://scenes/Ability/shield_ability.tscn")
+
+func _on_option_button_item_selected(index: int) -> void:
+	match $MarginContainer/CustomizationChildMenu/MarginContainer/VBoxContainer/ShootOptions.get_item_text(index):
+		"Shooting forward": Global.player = load("res://scenes/Player/player_default_shooting_style.tscn")
+		"Shooting forward and side": Global.player =  load("res://scenes/Player/player_shooting_style_two.tscn")
+
+
+
+func _on_ability_options_item_selected(index: int) -> void:
+	match $MarginContainer/CustomizationChildMenu/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/AbilityOptions.get_item_text(index):
+			"Destroyer": Global.ability = load("res://scenes/Ability/ability_laser.tscn")
+			"Tank": Global.ability =  load("res://scenes/Ability/shield_ability.tscn")

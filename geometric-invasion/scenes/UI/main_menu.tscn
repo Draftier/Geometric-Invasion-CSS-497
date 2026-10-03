@@ -137,13 +137,13 @@ text = "Shooting Style"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ShootForwardAndSide" type="Button" parent="MarginContainer/CustomizationChildMenu/MarginContainer/VBoxContainer" unique_id=781635060]
+[node name="ShootOptions" type="OptionButton" parent="MarginContainer/CustomizationChildMenu/MarginContainer/VBoxContainer" unique_id=1576584801]
 layout_mode = 2
-text = "Shooting forward and side"
-
-[node name="ShootForward" type="Button" parent="MarginContainer/CustomizationChildMenu/MarginContainer/VBoxContainer" unique_id=1363810041]
-layout_mode = 2
-text = "Shooting forward"
+item_count = 2
+popup/item_0/text = "Shooting forward"
+popup/item_0/id = 0
+popup/item_1/text = "Shooting forward and side"
+popup/item_1/id = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/CustomizationChildMenu/MarginContainer/VBoxContainer" unique_id=2132451194]
 layout_mode = 2
@@ -161,28 +161,54 @@ theme_override_font_sizes/font_size = 32
 text = "Abilities"
 horizontal_alignment = 1
 
-[node name="LaserButton" type="Button" parent="MarginContainer/CustomizationChildMenu/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer" unique_id=243060559]
+[node name="AbilityOptions" type="OptionButton" parent="MarginContainer/CustomizationChildMenu/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer" unique_id=197725870]
 layout_mode = 2
-theme_override_font_sizes/font_size = 16
-text = "Laser"
-
-[node name="ShieldButton" type="Button" parent="MarginContainer/CustomizationChildMenu/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer" unique_id=1227001687]
-layout_mode = 2
-theme_override_font_sizes/font_size = 16
-text = "Shield"
+item_count = 2
+popup/item_0/text = "Destroyer"
+popup/item_0/id = 0
+popup/item_1/text = "Tank"
+popup/item_1/id = 1
 
 [node name="StartGameButton" type="Button" parent="MarginContainer/CustomizationChildMenu" unique_id=1552382786]
 layout_mode = 2
 theme_override_font_sizes/font_size = 64
 text = "Start game"
 
+[node name="MultiplayerMenu" type="VBoxContainer" parent="MarginContainer" unique_id=1765564327]
+visible = false
+layout_mode = 2
+
+[node name="Multiplayer Menu" type="Label" parent="MarginContainer/MultiplayerMenu" unique_id=1478684691]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Multiplayer Menu"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MultiplayerMenu" unique_id=573527788]
+layout_mode = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 96
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MultiplayerMenu/MarginContainer" unique_id=1152015556]
+layout_mode = 2
+
+[node name="HostButton" type="Button" parent="MarginContainer/MultiplayerMenu/MarginContainer/VBoxContainer" unique_id=1794393354]
+layout_mode = 2
+text = "Host server"
+
+[node name="JoinButton" type="Button" parent="MarginContainer/MultiplayerMenu/MarginContainer/VBoxContainer" unique_id=244403894]
+layout_mode = 2
+text = "Join Server"
+
 [connection signal="pressed" from="MarginContainer/RootMenu/ButtonsVbox/Singleplayer" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="MarginContainer/RootMenu/ButtonsVbox/Multiplayer (Not implemented)" to="." method="_on_multiplayer_not_implemented_pressed"]
 [connection signal="pressed" from="MarginContainer/RootMenu/ButtonsVbox/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="pressed" from="MarginContainer/RootMenu/ButtonsVbox/TutorialButton" to="." method="_on_tutorial_button_pressed"]
 [connection signal="pressed" from="MarginContainer/RootMenu/ButtonsVbox/ControlsButton" to="." method="_on_controls_button_pressed"]
 [connection signal="pressed" from="MarginContainer/RootMenu/ControlsVbox/BackButton" to="." method="_on_back_button_pressed"]
-[connection signal="pressed" from="MarginContainer/CustomizationChildMenu/MarginContainer/VBoxContainer/ShootForwardAndSide" to="." method="_on_shoot_forward_and_side_pressed"]
-[connection signal="pressed" from="MarginContainer/CustomizationChildMenu/MarginContainer/VBoxContainer/ShootForward" to="." method="_on_shoot_forward_pressed"]
-[connection signal="pressed" from="MarginContainer/CustomizationChildMenu/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/LaserButton" to="." method="_on_laser_button_pressed"]
-[connection signal="pressed" from="MarginContainer/CustomizationChildMenu/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/ShieldButton" to="." method="_on_shield_button_pressed"]
+[connection signal="item_selected" from="MarginContainer/CustomizationChildMenu/MarginContainer/VBoxContainer/ShootOptions" to="." method="_on_option_button_item_selected"]
+[connection signal="item_selected" from="MarginContainer/CustomizationChildMenu/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/AbilityOptions" to="." method="_on_ability_options_item_selected"]
 [connection signal="pressed" from="MarginContainer/CustomizationChildMenu/StartGameButton" to="." method="_on_start_game_button_pressed"]

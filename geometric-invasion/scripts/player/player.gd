@@ -1,6 +1,7 @@
 class_name Player
 extends CharacterBody2D
 
+
 # Signal for player death
 signal death
 
@@ -20,6 +21,9 @@ var invulnerable : bool = false
 @export var ability_scene : PackedScene
 var ability : Ability
 
+#func _enter_tree() -> void:
+	#set_multiplayer_authority(name.to_int())
+
 func _ready() -> void:
 	$CanvasLayer/Label.text = "Lives : " + str(lives)
 	ability = ability_scene.instantiate()
@@ -28,6 +32,9 @@ func _ready() -> void:
 
 # Called every physics tick
 func _process(_delta: float) -> void:
+	#if !is_multiplayer_authority():
+		#return
+	
 	# Get an input vector and modify velocity of player based on it
 	direction = Input.get_vector("left", "right", "up", "down")
 	velocity = direction * player_class.speed

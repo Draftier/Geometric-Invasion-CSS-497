@@ -119,6 +119,8 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_uxo23"]
 radius = 9.0
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_uxo23"]
+
 [node name="Player" type="CharacterBody2D" unique_id=1651887187]
 collision_layer = 64
 collision_mask = 32
@@ -194,6 +196,9 @@ theme_override_fonts/font = ExtResource("10_uxo23")
 
 [node name="PlayerCollisionShape" type="CollisionShape2D" parent="." unique_id=1555844515]
 shape = SubResource("CircleShape2D_uxo23")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=730239114]
+replication_config = SubResource("SceneReplicationConfig_uxo23")
 
 [connection signal="body_entered" from="AbilityPickUpCollisionShape" to="." method="_on_whole_collision_box_body_entered"]
 [connection signal="timeout" from="InvulnerabilityTimer" to="." method="_on_invulnerability_timer_timeout"]
