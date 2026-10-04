@@ -2,6 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://dy2kgmqgonako" path="res://theme_test.tres" id="1_ertse"]
 [ext_resource type="Script" uid="uid://bgr0wualwt2sx" path="res://scenes/UI/player_customization_menu.gd" id="2_vgtkr"]
+[ext_resource type="PackedScene" uid="uid://cnr36qxaqynbc" path="res://scenes/star_background.tscn" id="3_ltpn8"]
 [ext_resource type="StyleBox" uid="uid://dn5gd6byuqut8" path="res://button_theme.tres" id="3_vgtkr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wt8fv"]
@@ -17,14 +18,8 @@ grow_vertical = 2
 theme = ExtResource("1_ertse")
 script = ExtResource("2_vgtkr")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1221497410]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(3.128499e-07, 0.21514863, 0.21514866, 1)
+[node name="StarBackground" parent="." unique_id=1934287316 instance=ExtResource("3_ltpn8")]
+unique_name_in_owner = true
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=914736173]
 layout_mode = 1
@@ -120,4 +115,5 @@ text = "Start game"
 
 [connection signal="item_selected" from="MarginContainer/CustomizationMenu/MarginContainer/VBoxContainer/ShootOptions" to="." method="_on_shoot_options_item_selected"]
 [connection signal="item_selected" from="MarginContainer/CustomizationMenu/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/AbilityOptions" to="." method="_on_ability_options_item_selected"]
+[connection signal="pressed" from="MarginContainer/CustomizationMenu/BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="pressed" from="MarginContainer/CustomizationMenu/StartGameButton" to="." method="_on_start_game_button_pressed"]

@@ -2,6 +2,13 @@
 
 [ext_resource type="Script" uid="uid://ck3org6l2kny3" path="res://scenes/UI/controls_menu.gd" id="1_4dh4y"]
 [ext_resource type="Theme" uid="uid://dy2kgmqgonako" path="res://theme_test.tres" id="1_6bw68"]
+[ext_resource type="PackedScene" uid="uid://cnr36qxaqynbc" path="res://scenes/star_background.tscn" id="2_qx6lj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qx6lj"]
+size = Vector2(1159, 21)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lvkkv"]
+size = Vector2(20, 647)
 
 [node name="Controls" type="Control" unique_id=987772107]
 layout_mode = 3
@@ -12,15 +19,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_4dh4y")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=2055551704]
-z_index = -1000
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(3.128499e-07, 0.21514863, 0.21514866, 1)
+[node name="StarBackground" parent="." unique_id=1934287316 instance=ExtResource("2_qx6lj")]
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1893482847]
 layout_mode = 1
@@ -66,5 +65,32 @@ text = "Back"
 [node name="Spawn" type="Marker2D" parent="." unique_id=1503853858]
 unique_name_in_owner = true
 position = Vector2(597.9425, 525.4366)
+
+[node name="Borders" type="Node2D" parent="." unique_id=198286629]
+position = Vector2(337, 232)
+
+[node name="top_bottom" type="StaticBody2D" parent="Borders" unique_id=2002900083]
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/top_bottom" unique_id=276639178]
+position = Vector2(242, -242)
+shape = SubResource("RectangleShape2D_qx6lj")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Borders/top_bottom" unique_id=758746303]
+position = Vector2(242, 427)
+shape = SubResource("RectangleShape2D_qx6lj")
+
+[node name="left_right" type="StaticBody2D" parent="Borders" unique_id=1824901483]
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/left_right" unique_id=1447833214]
+position = Vector2(-347, 92.5)
+shape = SubResource("RectangleShape2D_lvkkv")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Borders/left_right" unique_id=944885416]
+position = Vector2(825, 92)
+shape = SubResource("RectangleShape2D_lvkkv")
 
 [connection signal="pressed" from="MarginContainer/ControlsVbox/BackButton" to="." method="_on_back_button_pressed"]

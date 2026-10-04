@@ -1,7 +1,9 @@
 extends Control
 
 signal game_start()
+
 @onready var buttons_vbox: VBoxContainer = %ButtonsVbox
+@onready var background = %StarBackground
 
 func _ready() -> void:
 	print_orphan_nodes()
@@ -9,9 +11,6 @@ func _ready() -> void:
 	focus_button()
 
 func _on_start_button_pressed() -> void:
-	#game_start.emit()
-	#PoolManager.init_pools()
-	#call_deferred("change_scene")
 	get_tree().change_scene_to_file("res://scenes/UI/player_customization_menu.tscn")
 	pass
 
@@ -31,42 +30,9 @@ func focus_button() -> void:
 		if button is Button:
 			button.grab_focus()
 
-
 func _on_tutorial_button_pressed() -> void:
 	get_tree().change_scene_to_file("res:://scenes/tutorial.tscn")
 
 
 func _on_controls_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/UI/controls_menu.tscn")
-
-func _on_back_button_pressed() -> void:
-	$MarginContainer/RootMenu/TitleLabel.visible = true
-	%ButtonsVbox.visible = true
-	%ControlsVbox.visible = false
-
-func _on_start_game_button_pressed() -> void:
-	game_start.emit()
-	call_deferred("change_scene")
-
-
-
-func _on_multiplayer_not_implemented_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/UI/multiplayer_choice_menu.tscn")
-	pass # Replace with function body.
-
-
-func _on_option_button_item_selected(index: int) -> void:
-	match $MarginContainer/CustomizationChildMenu/MarginContainer/VBoxContainer/ShootOptions.get_item_text(index):
-		"Shooting forward": Global.player = load("res://scenes/Player/player_default_shooting_style.tscn")
-		"Shooting forward and side": Global.player =  load("res://scenes/Player/player_shooting_style_two.tscn")
-
-
-
-func _on_ability_options_item_selected(index: int) -> void:
-	match $MarginContainer/CustomizationChildMenu/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/AbilityOptions.get_item_text(index):
-			"Destroyer": Global.ability = load("res://scenes/Ability/ability_laser.tscn")
-			"Tank": Global.ability =  load("res://scenes/Ability/shield_ability.tscn")
-
-
-func _on_host_button_pressed() -> void:
-	pass

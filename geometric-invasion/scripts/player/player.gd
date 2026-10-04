@@ -54,9 +54,15 @@ func _process(_delta: float) -> void:
 	
 	if Input.is_action_just_pressed("ability"):
 		print("Trying to activate ability")
+		
+		if preview_mode == true:
+			ability.charge()
+			
 		if ability.can_activate():
 			print("activating")
+			print(preview_mode)
 			ability.activate()
+			
 	
 	# Apply velocity to player
 	move_and_slide()
