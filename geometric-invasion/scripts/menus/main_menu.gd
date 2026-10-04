@@ -51,9 +51,7 @@ func _on_start_game_button_pressed() -> void:
 
 
 func _on_multiplayer_not_implemented_pressed() -> void:
-	$MarginContainer/RootMenu/TitleLabel.visible = false
-	%ButtonsVbox.visible = false
-	$MarginContainer/MultiplayerMenu.visible = true
+	get_tree().change_scene_to_file("res://scenes/UI/multiplayer_choice_menu.tscn")
 	pass # Replace with function body.
 
 

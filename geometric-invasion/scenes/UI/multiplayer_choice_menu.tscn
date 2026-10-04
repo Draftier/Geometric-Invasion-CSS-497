@@ -1,5 +1,15 @@
 [gd_scene format=3 uid="uid://cckvlxp6lp7t0"]
 
+[ext_resource type="Theme" uid="uid://dy2kgmqgonako" path="res://theme_test.tres" id="1_aoc2s"]
+[ext_resource type="Script" uid="uid://bm1d42pt283vt" path="res://scenes/UI/multiplayer_choice_menu.gd" id="2_wt8fv"]
+[ext_resource type="StyleBox" uid="uid://dn5gd6byuqut8" path="res://button_theme.tres" id="3_cfko7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2m35m"]
+bg_color = Color(0, 0, 0, 0.41568628)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5blle"]
+bg_color = Color(0, 0, 0, 0.41568628)
+
 [node name="MultiplayerChoiceMenu" type="Control" unique_id=1476833249]
 layout_mode = 3
 anchors_preset = 15
@@ -7,6 +17,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_aoc2s")
+script = ExtResource("2_wt8fv")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1868804820]
 layout_mode = 1
@@ -17,30 +29,108 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(3.128499e-07, 0.21514863, 0.21514866, 1)
 
-[node name="MultiplayerMenu" type="VBoxContainer" parent="." unique_id=918754988]
-layout_mode = 0
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=594850476]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_aoc2s")
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
 
-[node name="Multiplayer Menu" type="Label" parent="MultiplayerMenu" unique_id=1715155368]
+[node name="MultiplayerMenu" type="VBoxContainer" parent="MarginContainer" unique_id=918754988]
+layout_mode = 2
+
+[node name="Multiplayer Menu" type="Label" parent="MarginContainer/MultiplayerMenu" unique_id=1715155368]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
 text = "Multiplayer Menu"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="MultiplayerMenu" unique_id=732092323]
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/MultiplayerMenu" unique_id=189986245]
 layout_mode = 2
 theme_override_constants/margin_left = 64
 theme_override_constants/margin_top = 96
 theme_override_constants/margin_right = 64
 theme_override_constants/margin_bottom = 64
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MultiplayerMenu/MarginContainer" unique_id=1421020390]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MultiplayerMenu/MarginContainer2" unique_id=81057590]
 layout_mode = 2
+theme_override_constants/separation = 17
 
-[node name="HostButton" type="Button" parent="MultiplayerMenu/MarginContainer/VBoxContainer" unique_id=277408626]
+[node name="ShootingStyleLabel" type="Label" parent="MarginContainer/MultiplayerMenu/MarginContainer2/VBoxContainer" unique_id=1444320621]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Shooting Style"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ShootOptions" type="OptionButton" parent="MarginContainer/MultiplayerMenu/MarginContainer2/VBoxContainer" unique_id=228740265]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_2m35m")
+alignment = 1
+selected = 0
+item_count = 2
+popup/item_0/text = "Shooting forward"
+popup/item_0/id = 0
+popup/item_1/text = "Shooting forward and side"
+popup/item_1/id = 1
+
+[node name="AbilityLabel" type="Label" parent="MarginContainer/MultiplayerMenu/MarginContainer2/VBoxContainer" unique_id=488306312]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Abilities"
+horizontal_alignment = 1
+
+[node name="AbilityOptions" type="OptionButton" parent="MarginContainer/MultiplayerMenu/MarginContainer2/VBoxContainer" unique_id=1255466888]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_5blle")
+alignment = 1
+selected = 0
+item_count = 2
+popup/item_0/text = "Destroyer"
+popup/item_0/id = 0
+popup/item_1/text = "Tank"
+popup/item_1/id = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MultiplayerMenu" unique_id=732092323]
+layout_mode = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 96
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MultiplayerMenu/MarginContainer" unique_id=1421020390]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="HostButton" type="Button" parent="MarginContainer/MultiplayerMenu/MarginContainer/VBoxContainer" unique_id=277408626]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("3_cfko7")
 text = "Host server"
 
-[node name="JoinButton" type="Button" parent="MultiplayerMenu/MarginContainer/VBoxContainer" unique_id=1979438574]
+[node name="JoinButton" type="Button" parent="MarginContainer/MultiplayerMenu/MarginContainer/VBoxContainer" unique_id=1979438574]
 layout_mode = 2
+theme_override_styles/normal = ExtResource("3_cfko7")
 text = "Join Server"
+
+[node name="LineEdit" type="LineEdit" parent="MarginContainer/MultiplayerMenu/MarginContainer/VBoxContainer" unique_id=1162111617]
+layout_mode = 2
+placeholder_text = "Host IP, e.g. 192.168.***.***"
+alignment = 1
+
+[node name="BackButton" type="Button" parent="MarginContainer/MultiplayerMenu/MarginContainer/VBoxContainer" unique_id=988965015]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("3_cfko7")
+text = "Back to main menu"
+
+[connection signal="pressed" from="MarginContainer/MultiplayerMenu/MarginContainer/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="MarginContainer/MultiplayerMenu/MarginContainer/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
+[connection signal="pressed" from="MarginContainer/MultiplayerMenu/MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

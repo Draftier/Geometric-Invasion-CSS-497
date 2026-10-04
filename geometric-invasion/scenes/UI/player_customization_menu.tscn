@@ -2,6 +2,10 @@
 
 [ext_resource type="Theme" uid="uid://dy2kgmqgonako" path="res://theme_test.tres" id="1_ertse"]
 [ext_resource type="Script" uid="uid://bgr0wualwt2sx" path="res://scenes/UI/player_customization_menu.gd" id="2_vgtkr"]
+[ext_resource type="StyleBox" uid="uid://dn5gd6byuqut8" path="res://button_theme.tres" id="3_vgtkr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wt8fv"]
+bg_color = Color(0, 0, 0, 0.41568628)
 
 [node name="PlayerCustomizationMenu" type="Control" unique_id=79301437]
 layout_mode = 3
@@ -64,6 +68,9 @@ vertical_alignment = 1
 [node name="ShootOptions" type="OptionButton" parent="MarginContainer/CustomizationMenu/MarginContainer/VBoxContainer" unique_id=602087371]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_wt8fv")
+alignment = 1
+selected = 0
 item_count = 2
 popup/item_0/text = "Shooting forward"
 popup/item_0/id = 0
@@ -89,16 +96,26 @@ horizontal_alignment = 1
 [node name="AbilityOptions" type="OptionButton" parent="MarginContainer/CustomizationMenu/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer" unique_id=1375234477]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_wt8fv")
+alignment = 1
+selected = 0
 item_count = 2
 popup/item_0/text = "Destroyer"
 popup/item_0/id = 0
 popup/item_1/text = "Tank"
 popup/item_1/id = 1
 
+[node name="BackButton" type="Button" parent="MarginContainer/CustomizationMenu" unique_id=1150533557]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/normal = ExtResource("3_vgtkr")
+text = "Back to main menu"
+
 [node name="StartGameButton" type="Button" parent="MarginContainer/CustomizationMenu" unique_id=493892705]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = ExtResource("3_vgtkr")
 text = "Start game"
 
 [connection signal="item_selected" from="MarginContainer/CustomizationMenu/MarginContainer/VBoxContainer/ShootOptions" to="." method="_on_shoot_options_item_selected"]

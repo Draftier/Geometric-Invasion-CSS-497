@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Global="*uid://cs4xr74m72b56"
 PoolManager="*uid://cutw3vbksk1lv"
+NetworkManager="*uid://hvsdddbxyut3"
 
 [display]
 
