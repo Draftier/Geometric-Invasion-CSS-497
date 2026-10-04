@@ -1,5 +1,7 @@
 extends Bullet
 
+@onready var bullet_scale : Vector2 = self.scale
+
 func _ready() -> void:
 	super._ready()
 	self.reset()
@@ -19,6 +21,7 @@ func reset() -> void:
 	
 	self.visible = false
 	self.speed = 0
+	self.scale = bullet_scale
 
 func activate() -> void:
 	self.set_process(true)

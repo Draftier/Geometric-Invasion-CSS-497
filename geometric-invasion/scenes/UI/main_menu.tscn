@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://domjpwtkv78nv"]
 
 [ext_resource type="Script" uid="uid://dlnfay7bq62ao" path="res://scripts/menus/main_menu.gd" id="1_l6cm7"]
-[ext_resource type="Theme" uid="uid://cdw17tifajcae" path="res://assets/themes/default_theme.tres" id="1_yonvy"]
+[ext_resource type="Theme" uid="uid://dy2kgmqgonako" path="res://theme_test.tres" id="1_yonvy"]
 
 [node name="Main menu" type="Control" unique_id=1321061727]
 layout_mode = 3
@@ -93,122 +93,8 @@ text = "Tutorial (To be done)"
 layout_mode = 2
 text = "Controls"
 
-[node name="ControlsVbox" type="VBoxContainer" parent="MarginContainer/RootMenu" unique_id=1091340424]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-
-[node name="Label" type="Label" parent="MarginContainer/RootMenu/ControlsVbox" unique_id=370476361]
-layout_mode = 2
-text = "Hold Z to shoot
-Hold Shift to slow down
-Press X to activate ability"
-horizontal_alignment = 1
-
-[node name="BackButton" type="Button" parent="MarginContainer/RootMenu/ControlsVbox" unique_id=1198401134]
-layout_mode = 2
-text = "Back"
-
-[node name="CustomizationChildMenu" type="VBoxContainer" parent="MarginContainer" unique_id=1521216053]
-visible = false
-layout_mode = 2
-
-[node name="ScreenTitle" type="Label" parent="MarginContainer/CustomizationChildMenu" unique_id=216798615]
-layout_mode = 2
-theme_override_font_sizes/font_size = 48
-text = "Player customization screen"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/CustomizationChildMenu" unique_id=719028199]
-layout_mode = 2
-theme_override_constants/margin_left = 128
-theme_override_constants/margin_top = 96
-theme_override_constants/margin_right = 128
-theme_override_constants/margin_bottom = 128
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CustomizationChildMenu/MarginContainer" unique_id=492978488]
-layout_mode = 2
-
-[node name="ShootingStyleLabel" type="Label" parent="MarginContainer/CustomizationChildMenu/MarginContainer/VBoxContainer" unique_id=1429503691]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "Shooting Style"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ShootOptions" type="OptionButton" parent="MarginContainer/CustomizationChildMenu/MarginContainer/VBoxContainer" unique_id=1576584801]
-layout_mode = 2
-item_count = 2
-popup/item_0/text = "Shooting forward"
-popup/item_0/id = 0
-popup/item_1/text = "Shooting forward and side"
-popup/item_1/id = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/CustomizationChildMenu/MarginContainer/VBoxContainer" unique_id=2132451194]
-layout_mode = 2
-theme_override_constants/margin_left = 64
-theme_override_constants/margin_top = 96
-theme_override_constants/margin_right = 64
-theme_override_constants/margin_bottom = 64
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CustomizationChildMenu/MarginContainer/VBoxContainer/MarginContainer" unique_id=1207911977]
-layout_mode = 2
-
-[node name="AbilityLabel" type="Label" parent="MarginContainer/CustomizationChildMenu/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer" unique_id=164285190]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "Abilities"
-horizontal_alignment = 1
-
-[node name="AbilityOptions" type="OptionButton" parent="MarginContainer/CustomizationChildMenu/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer" unique_id=197725870]
-layout_mode = 2
-item_count = 2
-popup/item_0/text = "Destroyer"
-popup/item_0/id = 0
-popup/item_1/text = "Tank"
-popup/item_1/id = 1
-
-[node name="StartGameButton" type="Button" parent="MarginContainer/CustomizationChildMenu" unique_id=1552382786]
-layout_mode = 2
-theme_override_font_sizes/font_size = 64
-text = "Start game"
-
-[node name="MultiplayerMenu" type="VBoxContainer" parent="MarginContainer" unique_id=1765564327]
-visible = false
-layout_mode = 2
-
-[node name="Multiplayer Menu" type="Label" parent="MarginContainer/MultiplayerMenu" unique_id=1478684691]
-layout_mode = 2
-theme_override_font_sizes/font_size = 48
-text = "Multiplayer Menu"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MultiplayerMenu" unique_id=573527788]
-layout_mode = 2
-theme_override_constants/margin_left = 64
-theme_override_constants/margin_top = 96
-theme_override_constants/margin_right = 64
-theme_override_constants/margin_bottom = 64
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MultiplayerMenu/MarginContainer" unique_id=1152015556]
-layout_mode = 2
-
-[node name="HostButton" type="Button" parent="MarginContainer/MultiplayerMenu/MarginContainer/VBoxContainer" unique_id=1794393354]
-layout_mode = 2
-text = "Host server"
-
-[node name="JoinButton" type="Button" parent="MarginContainer/MultiplayerMenu/MarginContainer/VBoxContainer" unique_id=244403894]
-layout_mode = 2
-text = "Join Server"
-
 [connection signal="pressed" from="MarginContainer/RootMenu/ButtonsVbox/Singleplayer" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="MarginContainer/RootMenu/ButtonsVbox/Multiplayer (Not implemented)" to="." method="_on_multiplayer_not_implemented_pressed"]
 [connection signal="pressed" from="MarginContainer/RootMenu/ButtonsVbox/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="pressed" from="MarginContainer/RootMenu/ButtonsVbox/TutorialButton" to="." method="_on_tutorial_button_pressed"]
 [connection signal="pressed" from="MarginContainer/RootMenu/ButtonsVbox/ControlsButton" to="." method="_on_controls_button_pressed"]
-[connection signal="pressed" from="MarginContainer/RootMenu/ControlsVbox/BackButton" to="." method="_on_back_button_pressed"]
-[connection signal="item_selected" from="MarginContainer/CustomizationChildMenu/MarginContainer/VBoxContainer/ShootOptions" to="." method="_on_option_button_item_selected"]
-[connection signal="item_selected" from="MarginContainer/CustomizationChildMenu/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/AbilityOptions" to="." method="_on_ability_options_item_selected"]
-[connection signal="pressed" from="MarginContainer/CustomizationChildMenu/StartGameButton" to="." method="_on_start_game_button_pressed"]

@@ -12,8 +12,7 @@ func _on_start_button_pressed() -> void:
 	#game_start.emit()
 	#PoolManager.init_pools()
 	#call_deferred("change_scene")
-	$MarginContainer/RootMenu.visible = false
-	$MarginContainer/CustomizationChildMenu.visible = true
+	get_tree().change_scene_to_file("res://scenes/UI/player_customization_menu.tscn")
 	pass
 
 func change_scene() -> void:
@@ -35,13 +34,10 @@ func focus_button() -> void:
 
 func _on_tutorial_button_pressed() -> void:
 	get_tree().change_scene_to_file("res:://scenes/tutorial.tscn")
-	pass # Replace with function body.
 
 
 func _on_controls_button_pressed() -> void:
-	$MarginContainer/RootMenu/TitleLabel.visible = false
-	%ButtonsVbox.visible = false
-	%ControlsVbox.visible = true
+	get_tree().change_scene_to_file("res://scenes/UI/controls_menu.tscn")
 
 func _on_back_button_pressed() -> void:
 	$MarginContainer/RootMenu/TitleLabel.visible = true
@@ -72,3 +68,7 @@ func _on_ability_options_item_selected(index: int) -> void:
 	match $MarginContainer/CustomizationChildMenu/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/AbilityOptions.get_item_text(index):
 			"Destroyer": Global.ability = load("res://scenes/Ability/ability_laser.tscn")
 			"Tank": Global.ability =  load("res://scenes/Ability/shield_ability.tscn")
+
+
+func _on_host_button_pressed() -> void:
+	pass

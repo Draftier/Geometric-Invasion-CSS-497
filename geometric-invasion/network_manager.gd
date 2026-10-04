@@ -5,6 +5,7 @@ var ip_address : String
 var port : int = 25566
 
 var peer : ENetMultiplayerPeer
+var is_solo : bool
 
 signal server_created
 
@@ -21,16 +22,16 @@ func get_host_ip() -> String :
 	return "host ip cannot be found"
 
 func start_server() -> void:
-	
-	pass
-
-func start_client() -> void:
 	peer = ENetMultiplayerPeer.new()
 	peer.create_server(port)
 	multiplayer.multiplayer_peer = peer
 	
 	server_created.emit()
 	
+	pass
+
+func start_client() -> void:
+	pass
 
 
 

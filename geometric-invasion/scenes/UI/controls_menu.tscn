@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://7eh5dpaum0o3"]
+
+[ext_resource type="Script" uid="uid://ck3org6l2kny3" path="res://scenes/UI/controls_menu.gd" id="1_4dh4y"]
+[ext_resource type="Theme" uid="uid://dy2kgmqgonako" path="res://theme_test.tres" id="1_6bw68"]
+
+[node name="Controls" type="Control" unique_id=987772107]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4dh4y")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=2055551704]
+z_index = -1000
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(3.128499e-07, 0.21514863, 0.21514866, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1893482847]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_6bw68")
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="ControlsVbox" type="VBoxContainer" parent="MarginContainer" unique_id=218784771]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="ShootControls" type="Label" parent="MarginContainer/ControlsVbox" unique_id=1661215437]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Hold Z to shoot"
+horizontal_alignment = 1
+
+[node name="FocusControls" type="Label" parent="MarginContainer/ControlsVbox" unique_id=317702417]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Hold Shift to enter focus mode"
+horizontal_alignment = 1
+
+[node name="AbilityControls" type="Label" parent="MarginContainer/ControlsVbox" unique_id=884866419]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Press X to activate ability"
+horizontal_alignment = 1
+
+[node name="BackButton" type="Button" parent="MarginContainer/ControlsVbox" unique_id=1931551167]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Back"
+
+[node name="Spawn" type="Marker2D" parent="." unique_id=1503853858]
+unique_name_in_owner = true
+position = Vector2(597.9425, 525.4366)
+
+[connection signal="pressed" from="MarginContainer/ControlsVbox/BackButton" to="." method="_on_back_button_pressed"]

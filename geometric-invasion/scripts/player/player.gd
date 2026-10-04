@@ -1,6 +1,8 @@
 class_name Player
 extends CharacterBody2D
 
+# Check to see if player is in control
+var preview_mode : bool = false
 
 # Signal for player death
 signal death
@@ -28,12 +30,15 @@ func _ready() -> void:
 	$CanvasLayer/Label.text = "Lives : " + str(lives)
 	ability = ability_scene.instantiate()
 	add_child(ability)
-	pass
+	
+	if preview_mode:
+		%Camera2D.enabled = false
 
 # Called every physics tick
 func _process(_delta: float) -> void:
 	#if !is_multiplayer_authority():
 		#return
+
 	
 	# Get an input vector and modify velocity of player based on it
 	direction = Input.get_vector("left", "right", "up", "down")

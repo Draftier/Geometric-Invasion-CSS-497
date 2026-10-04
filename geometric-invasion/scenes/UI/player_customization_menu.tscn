@@ -1,0 +1,106 @@
+[gd_scene format=3 uid="uid://c7vh8wvsj3cud"]
+
+[ext_resource type="Theme" uid="uid://dy2kgmqgonako" path="res://theme_test.tres" id="1_ertse"]
+[ext_resource type="Script" uid="uid://bgr0wualwt2sx" path="res://scenes/UI/player_customization_menu.gd" id="2_vgtkr"]
+
+[node name="PlayerCustomizationMenu" type="Control" unique_id=79301437]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ertse")
+script = ExtResource("2_vgtkr")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1221497410]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(3.128499e-07, 0.21514863, 0.21514866, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=914736173]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="CustomizationMenu" type="VBoxContainer" parent="MarginContainer" unique_id=528055562]
+layout_mode = 2
+
+[node name="ScreenTitle" type="Label" parent="MarginContainer/CustomizationMenu" unique_id=1072227057]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Player customization screen"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/CustomizationMenu" unique_id=1652357906]
+layout_mode = 2
+theme_override_constants/margin_left = 128
+theme_override_constants/margin_top = 96
+theme_override_constants/margin_right = 128
+theme_override_constants/margin_bottom = 128
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CustomizationMenu/MarginContainer" unique_id=329143380]
+layout_mode = 2
+
+[node name="ShootingStyleLabel" type="Label" parent="MarginContainer/CustomizationMenu/MarginContainer/VBoxContainer" unique_id=1448921772]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Shooting Style"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ShootOptions" type="OptionButton" parent="MarginContainer/CustomizationMenu/MarginContainer/VBoxContainer" unique_id=602087371]
+unique_name_in_owner = true
+layout_mode = 2
+item_count = 2
+popup/item_0/text = "Shooting forward"
+popup/item_0/id = 0
+popup/item_1/text = "Shooting forward and side"
+popup/item_1/id = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/CustomizationMenu/MarginContainer/VBoxContainer" unique_id=1005683144]
+layout_mode = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 96
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CustomizationMenu/MarginContainer/VBoxContainer/MarginContainer" unique_id=1198917958]
+layout_mode = 2
+
+[node name="AbilityLabel" type="Label" parent="MarginContainer/CustomizationMenu/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer" unique_id=1630899465]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Abilities"
+horizontal_alignment = 1
+
+[node name="AbilityOptions" type="OptionButton" parent="MarginContainer/CustomizationMenu/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer" unique_id=1375234477]
+unique_name_in_owner = true
+layout_mode = 2
+item_count = 2
+popup/item_0/text = "Destroyer"
+popup/item_0/id = 0
+popup/item_1/text = "Tank"
+popup/item_1/id = 1
+
+[node name="StartGameButton" type="Button" parent="MarginContainer/CustomizationMenu" unique_id=493892705]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Start game"
+
+[connection signal="item_selected" from="MarginContainer/CustomizationMenu/MarginContainer/VBoxContainer/ShootOptions" to="." method="_on_shoot_options_item_selected"]
+[connection signal="item_selected" from="MarginContainer/CustomizationMenu/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/AbilityOptions" to="." method="_on_ability_options_item_selected"]
+[connection signal="pressed" from="MarginContainer/CustomizationMenu/StartGameButton" to="." method="_on_start_game_button_pressed"]
