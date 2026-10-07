@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://bm1d42pt283vt" path="res://scenes/UI/multiplayer_choice_menu.gd" id="2_wt8fv"]
 [ext_resource type="PackedScene" uid="uid://cnr36qxaqynbc" path="res://scenes/star_background.tscn" id="3_ao0e5"]
 [ext_resource type="StyleBox" uid="uid://dn5gd6byuqut8" path="res://button_theme.tres" id="3_cfko7"]
+[ext_resource type="Script" uid="uid://crw55ukacmqdi" path="res://scenes/UI/host_button.gd" id="5_jncdb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2m35m"]
 bg_color = Color(0, 0, 0, 0.41568628)
@@ -109,6 +110,7 @@ theme_override_constants/separation = 15
 layout_mode = 2
 theme_override_styles/normal = ExtResource("3_cfko7")
 text = "Host server"
+script = ExtResource("5_jncdb")
 
 [node name="JoinButton" type="Button" parent="MarginContainer/MultiplayerMenu/MarginContainer/VBoxContainer" unique_id=1979438574]
 layout_mode = 2
