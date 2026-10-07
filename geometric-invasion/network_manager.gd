@@ -27,11 +27,12 @@ func start_server() -> void:
 	multiplayer.multiplayer_peer = peer
 	
 	server_created.emit()
-	
-	pass
+
 
 func start_client() -> void:
-	pass
+	peer = ENetMultiplayerPeer.new()
+	peer.create_client(ip_address, port)
+	multiplayer.multiplayer_peer = peer
 
 
 
