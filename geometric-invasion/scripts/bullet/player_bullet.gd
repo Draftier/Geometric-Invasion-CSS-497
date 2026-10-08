@@ -22,6 +22,8 @@ func reset() -> void:
 	self.visible = false
 	self.speed = 0
 	self.scale = bullet_scale
+	
+	self.is_active = false
 
 func activate() -> void:
 	self.set_process(true)
@@ -29,6 +31,12 @@ func activate() -> void:
 	self.visible = true
 	self.set_block_signals(false)
 	self.bullet_hitbox.monitorable = true
+	
+	self.is_active = true
 
 func _on_hit() -> void:
 	PoolManager.return_to_player_pool(self)
+
+func _on_tree_exiting() -> void:
+	PoolManager.return_to_player_pool(self)
+	#PoolManager.return_to_enemy_pool(self)

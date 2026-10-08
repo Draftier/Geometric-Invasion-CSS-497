@@ -30,8 +30,10 @@ func reset() -> void:
 	
 	self.visible = false
 	self.speed = 0
+	
+	self.is_active = false
 
-func activate() -> void:
+func activate() -> void:	
 	self.set_process(true)
 	self.set_physics_process(true)
 	self.visible = true
@@ -39,8 +41,13 @@ func activate() -> void:
 	self.bullet_hitbox.monitorable = true
 	self.bullet_hurtbox.monitoring = true
 	
+	self.is_active = true
+	
 	if emitter != null:
 		add_child(emitter)
 
 func _on_hit() -> void:
+	PoolManager.return_to_enemy_pool(self)
+
+func _on_tree_exiting() -> void:
 	PoolManager.return_to_enemy_pool(self)

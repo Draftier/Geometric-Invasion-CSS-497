@@ -10,6 +10,8 @@ extends Node2D
 @onready var bullet_hitbox = $Sprite2D/Hitbox
 #@onready var bullet_hurtbox = get_node_or_null("Sprite2D/Hurtbox")
 
+var is_active : bool = false
+
 signal exited_screen
 
 func _ready() -> void:

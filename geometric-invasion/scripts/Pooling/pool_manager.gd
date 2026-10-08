@@ -35,3 +35,8 @@ func init_pools() -> void:
 	enemy_bullet_pool.initialize_pool()
 	player_bullet_pool.initialize_pool()
 	#emitter_pool.initialize_pool()
+	
+func reset_pools() -> void:
+	enemy_bullet_pool.reset_pool()
+	player_bullet_pool.reset_pool()
+	

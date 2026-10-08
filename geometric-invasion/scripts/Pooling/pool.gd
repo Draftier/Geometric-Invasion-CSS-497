@@ -13,10 +13,13 @@ var bullets : Array [ Bullet ]
 
 # Function to add bullets to the object pool
 func add_to_pool(bullet : Node) -> void:
+	#bullet.reset()
+	#get_instance_id()
+	## We reparent the bullet to make sure it appears correctly in scene tree
+	## Without this the bullet is visually invisible
+	#bullets.append(bullet)
 	bullet.reset()
-	get_instance_id()
-	# We reparent the bullet to make sure it appears correctly in scene tree
-	# Without this the bullet is visually invisible
+	bullet.is_active = false
 	bullets.append(bullet)
 
 # Function to initialize the pool with max num of objects
@@ -40,8 +43,11 @@ func pull_from_pool() -> Node:
 	if bullets.is_empty():
 		bullet = bullet_scene.instantiate()
 	else:
-		bullet = bullets[0]
-		bullets.remove_at(0)
+		#bullet = bullets[0]
+		#bullets.remove_at(0)
+		for i in bullets:
+			if i.is_active == false:
+				bullet = i
 	# Unpause calculation from bullet being pulled from pool
 	bullet.activate()
 	
@@ -58,3 +64,8 @@ func destroy_pool() -> void:
 		if is_instance_valid(i):
 			i.queue_free()
 	bullets.clear()
+
+func reset_pool() -> void:
+	for i in bullets:
+		if i.is_active == true:
+			i.reset()

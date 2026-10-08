@@ -25,7 +25,8 @@ func _on_resume_button_pressed() -> void:
 
 func _on_quit_to_menu_pressed() -> void:
 	get_tree().paused = false
-	PoolManager.destroy_pools()
+	#PoolManager.destroy_pools()
+	PoolManager.reset_pools()
 	get_tree().call_deferred("change_scene_to_file", "res://scenes/UI/main_menu.tscn")
 
 func _on_quit_to_desktop_pressed() -> void:
@@ -53,8 +54,8 @@ func _on_level_manager_victory() -> void:
 
 func _on_restart_button_pressed() -> void:
 	pause_game()
-	PoolManager.destroy_pools()
-	PoolManager.init_pools()
+	#PoolManager.destroy_pools()
+	#PoolManager.init_pools()
 	get_tree().reload_current_scene()
 	
 func player_connect(player : Player) -> void:
