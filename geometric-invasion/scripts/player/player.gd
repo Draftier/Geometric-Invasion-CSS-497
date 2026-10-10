@@ -23,8 +23,10 @@ var invulnerable : bool = false
 @export var ability_scene : PackedScene
 var ability : Ability
 
-#func _enter_tree() -> void:
-	#set_multiplayer_authority(name.to_int())
+var is_solo
+
+func _enter_tree() -> void:
+	set_multiplayer_authority(name.to_int())
 
 func _ready() -> void:
 	$CanvasLayer/Label.text = "Lives : " + str(lives)
@@ -36,8 +38,8 @@ func _ready() -> void:
 
 # Called every physics tick
 func _process(_delta: float) -> void:
-	#if !is_multiplayer_authority():
-		#return
+	if !is_multiplayer_authority() and !NetworkManager.is_solo:
+		return
 
 	
 	# Get an input vector and modify velocity of player based on it

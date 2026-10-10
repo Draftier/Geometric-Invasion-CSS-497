@@ -2,12 +2,13 @@ extends Node
 
 var ip_address : String
 # Going to arbitraily utilize port 25566 for this project
-var port : int = 25566
+var port : int = 42069
 
 var peer : ENetMultiplayerPeer
-var is_solo : bool
+var is_solo : bool = true
 
 signal server_created
+signal server_joined
 
 func _ready():
 	ip_address = get_host_ip()
@@ -23,17 +24,30 @@ func get_host_ip() -> String :
 
 func start_server() -> void:
 	peer = ENetMultiplayerPeer.new()
-	peer.create_server(port)
+	var error := peer.create_server(port)
+	if error != OK:
+		push_error("Server creation failed: %s" % error_string(error))
 	multiplayer.multiplayer_peer = peer
 	
 	server_created.emit()
+	
+	is_solo = false
 
 
-func start_client() -> void:
+func start_client(ip_addres : String) -> bool:
+	ip_address = ip_addres
 	peer = ENetMultiplayerPeer.new()
-	peer.create_client(ip_address, port)
+	var error := peer.create_client(ip_address, port)
+	if error != OK:
+		push_error("Server creation failed: %s" % error_string(error))
+	#if !peer.create_client(ip_address, port):
+		#return false
+		
 	multiplayer.multiplayer_peer = peer
-
-
+	is_solo = false
+	
+	server_joined.emit()
+	
+	return true
 
 	

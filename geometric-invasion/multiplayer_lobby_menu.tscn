@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://du5a2qpbn5avw"]
+
+[ext_resource type="Script" uid="uid://d31bgscf1dbt" path="res://multiplayer_lobby_menu.gd" id="1_2d6oa"]
+[ext_resource type="PackedScene" uid="uid://cnr36qxaqynbc" path="res://scenes/star_background.tscn" id="2_lst0y"]
+[ext_resource type="Theme" uid="uid://dy2kgmqgonako" path="res://theme_test.tres" id="3_77o5t"]
+[ext_resource type="StyleBox" uid="uid://dn5gd6byuqut8" path="res://button_theme.tres" id="4_hhiqo"]
+
+[node name="MultiplayerLobbyMenu" type="Control" unique_id=1575445770]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2d6oa")
+
+[node name="StarBackground" parent="." unique_id=1934287316 instance=ExtResource("2_lst0y")]
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=904519966]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_77o5t")
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="Lobby" type="VBoxContainer" parent="MarginContainer" unique_id=607571169]
+layout_mode = 2
+
+[node name="Multiplayer Menu" type="Label" parent="MarginContainer/Lobby" unique_id=371060360]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Lobby"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Lobby" unique_id=662102404]
+layout_mode = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 96
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Lobby/MarginContainer" unique_id=1213308703]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="IPLabel" type="Label" parent="MarginContainer/Lobby/MarginContainer/VBoxContainer" unique_id=1847138511]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Host ip address: "
+
+[node name="PlayerCountLabel" type="Label" parent="MarginContainer/Lobby/MarginContainer/VBoxContainer" unique_id=1787262128]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="StartGameButton" type="Button" parent="MarginContainer/Lobby/MarginContainer/VBoxContainer" unique_id=1275782273]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("4_hhiqo")
+text = "Start Game"
+
+[node name="BackButton" type="Button" parent="MarginContainer/Lobby/MarginContainer/VBoxContainer" unique_id=766023731]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("4_hhiqo")
+text = "Back"
+
+[connection signal="pressed" from="MarginContainer/Lobby/MarginContainer/VBoxContainer/StartGameButton" to="." method="_on_start_game_button_pressed"]
+[connection signal="pressed" from="MarginContainer/Lobby/MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

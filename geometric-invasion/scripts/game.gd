@@ -10,6 +10,8 @@ extends Node
 var player : Player
 var level
 
+signal joined_lobby
+
 func _ready() -> void:
 	player = Global.player.instantiate()
 	player.ability_scene =  Global.ability

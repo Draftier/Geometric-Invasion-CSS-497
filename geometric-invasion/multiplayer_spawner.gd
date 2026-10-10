@@ -9,6 +9,8 @@ func _on_server_created():
 	spawn_player(1)
 
 func spawn_player(id : int) -> void:
+	network_player = Global.player
+	
 	if !multiplayer.is_server(): return
 	
 	var player : Node = network_player.instantiate()

@@ -1,11 +1,9 @@
 [gd_scene format=3 uid="uid://booph1yenfeux"]
 
 [ext_resource type="PackedScene" uid="uid://cnr36qxaqynbc" path="res://scenes/star_background.tscn" id="1_3fc8k"]
-[ext_resource type="Script" uid="uid://dt1c0f6c5i51q" path="res://multiplayer_spawner.gd" id="2_sjw14"]
 
 [node name="multiplayer_test" type="Node2D" unique_id=2135646642]
 
 [node name="StarBackground" parent="." unique_id=1934287316 instance=ExtResource("1_3fc8k")]
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=166401999]
-script = ExtResource("2_sjw14")
