@@ -11,14 +11,19 @@ func _on_host_button_pressed() -> void:
 
 func _on_join_button_pressed() -> void:
 	var ip_address = ip_input.text
+	#var error = NetworkManager.start_client(ip_address)
+	
 	
 	if !NetworkManager.start_client(ip_address):
 		var timer = get_tree().create_timer(1.0)
 		ip_input.text = "Invalid ip_address"
 		await timer.timeout
 		ip_input.clear()
+	else:
+		NetworkManager.start_client(ip_address)
+		get_tree().change_scene_to_file("res://multiplayer_lobby_menu.tscn")
 	
-	NetworkManager.start_client(ip_address)
 
 func _on_back_button_pressed() -> void:
+	NetworkManager.stop_server()	
 	get_tree().change_scene_to_file("res://scenes/UI/main_menu.tscn")

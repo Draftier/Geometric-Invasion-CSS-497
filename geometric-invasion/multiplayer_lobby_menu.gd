@@ -9,6 +9,7 @@ func _ready() -> void:
 	num_players += 1
 	player_count_label.text = "Player count : " + str(num_players) + " / 3"
 	multiplayer.peer_connected.connect(_on_peer_connected)
+	multiplayer.server_disconnected.connect(_on_server_disconnected)
 	%IPLabel.text += NetworkManager.ip_address
 
 func _on_start_game_button_pressed() -> void:
@@ -18,6 +19,12 @@ func _on_start_game_button_pressed() -> void:
 func _on_peer_connected(id : int) -> void:
 	num_players += 1
 	player_count_label.text = "Player count : " + str(num_players) + " / 3"
+	
+func _on_server_disconnected() -> void:
+	print("server shutdown")
+	multiplayer.multiplayer_peer = null
+	get_tree().change_scene_to_file("res://scenes/UI/multiplayer_choice_menu.tscn")
 
 func _on_back_button_pressed() -> void:
+	multiplayer.multiplayer_peer = null
 	get_tree().change_scene_to_file("res://scenes/UI/multiplayer_choice_menu.tscn")

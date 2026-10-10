@@ -23,6 +23,9 @@ func get_host_ip() -> String :
 	return "host ip cannot be found"
 
 func start_server() -> void:
+	
+	stop_server()
+	
 	peer = ENetMultiplayerPeer.new()
 	var error := peer.create_server(port)
 	if error != OK:
@@ -36,10 +39,15 @@ func start_server() -> void:
 
 func start_client(ip_addres : String) -> bool:
 	ip_address = ip_addres
+	
+	if ip_addres == "":
+		return false
+	
 	peer = ENetMultiplayerPeer.new()
 	var error := peer.create_client(ip_address, port)
 	if error != OK:
-		push_error("Server creation failed: %s" % error_string(error))
+		#push_error("Server creation failed: %s" % error_string(error))
+		return false
 	#if !peer.create_client(ip_address, port):
 		#return false
 		
@@ -50,4 +58,10 @@ func start_client(ip_addres : String) -> bool:
 	
 	return true
 
+func stop_server() -> void:
+	if peer != null:
+		peer.close()
 	
+	multiplayer.multiplayer_peer = null
+	peer = null
+	is_solo = true
