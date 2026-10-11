@@ -38,7 +38,7 @@ func _ready() -> void:
 
 # Called every physics tick
 func _process(_delta: float) -> void:
-	if !is_multiplayer_authority() and !NetworkManager.is_solo:
+	if !NetworkManager.is_solo and !is_multiplayer_authority():
 		return
 
 	
