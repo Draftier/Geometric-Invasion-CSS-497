@@ -2,7 +2,8 @@ extends Control
 
 @onready var player_count_label = %PlayerCountLabel
 @onready var ip_label = %IPLabel
-@onready var error_label = %ErrorLabel
+@onready var error_label = %ConnectionErrorLabel
+@onready var start_game_warning_label = %StartGameWarningLabel
 
 var num_players : int = 0 
 
@@ -14,6 +15,13 @@ func _ready() -> void:
 	%IPLabel.text += NetworkManager.ip_address
 
 func _on_start_game_button_pressed() -> void:
+	if !is_multiplayer_authority():
+		start_game_warning_label.text = "Only host can start game"
+		
+		var timer = get_tree().create_timer(1.0)
+		await timer.timeout
+		
+		start_game_warning_label.text = ""
 	pass
 
 
