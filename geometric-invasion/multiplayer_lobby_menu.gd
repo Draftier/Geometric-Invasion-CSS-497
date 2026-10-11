@@ -15,6 +15,7 @@ func _ready() -> void:
 	%IPLabel.text += NetworkManager.ip_address
 
 func _on_start_game_button_pressed() -> void:
+	print(num_players)
 	if !is_multiplayer_authority():
 		start_game_warning_label.text = "Only host can start game"
 		
@@ -22,6 +23,17 @@ func _on_start_game_button_pressed() -> void:
 		await timer.timeout
 		
 		start_game_warning_label.text = ""
+		return
+	elif num_players < 2:
+		start_game_warning_label.text = "Game can only start with two or more players"
+		
+		var timer = get_tree().create_timer(1.0)
+		await  timer.timeout
+		
+		start_game_warning_label.text = ""
+		return
+
+	NetworkManager.change_scene_for_all_players.rpc("res://scenes/game.tscn")
 	pass
 
 

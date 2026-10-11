@@ -10,6 +10,14 @@ var is_solo : bool = true
 signal server_created
 signal server_joined
 
+@rpc("authority", "call_local", "reliable")
+func change_scene_for_all_players(scene_path : String) -> void:
+	print("foo")
+	var error := get_tree().change_scene_to_file(scene_path)
+	
+	if error != OK:
+		push_error("Scene change failed: " + error_string(error))
+
 func _ready():
 	ip_address = get_host_ip()
 	print(ip_address)
