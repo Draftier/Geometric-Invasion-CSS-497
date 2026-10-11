@@ -13,11 +13,16 @@ signal server_level_entered
 
 @rpc("authority", "call_local", "reliable")
 func change_scene_for_all_players(scene_path : String) -> void:
-	print("foo")
 	var error := get_tree().change_scene_to_file(scene_path)
 	
 	if error != OK:
 		push_error("Scene change failed: " + error_string(error))
+		
+	await get_tree().scene_changed
+	
+	server_level_entered.emit()
+	
+
 
 func _ready():
 	ip_address = get_host_ip()

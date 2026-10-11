@@ -29,8 +29,8 @@ var ability : Ability
 var is_solo : bool
 
 func _enter_tree() -> void:
-	if is_multiplayer_authority():
-		set_multiplayer_authority(name.to_int())
+	#if is_multiplayer_authority():
+	set_multiplayer_authority(str(name).to_int())
 		
 
 func _ready() -> void:	

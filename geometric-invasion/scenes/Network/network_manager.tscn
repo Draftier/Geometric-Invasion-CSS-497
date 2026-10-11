@@ -1,10 +1,6 @@
 [gd_scene format=3 uid="uid://dcfnkbtd8cgov"]
 
 [ext_resource type="Script" uid="uid://hvsdddbxyut3" path="res://network_manager.gd" id="1_bidd7"]
-[ext_resource type="Script" uid="uid://dt1c0f6c5i51q" path="res://multiplayer_spawner.gd" id="2_6bwve"]
 
 [node name="NetworkManager" type="Node" unique_id=320097988]
 script = ExtResource("1_bidd7")
-
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=239122438]
-script = ExtResource("2_6bwve")
