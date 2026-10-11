@@ -54,7 +54,7 @@ func _process(_delta: float) -> void:
 	# Fire bullets from player guns if shoot button held
 	if Input.is_action_pressed("shoot"):
 		for i in $guns.get_children():
-			i.shoot()
+			i.shoot.rpc()
 	
 	if Input.is_action_pressed("slow"):
 		velocity = direction * player_class.speed / 2

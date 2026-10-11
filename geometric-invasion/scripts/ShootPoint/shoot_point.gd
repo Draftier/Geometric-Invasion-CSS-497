@@ -15,6 +15,7 @@ func _ready() -> void:
 func _on_fire_rate_timer_timeout() -> void:
 	can_shoot = true
 
+@rpc("authority", "call_local", "reliable")
 func shoot() -> void:
 	# Fire bullet then reset can_shoot flag so that we can keep bullet fire rate within timer time
 	if can_shoot == true:
