@@ -4,7 +4,20 @@ extends Control
 @onready var ip_input = %IpInput
 @onready var error_label = %ErrorLabel
 
+@onready var ability_dropdown = %AbilityOptions
+@onready var shoot_style_dropdown = %ShootOptions
+
 var error
+
+func _on_ability_options_item_selected(index: int) -> void:
+	match ability_dropdown.get_item_text(index):
+		"Destroyer": Global.ability = load("res://scenes/Ability/ability_laser.tscn")
+		"Tank": Global.ability =  load("res://scenes/Ability/shield_ability.tscn")
+
+func _on_shoot_options_item_selected(index: int) -> void:
+	match shoot_style_dropdown.get_item_text(index):
+		"Shooting forward": Global.player = load("res://scenes/Player/player_default_shooting_style.tscn")
+		"Shooting forward and side": Global.player =  load("res://scenes/Player/player_shooting_style_two.tscn")
 
 func _on_host_button_pressed() -> void:
 	if !NetworkManager.start_server():

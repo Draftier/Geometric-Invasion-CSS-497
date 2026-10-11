@@ -132,6 +132,8 @@ layout_mode = 2
 theme_override_styles/normal = ExtResource("3_cfko7")
 text = "Back to main menu"
 
+[connection signal="item_selected" from="MarginContainer/MultiplayerMenu/MarginContainer2/VBoxContainer/ShootOptions" to="." method="_on_shoot_options_item_selected"]
+[connection signal="item_selected" from="MarginContainer/MultiplayerMenu/MarginContainer2/VBoxContainer/AbilityOptions" to="." method="_on_ability_options_item_selected"]
 [connection signal="pressed" from="MarginContainer/MultiplayerMenu/MarginContainer/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
 [connection signal="pressed" from="MarginContainer/MultiplayerMenu/MarginContainer/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
 [connection signal="pressed" from="MarginContainer/MultiplayerMenu/MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

@@ -15,7 +15,6 @@ func _ready() -> void:
 	%IPLabel.text += NetworkManager.ip_address
 
 func _on_start_game_button_pressed() -> void:
-	print(num_players)
 	if !is_multiplayer_authority():
 		start_game_warning_label.text = "Only host can start game"
 		
@@ -32,8 +31,9 @@ func _on_start_game_button_pressed() -> void:
 		
 		start_game_warning_label.text = ""
 		return
-
-	NetworkManager.change_scene_for_all_players.rpc("res://scenes/game.tscn")
+	#get_tree().change_scene_to_file("res://multiplayer_test.tscn")
+	NetworkManager.server_level_entered.emit()
+	NetworkManager.change_scene_for_all_players.rpc("res://multiplayer_test.tscn")
 	pass
 
 

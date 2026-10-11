@@ -9,6 +9,7 @@ var is_solo : bool = true
 
 signal server_created
 signal server_joined
+signal server_level_entered
 
 @rpc("authority", "call_local", "reliable")
 func change_scene_for_all_players(scene_path : String) -> void:

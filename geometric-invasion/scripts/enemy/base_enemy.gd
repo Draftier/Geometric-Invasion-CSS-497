@@ -50,8 +50,8 @@ func _ready() -> void:
 	
 func _physics_process(delta: float) -> void:
 	# Check if the current movement event is directional or curved
-	print("global position: ", self.global_position)
-	print("target position: ", target_pos)
+	#print("global position: ", self.global_position)
+	#print("target position: ", target_pos)
 	if cur_event is DirectionalMovement:
 		# If direction then check speed curve and move specified distance in direction at speed of current sampled speed curve
 		# If there's a speed curve then sample the curve based on distance traveled and take speed from curve
@@ -173,7 +173,7 @@ func set_directional_movement(movement : DirectionalMovement) -> void:
 				direction_vector = Vector2.ZERO
 		# Calculate the target position of the current movement
 		target_pos = self.global_position + (direction_vector.normalized() * distance_to_move)
-		print(target_pos)
+		#print(target_pos)
 		#var test = direction_vector.normalized() * distance_to_move
 		
 		# Variables to store initial direction and angle

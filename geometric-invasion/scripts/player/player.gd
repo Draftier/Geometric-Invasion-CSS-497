@@ -7,6 +7,9 @@ var preview_mode : bool = false
 # Signal for player death
 signal death
 
+# Signal for entering level
+signal entered_level
+
 # TODO add implementation for player classes perhaps different health or move speed for calss
 @export var player_class : PlayerClass 
 
@@ -23,12 +26,14 @@ var invulnerable : bool = false
 @export var ability_scene : PackedScene
 var ability : Ability
 
-var is_solo
+var is_solo : bool
 
 func _enter_tree() -> void:
-	set_multiplayer_authority(name.to_int())
+	if is_multiplayer_authority():
+		set_multiplayer_authority(name.to_int())
+		
 
-func _ready() -> void:
+func _ready() -> void:	
 	$CanvasLayer/Label.text = "Lives : " + str(lives)
 	ability = ability_scene.instantiate()
 	add_child(ability)
