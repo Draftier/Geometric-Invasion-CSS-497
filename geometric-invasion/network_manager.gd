@@ -9,6 +9,15 @@ var is_solo : bool = true
 
 signal server_created
 signal server_joined
+signal server_level_entered
+
+@rpc("authority", "call_local", "reliable")
+func change_scene_for_all_players(scene_path : String) -> void:
+	print("foo")
+	var error := get_tree().change_scene_to_file(scene_path)
+	
+	if error != OK:
+		push_error("Scene change failed: " + error_string(error))
 
 func _ready():
 	ip_address = get_host_ip()
@@ -22,26 +31,27 @@ func get_host_ip() -> String :
 		pass
 	return "host ip cannot be found"
 
-func start_server() -> void:
+func start_server() -> bool:
 	
 	stop_server()
 	
 	peer = ENetMultiplayerPeer.new()
 	var error := peer.create_server(port)
+	
 	if error != OK:
 		push_error("Server creation failed: %s" % error_string(error))
+		return false
+		
+		
 	multiplayer.multiplayer_peer = peer
 	
 	server_created.emit()
 	
 	is_solo = false
-
+	return true
 
 func start_client(ip_addres : String) -> bool:
 	ip_address = ip_addres
-	
-	if ip_addres == "":
-		return false
 	
 	peer = ENetMultiplayerPeer.new()
 	var error := peer.create_client(ip_address, port)
