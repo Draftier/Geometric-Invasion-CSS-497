@@ -17,12 +17,10 @@ func _ready() -> void:
 	add_child(player)
 	init_speed = player.player_class.speed
 	player.player_class.speed *= 3
-
-
 	
 
 func _on_back_button_pressed() -> void:
 	player.player_class.speed = init_speed
-	PoolManager.destroy_pools()
-	PoolManager.init_pools()
+	#PoolManager.destroy_pools()
+	#PoolManager.init_pools()
 	get_tree().change_scene_to_file("res://scenes/UI/main_menu.tscn")

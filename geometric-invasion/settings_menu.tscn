@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://bw0cg8kvqjf1f"]
+
+[ext_resource type="PackedScene" uid="uid://cnr36qxaqynbc" path="res://scenes/star_background.tscn" id="1_0cmel"]
+[ext_resource type="Script" uid="uid://dj7bmx275e27u" path="res://settings_menu.gd" id="1_mlw3h"]
+[ext_resource type="Theme" uid="uid://dy2kgmqgonako" path="res://theme_test.tres" id="2_d0eu6"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_d8ny1"]
+font_size = 100
+
+[node name="SettingsMenu" type="Control" unique_id=505777350]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mlw3h")
+
+[node name="StarBackground" parent="." unique_id=1934287316 instance=ExtResource("1_0cmel")]
+unique_name_in_owner = true
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1909921300]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="RootMenu" type="VBoxContainer" parent="MarginContainer" unique_id=1753786380]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/RootMenu" unique_id=621242930]
+layout_mode = 2
+theme = ExtResource("2_d0eu6")
+text = "Settings"
+label_settings = SubResource("LabelSettings_d8ny1")
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/RootMenu" unique_id=355259794]
+layout_mode = 2
+text = "Volume"
+horizontal_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="MarginContainer/RootMenu/Label" unique_id=185783860]
+layout_mode = 0
+offset_left = 231.0
+offset_top = 27.0
+offset_right = 851.0
+offset_bottom = 43.0
+
+[node name="DisplaySetting" type="CheckBox" parent="MarginContainer/RootMenu" unique_id=859934268]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Fullscreen"
+alignment = 1
+
+[node name="BackButton" type="Button" parent="MarginContainer/RootMenu" unique_id=1024788489]
+layout_mode = 2
+text = "Back to main menu"
+
+[connection signal="toggled" from="MarginContainer/RootMenu/DisplaySetting" to="." method="_on_display_setting_toggled"]
+[connection signal="pressed" from="MarginContainer/RootMenu/BackButton" to="." method="_on_back_button_pressed"]
