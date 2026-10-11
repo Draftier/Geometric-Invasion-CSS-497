@@ -13,6 +13,7 @@ func _on_ability_options_item_selected(index: int) -> void:
 	match ability_dropdown.get_item_text(index):
 		"Destroyer": Global.ability = load("res://scenes/Ability/ability_laser.tscn")
 		"Tank": Global.ability =  load("res://scenes/Ability/shield_ability.tscn")
+	print("Ability change to" + str(Global.ability))
 
 func _on_shoot_options_item_selected(index: int) -> void:
 	match shoot_style_dropdown.get_item_text(index):
