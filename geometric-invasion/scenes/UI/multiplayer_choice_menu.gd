@@ -9,6 +9,11 @@ extends Control
 
 var error
 
+func _ready() -> void:
+	NetworkManager.server_joined.connect(_on_server_connected)
+	NetworkManager.connecting_to_server.connect(_connecting_to_server)
+	NetworkManager.connection_to_server_failed.connect(_on_connection_failed)
+
 func _on_ability_options_item_selected(index: int) -> void:
 	match ability_dropdown.get_item_text(index):
 		"Destroyer": Global.ability = load("res://scenes/Ability/ability_laser.tscn")
@@ -47,10 +52,28 @@ func _on_join_button_pressed() -> void:
 		var timer = get_tree().create_timer(1.0)
 		await timer.timeout
 		error_label.text = ""
-	else:
-		get_tree().change_scene_to_file("res://multiplayer_lobby_menu.tscn")
+	
+	
+		
+		#get_tree().change_scene_to_file("res://multiplayer_lobby_menu.tscn")
+		pass
 	
 
 func _on_back_button_pressed() -> void:
 	NetworkManager.stop_server()	
 	get_tree().change_scene_to_file("res://scenes/UI/main_menu.tscn")
+	
+func _on_server_connected() -> void:
+	get_tree().change_scene_to_file("res://multiplayer_lobby_menu.tscn")
+	
+func _connecting_to_server() -> void:
+	error_label.text = "Connecting to server..."
+	await NetworkManager.server_joined
+	error_label.text = ""
+
+func _on_connection_failed() -> void:
+	error_label.text = "Connection to server failed"
+	var timer = get_tree().create_timer(1.0)
+	await timer.timeout
+	ip_input.clear()
+	error_label.text = ""

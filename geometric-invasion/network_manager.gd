@@ -10,6 +10,8 @@ var is_solo : bool = true
 signal server_created
 signal server_joined
 signal server_level_entered
+signal connecting_to_server
+signal connection_to_server_failed
 
 @rpc("authority", "call_local", "reliable")
 func change_scene_for_all_players(scene_path : String) -> void:
@@ -23,9 +25,12 @@ func change_scene_for_all_players(scene_path : String) -> void:
 	server_level_entered.emit()
 	
 
-
 func _ready():
 	ip_address = get_host_ip()
+	multiplayer.connected_to_server.connect(_on_connection_to_server)
+	multiplayer.connection_failed.connect(_on_connection_to_server_failed)
+	
+	
 	print(ip_address)
 
 func get_host_ip() -> String :
@@ -65,12 +70,8 @@ func start_client(ip_addres : String) -> bool:
 		return false
 	#if !peer.create_client(ip_address, port):
 		#return false
-		
 	multiplayer.multiplayer_peer = peer
-	is_solo = false
-	
-	server_joined.emit()
-	
+	connecting_to_server.emit()
 	return true
 
 func stop_server() -> void:
@@ -80,3 +81,12 @@ func stop_server() -> void:
 	multiplayer.multiplayer_peer = null
 	peer = null
 	is_solo = true
+
+func _on_connection_to_server() -> void:
+		is_solo = false
+		server_joined.emit()
+		
+func _on_connection_to_server_failed() -> void:
+	peer.close()
+	multiplayer.multiplayer_peer = OfflineMultiplayerPeer.new()
+	connection_to_server_failed.emit()
