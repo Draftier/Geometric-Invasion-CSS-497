@@ -2,9 +2,10 @@ extends Control
 
 # Storing unique items as variables
 @onready var player_count_label = %PlayerCountLabel
-@onready var ip_label = %IPLabel
+@onready var wifi_ip_label = %WifiIpLabel
 @onready var error_label = %ConnectionErrorLabel
 @onready var start_game_warning_label = %StartGameWarningLabel
+@onready var ethernet_ip_label = %EthernetIpLabel
 
 # Variable to keep track of the number of players
 var num_players : int = 0
@@ -25,7 +26,9 @@ func _ready() -> void:
 	_update_player_count()
 	
 	# Show the host ip address
-	%IPLabel.text += NetworkManager.ip_address
+	wifi_ip_label.text += NetworkManager.wifi_ip_address
+	ethernet_ip_label.text += NetworkManager.ethernet_ip_address
+	
 
 # Logic for what happens when start game button is presed
 func _on_start_game_button_pressed() -> void:

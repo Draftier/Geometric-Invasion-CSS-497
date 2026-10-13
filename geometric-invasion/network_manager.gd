@@ -13,6 +13,9 @@ signal server_level_entered
 signal connecting_to_server
 signal connection_to_server_failed
 
+var wifi_ip_address : String
+var ethernet_ip_address : String
+
 # Rpc to change scene for all players based on a given path
 @rpc("authority", "call_local", "reliable")
 func change_scene_for_all_players(scene_path : String) -> void:
@@ -33,6 +36,12 @@ func _ready():
 	# Obtain the ip of the host
 	ip_address = get_host_ip()
 	
+	
+	wifi_ip_address = get_host_wifi_ip()
+	ethernet_ip_address = get_host_ethernet_ip()
+	
+	print(wifi_ip_address)
+	print(ethernet_ip_address)
 	# Connect signals to check if connection to server is failed or successful
 	multiplayer.connected_to_server.connect(_on_connection_to_server)
 	multiplayer.connection_failed.connect(_on_connection_to_server_failed)
@@ -41,11 +50,31 @@ func _ready():
 # Function to obtain host ip address
 func get_host_ip() -> String :
 	# Loop through the ip addresses and find the first address that is not a loop back address, ipv6 address or 
-	for i in IP.get_local_addresses():
-		if i.begins_with("192.168.") or i.begins_with("10.") or i.begins_with("172."):
-			return i
-		pass
+	#for i in IP.get_local_addresses():
+		#if i.begins_with("192.168.") or i.begins_with("10.") or i.begins_with("172."):
+			#return i
+		#pass
+	for i in IP.get_local_interfaces():
+		print(i["friendly"], ": ", i["addresses"])
+	
+	#ip_address = IP.resolve_hostname(str(OS.get_environment("COMPUTERNAME"), 1))
+	print("Obtained address: ", ip_address)
+	return ip_address
 	return "host ip cannot be found"
+	
+func get_host_wifi_ip() -> String : 
+	for i in IP.get_local_interfaces():
+		if i["friendly"] == "Ethernet":
+			return i["addresses"][0]
+	return "host wifi ip cannot be found"
+	pass
+	
+func get_host_ethernet_ip() -> String:
+	for i in IP.get_local_interfaces():
+		if i["friendly"] == "Wi-Fi":
+			return i["addresses"][0]
+	return "host wifi ip cannot be found"
+	pass
 
 # Function to start server
 func start_server() -> bool:

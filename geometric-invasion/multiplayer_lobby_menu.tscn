@@ -50,10 +50,15 @@ theme_override_constants/margin_bottom = 64
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="IPLabel" type="Label" parent="MarginContainer/Lobby/MarginContainer/VBoxContainer" unique_id=1847138511]
+[node name="WifiIpLabel" type="Label" parent="MarginContainer/Lobby/MarginContainer/VBoxContainer" unique_id=1847138511]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Host ip address: "
+text = "Host wifi ip address: "
+
+[node name="EthernetIpLabel" type="Label" parent="MarginContainer/Lobby/MarginContainer/VBoxContainer" unique_id=1565912271]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Host ethernet ip address:"
 
 [node name="PlayerCountLabel" type="Label" parent="MarginContainer/Lobby/MarginContainer/VBoxContainer" unique_id=1787262128]
 unique_name_in_owner = true
