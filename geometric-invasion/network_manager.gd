@@ -64,14 +64,14 @@ func get_host_ip() -> String :
 	
 func get_host_wifi_ip() -> String : 
 	for i in IP.get_local_interfaces():
-		if i["friendly"] == "Ethernet":
+		if i["friendly"] == "Wi-Fi":
 			return i["addresses"][0]
 	return "host wifi ip cannot be found"
 	pass
 	
 func get_host_ethernet_ip() -> String:
 	for i in IP.get_local_interfaces():
-		if i["friendly"] == "Wi-Fi":
+		if i["friendly"] == "Ethernet":
 			return i["addresses"][0]
 	return "host wifi ip cannot be found"
 	pass
