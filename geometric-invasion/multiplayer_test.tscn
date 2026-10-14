@@ -4,6 +4,12 @@
 [ext_resource type="Script" uid="uid://dkna4bvtvxq32" path="res://multiplayer_test.gd" id="1_q3bjm"]
 [ext_resource type="Script" uid="uid://dt1c0f6c5i51q" path="res://multiplayer_spawner.gd" id="2_sjw14"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q3bjm"]
+size = Vector2(646, 21)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pg252"]
+size = Vector2(20, 618)
+
 [node name="MultiplayerTest" type="Node2D" unique_id=543451976]
 script = ExtResource("1_q3bjm")
 
@@ -14,3 +20,29 @@ scale = Vector2(0.495, 0.495)
 [node name="spawner" type="MultiplayerSpawner" parent="." unique_id=1416540720]
 spawn_path = NodePath("..")
 script = ExtResource("2_sjw14")
+
+[node name="Borders" type="Node2D" parent="." unique_id=522387079]
+
+[node name="top_bottom" type="StaticBody2D" parent="Borders" unique_id=1824013654]
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/top_bottom" unique_id=1057216338]
+position = Vector2(0, -174)
+shape = SubResource("RectangleShape2D_q3bjm")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Borders/top_bottom" unique_id=1320693876]
+position = Vector2(-12, 175)
+shape = SubResource("RectangleShape2D_q3bjm")
+
+[node name="left_right" type="StaticBody2D" parent="Borders" unique_id=1613845313]
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/left_right" unique_id=345102067]
+position = Vector2(-298, 9)
+shape = SubResource("RectangleShape2D_pg252")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Borders/left_right" unique_id=45577537]
+position = Vector2(297, 9)
+shape = SubResource("RectangleShape2D_pg252")
