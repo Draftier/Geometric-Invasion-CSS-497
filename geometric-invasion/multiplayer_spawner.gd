@@ -45,8 +45,10 @@ func spawn_player(id : int) -> void:
 	
 	tracked_players.append(player)
 	
+	print("spawned_player")
+	
 func remove_player(id : int) -> void:
-	for i in tracked_players:
-		if i.get_multiplayer_authority() == id:
-			i.queue_free()
-	pass
+	for i in tracked_players.size():
+		if tracked_players[i].get_multiplayer_authority() == id:
+			tracked_players[i].queue_free()
+			tracked_players.remove_at(i)

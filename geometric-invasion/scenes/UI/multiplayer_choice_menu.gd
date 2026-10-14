@@ -13,6 +13,7 @@ func _ready() -> void:
 	NetworkManager.server_joined.connect(_on_server_connected)
 	NetworkManager.connecting_to_server.connect(_connecting_to_server)
 	NetworkManager.connection_to_server_failed.connect(_on_connection_failed)
+	NetworkManager.game_started_signal.connect(_on_game_started_error)
 
 func _on_ability_options_item_selected(index: int) -> void:
 	match ability_dropdown.get_item_text(index):
@@ -73,6 +74,13 @@ func _connecting_to_server() -> void:
 
 func _on_connection_failed() -> void:
 	error_label.text = "Connection to server failed"
+	var timer = get_tree().create_timer(1.0)
+	await timer.timeout
+	ip_input.clear()
+	error_label.text = ""
+
+func _on_game_started_error() -> void:
+	error_label.text = "Game has already started"
 	var timer = get_tree().create_timer(1.0)
 	await timer.timeout
 	ip_input.clear()

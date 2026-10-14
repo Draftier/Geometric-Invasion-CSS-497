@@ -54,6 +54,7 @@ func _on_start_game_button_pressed() -> void:
 	
 	# Otherwise if host is starting then emit signal 
 	#NetworkManager.server_level_entered.emit()
+	NetworkManager.game_started = true
 	NetworkManager.change_scene_for_all_players.rpc("res://multiplayer_test.tscn")
 	pass
 

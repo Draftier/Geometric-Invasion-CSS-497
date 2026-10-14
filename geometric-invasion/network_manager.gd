@@ -12,9 +12,14 @@ signal server_joined
 signal server_level_entered
 signal connecting_to_server
 signal connection_to_server_failed
+signal game_started_signal
 
 var wifi_ip_address : String
 var ethernet_ip_address : String
+
+var game_started : bool = false
+
+var max_players : int = 2
 
 # Rpc to change scene for all players based on a given path
 @rpc("authority", "call_local", "reliable")
@@ -47,7 +52,10 @@ func _ready():
 	multiplayer.connected_to_server.connect(_on_connection_to_server)
 	multiplayer.connection_failed.connect(_on_connection_to_server_failed)
 	
-	multiplayer.peer_connected.connect(_on_peer_connected)
+	
+	# Setup authentication
+	multiplayer.auth_callback = _on_receive_auth_data
+	multiplayer.peer_authenticating.connect(_on_peer_authenticating)
 
 # Function to obtain host ip address
 func get_host_ip() -> String :
@@ -85,7 +93,7 @@ func start_server() -> bool:
 	
 	# Create new peer and server for that peer
 	peer = ENetMultiplayerPeer.new()
-	var error := peer.create_server(port)
+	var error := peer.create_server(port, max_players)
 	
 	# Error check
 	if error != OK:
@@ -141,8 +149,20 @@ func _on_connection_to_server_failed() -> void:
 	peer.close()
 	multiplayer.multiplayer_peer = OfflineMultiplayerPeer.new()
 	connection_to_server_failed.emit()
+		
+func _on_receive_auth_data(peer_id : int, payload: PackedByteArray) -> void:
+	var data : String = payload.get_string_from_utf8()
 	
-func _on_peer_connected(id : int) -> void:
-	if Global.game_started == true:
-		multiplayer.multiplayer_peer.disconnect_peer(id)
-	pass
+	if !multiplayer.is_server():
+		if data == "Approved":
+			multiplayer.complete_auth(peer_id)
+		else:
+			game_started_signal.emit()
+	
+func _on_peer_authenticating(peer_id : int) -> void:
+	if multiplayer.is_server():
+		if game_started == true:
+			multiplayer.send_auth(peer_id, "Game started".to_utf8_buffer())
+		else:
+			multiplayer.send_auth(peer_id, "Approved".to_utf8_buffer())
+			multiplayer.complete_auth(peer_id)
