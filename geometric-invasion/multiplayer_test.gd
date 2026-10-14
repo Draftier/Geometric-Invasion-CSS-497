@@ -7,6 +7,7 @@ func _ready() -> void:
 	#
 	#print("Connected: ", NetworkManager.server_level_entered.is_connected(_on_server_level_entered))
 	multiplayer.server_disconnected.connect(change_scene)
+	
 	pass
 
 func change_scene() -> void:

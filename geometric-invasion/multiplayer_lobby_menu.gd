@@ -60,7 +60,7 @@ func _on_start_game_button_pressed() -> void:
 # Function utilized to update player count, made since
 # Peer disconnected and peer connected signals 
 # Require functions to take in a peer's id
-func _on_peer_connected(id : int) -> void:
+func _on_peer_connected(id : int) -> void:	
 	_update_player_count()
 
 func _on_peer_disconnected(id : int) -> void:

@@ -31,6 +31,7 @@ func change_scene_for_all_players(scene_path : String) -> void:
 	# Then emit signal that client has entered the level
 	server_level_entered.emit()
 	
+	
 
 func _ready():
 	# Obtain the ip of the host
@@ -45,7 +46,8 @@ func _ready():
 	# Connect signals to check if connection to server is failed or successful
 	multiplayer.connected_to_server.connect(_on_connection_to_server)
 	multiplayer.connection_failed.connect(_on_connection_to_server_failed)
-
+	
+	multiplayer.peer_connected.connect(_on_peer_connected)
 
 # Function to obtain host ip address
 func get_host_ip() -> String :
@@ -139,3 +141,8 @@ func _on_connection_to_server_failed() -> void:
 	peer.close()
 	multiplayer.multiplayer_peer = OfflineMultiplayerPeer.new()
 	connection_to_server_failed.emit()
+	
+func _on_peer_connected(id : int) -> void:
+	if Global.game_started == true:
+		multiplayer.multiplayer_peer.disconnect_peer(id)
+	pass

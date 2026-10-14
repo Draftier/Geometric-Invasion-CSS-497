@@ -2,10 +2,13 @@ extends MultiplayerSpawner
 
 @export var network_player : PackedScene
 
+var tracked_players : Array [Player]
+
 func _ready() -> void:
 	add_spawnable_scene(Global.player.resource_path)
 	
 	NetworkManager.server_level_entered.connect(_on_server_level_entered)
+	multiplayer.peer_disconnected.connect(remove_player)
 	
 	print("Connected: ", NetworkManager.server_level_entered.is_connected(_on_server_level_entered))
 	
@@ -40,4 +43,10 @@ func spawn_player(id : int) -> void:
 	
 	get_node(spawn_path).call_deferred("add_child", player)
 	
+	tracked_players.append(player)
 	
+func remove_player(id : int) -> void:
+	for i in tracked_players:
+		if i.get_multiplayer_authority() == id:
+			i.queue_free()
+	pass
