@@ -14,7 +14,7 @@ var num_players : int = 0
 
 func _ready() -> void:
 	# Setup the broadcast port
-	NetworkManager.set_up_broadcast_port(NetworkManager.server_dictionary.name)
+	NetworkManager.set_up_broadcast_port(NetworkManager.server_dictionary["name"])
 		
 	# Start broadcasting to clients
 	broad_cast_timer.start()
@@ -101,3 +101,9 @@ func _update_player_count() -> void:
 
 func _on_broadcast_timer_timeout() -> void:
 	NetworkManager.broadcast_server_information()
+
+func _exit_tree() -> void:
+	if multiplayer.is_server():
+		NetworkManager.stop_broadcast()
+	pass
+	

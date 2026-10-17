@@ -42,7 +42,8 @@ func _on_host_button_pressed() -> void:
 		error_label.text = ""
 		return
 
-	NetworkManager.server_dictionary.name = server_name_input.text
+	NetworkManager.server_dictionary["name"] = server_name_input.text
+	print(NetworkManager.server_dictionary["name"])
 	
 	get_tree().change_scene_to_file("res://multiplayer_lobby_menu.tscn")
 

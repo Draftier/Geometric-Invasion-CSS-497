@@ -234,7 +234,7 @@ func obtain_server_information() -> ServerInfo:
 func broadcast_server_information() -> void:
 	var server_info = ServerInfo.new()
 	
-	server_info.server_dictionary["name"] = name
+	server_info.server_dictionary["name"] = server_dictionary["name"]
 	server_info.server_dictionary["player_count"] = multiplayer.get_peers().size() + 1
 	
 	var data = JSON.stringify(server_info.server_dictionary)
@@ -242,3 +242,9 @@ func broadcast_server_information() -> void:
 	broadcast_peer.put_packet(packet)
 	
 	print("Broadcasting server info")
+
+func stop_broadcast() -> void:
+	broadcast_peer.close()
+
+func stop_listen() -> void:
+	listen_peer.close()

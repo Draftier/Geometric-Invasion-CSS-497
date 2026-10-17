@@ -1,23 +1,35 @@
 [gd_scene format=3 uid="uid://bnqykgdlppqo1"]
 
+[ext_resource type="Script" uid="uid://x1j72daq30lo" path="res://server_info.gd" id="1_e5yu4"]
+[ext_resource type="Theme" uid="uid://dy2kgmqgonako" path="res://theme_test.tres" id="2_arsx7"]
+[ext_resource type="FontFile" uid="uid://dihhulpjs1064" path="res://assets/fonts/PixelOperator8.ttf" id="3_ejxhj"]
+
 [node name="ServerInfo" type="HBoxContainer" unique_id=354989575]
+script = ExtResource("1_e5yu4")
 
 [node name="RoomNameLabel" type="Label" parent="." unique_id=780648709]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("2_arsx7")
 text = "PlaceHolderName"
 
 [node name="IpAddressLabel" type="Label" parent="." unique_id=1804551319]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("2_arsx7")
 text = "192.168.***.***"
 
 [node name="PlayerCountLabel" type="Label" parent="." unique_id=1851367168]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("2_arsx7")
 text = "0 / 3"
 
-[node name="Button" type="Button" parent="." unique_id=1825947810]
+[node name="JoinButton" type="Button" parent="." unique_id=1825947810]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("3_ejxhj")
 text = "Join Server"
+
+[connection signal="pressed" from="JoinButton" to="." method="_on_join_button_pressed"]
