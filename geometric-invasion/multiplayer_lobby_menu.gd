@@ -11,6 +11,9 @@ extends Control
 var num_players : int = 0
 
 func _ready() -> void:
+	# Start broadcasting to the clients
+	NetworkManager.set_up_broadcast_port("Foo")
+	
 	# Connecting signals to update number of players based on
 	# - Peer connected
 	# - Peer disconnected
@@ -83,8 +86,7 @@ func _on_server_disconnected() -> void:
 # Makes multiplayer peer offline, and closes current connection to server
 # Then puts user back to multiplayer choice menu
 func _on_back_button_pressed() -> void:
-	multiplayer.multiplayer_peer.close()
-	multiplayer.multiplayer_peer = OfflineMultiplayerPeer.new()
+	NetworkManager.close_multiplayer_connection()
 	get_tree().change_scene_to_file("res://scenes/UI/multiplayer_choice_menu.tscn")
 
 # Updates player count based on number of peers

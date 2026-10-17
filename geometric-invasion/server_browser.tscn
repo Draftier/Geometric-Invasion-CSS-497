@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://cnmfu0thrs6f2"]
+
+[ext_resource type="PackedScene" uid="uid://cnr36qxaqynbc" path="res://scenes/star_background.tscn" id="1_1k87n"]
+[ext_resource type="Script" uid="uid://djgduw3toc837" path="res://server_browser.gd" id="1_yhaig"]
+
+[node name="ServerBrowser" type="Control" unique_id=1590385312]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yhaig")
+
+[node name="StarBackground" parent="." unique_id=1934287316 instance=ExtResource("1_1k87n")]
+unique_name_in_owner = true
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=185778783]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 649.0
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="Panel" type="Panel" parent="MarginContainer" unique_id=613669447]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer" unique_id=479293288]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer2" unique_id=1437078926]
+layout_mode = 2
+
+[node name="ServerInfo" type="HBoxContainer" parent="MarginContainer/VBoxContainer2/VBoxContainer" unique_id=1660320244]
+layout_mode = 2
+
+[node name="RoomNameLabel" type="Label" parent="MarginContainer/VBoxContainer2/VBoxContainer/ServerInfo" unique_id=1325273508]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Name"
+
+[node name="IpAddressLabel" type="Label" parent="MarginContainer/VBoxContainer2/VBoxContainer/ServerInfo" unique_id=2047325546]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Ip Address"
+
+[node name="PlayerCountLabel" type="Label" parent="MarginContainer/VBoxContainer2/VBoxContainer/ServerInfo" unique_id=931986879]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Player Count"
+
+[node name="PlayerCountLabel2" type="Label" parent="MarginContainer/VBoxContainer2/VBoxContainer/ServerInfo" unique_id=607472700]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Join"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer2" unique_id=941197719]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ServerList" type="VBoxContainer" parent="MarginContainer/VBoxContainer2/ScrollContainer" unique_id=1176547174]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BackToButton" type="Button" parent="MarginContainer/VBoxContainer2" unique_id=349531707]
+layout_mode = 2
+text = "Exit Server Browser"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer2/BackToButton" to="." method="_on_back_to_menu_button_pressed"]

@@ -48,7 +48,7 @@ func spawn_player(id : int) -> void:
 	print("spawned_player")
 	
 func remove_player(id : int) -> void:
-	for i in tracked_players.size():
+	for i in tracked_players.size() - 1:
 		if tracked_players[i].get_multiplayer_authority() == id:
 			tracked_players[i].queue_free()
 			tracked_players.remove_at(i)

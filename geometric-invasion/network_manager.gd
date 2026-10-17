@@ -14,6 +14,24 @@ signal connecting_to_server
 signal connection_to_server_failed
 signal game_started_signal
 
+@export var listen_port : int = 8081
+var listen_peer : PacketPeerUDP
+
+@export var broadcast_port : int = 8082
+var broadcast_peer : PacketPeerUDP
+
+@export var broadcast_address : String = "255.255.255.255"
+
+# Object that represents ServerInfo to be sent between scripts
+class ServerInfo:
+	var server_ip : String
+	var server_port : int
+	var server_dictionary
+
+# Dictionary sent from server to clients to represent server name and player count
+var server_dictionary = {"name":"name", "player_count": 0}
+
+
 var wifi_ip_address : String
 var ethernet_ip_address : String
 
@@ -166,3 +184,61 @@ func _on_peer_authenticating(peer_id : int) -> void:
 		else:
 			multiplayer.send_auth(peer_id, "Approved".to_utf8_buffer())
 			multiplayer.complete_auth(peer_id)
+
+func close_multiplayer_connection() -> void:
+	multiplayer.multiplayer_peer.close()
+	multiplayer.multiplayer_peer = OfflineMultiplayerPeer.new()
+	
+func set_up_listen_port() -> void:
+	listen_peer = PacketPeerUDP.new()
+	
+	var error = listen_peer.bind(listen_port)
+	
+	if error != OK:
+		print("Failed to bind to listen port!")
+		
+func set_up_broadcast_port(name : String) -> void:
+	var server_info = ServerInfo
+	
+	server_info.name = name
+	server_info.player_count = multiplayer.get_peers().size() + 1
+	
+	broadcast_peer = PacketPeerUDP.new()
+	broadcast_peer.set_broadcast_enabled(true)
+	broadcast_peer.set_dest_address(broadcast_address, listen_port)
+	
+	var error = broadcast_peer.bind(broadcast_port)
+	
+	if error != OK:
+		print("Failed to bind to broadcast port")
+	
+func obtain_server_information() -> ServerInfo:
+	var current_info = ServerInfo
+	
+	if listen_peer.get_available_packet_count() > 0:
+		# Obtain information from packet header
+		current_info.ip = listen_peer.get_packet_ip()
+		current_info.server_ip = listen_peer.get_packet_ip()
+		current_info.server_port = listen_peer.get_packet_port()
+		
+		# Obtain information from within packet
+		var bytes = listen_peer.get_packet()
+		var data = bytes.get_string_from_ascii()
+		
+		# Set returned server info dictionary to the dictionary given from server
+		current_info.server_dictionary = JSON.parse_string(data)
+		
+		# Return server information
+		return current_info
+		
+	return null
+
+func broadcast_server_information() -> void:
+	var server_info = ServerInfo
+	
+	server_info.name = name
+	server_info.player_count = multiplayer.get_peers().size() + 1
+	
+	var data = JSON.stringify(server_info)
+	var packet = data.to_ascii_buffer()
+	broadcast_peer.put_packet(packet)
