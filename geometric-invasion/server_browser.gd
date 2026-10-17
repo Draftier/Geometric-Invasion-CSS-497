@@ -29,5 +29,5 @@ func _process(delta: float) -> void:
 	if server_info == null:
 		return
 	else:
-		print("server ip: " + server_info.server_ip + " server port: " + server_info.server_port + " server info: " + str(server_info.server_dictionary))
+		print("server ip: " + server_info.server_ip + " server port: " + str(server_info.server_port) + " server info: " + str(server_info.server_dictionary))
 	

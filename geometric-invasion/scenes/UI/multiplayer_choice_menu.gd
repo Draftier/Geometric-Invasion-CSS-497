@@ -3,6 +3,7 @@ extends Control
 @onready var host_button = %HostButton
 @onready var ip_input = %IpInput
 @onready var error_label = %ErrorLabel
+@onready var server_name_input = %ServerNameInput
 
 @onready var ability_dropdown = %AbilityOptions
 @onready var shoot_style_dropdown = %ShootOptions
@@ -27,6 +28,13 @@ func _on_shoot_options_item_selected(index: int) -> void:
 		"Shooting forward and side": Global.player =  load("res://scenes/Player/player_shooting_style_two.tscn")
 
 func _on_host_button_pressed() -> void:
+	if server_name_input.text == "":
+		error_label	.text = "Please enter a name for your server!"
+		var timer = get_tree().create_timer(3.0)
+		await timer.timeout
+		error_label.text = ""
+		return
+	
 	if !NetworkManager.start_server():
 		error_label.text = "Unable to start server"
 		var timer = get_tree().create_timer(1.0)
@@ -34,6 +42,8 @@ func _on_host_button_pressed() -> void:
 		error_label.text = ""
 		return
 
+	NetworkManager.server_dictionary.name = server_name_input.text
+	
 	get_tree().change_scene_to_file("res://multiplayer_lobby_menu.tscn")
 
 

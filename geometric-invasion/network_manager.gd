@@ -26,7 +26,7 @@ var broadcast_peer : PacketPeerUDP
 class ServerInfo:
 	var server_ip : String
 	var server_port : int
-	var server_dictionary
+	var server_dictionary : Dictionary = {}
 
 # Dictionary sent from server to clients to represent server name and player count
 var server_dictionary = {"name":"name", "player_count": 0}
@@ -198,10 +198,10 @@ func set_up_listen_port() -> void:
 		print("Failed to bind to listen port!")
 		
 func set_up_broadcast_port(name : String) -> void:
-	var server_info = ServerInfo
+	var server_info = ServerInfo.new()
 	
-	server_info.name = name
-	server_info.player_count = multiplayer.get_peers().size() + 1
+	server_info.server_dictionary["name"] = name
+	server_info.server_dictionary["player_count"] = multiplayer.get_peers().size() + 1
 	
 	broadcast_peer = PacketPeerUDP.new()
 	broadcast_peer.set_broadcast_enabled(true)
@@ -213,11 +213,10 @@ func set_up_broadcast_port(name : String) -> void:
 		print("Failed to bind to broadcast port")
 	
 func obtain_server_information() -> ServerInfo:
-	var current_info = ServerInfo
+	var current_info = ServerInfo.new()
 	
 	if listen_peer.get_available_packet_count() > 0:
 		# Obtain information from packet header
-		current_info.ip = listen_peer.get_packet_ip()
 		current_info.server_ip = listen_peer.get_packet_ip()
 		current_info.server_port = listen_peer.get_packet_port()
 		
@@ -230,15 +229,16 @@ func obtain_server_information() -> ServerInfo:
 		
 		# Return server information
 		return current_info
-		
 	return null
 
 func broadcast_server_information() -> void:
-	var server_info = ServerInfo
+	var server_info = ServerInfo.new()
 	
-	server_info.name = name
-	server_info.player_count = multiplayer.get_peers().size() + 1
+	server_info.server_dictionary["name"] = name
+	server_info.server_dictionary["player_count"] = multiplayer.get_peers().size() + 1
 	
-	var data = JSON.stringify(server_info)
+	var data = JSON.stringify(server_info.server_dictionary)
 	var packet = data.to_ascii_buffer()
 	broadcast_peer.put_packet(packet)
+	
+	print("Broadcasting server info")

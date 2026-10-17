@@ -7,12 +7,17 @@ extends Control
 @onready var start_game_warning_label = %StartGameWarningLabel
 @onready var ethernet_ip_label = %EthernetIpLabel
 
+@onready var broad_cast_timer : Timer = %BroadcastTimer
+
 # Variable to keep track of the number of players
 var num_players : int = 0
 
 func _ready() -> void:
-	# Start broadcasting to the clients
-	NetworkManager.set_up_broadcast_port("Foo")
+	# Setup the broadcast port
+	NetworkManager.set_up_broadcast_port(NetworkManager.server_dictionary.name)
+		
+	# Start broadcasting to clients
+	broad_cast_timer.start()
 	
 	# Connecting signals to update number of players based on
 	# - Peer connected
@@ -93,3 +98,6 @@ func _on_back_button_pressed() -> void:
 func _update_player_count() -> void:
 	num_players = multiplayer.get_peers().size() + 1
 	player_count_label.text = "Player count : " + str(num_players) + " / 3"
+
+func _on_broadcast_timer_timeout() -> void:
+	NetworkManager.broadcast_server_information()

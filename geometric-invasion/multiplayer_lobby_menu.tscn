@@ -84,5 +84,9 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 48
 horizontal_alignment = 1
 
+[node name="BroadcastTimer" type="Timer" parent="." unique_id=1694062293]
+unique_name_in_owner = true
+
 [connection signal="pressed" from="MarginContainer/Lobby/MarginContainer/VBoxContainer/StartGameButton" to="." method="_on_start_game_button_pressed"]
 [connection signal="pressed" from="MarginContainer/Lobby/MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="timeout" from="BroadcastTimer" to="." method="_on_broadcast_timer_timeout"]

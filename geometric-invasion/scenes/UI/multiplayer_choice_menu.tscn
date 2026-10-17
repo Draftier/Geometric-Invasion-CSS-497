@@ -51,7 +51,6 @@ layout_mode = 2
 theme_override_constants/margin_left = 64
 theme_override_constants/margin_top = 96
 theme_override_constants/margin_right = 64
-theme_override_constants/margin_bottom = 64
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MultiplayerMenu/MarginContainer2" unique_id=81057590]
 layout_mode = 2
@@ -97,13 +96,13 @@ popup/item_1/id = 1
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MultiplayerMenu" unique_id=732092323]
 layout_mode = 2
 theme_override_constants/margin_left = 64
-theme_override_constants/margin_top = 96
+theme_override_constants/margin_top = 64
 theme_override_constants/margin_right = 64
 theme_override_constants/margin_bottom = 64
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MultiplayerMenu/MarginContainer" unique_id=1421020390]
 layout_mode = 2
-theme_override_constants/separation = 15
+theme_override_constants/separation = 10
 
 [node name="ErrorLabel" type="Label" parent="MarginContainer/MultiplayerMenu/MarginContainer/VBoxContainer" unique_id=1805600993]
 unique_name_in_owner = true
@@ -116,6 +115,12 @@ layout_mode = 2
 theme_override_styles/normal = ExtResource("3_cfko7")
 text = "Host server"
 
+[node name="ServerNameInput" type="LineEdit" parent="MarginContainer/MultiplayerMenu/MarginContainer/VBoxContainer" unique_id=646848237]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "Enter name of server"
+alignment = 1
+
 [node name="JoinByIp" type="Button" parent="MarginContainer/MultiplayerMenu/MarginContainer/VBoxContainer" unique_id=1979438574]
 layout_mode = 2
 theme_override_styles/normal = ExtResource("3_cfko7")
@@ -124,7 +129,7 @@ text = "Join Server by ip"
 [node name="IpInput" type="LineEdit" parent="MarginContainer/MultiplayerMenu/MarginContainer/VBoxContainer" unique_id=1162111617]
 unique_name_in_owner = true
 layout_mode = 2
-placeholder_text = "Host IP, e.g. 192.168.***.***"
+placeholder_text = "Enter host IP, e.g. 192.168.***.***"
 alignment = 1
 
 [node name="OpenServerBrowser" type="Button" parent="MarginContainer/MultiplayerMenu/MarginContainer/VBoxContainer" unique_id=332209589]
