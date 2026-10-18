@@ -11,8 +11,6 @@ extends Node
 @export var enemies : Array[basic_enemy]
 var num_enemies
 
-@onready var pool_node = $Pool
-
 signal victory
 
 # Utilized to index the event array
@@ -86,11 +84,6 @@ func sort_events_ascending(a : Spawn_Event, b : Spawn_Event) -> bool:
 		if a.time_to_occur < b.time_to_occur:
 			return true
 	return false
-
-func _on_tree_exiting() -> void:
-	for i in pool_node.get_children():
-		i.queue_free()
-
 
 func _on_enemy_death() -> void:
 	num_enemies -= 1

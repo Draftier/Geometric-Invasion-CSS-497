@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://dmjfjfilssxt6" path="res://scripts/enemy/movement_base.gd" id="7_83p7b"]
 [ext_resource type="Script" uid="uid://c8u5b5y0i25wp" path="res://scripts/enemy/directional_movement.gd" id="8_or8h2"]
 [ext_resource type="Script" uid="uid://thlx0gtur2d4" path="res://scripts/enemy/enemy_movement_data.gd" id="9_ff7mi"]
+[ext_resource type="FontFile" uid="uid://dihhulpjs1064" path="res://assets/fonts/PixelOperator8.ttf" id="10_3cu50"]
 
 [sub_resource type="Resource" id="Resource_o222r"]
 script = ExtResource("8_or8h2")
@@ -56,6 +57,18 @@ position = Vector2(0, -185)
 script = ExtResource("3_3cu50")
 event = SubResource("Resource_d8ny1")
 metadata/_custom_type_script = "uid://cpbp4ohcaqwle"
+
+[node name="LevelTimer" type="Timer" parent="Level_Manager" unique_id=1155754645]
+wait_time = 120.0
+
+[node name="Label" type="Label" parent="Level_Manager" unique_id=1208979116]
+offset_left = -282.0
+offset_top = -135.0
+offset_right = -152.0
+offset_bottom = -112.0
+theme_override_fonts/font = ExtResource("10_3cu50")
+theme_override_font_sizes/font_size = 16
+text = "Time left: "
 
 [node name="StarBackground" parent="." unique_id=1934287316 instance=ExtResource("1_3fc8k")]
 position = Vector2(-292, -153)
