@@ -41,6 +41,7 @@ func _process(delta: float) -> void:
 			if i.name == server_info.server_dictionary["name"]:
 				i.get_node("IpAddressLabel").text = server_info.server_ip
 				i.get_node("PlayerCountLabel").text = str(server_info.server_dictionary["player_count"])
+				i.reset_timer()
 				return
 		
 		add_server_to_server_list(server_info)

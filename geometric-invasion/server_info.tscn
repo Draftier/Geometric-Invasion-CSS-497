@@ -32,4 +32,9 @@ size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("3_ejxhj")
 text = "Join Server"
 
+[node name="StaleServerTimer" type="Timer" parent="." unique_id=1041062561]
+unique_name_in_owner = true
+wait_time = 5.0
+
 [connection signal="pressed" from="JoinButton" to="." method="_on_join_button_pressed"]
+[connection signal="timeout" from="StaleServerTimer" to="." method="_on_stale_server_timer_timeout"]
