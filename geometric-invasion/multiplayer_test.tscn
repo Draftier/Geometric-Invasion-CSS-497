@@ -13,6 +13,19 @@
 [ext_resource type="Script" uid="uid://thlx0gtur2d4" path="res://scripts/enemy/enemy_movement_data.gd" id="9_ff7mi"]
 [ext_resource type="FontFile" uid="uid://dihhulpjs1064" path="res://assets/fonts/PixelOperator8.ttf" id="10_3cu50"]
 
+[sub_resource type="Resource" id="Resource_mobb4"]
+script = ExtResource("5_s8var")
+enemy = ExtResource("6_yywf3")
+number_of_enemies = 4
+metadata/_custom_type_script = "uid://c4twyssjo6an2"
+
+[sub_resource type="Resource" id="Resource_3cu50"]
+script = ExtResource("4_mobb4")
+time_between_spawns = 1.0
+time_to_occur = 10.0
+spawns = Array[ExtResource("5_s8var")]([SubResource("Resource_mobb4")])
+metadata/_custom_type_script = "uid://bewu02jnvwcgy"
+
 [sub_resource type="Resource" id="Resource_o222r"]
 script = ExtResource("8_or8h2")
 direction = 1
@@ -50,6 +63,8 @@ script = ExtResource("1_q3bjm")
 [node name="Level_Manager" type="Node" parent="." unique_id=1423209566 node_paths=PackedStringArray("spawners")]
 script = ExtResource("2_nx75l")
 spawners = [NodePath("EnemySpawnPoint")]
+events = Array[ExtResource("4_mobb4")]([SubResource("Resource_3cu50")])
+level_time = 120.0
 metadata/_custom_type_script = "uid://b2nxf0ct0x4gn"
 
 [node name="EnemySpawnPoint" type="Node2D" parent="Level_Manager" unique_id=1899267310]
