@@ -49,6 +49,9 @@ func _ready() -> void:
 	pass
 	
 func _physics_process(delta: float) -> void:
+	if !multiplayer.is_server():
+		return
+	
 	# Check if the current movement event is directional or curved
 	#print("global position: ", self.global_position)
 	#print("target position: ", target_pos)

@@ -11,9 +11,11 @@ func _ready() -> void:
 	#PoolManager.init_pools()
 	pass
 
-@rpc("authority", "call_local", "reliable")
 # Function to spawn enemies given a spawn event
 func execute_spawn_event(event : Spawn_Event) -> void:
+	if !multiplayer.is_server():
+		return
+	
 	# Check to see if event is null for debugging
 	assert(event != null, "Event given to spawner is null")
 	
