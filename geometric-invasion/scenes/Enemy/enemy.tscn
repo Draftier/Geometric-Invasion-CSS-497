@@ -71,11 +71,6 @@ shader_parameter/Progress = 1.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8tegq"]
 size = Vector2(14, 14)
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_fx0l5"]
-properties/0/path = NodePath(".:position")
-properties/0/spawn = true
-properties/0/replication_mode = 1
-
 [node name="Enemy" type="Node2D" unique_id=682992089 groups=["enemy"]]
 position = Vector2(507, 227)
 script = ExtResource("1_5uy6h")
@@ -109,8 +104,5 @@ metadata/_custom_type_script = "uid://dhan5ja6q4fjx"
 shape = SubResource("RectangleShape2D_8tegq")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=247689940]
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1385526594]
-replication_config = SubResource("SceneReplicationConfig_fx0l5")
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
