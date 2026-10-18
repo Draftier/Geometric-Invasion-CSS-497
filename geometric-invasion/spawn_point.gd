@@ -11,6 +11,7 @@ func _ready() -> void:
 	#PoolManager.init_pools()
 	pass
 
+@rpc("authority", "call_local", "reliable")
 # Function to spawn enemies given a spawn event
 func execute_spawn_event(event : Spawn_Event) -> void:
 	# Check to see if event is null for debugging

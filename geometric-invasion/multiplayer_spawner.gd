@@ -28,7 +28,6 @@ func _on_server_level_entered():
 	#pause_menu.player_connect(player)
 	#print("foo")
 
-
 func spawn_player(id : int) -> void:
 	network_player = Global.player
 
