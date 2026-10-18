@@ -103,7 +103,7 @@ scale = Vector2(0.495, 0.495)
 
 [node name="spawner" type="MultiplayerSpawner" parent="." unique_id=1416540720]
 _spawnable_scenes = PackedStringArray("uid://cp837cm6qinkj", "uid://bpouseiggfiit", "uid://cu4vxxsdf4l7r")
-spawn_path = NodePath("../Level_Manager")
+spawn_path = NodePath("..")
 script = ExtResource("2_sjw14")
 
 [node name="Borders" type="Node2D" parent="." unique_id=522387079]
