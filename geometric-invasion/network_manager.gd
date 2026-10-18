@@ -40,7 +40,8 @@ var game_started : bool = false
 var max_players : int = 2
 
 # Rpc to change scene for all players based on a given path
-@rpc("authority", "call_local", "reliable")
+@rpc("call_local", "reliable")
+#@rpc("authority", call_local", "reliable")
 func change_scene_for_all_players(scene_path : String) -> void:
 	
 	# Error checking for scene change if error push error to error trace
