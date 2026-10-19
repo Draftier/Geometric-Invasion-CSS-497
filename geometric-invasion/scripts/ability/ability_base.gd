@@ -14,8 +14,10 @@ func _ready() -> void:
 	set_physics_process(false)
 	self.visible = false
 
+@rpc("authority", "call_local", "reliable")
 # Function to activate the ability
 func activate() -> bool:
+	
 	set_physics_process(true)
 	
 	# Check if we can activate the ability
@@ -40,12 +42,13 @@ func activate() -> bool:
 	discharge()
 	
 	return true
-	
+
 # Function to check if we can activate ability
 func can_activate() -> bool:
 	if is_charged == true:
 		return true
 	return false
+
 
 # Function to charge ability
 func charge() -> void:
