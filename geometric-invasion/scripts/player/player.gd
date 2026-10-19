@@ -68,7 +68,7 @@ func _process(_delta: float) -> void:
 		if ability.can_activate():
 			print("activating")
 			print(preview_mode)
-			ability.activate()
+			ability.activate.rpc()
 			
 	
 	# Apply velocity to player
