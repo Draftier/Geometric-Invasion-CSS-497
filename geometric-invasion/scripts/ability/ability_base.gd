@@ -13,9 +13,9 @@ var is_active : bool = false
 func _ready() -> void:
 	set_physics_process(false)
 	self.visible = false
-
-@rpc("authority", "call_local", "reliable")
+	
 # Function to activate the ability
+@rpc("any_peer", "call_local", "reliable")
 func activate() -> bool:
 	
 	set_physics_process(true)
