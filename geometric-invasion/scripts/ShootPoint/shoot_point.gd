@@ -9,13 +9,14 @@ var can_shoot : bool = true
 
 func _ready() -> void:
 	# Set the fire rate based on resource
+	
 	$FireRateTimer.wait_time = stats.fire_rate
 
 # When the fire rate timer times out, allow shooting bullets
 func _on_fire_rate_timer_timeout() -> void:
 	can_shoot = true
 
-@rpc("authority", "call_local", "reliable")
+@rpc("any_peer", "call_local", "reliable")
 func shoot() -> void:
 	# Fire bullet then reset can_shoot flag so that we can keep bullet fire rate within timer time
 	if can_shoot == true:
@@ -41,3 +42,11 @@ func shoot() -> void:
 		#add_child(bullet)
 		$FireRateTimer.start()
 		can_shoot = false
+
+@rpc("any_peer", "call_remote", "reliable")
+func request_shoot() -> void:
+	if !multiplayer.is_server():
+		return
+		
+	if can_shoot == true:
+		shoot.rpc()

@@ -54,7 +54,11 @@ func _process(_delta: float) -> void:
 	# Fire bullets from player guns if shoot button held
 	if Input.is_action_pressed("shoot"):
 		for i in $guns.get_children():
-			i.shoot.rpc()
+			if multiplayer.is_server():
+				i.request_shoot()
+			else:
+				i.request_shoot.rpc_id(1)
+			
 	
 	if Input.is_action_pressed("slow"):
 		velocity = direction * player_class.speed / 2
