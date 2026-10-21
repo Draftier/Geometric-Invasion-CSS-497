@@ -40,8 +40,6 @@ func _ready() -> void:
 	# Start the timer
 	$LevelTimer.start()
 	
-	
-	
 func _process(_delta: float) -> void:
 	# Calculate the current time every frame
 	current_time = (($LevelTimer.time_left - $LevelTimer.wait_time) * -1)
@@ -52,7 +50,9 @@ func _process(_delta: float) -> void:
 		## Loop through events
 		if events[event_index].time_to_occur <= current_time:
 			print("Current_time: ", current_time)
-			execute_event(events[event_index])
+			if multiplayer.is_server():
+				execute_event.rpc(event_index)
+			#execute_event(events[event_index])
 			event_index += 1
 	
 	$Label.text = "Time left: " + str($LevelTimer.time_left as int)
@@ -69,9 +69,11 @@ func _process(_delta: float) -> void:
 func _on_level_timer_timeout() -> void:
 	victory.emit()
 	
-	
+
 # Function to execute an event
-func execute_event(event : Spawn_Event) -> void:
+@rpc("authority", "call_local", "reliable")
+func execute_event(event_index : int) -> void:
+	var event = events[event_index]
 	for i in spawners:
 		if i.id == event.spawner:
 			i.execute_spawn_event(event)

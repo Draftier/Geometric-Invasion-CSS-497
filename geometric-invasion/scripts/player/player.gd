@@ -89,7 +89,9 @@ func _process(_delta: float) -> void:
 			self.set_process(false)
 	
 
+
 # Function that allows the player to take damage
+@rpc("any_peer", "call_local", "reliable")
 func take_damage(damage : int) -> void:
 	#print("hit")
 	if invulnerable == false and lives > 0:
@@ -114,3 +116,12 @@ func _on_whole_collision_box_body_entered(body: Node2D) -> void:
 	print("Picked up charge")
 	ability.charge()
 	body.queue_free()
+
+@rpc("any_peer", "call_remote", "reliable")
+func request_take_damage(damage_giver_pos : Vector2, damage_amount : float) -> void:
+	if !multiplayer.is_server():
+		return
+	
+	if damage_giver_pos.distance_to(self.position) <= 5:
+		take_damage.rpc(damage_amount)
+	pass

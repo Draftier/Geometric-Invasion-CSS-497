@@ -39,7 +39,14 @@ var temp_speed : float
 
 var points_copy : Array[Vector2]
 
+var id : int
+
 func _ready() -> void:
+	id = Global.current_enemy_id
+	Global.current_enemy_id += 1 
+	
+	self.name = str(id)
+	
 	# Run the movement events as a coroutine
 	temp_speed = speed
 	execute_movement_events()
@@ -93,6 +100,7 @@ func _physics_process(delta: float) -> void:
 			
 		pass
 
+@rpc("any_peer", "call_local", "reliable")
 # Function to calculate health and hit upon getting hit by player bullet
 func take_damage(damage : int) -> void:
 	# Subtract one  health	
@@ -200,5 +208,16 @@ func leave_screen() -> void:
 	function_direction = direction_vector
 	
 func execute_attack_events() -> void:
-	
 	pass
+
+@rpc("any_peer", "call_remote", "reliable")
+func request_take_damage(damage_giver_pos : Vector2, damage_amount : float) -> void:
+	if !multiplayer.is_server():
+		return
+	
+	if damage_giver_pos.distance_to(self.position) <= 0.1:
+		take_damage.rpc(damage_amount)
+
+
+func _on_child_entered_tree(node: Node) -> void:
+	Global.enemies.push_back(self)
