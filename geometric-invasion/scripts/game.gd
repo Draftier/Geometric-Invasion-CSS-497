@@ -13,12 +13,13 @@ var level
 signal joined_lobby
 
 func _ready() -> void:
-	player = Global.player.instantiate()
-	player.ability_scene =  Global.ability
-	player.global_position = $SpawnPoint.global_position
-	add_child(player)
-	pause_menu.player_connect(player)
-	print("foo")
+	#player = Global.player.instantiate()
+	#player.ability_scene =  Global.ability
+	#player.global_position = $SpawnPoint.global_position
+	#add_child(player)
+	#pause_menu.player_connect(player)
+	#print("foo")
+	pass
 
 func start_game():
 	

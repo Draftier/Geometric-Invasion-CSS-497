@@ -1,11 +1,13 @@
 [gd_scene format=3 uid="uid://dea3ckmfpjcym"]
 
 [ext_resource type="Texture2D" uid="uid://dhr2fi5xwbms0" path="res://assets/sprites/dark_blue.png" id="1_d08ph"]
+[ext_resource type="Script" uid="uid://cxb2451ywbis5" path="res://scenes/Ability/ability_pickup.gd" id="1_ju6xp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1tcrw"]
 size = Vector2(18, 18)
 
 [node name="ability_pickup" type="Node2D" unique_id=1250034196]
+script = ExtResource("1_ju6xp")
 
 [node name="RigidBody2D" type="RigidBody2D" parent="." unique_id=945493596]
 collision_layer = 256

@@ -11,7 +11,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func pause_game() -> void:
 	if get_tree().paused == false:
-		get_tree().paused = true
+		if NetworkManager.is_solo == true:
+			get_tree().paused = true
 		show()
 		get_node("FinishLabel").hide()
 		get_node("RestartButton").hide()

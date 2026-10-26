@@ -11,6 +11,10 @@
 [ext_resource type="Script" uid="uid://dhan5ja6q4fjx" path="res://scripts/hurt_and_hit_box/hitbox.gd" id="5_eacat"]
 [ext_resource type="Script" uid="uid://bho4wgornhjo7" path="res://scripts/enemy/curve_movement.gd" id="5_lkp36"]
 [ext_resource type="PackedScene" uid="uid://dea3ckmfpjcym" path="res://scenes/Ability/ability_pickup.tscn" id="6_fx0l5"]
+[ext_resource type="Script" uid="uid://baq3m8rspbgqo" path="res://scripts/enemy/enemy_attack_data.gd" id="7_h0di7"]
+[ext_resource type="Resource" uid="uid://c3odk6bmthjms" path="res://fan_4_10_1_downward.tres" id="8_t4kp2"]
+[ext_resource type="Resource" uid="uid://bxtpc3ykjuuml" path="res://circle_15_0_1.tres" id="9_k06wl"]
+[ext_resource type="PackedScene" uid="uid://lha1c308vq6j" path="res://emitter.tscn" id="11_fxkbx"]
 
 [sub_resource type="Resource" id="Resource_ixhtt"]
 script = ExtResource("3_ebm38")
@@ -75,8 +79,11 @@ size = Vector2(14, 14)
 position = Vector2(507, 227)
 script = ExtResource("1_5uy6h")
 movement_events = SubResource("Resource_eacat")
+attack_events = Array[ExtResource("7_h0di7")]([ExtResource("8_t4kp2"), ExtResource("9_k06wl")])
 speed = 100
 power_up_charge = ExtResource("6_fx0l5")
+
+[node name="emitter" parent="." unique_id=1019809325 instance=ExtResource("11_fxkbx")]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1252295741]
 material = SubResource("ShaderMaterial_iywne")
@@ -107,3 +114,5 @@ shape = SubResource("RectangleShape2D_8tegq")
 
 [connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+
+[editable path="emitter"]

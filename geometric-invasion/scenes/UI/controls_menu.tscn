@@ -57,6 +57,12 @@ layout_mode = 2
 text = "Press X to activate ability"
 horizontal_alignment = 1
 
+[node name="MovementControls" type="Label" parent="MarginContainer/ControlsVbox" unique_id=365883517]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Arrow keys to move"
+horizontal_alignment = 1
+
 [node name="BackButton" type="Button" parent="MarginContainer/ControlsVbox" unique_id=1931551167]
 unique_name_in_owner = true
 layout_mode = 2

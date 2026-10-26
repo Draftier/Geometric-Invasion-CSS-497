@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemyAttackData" format=3 uid="uid://bxtpc3ykjuuml"]
+
+[ext_resource type="Script" uid="uid://baq3m8rspbgqo" path="res://scripts/enemy/enemy_attack_data.gd" id="1_widfi"]
+
+[resource]
+script = ExtResource("1_widfi")
+num_spawn_points = 15
+angular_spread = 6.283
+bullet_speed = 400.0
+max_times_to_fire = 1
+fire_rate = 1.0
+max_times_to_rotate = 3
+metadata/_custom_type_script = "uid://baq3m8rspbgqo"

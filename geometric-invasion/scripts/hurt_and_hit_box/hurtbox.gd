@@ -21,12 +21,9 @@ func _on_area_entered(hitbox: Hitbox) -> void:
 	# Checks to see if owner node has function to take damage orif
 	# There's another interaction with owner node that is detailed in if statement
 	# If owner of hitbox is not ability then check if it can take damage if so dish out damage
-	if owner.has_method("take_damage") and hitbox.owner is not Ability:
-		if multiplayer.is_server():
-			owner.take_damage.rpc(hitbox.damage)
-		else:
-			owner.request_take_damage.rpc_id(1, hitbox.position, hitbox.damage)
-		
+	if owner.has_method("report_hit") and hitbox.owner is not Ability:
+		owner.report_hit(hitbox.damage)
+
 	# If the owner of the hitbox is an ability then do different checks
 	elif hitbox.owner is Ability:
 		# Check if ability is laser or shield since both laser and shield delete bullets

@@ -43,8 +43,8 @@ speed = 10
 [node name="Sprite2D" parent="." index="0" unique_id=1252295741]
 material = SubResource("ShaderMaterial_6cvjy")
 
-[node name="Rotater" type="Node2D" parent="." index="3" unique_id=1939589730]
+[node name="Rotater" type="Node2D" parent="." index="2" unique_id=1939589730]
 
-[node name="ShootTimer" type="Timer" parent="." index="4" unique_id=1901480178]
+[node name="ShootTimer" type="Timer" parent="." index="3" unique_id=1901480178]
 
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

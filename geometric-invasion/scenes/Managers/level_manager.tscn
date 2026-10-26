@@ -1,15 +1,15 @@
 [gd_scene format=3 uid="uid://cjye6s0e01omf"]
 
 [ext_resource type="Script" uid="uid://b2nxf0ct0x4gn" path="res://scripts/level_manager/level_manager.gd" id="1_06fa7"]
+[ext_resource type="PackedScene" uid="uid://dea3ckmfpjcym" path="res://scenes/Ability/ability_pickup.tscn" id="2_4j0go"]
 [ext_resource type="FontFile" uid="uid://dihhulpjs1064" path="res://assets/fonts/PixelOperator8.ttf" id="2_udsve"]
 
 [node name="LevelManager" type="Node" unique_id=1305954196 groups=["level_manager"]]
 script = ExtResource("1_06fa7")
+power_up_charge = ExtResource("2_4j0go")
 
 [node name="LevelTimer" type="Timer" parent="." unique_id=1173292609]
 wait_time = 120.0
-
-[node name="Pool" type="Node" parent="." unique_id=1705030930]
 
 [node name="Label" type="Label" parent="." unique_id=405150559]
 offset_right = 40.0
@@ -17,6 +17,10 @@ offset_bottom = 23.0
 theme_override_fonts/font = ExtResource("2_udsve")
 theme_override_font_sizes/font_size = 16
 text = "Time left: "
+
+[node name="Enemies" type="Node2D" parent="." unique_id=432049841]
+
+[node name="Powerup" type="Node2D" parent="." unique_id=201648056]
 
 [connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
 [connection signal="timeout" from="LevelTimer" to="." method="_on_level_timer_timeout"]

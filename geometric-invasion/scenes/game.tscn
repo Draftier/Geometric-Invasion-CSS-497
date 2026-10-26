@@ -8,8 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://bpouseiggfiit" path="res://scenes/Enemy/fixed_shoot_enemy.tscn" id="6_gee14"]
 [ext_resource type="PackedScene" uid="uid://cp837cm6qinkj" path="res://scenes/Enemy/enemy.tscn" id="6_kvuet"]
 [ext_resource type="Script" uid="uid://thlx0gtur2d4" path="res://scripts/enemy/enemy_movement_data.gd" id="7_trtic"]
-[ext_resource type="Resource" uid="uid://c641j6jfn477v" path="res://resources/events/test_movement_data_two.tres" id="8_0tnpc"]
-[ext_resource type="PackedScene" uid="uid://cu4vxxsdf4l7r" path="res://scenes/Enemy/rotater_shoot_enemy.tscn" id="8_gee14"]
 [ext_resource type="Script" uid="uid://cpbp4ohcaqwle" path="res://spawn_point.gd" id="9_0tnpc"]
 [ext_resource type="Script" uid="uid://c8u5b5y0i25wp" path="res://scripts/enemy/directional_movement.gd" id="9_ca42v"]
 [ext_resource type="Script" uid="uid://beg1vql3x734k" path="res://scripts/enemy/point.gd" id="9_ssvqc"]
@@ -17,195 +15,14 @@
 [ext_resource type="Script" uid="uid://c4twyssjo6an2" path="res://scripts/event/spawn.gd" id="12_dinhu"]
 [ext_resource type="Script" uid="uid://dmjfjfilssxt6" path="res://scripts/enemy/movement_base.gd" id="13_ir15t"]
 [ext_resource type="FontFile" uid="uid://dihhulpjs1064" path="res://assets/fonts/PixelOperator8.ttf" id="14_trtic"]
+[ext_resource type="Script" uid="uid://dt1c0f6c5i51q" path="res://multiplayer_spawner.gd" id="16_ca42v"]
+[ext_resource type="PackedScene" uid="uid://cw7p0ekjax6t7" path="res://player_user_interface.tscn" id="17_rysoc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d8ny1"]
 size = Vector2(646, 21)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iywne"]
 size = Vector2(20, 618)
-
-[sub_resource type="Resource" id="Resource_bhx41"]
-script = ExtResource("9_ca42v")
-direction = 1
-distance = 0.1
-metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
-
-[sub_resource type="Resource" id="Resource_suyxu"]
-script = ExtResource("9_ssvqc")
-x_percent = 0.05
-y_percent = 0.1
-metadata/_custom_type_script = "uid://beg1vql3x734k"
-
-[sub_resource type="Resource" id="Resource_sgl2t"]
-script = ExtResource("9_ssvqc")
-x_percent = 0.1
-y_percent = 0.15
-metadata/_custom_type_script = "uid://beg1vql3x734k"
-
-[sub_resource type="Resource" id="Resource_qouja"]
-script = ExtResource("9_ssvqc")
-x_percent = 0.2
-metadata/_custom_type_script = "uid://beg1vql3x734k"
-
-[sub_resource type="Curve" id="Curve_ssvqc"]
-_data = [Vector2(0.14772727, 0.3370787), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="Resource" id="Resource_sww3w"]
-script = ExtResource("10_264po")
-point_array = Array[ExtResource("9_ssvqc")]([SubResource("Resource_suyxu"), SubResource("Resource_sgl2t"), SubResource("Resource_qouja")])
-speed_curve = SubResource("Curve_ssvqc")
-metadata/_custom_type_script = "uid://bho4wgornhjo7"
-
-[sub_resource type="Curve" id="Curve_5newe"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.43820232), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="Resource" id="Resource_wljb1"]
-script = ExtResource("9_ca42v")
-direction = 2
-distance = 0.4
-speed_curve = SubResource("Curve_5newe")
-metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
-
-[sub_resource type="Resource" id="Resource_e1j6l"]
-script = ExtResource("7_trtic")
-movement_array = Array[ExtResource("13_ir15t")]([SubResource("Resource_bhx41"), SubResource("Resource_sww3w"), SubResource("Resource_wljb1")])
-wrap_movements = true
-metadata/_custom_type_script = "uid://thlx0gtur2d4"
-
-[sub_resource type="Curve" id="Curve_8xu4i"]
-_data = [Vector2(0.0056818128, 0.7415731), 0.0, 0.0, 0, 0, Vector2(0.48863637, 0.516854), 0.0, 0.0, 0, 0, Vector2(0.92613643, 0.9662922), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="Resource" id="Resource_vx3tf"]
-script = ExtResource("9_ca42v")
-direction = 1
-distance = 0.2
-speed_curve = SubResource("Curve_8xu4i")
-metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
-
-[sub_resource type="Resource" id="Resource_1q8se"]
-script = ExtResource("9_ssvqc")
-x_percent = -0.1
-y_percent = 0.3
-metadata/_custom_type_script = "uid://beg1vql3x734k"
-
-[sub_resource type="Resource" id="Resource_gce0c"]
-script = ExtResource("9_ssvqc")
-x_percent = -0.2
-metadata/_custom_type_script = "uid://beg1vql3x734k"
-
-[sub_resource type="Resource" id="Resource_jubrh"]
-script = ExtResource("10_264po")
-point_array = Array[ExtResource("9_ssvqc")]([SubResource("Resource_1q8se"), SubResource("Resource_gce0c")])
-metadata/_custom_type_script = "uid://bho4wgornhjo7"
-
-[sub_resource type="Resource" id="Resource_ssvqc"]
-script = ExtResource("9_ca42v")
-distance = 0.5
-metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
-
-[sub_resource type="Resource" id="Resource_xkxo5"]
-script = ExtResource("7_trtic")
-movement_array = Array[ExtResource("13_ir15t")]([SubResource("Resource_vx3tf"), SubResource("Resource_jubrh"), SubResource("Resource_ssvqc"), null])
-metadata/_custom_type_script = "uid://thlx0gtur2d4"
-
-[sub_resource type="Curve" id="Curve_e1j6l"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5, 0.8651686), 0.0, 0.0, 0, 0, Vector2(0.9943182, 0.37078655), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="Resource" id="Resource_bt5mj"]
-script = ExtResource("9_ca42v")
-direction = 1
-distance = 0.2
-speed_curve = SubResource("Curve_e1j6l")
-metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
-
-[sub_resource type="Curve" id="Curve_1kice"]
-_data = [Vector2(0.14772727, 0.41573036), 0.0, 0.0, 0, 0, Vector2(0.5056818, 1), 0.0, 0.0, 0, 0, Vector2(0.98295456, 0.4044944), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="Resource" id="Resource_1kice"]
-script = ExtResource("9_ca42v")
-distance = 0.1
-speed_curve = SubResource("Curve_1kice")
-metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
-
-[sub_resource type="Resource" id="Resource_pl11u"]
-script = ExtResource("9_ssvqc")
-x_percent = 0.1
-y_percent = 0.3
-metadata/_custom_type_script = "uid://beg1vql3x734k"
-
-[sub_resource type="Resource" id="Resource_qnb83"]
-script = ExtResource("9_ssvqc")
-x_percent = 0.2
-metadata/_custom_type_script = "uid://beg1vql3x734k"
-
-[sub_resource type="Curve" id="Curve_264po"]
-_data = [Vector2(0.26704544, 0.8876405), 0.0, 0.0, 0, 0, Vector2(0.6136364, 0.41573036), 0.0, 0.0, 0, 0, Vector2(0.95454544, 0.9887641), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="Resource" id="Resource_v2yb1"]
-script = ExtResource("10_264po")
-point_array = Array[ExtResource("9_ssvqc")]([SubResource("Resource_pl11u"), SubResource("Resource_qnb83")])
-speed_curve = SubResource("Curve_264po")
-metadata/_custom_type_script = "uid://bho4wgornhjo7"
-
-[sub_resource type="Resource" id="Resource_5newe"]
-script = ExtResource("7_trtic")
-movement_array = Array[ExtResource("13_ir15t")]([SubResource("Resource_bt5mj"), SubResource("Resource_1kice"), SubResource("Resource_v2yb1")])
-metadata/_custom_type_script = "uid://thlx0gtur2d4"
-
-[sub_resource type="Resource" id="Resource_kmnlx"]
-script = ExtResource("9_ca42v")
-direction = 1
-distance = 0.5
-metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
-
-[sub_resource type="Resource" id="Resource_egg0y"]
-script = ExtResource("9_ssvqc")
-x_percent = 0.05
-y_percent = 0.1
-metadata/_custom_type_script = "uid://beg1vql3x734k"
-
-[sub_resource type="Resource" id="Resource_0ww3c"]
-script = ExtResource("9_ssvqc")
-x_percent = 0.1
-metadata/_custom_type_script = "uid://beg1vql3x734k"
-
-[sub_resource type="Curve" id="Curve_nlm5o"]
-_data = [Vector2(0.09659091, 0.70786524), 0.0, 0.0, 0, 0, Vector2(0.5227273, 0.28089893), 0.0, 0.0, 0, 0, Vector2(1, 0.6966293), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="Resource" id="Resource_rf4g2"]
-script = ExtResource("10_264po")
-point_array = Array[ExtResource("9_ssvqc")]([SubResource("Resource_egg0y"), SubResource("Resource_0ww3c")])
-speed_curve = SubResource("Curve_nlm5o")
-metadata/_custom_type_script = "uid://bho4wgornhjo7"
-
-[sub_resource type="Resource" id="Resource_5k7sd"]
-script = ExtResource("7_trtic")
-movement_array = Array[ExtResource("13_ir15t")]([SubResource("Resource_kmnlx"), SubResource("Resource_rf4g2")])
-metadata/_custom_type_script = "uid://thlx0gtur2d4"
-
-[sub_resource type="Resource" id="Resource_nhfu3"]
-script = ExtResource("9_ca42v")
-direction = 1
-distance = 0.3
-metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
-
-[sub_resource type="Resource" id="Resource_4o8i3"]
-script = ExtResource("9_ca42v")
-distance = 0.3
-metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
-
-[sub_resource type="Resource" id="Resource_qcmcn"]
-script = ExtResource("7_trtic")
-movement_array = Array[ExtResource("13_ir15t")]([SubResource("Resource_nhfu3"), SubResource("Resource_4o8i3")])
-wrap_movements = true
-metadata/_custom_type_script = "uid://thlx0gtur2d4"
 
 [sub_resource type="Resource" id="Resource_2eb2s"]
 script = ExtResource("9_ssvqc")
@@ -219,7 +36,7 @@ x_percent = 0.2
 metadata/_custom_type_script = "uid://beg1vql3x734k"
 
 [sub_resource type="Curve" id="Curve_qcmcn"]
-_data = [Vector2(0.21527778, 0.46067423), 0.0, 0.0, 0, 0, Vector2(0.5, 0.49438208), 0.0, 0.0, 0, 0, Vector2(1, 0.43820232), 0.0, 0.0, 0, 0]
+_data = [Vector2(0.0060060024, 0.45736432), 0.0, 0.0, 0, 0, Vector2(0.5315315, 0.1705426), 0.0, 0.0, 0, 0, Vector2(1, 0.4728682), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="Resource" id="Resource_odhan"]
@@ -245,7 +62,7 @@ metadata/_custom_type_script = "uid://c4twyssjo6an2"
 script = ExtResource("4_kvpfn")
 spawner = 1
 time_between_spawns = 0.5
-time_to_occur = 20.0
+time_to_occur = 5.0
 spawns = Array[ExtResource("12_dinhu")]([SubResource("Resource_trtic")])
 metadata/_custom_type_script = "uid://bewu02jnvwcgy"
 
@@ -272,7 +89,7 @@ metadata/_custom_type_script = "uid://c4twyssjo6an2"
 script = ExtResource("4_kvpfn")
 spawner = 2
 time_between_spawns = 2.5
-time_to_occur = 10.0
+time_to_occur = 15.0
 spawns = Array[ExtResource("12_dinhu")]([SubResource("Resource_rysoc")])
 metadata/_custom_type_script = "uid://bewu02jnvwcgy"
 
@@ -337,7 +154,7 @@ metadata/_custom_type_script = "uid://c4twyssjo6an2"
 script = ExtResource("4_kvpfn")
 spawner = 4
 time_between_spawns = 1.5
-time_to_occur = 5.0
+time_to_occur = 10.0
 spawns = Array[ExtResource("12_dinhu")]([SubResource("Resource_02fa5")])
 metadata/_custom_type_script = "uid://bewu02jnvwcgy"
 
@@ -381,110 +198,54 @@ shape = SubResource("RectangleShape2D_iywne")
 position = Vector2(297, 9)
 shape = SubResource("RectangleShape2D_iywne")
 
-[node name="Rotater_Shoot_Enemy" parent="." unique_id=1705948068 instance=ExtResource("8_gee14")]
-position = Vector2(-6, -11)
-rotate_speed = 20
-shooter_timer_wait_time = 0.2
-spawn_point_count = 8
-radius = 2
-movement_events = SubResource("Resource_e1j6l")
-health = 1000
-
-[node name="Enemy" parent="." unique_id=1367146779 instance=ExtResource("6_gee14")]
-position = Vector2(159, -108)
-rotation = -3.1415925
-shoot_timer_wait_time = 1.1
-movement_events = SubResource("Resource_xkxo5")
-health = 20
-
-[node name="Enemy2" parent="." unique_id=1178207838 instance=ExtResource("6_gee14")]
-position = Vector2(78, -113)
-rotation = -3.1415925
-shoot_timer_wait_time = 1.2
-speed = 75
-health = 20
-
-[node name="Enemy3" parent="." unique_id=154528625 instance=ExtResource("6_gee14")]
-position = Vector2(-60, -118)
-rotation = -3.1415925
-shoot_timer_wait_time = 1.3
-movement_events = SubResource("Resource_5newe")
-speed = 80
-health = 20
-
-[node name="Enemy4" parent="." unique_id=2110015904 instance=ExtResource("6_gee14")]
-position = Vector2(-180, -122)
-rotation = -3.1415925
-shoot_timer_wait_time = 1.4
-movement_events = SubResource("Resource_5k7sd")
-speed = 90
-health = 20
-
-[node name="Enemy5" parent="." unique_id=1787899574 instance=ExtResource("6_gee14")]
-position = Vector2(-233, -124)
-rotation = 1.5707964
-shoot_timer_wait_time = 0.8
-movement_events = ExtResource("8_0tnpc")
-speed = 110
-health = 20
-
-[node name="Enemy6" parent="." unique_id=173122041 instance=ExtResource("6_gee14")]
-position = Vector2(203, -111)
-rotation = -1.5707964
-shoot_timer_wait_time = 0.88
-movement_events = SubResource("Resource_qcmcn")
-speed = 300
-health = 20
-
 [node name="SpawnPoint" type="Marker2D" parent="." unique_id=732362670]
 position = Vector2(-6, 130)
 
-[node name="EnemySpawnPoint" type="Node2D" parent="." unique_id=966124853]
+[node name="LevelManager" parent="." unique_id=1305954196 node_paths=PackedStringArray("spawners") instance=ExtResource("2_gee14")]
+spawners = [NodePath("EnemySpawnPoint"), NodePath("EnemySpawnPoint2"), NodePath("EnemySpawnPoint4"), NodePath("EnemySpawnPoint5")]
+events = Array[ExtResource("4_kvpfn")]([SubResource("Resource_kvuet"), SubResource("Resource_37s47"), SubResource("Resource_nepv3")])
+level_time = 30.0
+
+[node name="Label" parent="LevelManager" index="1" unique_id=405150559]
+offset_left = -282.0
+offset_top = -135.0
+offset_right = -152.0
+offset_bottom = -112.0
+
+[node name="EnemySpawnPoint" type="Node2D" parent="LevelManager" unique_id=966124853]
 position = Vector2(1, -214)
 script = ExtResource("9_0tnpc")
 id = 1
 spawn_interval = 1.0
 metadata/_custom_type_script = "uid://cpbp4ohcaqwle"
 
-[node name="EnemySpawnPoint4" type="Node2D" parent="." unique_id=961822767]
+[node name="EnemySpawnPoint4" type="Node2D" parent="LevelManager" unique_id=961822767]
 position = Vector2(-377, -70)
 script = ExtResource("9_0tnpc")
 id = 4
 spawn_interval = 1.0
 metadata/_custom_type_script = "uid://cpbp4ohcaqwle"
 
-[node name="EnemySpawnPoint5" type="Node2D" parent="." unique_id=1344813384]
+[node name="EnemySpawnPoint5" type="Node2D" parent="LevelManager" unique_id=1344813384]
 position = Vector2(377, -60)
 script = ExtResource("9_0tnpc")
 id = 5
 spawn_interval = 1.0
 metadata/_custom_type_script = "uid://cpbp4ohcaqwle"
 
-[node name="EnemySpawnPoint2" type="Node2D" parent="." unique_id=916848794]
+[node name="EnemySpawnPoint2" type="Node2D" parent="LevelManager" unique_id=916848794]
 position = Vector2(184, 220)
 script = ExtResource("9_0tnpc")
 id = 2
 spawn_interval = 1.0
 metadata/_custom_type_script = "uid://cpbp4ohcaqwle"
 
-[node name="EnemySpawnPoint3" type="Node2D" parent="." unique_id=1311989074]
+[node name="EnemySpawnPoint3" type="Node2D" parent="LevelManager" unique_id=1311989074]
 position = Vector2(-210, -220)
 script = ExtResource("9_0tnpc")
 id = 3
 spawn_interval = 1.0
 metadata/_custom_type_script = "uid://cpbp4ohcaqwle"
-
-[node name="LevelManager" parent="." unique_id=1305954196 node_paths=PackedStringArray("spawners", "enemies") instance=ExtResource("2_gee14")]
-spawners = [NodePath("../EnemySpawnPoint"), NodePath("../EnemySpawnPoint2"), NodePath("../EnemySpawnPoint4"), NodePath("../EnemySpawnPoint5")]
-events = Array[ExtResource("4_kvpfn")]([SubResource("Resource_kvuet"), SubResource("Resource_37s47"), SubResource("Resource_nepv3")])
-level_time = 30.0
-enemies = [null, null, null, null, null, null, null]
-
-[node name="Label" parent="LevelManager" index="2" unique_id=405150559]
-offset_left = -282.0
-offset_top = -135.0
-offset_right = -152.0
-offset_bottom = -112.0
 
 [node name="Label" type="Label" parent="." unique_id=675057189]
 offset_left = -105.0
@@ -494,6 +255,21 @@ offset_bottom = -125.0
 theme_override_fonts/font = ExtResource("14_trtic")
 theme_override_font_sizes/font_size = 32
 text = "Survive!"
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1122154381]
+unique_name_in_owner = true
+zoom = Vector2(2, 2)
+limit_left = -191
+limit_top = -162
+limit_right = 188
+limit_bottom = 163
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1298966056 node_paths=PackedStringArray("player_user_interface")]
+spawn_path = NodePath("..")
+script = ExtResource("16_ca42v")
+player_user_interface = NodePath("../PlayerUserInterface")
+
+[node name="PlayerUserInterface" parent="." unique_id=330220776 instance=ExtResource("17_rysoc")]
 
 [connection signal="victory" from="LevelManager" to="PauseMenu" method="_on_level_manager_victory"]
 

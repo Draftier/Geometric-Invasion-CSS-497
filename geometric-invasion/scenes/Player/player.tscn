@@ -10,11 +10,13 @@
 [ext_resource type="Script" uid="uid://dhan5ja6q4fjx" path="res://scripts/hurt_and_hit_box/hitbox.gd" id="7_dl1wr"]
 [ext_resource type="Texture2D" uid="uid://uvk4s6j4ws4c" path="res://assets/sprites/circle_1.png" id="9_wwtew"]
 [ext_resource type="FontFile" uid="uid://dihhulpjs1064" path="res://assets/fonts/PixelOperator8.ttf" id="10_uxo23"]
+[ext_resource type="PackedScene" uid="uid://cw7p0ekjax6t7" path="res://player_user_interface.tscn" id="11_n7rn1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a06cl"]
 radius = 9.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fjrip"]
+resource_local_to_scene = true
 shader = ExtResource("4_tuyoq")
 shader_parameter/flash_color = Color(1, 1, 1, 0)
 shader_parameter/flash_pct = 0.0
@@ -128,6 +130,7 @@ collision_mask = 32
 motion_mode = 1
 script = ExtResource("1_g2els")
 player_class = ExtResource("2_a06cl")
+lives = 2
 ability_scene = ExtResource("3_dl1wr")
 
 [node name="AbilityPickUpCollisionShape" type="Area2D" parent="." unique_id=1308904982]
@@ -137,16 +140,8 @@ collision_mask = 256
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AbilityPickUpCollisionShape" unique_id=1493186045]
 shape = SubResource("CircleShape2D_a06cl")
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1316585369]
-unique_name_in_owner = true
-zoom = Vector2(2, 2)
-limit_left = -191
-limit_top = -162
-limit_right = 188
-limit_bottom = 163
-
 [node name="InvulnerabilityTimer" type="Timer" parent="." unique_id=126532848]
-wait_time = 5.0
+wait_time = 2.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=919492480]
 material = SubResource("ShaderMaterial_fjrip")
@@ -158,6 +153,7 @@ scale = Vector2(0.02580646, 0.02580646)
 texture = ExtResource("9_wwtew")
 
 [node name="Hitbox" type="Area2D" parent="AnimatedSprite2D" unique_id=1759807793]
+unique_name_in_owner = true
 collision_mask = 32
 monitoring = false
 script = ExtResource("7_dl1wr")
@@ -167,6 +163,7 @@ metadata/_custom_type_script = "uid://dhan5ja6q4fjx"
 shape = SubResource("CircleShape2D_u8vuu")
 
 [node name="Hurtbox" type="Area2D" parent="AnimatedSprite2D" unique_id=352799352]
+unique_name_in_owner = true
 collision_layer = 2
 collision_mask = 4
 monitorable = false
@@ -197,6 +194,9 @@ shape = SubResource("CircleShape2D_uxo23")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=730239114]
 replication_config = SubResource("SceneReplicationConfig_uxo23")
+
+[node name="PlayerUserInterface" parent="." unique_id=415349145 instance=ExtResource("11_n7rn1")]
+unique_name_in_owner = true
 
 [connection signal="body_entered" from="AbilityPickUpCollisionShape" to="." method="_on_whole_collision_box_body_entered"]
 [connection signal="timeout" from="InvulnerabilityTimer" to="." method="_on_invulnerability_timer_timeout"]

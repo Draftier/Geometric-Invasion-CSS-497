@@ -8,6 +8,7 @@ func _ready() -> void:
 	hitbox.monitorable = is_active
 	hitbox.monitoring = is_active
 
+@rpc("any_peer", "call_local", "reliable")
 func fire_ability(delta : float) -> void:
 	hitbox.monitorable = is_active
 	hitbox.monitoring = is_active

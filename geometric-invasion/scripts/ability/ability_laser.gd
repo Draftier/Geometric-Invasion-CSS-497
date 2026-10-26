@@ -18,7 +18,8 @@ func _ready() -> void:
 	hitbox.monitoring = is_active
 	
 	set_color(color)
-	
+
+@rpc("any_peer", "call_local", "reliable")
 func fire_ability(_delta : float) -> void:
 	
 	ray_cast.target_position.y = move_toward(

@@ -31,7 +31,6 @@ class ServerInfo:
 # Dictionary sent from server to clients to represent server name and player count
 var server_dictionary = {"name":"name", "player_count": 0}
 
-
 var wifi_ip_address : String
 var ethernet_ip_address : String
 
@@ -107,6 +106,8 @@ func get_host_ethernet_ip() -> String:
 
 # Function to start server
 func start_server() -> bool:
+	print("This is a host")
+	
 	# Clean up any zombie servers in case
 	stop_server()
 	
@@ -130,6 +131,7 @@ func start_server() -> bool:
 
 # Function to start the client
 func start_client(ip_addres : String) -> bool:
+	print("This is a client")
 	# Set ip_address to given ip_address
 	ip_address = ip_addres
 	
@@ -154,7 +156,7 @@ func stop_server() -> void:
 		peer.close()
 	
 	# Set peer values to null and is_solo to true
-	multiplayer.multiplayer_peer = null
+	multiplayer.multiplayer_peer = OfflineMultiplayerPeer.new()
 	peer = null
 	is_solo = true
 

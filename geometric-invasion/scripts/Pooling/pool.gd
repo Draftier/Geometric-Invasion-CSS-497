@@ -48,6 +48,13 @@ func pull_from_pool() -> Node:
 		for i in bullets:
 			if i.is_active == false:
 				bullet = i
+	
+	if bullet == null:
+		bullet = bullet_scene.instantiate()
+		add_child(bullet)
+		bullet.connect("exited_screen", _on_bullet_exit_screen)
+		add_to_pool(bullet)
+	
 	# Unpause calculation from bullet being pulled from pool
 	bullet.activate()
 	

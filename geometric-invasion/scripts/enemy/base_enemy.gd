@@ -9,12 +9,14 @@ extends Node2D
 # Temp death signal for playatest
 signal death
 signal movement_finished
+signal hit_report(id : int, damage : float)
 
 @onready var screen : Vector2 = get_viewport_rect().size
+@onready var emitter : Emitter = $emitter
 
 # Movement and attack resources that enemies will utilize
 @export var movement_events : EnemyMovementData
-@export var attack_events : EnemyAttackData
+@export var attack_events : Array[EnemyAttackData]
 
 # Variables to controll full speed, health, and move distance
 @export var speed = 10
@@ -42,16 +44,14 @@ var points_copy : Array[Vector2]
 var id : int
 
 func _ready() -> void:
-	id = Global.current_enemy_id
-	Global.current_enemy_id += 1 
+	#id = Global.current_enemy_id
+	#Global.current_enemy_id += 1 
 	
 	self.name = str(id)
-	
 	# Run the movement events as a coroutine
 	temp_speed = speed
 	execute_movement_events()
-	
-	
+	execute_attack_events()
 
 	pass
 	
@@ -100,38 +100,31 @@ func _physics_process(delta: float) -> void:
 			
 		pass
 
-@rpc("any_peer", "call_local", "reliable")
 # Function to calculate health and hit upon getting hit by player bullet
 func take_damage(damage : int) -> void:
+	if !multiplayer.is_server():
+		return
+	
 	# Subtract one  health	
 	if health - damage < 0:
 		health = 0
 	else:
 		health -= damage
 	
-	# If health zero then free
+	## If health zero then free
 	if health == 0 and is_dead == false:
-		# death.emit.call_deferred()
 		is_dead = true
-		death.emit()
+		death.emit(id)
 		print("dying")
+		return
 		
-		if randf() < 0.5:
-			var power_up = power_up_charge.instantiate()
-			power_up.position = self.position
-			get_parent().call_deferred("add_child", power_up)
-		
-		queue_free()
-	# If health not zero then set progress of flash shader
-	var tween = create_tween()
-	tween.tween_property($Sprite2D.material, 'shader_parameter/Progress', 0.0, 0.01)
-	tween.tween_property($Sprite2D.material, 'shader_parameter/Progress', 1.0, 0.02)	
+	flash_enemy.rpc()
 
 
 # If the enemy exits the screen then free it
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
-	death.emit()
-	queue_free()
+	death.emit(id)
+	#queue_free()
 
 
 func execute_movement_events() -> void:
@@ -207,17 +200,25 @@ func leave_screen() -> void:
 	# Move using previous direction vector until out of screen
 	function_direction = direction_vector
 	
-func execute_attack_events() -> void:
-	pass
+func report_hit(damage : float) -> void:
+	hit_report.emit(id, damage)
 
-@rpc("any_peer", "call_remote", "reliable")
-func request_take_damage(damage_giver_pos : Vector2, damage_amount : float) -> void:
-	if !multiplayer.is_server():
+@rpc("any_peer", "call_local", "reliable")
+func flash_enemy() -> void:
+	var tween = create_tween()
+	tween.tween_property($Sprite2D.material, 'shader_parameter/Progress', 0.0, 0.01)
+	tween.tween_property($Sprite2D.material, 'shader_parameter/Progress', 1.0, 0.02)	
+	
+func execute_attack_events() -> void:
+	if attack_events.is_empty():
+		print("No attacks present")
 		return
 	
-	if damage_giver_pos.distance_to(self.position) <= 0.1:
-		take_damage.rpc(damage_amount)
-
-
-func _on_child_entered_tree(node: Node) -> void:
-	Global.enemies.push_back(self)
+	for i in attack_events:
+		print("Executing event")
+		var attack_data = i as EnemyAttackData
+		
+		
+		emitter.set_attack_event(attack_data)
+		
+		await emitter.event_finished
