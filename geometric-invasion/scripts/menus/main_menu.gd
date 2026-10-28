@@ -43,4 +43,4 @@ func _on_multiplayer_not_implemented_pressed() -> void:
 
 
 func _on_settings_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://settings_menu.tscn")
+	get_tree().change_scene_to_file("res://scenes/UI/settings_menu.tscn")

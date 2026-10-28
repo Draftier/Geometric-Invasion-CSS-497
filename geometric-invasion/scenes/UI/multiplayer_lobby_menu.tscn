@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://du5a2qpbn5avw"]
 
-[ext_resource type="Script" uid="uid://d31bgscf1dbt" path="res://multiplayer_lobby_menu.gd" id="1_2d6oa"]
-[ext_resource type="PackedScene" uid="uid://cnr36qxaqynbc" path="res://scenes/star_background.tscn" id="2_lst0y"]
-[ext_resource type="Theme" uid="uid://dy2kgmqgonako" path="res://theme_test.tres" id="3_77o5t"]
-[ext_resource type="StyleBox" uid="uid://dn5gd6byuqut8" path="res://button_theme.tres" id="4_hhiqo"]
+[ext_resource type="Script" uid="uid://d31bgscf1dbt" path="res://scripts/menus/multiplayer_lobby_menu.gd" id="1_gty5r"]
+[ext_resource type="PackedScene" uid="uid://cnr36qxaqynbc" path="res://scenes/star_background.tscn" id="2_sk1sy"]
+[ext_resource type="Theme" uid="uid://dy2kgmqgonako" path="res://theme_test.tres" id="3_xv84o"]
+[ext_resource type="StyleBox" uid="uid://dn5gd6byuqut8" path="res://button_theme.tres" id="4_oeyph"]
 
 [node name="MultiplayerLobbyMenu" type="Control" unique_id=1575445770]
 layout_mode = 3
@@ -12,9 +12,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_2d6oa")
+script = ExtResource("1_gty5r")
 
-[node name="StarBackground" parent="." unique_id=1934287316 instance=ExtResource("2_lst0y")]
+[node name="StarBackground" parent="." unique_id=1934287316 instance=ExtResource("2_sk1sy")]
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=904519966]
 layout_mode = 1
@@ -23,7 +23,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("3_77o5t")
+theme = ExtResource("3_xv84o")
 theme_override_constants/margin_left = 32
 theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
@@ -70,12 +70,12 @@ layout_mode = 2
 
 [node name="StartGameButton" type="Button" parent="MarginContainer/Lobby/MarginContainer/VBoxContainer" unique_id=1275782273]
 layout_mode = 2
-theme_override_styles/normal = ExtResource("4_hhiqo")
+theme_override_styles/normal = ExtResource("4_oeyph")
 text = "Start Game"
 
 [node name="BackButton" type="Button" parent="MarginContainer/Lobby/MarginContainer/VBoxContainer" unique_id=766023731]
 layout_mode = 2
-theme_override_styles/normal = ExtResource("4_hhiqo")
+theme_override_styles/normal = ExtResource("4_oeyph")
 text = "Back"
 
 [node name="ConnectionErrorLabel" type="Label" parent="MarginContainer/Lobby" unique_id=2024606852]

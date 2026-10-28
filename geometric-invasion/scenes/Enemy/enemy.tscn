@@ -14,7 +14,7 @@
 [ext_resource type="Script" uid="uid://baq3m8rspbgqo" path="res://scripts/enemy/enemy_attack_data.gd" id="7_h0di7"]
 [ext_resource type="Resource" uid="uid://c3odk6bmthjms" path="res://fan_4_10_1_downward.tres" id="8_t4kp2"]
 [ext_resource type="Resource" uid="uid://bxtpc3ykjuuml" path="res://circle_15_0_1.tres" id="9_k06wl"]
-[ext_resource type="PackedScene" uid="uid://lha1c308vq6j" path="res://emitter.tscn" id="11_fxkbx"]
+[ext_resource type="PackedScene" uid="uid://lha1c308vq6j" path="res://scenes/Enemy/emitter.tscn" id="11_fxkbx"]
 
 [sub_resource type="Resource" id="Resource_ixhtt"]
 script = ExtResource("3_ebm38")

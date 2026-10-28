@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://bvcd8wmyx4o8o"]
 
-[ext_resource type="Script" uid="uid://cejwab54dw4r5" path="res://scripts/game.gd" id="1_tvakj"]
+[ext_resource type="Script" uid="uid://cejwab54dw4r5" path="res://scripts/singleton/game.gd" id="1_tvakj"]
 [ext_resource type="PackedScene" uid="uid://d043xpjj4wac0" path="res://scenes/UI/pause_menu.tscn" id="2_w3ok3"]
 [ext_resource type="Texture2D" uid="uid://bvt77d3gapc08" path="res://assets/sprites/background_1.png" id="3_7ubi8"]
 [ext_resource type="Texture2D" uid="uid://dhr2fi5xwbms0" path="res://assets/sprites/dark_blue.png" id="4_dk4d7"]
@@ -10,7 +10,7 @@
 [ext_resource type="Script" uid="uid://bho4wgornhjo7" path="res://scripts/enemy/curve_movement.gd" id="9_g7wpi"]
 [ext_resource type="Script" uid="uid://thlx0gtur2d4" path="res://scripts/enemy/enemy_movement_data.gd" id="10_pesba"]
 [ext_resource type="PackedScene" uid="uid://bpouseiggfiit" path="res://scenes/Enemy/fixed_shoot_enemy.tscn" id="11_ademj"]
-[ext_resource type="Script" uid="uid://cpbp4ohcaqwle" path="res://spawn_point.gd" id="13_lwgx1"]
+[ext_resource type="Script" uid="uid://cpbp4ohcaqwle" path="res://scripts/spawn_point.gd" id="13_lwgx1"]
 [ext_resource type="PackedScene" uid="uid://cjye6s0e01omf" path="res://scenes/Managers/level_manager.tscn" id="14_qm4mo"]
 [ext_resource type="Script" uid="uid://bewu02jnvwcgy" path="res://scripts/event/spawn_event_data.gd" id="15_823u0"]
 [ext_resource type="Script" uid="uid://c4twyssjo6an2" path="res://scripts/event/spawn.gd" id="16_f5atd"]

@@ -64,7 +64,7 @@ func _on_game_started_error() -> void:
 	await timer.timeout
 
 func _on_server_connected() -> void:
-	get_tree().change_scene_to_file("res://multiplayer_lobby_menu.tscn")
+	get_tree().change_scene_to_file("res://scenes/UI/multiplayer_lobby_menu.tscn")
 	
 func add_server_to_server_list(server_info) -> void:
 	var child = $MarginContainer/VBoxContainer2/ScrollContainer/ServerList.find_child(server_info.server_dictionary["name"])

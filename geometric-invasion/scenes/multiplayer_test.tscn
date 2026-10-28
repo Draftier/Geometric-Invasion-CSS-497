@@ -1,47 +1,47 @@
 [gd_scene format=3 uid="uid://booph1yenfeux"]
 
-[ext_resource type="PackedScene" uid="uid://cnr36qxaqynbc" path="res://scenes/star_background.tscn" id="1_3fc8k"]
-[ext_resource type="Script" uid="uid://dkna4bvtvxq32" path="res://multiplayer_test.gd" id="1_q3bjm"]
-[ext_resource type="Script" uid="uid://b2nxf0ct0x4gn" path="res://scripts/level_manager/level_manager.gd" id="2_nx75l"]
-[ext_resource type="Script" uid="uid://dt1c0f6c5i51q" path="res://multiplayer_spawner.gd" id="2_sjw14"]
-[ext_resource type="Script" uid="uid://cpbp4ohcaqwle" path="res://spawn_point.gd" id="3_3cu50"]
-[ext_resource type="Script" uid="uid://bewu02jnvwcgy" path="res://scripts/event/spawn_event_data.gd" id="4_mobb4"]
-[ext_resource type="Script" uid="uid://c4twyssjo6an2" path="res://scripts/event/spawn.gd" id="5_s8var"]
-[ext_resource type="Script" uid="uid://baq3m8rspbgqo" path="res://scripts/enemy/enemy_attack_data.gd" id="6_83p7b"]
-[ext_resource type="PackedScene" uid="uid://cp837cm6qinkj" path="res://scenes/Enemy/enemy.tscn" id="6_yywf3"]
-[ext_resource type="Script" uid="uid://dmjfjfilssxt6" path="res://scripts/enemy/movement_base.gd" id="7_83p7b"]
-[ext_resource type="Resource" uid="uid://bxtpc3ykjuuml" path="res://circle_15_0_1.tres" id="8_ff7mi"]
-[ext_resource type="Script" uid="uid://c8u5b5y0i25wp" path="res://scripts/enemy/directional_movement.gd" id="8_or8h2"]
-[ext_resource type="Script" uid="uid://thlx0gtur2d4" path="res://scripts/enemy/enemy_movement_data.gd" id="9_ff7mi"]
-[ext_resource type="PackedScene" uid="uid://dea3ckmfpjcym" path="res://scenes/Ability/ability_pickup.tscn" id="9_mobb4"]
-[ext_resource type="FontFile" uid="uid://dihhulpjs1064" path="res://assets/fonts/PixelOperator8.ttf" id="10_3cu50"]
-[ext_resource type="Resource" uid="uid://c3odk6bmthjms" path="res://fan_4_10_1_downward.tres" id="12_or8h2"]
-[ext_resource type="PackedScene" uid="uid://cw7p0ekjax6t7" path="res://player_user_interface.tscn" id="14_s8var"]
+[ext_resource type="Script" uid="uid://dkna4bvtvxq32" path="res://scripts/menus/multiplayer_test.gd" id="1_8kenn"]
+[ext_resource type="Script" uid="uid://b2nxf0ct0x4gn" path="res://scripts/level_manager/level_manager.gd" id="2_feea6"]
+[ext_resource type="Script" uid="uid://bewu02jnvwcgy" path="res://scripts/event/spawn_event_data.gd" id="3_6mro0"]
+[ext_resource type="Script" uid="uid://c4twyssjo6an2" path="res://scripts/event/spawn.gd" id="4_dg73d"]
+[ext_resource type="PackedScene" uid="uid://cp837cm6qinkj" path="res://scenes/Enemy/enemy.tscn" id="5_6qfb6"]
+[ext_resource type="Script" uid="uid://baq3m8rspbgqo" path="res://scripts/enemy/enemy_attack_data.gd" id="6_ibgdi"]
+[ext_resource type="Resource" uid="uid://c3odk6bmthjms" path="res://fan_4_10_1_downward.tres" id="7_0u7d8"]
+[ext_resource type="Resource" uid="uid://bxtpc3ykjuuml" path="res://circle_15_0_1.tres" id="8_8dt1a"]
+[ext_resource type="Script" uid="uid://dmjfjfilssxt6" path="res://scripts/enemy/movement_base.gd" id="9_yvbbh"]
+[ext_resource type="Script" uid="uid://c8u5b5y0i25wp" path="res://scripts/enemy/directional_movement.gd" id="10_yrd5d"]
+[ext_resource type="Script" uid="uid://thlx0gtur2d4" path="res://scripts/enemy/enemy_movement_data.gd" id="11_indfc"]
+[ext_resource type="PackedScene" uid="uid://dea3ckmfpjcym" path="res://scenes/Ability/ability_pickup.tscn" id="12_u5kbj"]
+[ext_resource type="Script" uid="uid://cpbp4ohcaqwle" path="res://scripts/spawn_point.gd" id="13_mqxpw"]
+[ext_resource type="FontFile" uid="uid://dihhulpjs1064" path="res://assets/fonts/PixelOperator8.ttf" id="14_bhepv"]
+[ext_resource type="PackedScene" uid="uid://cnr36qxaqynbc" path="res://scenes/star_background.tscn" id="15_iudw3"]
+[ext_resource type="Script" uid="uid://dt1c0f6c5i51q" path="res://scripts/level_manager/multiplayer_spawner.gd" id="16_r25ah"]
+[ext_resource type="PackedScene" uid="uid://cw7p0ekjax6t7" path="res://scenes/UI/player_user_interface.tscn" id="17_kvop5"]
 
 [sub_resource type="Resource" id="Resource_mobb4"]
-script = ExtResource("8_or8h2")
+script = ExtResource("10_yrd5d")
 direction = 1
 distance = 0.8
 metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
 
 [sub_resource type="Resource" id="Resource_3cu50"]
-script = ExtResource("9_ff7mi")
-movement_array = Array[ExtResource("7_83p7b")]([SubResource("Resource_mobb4")])
+script = ExtResource("11_indfc")
+movement_array = Array[ExtResource("9_yvbbh")]([SubResource("Resource_mobb4")])
 metadata/_custom_type_script = "uid://thlx0gtur2d4"
 
 [sub_resource type="Resource" id="Resource_s8var"]
-script = ExtResource("5_s8var")
-enemy = ExtResource("6_yywf3")
+script = ExtResource("4_dg73d")
+enemy = ExtResource("5_6qfb6")
 enemy_movement_pattern = SubResource("Resource_3cu50")
-enemy_attack_pattern = Array[ExtResource("6_83p7b")]([ExtResource("12_or8h2"), ExtResource("8_ff7mi")])
+enemy_attack_pattern = Array[ExtResource("6_ibgdi")]([ExtResource("7_0u7d8"), ExtResource("8_8dt1a")])
 number_of_enemies = 4
 metadata/_custom_type_script = "uid://c4twyssjo6an2"
 
 [sub_resource type="Resource" id="Resource_yywf3"]
-script = ExtResource("4_mobb4")
+script = ExtResource("3_6mro0")
 time_between_spawns = 1.0
 time_to_occur = 5.0
-spawns = Array[ExtResource("5_s8var")]([SubResource("Resource_s8var")])
+spawns = Array[ExtResource("4_dg73d")]([SubResource("Resource_s8var")])
 metadata/_custom_type_script = "uid://bewu02jnvwcgy"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q3bjm"]
@@ -51,19 +51,19 @@ size = Vector2(646, 21)
 size = Vector2(20, 618)
 
 [node name="MultiplayerTest" type="Node2D" unique_id=543451976]
-script = ExtResource("1_q3bjm")
+script = ExtResource("1_8kenn")
 
 [node name="Level_Manager" type="Node" parent="." unique_id=1423209566 node_paths=PackedStringArray("spawners")]
-script = ExtResource("2_nx75l")
+script = ExtResource("2_feea6")
 spawners = [NodePath("EnemySpawnPoint")]
-events = Array[ExtResource("4_mobb4")]([SubResource("Resource_yywf3")])
+events = Array[ExtResource("3_6mro0")]([SubResource("Resource_yywf3")])
 level_time = 120.0
-power_up_charge = ExtResource("9_mobb4")
+power_up_charge = ExtResource("12_u5kbj")
 metadata/_custom_type_script = "uid://b2nxf0ct0x4gn"
 
 [node name="EnemySpawnPoint" type="Node2D" parent="Level_Manager" unique_id=1899267310]
 position = Vector2(0, -185)
-script = ExtResource("3_3cu50")
+script = ExtResource("13_mqxpw")
 metadata/_custom_type_script = "uid://cpbp4ohcaqwle"
 
 [node name="LevelTimer" type="Timer" parent="Level_Manager" unique_id=1155754645]
@@ -74,19 +74,19 @@ offset_left = -282.0
 offset_top = -135.0
 offset_right = -152.0
 offset_bottom = -112.0
-theme_override_fonts/font = ExtResource("10_3cu50")
+theme_override_fonts/font = ExtResource("14_bhepv")
 theme_override_font_sizes/font_size = 16
 text = "Time left: "
 
 [node name="Enemies" type="Node2D" parent="Level_Manager" unique_id=1082741761]
 
-[node name="StarBackground" parent="." unique_id=1934287316 instance=ExtResource("1_3fc8k")]
+[node name="StarBackground" parent="." unique_id=1934287316 instance=ExtResource("15_iudw3")]
 position = Vector2(-292, -153)
 scale = Vector2(0.495, 0.495)
 
 [node name="spawner" type="MultiplayerSpawner" parent="." unique_id=1416540720 node_paths=PackedStringArray("player_user_interface")]
 spawn_path = NodePath("..")
-script = ExtResource("2_sjw14")
+script = ExtResource("16_r25ah")
 player_user_interface = NodePath("../PlayerUserInterface")
 
 [node name="Borders" type="Node2D" parent="." unique_id=522387079]
@@ -123,4 +123,4 @@ limit_top = -162
 limit_right = 188
 limit_bottom = 163
 
-[node name="PlayerUserInterface" parent="." unique_id=415349145 instance=ExtResource("14_s8var")]
+[node name="PlayerUserInterface" parent="." unique_id=415349145 instance=ExtResource("17_kvop5")]

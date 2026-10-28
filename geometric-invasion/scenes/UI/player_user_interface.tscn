@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://cw7p0ekjax6t7"]
 
-[ext_resource type="Script" uid="uid://bwd3m5w7tk1om" path="res://player_user_interface.gd" id="1_g8m60"]
-[ext_resource type="PackedScene" uid="uid://dmjxmpsy3qbcm" path="res://player_ui_entry.tscn" id="2_poeie"]
+[ext_resource type="Script" uid="uid://bwd3m5w7tk1om" path="res://scripts/menus/player_user_interface.gd" id="1_vbvkd"]
+[ext_resource type="PackedScene" uid="uid://dmjxmpsy3qbcm" path="res://scenes/UI/player_ui_entry.tscn" id="2_ih0ue"]
 
 [node name="PlayerUserInterface" type="CanvasLayer" unique_id=330220776]
-script = ExtResource("1_g8m60")
-player_info_scene = ExtResource("2_poeie")
+script = ExtResource("1_vbvkd")
+player_info_scene = ExtResource("2_ih0ue")
 
 [node name="LivesContainer" type="HBoxContainer" parent="." unique_id=909307650]
 unique_name_in_owner = true

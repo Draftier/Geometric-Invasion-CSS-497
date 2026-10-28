@@ -10,7 +10,7 @@
 [ext_resource type="Script" uid="uid://dhan5ja6q4fjx" path="res://scripts/hurt_and_hit_box/hitbox.gd" id="7_dl1wr"]
 [ext_resource type="Texture2D" uid="uid://uvk4s6j4ws4c" path="res://assets/sprites/circle_1.png" id="9_wwtew"]
 [ext_resource type="FontFile" uid="uid://dihhulpjs1064" path="res://assets/fonts/PixelOperator8.ttf" id="10_uxo23"]
-[ext_resource type="PackedScene" uid="uid://cw7p0ekjax6t7" path="res://player_user_interface.tscn" id="11_n7rn1"]
+[ext_resource type="PackedScene" uid="uid://cw7p0ekjax6t7" path="res://scenes/UI/player_user_interface.tscn" id="11_n7rn1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a06cl"]
 radius = 9.0

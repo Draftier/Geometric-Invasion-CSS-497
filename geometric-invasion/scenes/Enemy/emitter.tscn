@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://lha1c308vq6j"]
+
+[ext_resource type="Script" uid="uid://bg7ka1615oja3" path="res://scripts/enemy/emitter.gd" id="1_hvcdl"]
+[ext_resource type="Resource" uid="uid://c3odk6bmthjms" path="res://fan_4_10_1_downward.tres" id="2_jkfdd"]
+[ext_resource type="PackedScene" uid="uid://d02ey725i8t81" path="res://scenes/Enemy/obstacle_bullet_base.tscn" id="3_it2u0"]
+
+[node name="emitter" type="Node2D" unique_id=1019809325]
+script = ExtResource("1_hvcdl")
+attack_event = ExtResource("2_jkfdd")
+bullet_speed = 250.03
+bullet = ExtResource("3_it2u0")
+
+[node name="Timer" type="Timer" parent="." unique_id=1051526819]
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=1947237476]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
