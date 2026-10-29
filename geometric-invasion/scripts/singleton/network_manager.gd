@@ -54,7 +54,6 @@ func change_scene_for_all_players(scene_path : String) -> void:
 	# Then emit signal that client has entered the level
 	server_level_entered.emit()
 	
-	
 
 func _ready():
 	# Obtain the ip of the host
@@ -141,7 +140,7 @@ func start_client(ip_addres : String) -> bool:
 	# Error check
 	var error := peer.create_client(ip_address, port)
 	if error != OK:
-		push_error("Server creation failed: %s" % error_string(error))
+		push_error("Client creation failed: %s" % error_string(error))
 		return false
 
 	# Set multiplayer_peer to newly created peer and emit that client is attempting to connect to server
@@ -157,6 +156,7 @@ func stop_server() -> void:
 	
 	# Set peer values to null and is_solo to true
 	multiplayer.multiplayer_peer = OfflineMultiplayerPeer.new()
+	
 	peer = null
 	is_solo = true
 
