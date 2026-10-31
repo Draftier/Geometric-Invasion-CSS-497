@@ -3,7 +3,7 @@
 [ext_resource type="Theme" uid="uid://dy2kgmqgonako" path="res://theme_test.tres" id="1_aoc2s"]
 [ext_resource type="Script" uid="uid://bm1d42pt283vt" path="res://scenes/UI/multiplayer_choice_menu.gd" id="2_wt8fv"]
 [ext_resource type="PackedScene" uid="uid://cnr36qxaqynbc" path="res://scenes/star_background.tscn" id="3_ao0e5"]
-[ext_resource type="StyleBox" uid="uid://dn5gd6byuqut8" path="res://button_theme.tres" id="3_cfko7"]
+[ext_resource type="Theme" uid="uid://d21lh0fquueyo" path="res://new_button_theme.tres" id="4_ao0e5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2m35m"]
 bg_color = Color(0, 0, 0, 0.41568628)
@@ -112,7 +112,9 @@ horizontal_alignment = 1
 [node name="HostButton" type="Button" parent="MarginContainer/MultiplayerMenu/MarginContainer/VBoxContainer" unique_id=277408626]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_styles/normal = ExtResource("3_cfko7")
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("4_ao0e5")
 text = "Host server"
 
 [node name="ServerNameInput" type="LineEdit" parent="MarginContainer/MultiplayerMenu/MarginContainer/VBoxContainer" unique_id=646848237]
@@ -123,7 +125,9 @@ alignment = 1
 
 [node name="JoinByIp" type="Button" parent="MarginContainer/MultiplayerMenu/MarginContainer/VBoxContainer" unique_id=1979438574]
 layout_mode = 2
-theme_override_styles/normal = ExtResource("3_cfko7")
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("4_ao0e5")
 text = "Join Server by ip"
 
 [node name="IpInput" type="LineEdit" parent="MarginContainer/MultiplayerMenu/MarginContainer/VBoxContainer" unique_id=1162111617]
@@ -134,12 +138,16 @@ alignment = 1
 
 [node name="OpenServerBrowser" type="Button" parent="MarginContainer/MultiplayerMenu/MarginContainer/VBoxContainer" unique_id=332209589]
 layout_mode = 2
-theme_override_styles/normal = ExtResource("3_cfko7")
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("4_ao0e5")
 text = "Server Browser"
 
 [node name="BackButton" type="Button" parent="MarginContainer/MultiplayerMenu/MarginContainer/VBoxContainer" unique_id=988965015]
 layout_mode = 2
-theme_override_styles/normal = ExtResource("3_cfko7")
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("4_ao0e5")
 text = "Back to main menu"
 
 [connection signal="item_selected" from="MarginContainer/MultiplayerMenu/MarginContainer2/VBoxContainer/ShootOptions" to="." method="_on_shoot_options_item_selected"]

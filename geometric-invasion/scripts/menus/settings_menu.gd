@@ -9,6 +9,8 @@ func _ready() -> void:
 		display_mode.set_block_signals(true)
 		display_mode.button_pressed = true
 		display_mode.set_block_signals(false)
+		
+	AudioManager.setup_ui_button_audio(self)
 
 func _on_display_setting_toggled(toggled_on: bool) -> void:
 	if current_display_mode == DisplayServer.WINDOW_MODE_FULLSCREEN:

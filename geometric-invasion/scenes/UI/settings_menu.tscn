@@ -3,9 +3,13 @@
 [ext_resource type="PackedScene" uid="uid://cnr36qxaqynbc" path="res://scenes/star_background.tscn" id="1_0cmel"]
 [ext_resource type="Script" uid="uid://dj7bmx275e27u" path="res://scripts/menus/settings_menu.gd" id="1_mlw3h"]
 [ext_resource type="Theme" uid="uid://dy2kgmqgonako" path="res://theme_test.tres" id="2_d0eu6"]
+[ext_resource type="FontFile" uid="uid://dihhulpjs1064" path="res://assets/fonts/PixelOperator8.ttf" id="4_t4w0s"]
+[ext_resource type="Theme" uid="uid://d21lh0fquueyo" path="res://new_button_theme.tres" id="5_lwg20"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_d8ny1"]
 font_size = 100
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bl585"]
 
 [node name="SettingsMenu" type="Control" unique_id=505777350]
 layout_mode = 3
@@ -42,27 +46,81 @@ text = "Settings"
 label_settings = SubResource("LabelSettings_d8ny1")
 horizontal_alignment = 1
 
-[node name="Label" type="Label" parent="MarginContainer/RootMenu" unique_id=355259794]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/RootMenu" unique_id=1541278271]
 layout_mode = 2
-text = "Volume"
+theme_override_constants/separation = 20
+
+[node name="MusicVolume" type="HBoxContainer" parent="MarginContainer/RootMenu/VBoxContainer" unique_id=456702185]
+layout_mode = 2
+
+[node name="MusicLabel" type="Label" parent="MarginContainer/RootMenu/VBoxContainer/MusicVolume" unique_id=355259794]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.45
+theme_override_fonts/font = ExtResource("4_t4w0s")
+text = "Music Volume"
 horizontal_alignment = 1
 
-[node name="HSlider" type="HSlider" parent="MarginContainer/RootMenu/Label" unique_id=185783860]
-layout_mode = 0
-offset_left = 231.0
-offset_top = 27.0
-offset_right = 851.0
-offset_bottom = 43.0
+[node name="HSlider" type="HSlider" parent="MarginContainer/RootMenu/VBoxContainer/MusicVolume" unique_id=185783860]
+layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="DisplaySetting" type="CheckBox" parent="MarginContainer/RootMenu" unique_id=859934268]
+[node name="SfxVolume" type="HBoxContainer" parent="MarginContainer/RootMenu/VBoxContainer" unique_id=1078000554]
+layout_mode = 2
+
+[node name="MusicLabel" type="Label" parent="MarginContainer/RootMenu/VBoxContainer/SfxVolume" unique_id=1153721352]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.45
+theme_override_fonts/font = ExtResource("4_t4w0s")
+text = "Sfx Volume"
+horizontal_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="MarginContainer/RootMenu/VBoxContainer/SfxVolume" unique_id=1102883956]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="UiVolume" type="HBoxContainer" parent="MarginContainer/RootMenu/VBoxContainer" unique_id=1170711306]
+layout_mode = 2
+
+[node name="MusicLabel" type="Label" parent="MarginContainer/RootMenu/VBoxContainer/UiVolume" unique_id=1791241730]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.45
+theme_override_fonts/font = ExtResource("4_t4w0s")
+text = "Ui volume"
+horizontal_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="MarginContainer/RootMenu/VBoxContainer/UiVolume" unique_id=1556247070]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FullScreen" type="HBoxContainer" parent="MarginContainer/RootMenu/VBoxContainer" unique_id=1725651105]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/RootMenu/VBoxContainer/FullScreen" unique_id=1221456571]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.45
+theme_override_fonts/font = ExtResource("4_t4w0s")
+text = "Fullscreen"
+horizontal_alignment = 1
+
+[node name="DisplaySetting" type="CheckBox" parent="MarginContainer/RootMenu/VBoxContainer/FullScreen" unique_id=859934268]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Fullscreen"
+size_flags_horizontal = 6
+theme_override_fonts/font = ExtResource("4_t4w0s")
 alignment = 1
 
-[node name="BackButton" type="Button" parent="MarginContainer/RootMenu" unique_id=1024788489]
+[node name="BackButton" type="Button" parent="MarginContainer/RootMenu/VBoxContainer" unique_id=1024788489]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("5_lwg20")
+theme_override_fonts/font = ExtResource("4_t4w0s")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_bl585")
 text = "Back to main menu"
 
-[connection signal="toggled" from="MarginContainer/RootMenu/DisplaySetting" to="." method="_on_display_setting_toggled"]
-[connection signal="pressed" from="MarginContainer/RootMenu/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="toggled" from="MarginContainer/RootMenu/VBoxContainer/FullScreen/DisplaySetting" to="." method="_on_display_setting_toggled"]
+[connection signal="pressed" from="MarginContainer/RootMenu/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

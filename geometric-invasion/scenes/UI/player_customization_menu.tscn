@@ -3,7 +3,7 @@
 [ext_resource type="Theme" uid="uid://dy2kgmqgonako" path="res://theme_test.tres" id="1_ertse"]
 [ext_resource type="Script" uid="uid://bgr0wualwt2sx" path="res://scenes/UI/player_customization_menu.gd" id="2_vgtkr"]
 [ext_resource type="PackedScene" uid="uid://cnr36qxaqynbc" path="res://scenes/star_background.tscn" id="3_ltpn8"]
-[ext_resource type="StyleBox" uid="uid://dn5gd6byuqut8" path="res://button_theme.tres" id="3_vgtkr"]
+[ext_resource type="Theme" uid="uid://d21lh0fquueyo" path="res://new_button_theme.tres" id="4_ltpn8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wt8fv"]
 bg_color = Color(0, 0, 0, 0.41568628)
@@ -107,18 +107,22 @@ popup/item_1/id = 1
 [node name="BackButton" type="Button" parent="MarginContainer/CustomizationMenu" unique_id=1150533557]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 focus_neighbor_top = NodePath("../MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/AbilityOptions")
 focus_neighbor_bottom = NodePath("../StartGameButton")
-theme_override_styles/normal = ExtResource("3_vgtkr")
+theme = ExtResource("4_ltpn8")
 text = "Back to main menu"
 
 [node name="StartGameButton" type="Button" parent="MarginContainer/CustomizationMenu" unique_id=493892705]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 focus_neighbor_top = NodePath("../BackButton")
 focus_neighbor_bottom = NodePath("../MarginContainer/VBoxContainer/ShootOptions")
+theme = ExtResource("4_ltpn8")
 theme_override_font_sizes/font_size = 64
-theme_override_styles/normal = ExtResource("3_vgtkr")
 text = "Start game"
 
 [connection signal="item_selected" from="MarginContainer/CustomizationMenu/MarginContainer/VBoxContainer/ShootOptions" to="." method="_on_shoot_options_item_selected"]

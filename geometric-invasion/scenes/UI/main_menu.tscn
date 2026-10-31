@@ -2,8 +2,11 @@
 
 [ext_resource type="Script" uid="uid://dlnfay7bq62ao" path="res://scripts/menus/main_menu.gd" id="1_l6cm7"]
 [ext_resource type="Theme" uid="uid://dy2kgmqgonako" path="res://theme_test.tres" id="1_yonvy"]
-[ext_resource type="StyleBox" uid="uid://dn5gd6byuqut8" path="res://button_theme.tres" id="3_5jstl"]
 [ext_resource type="PackedScene" uid="uid://cnr36qxaqynbc" path="res://scenes/star_background.tscn" id="3_tfcbk"]
+[ext_resource type="Theme" uid="uid://d21lh0fquueyo" path="res://new_button_theme.tres" id="4_tfcbk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t4w0s"]
+bg_color = Color(0.50638676, 0.50638676, 0.50638676, 0.34901962)
 
 [node name="Main menu" type="Control" unique_id=1321061727]
 layout_mode = 3
@@ -53,7 +56,8 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 focus_neighbor_top = NodePath("../QuitButton")
 focus_neighbor_bottom = NodePath("../Multiplayer (Not implemented)")
-theme_override_styles/normal = ExtResource("3_5jstl")
+theme = ExtResource("4_tfcbk")
+theme_override_styles/hover = SubResource("StyleBoxFlat_t4w0s")
 text = "Singleplayer"
 metadata/_edit_use_anchors_ = true
 
@@ -63,29 +67,36 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 focus_neighbor_top = NodePath("../Singleplayer")
 focus_neighbor_bottom = NodePath("../TutorialButton")
-theme_override_styles/normal = ExtResource("3_5jstl")
+theme = ExtResource("4_tfcbk")
 text = "Multiplayer (To be done)
 "
 metadata/_edit_use_anchors_ = true
 
 [node name="TutorialButton" type="Button" parent="MarginContainer/RootMenu/ButtonsVbox" unique_id=1411541682]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 focus_neighbor_top = NodePath("../Multiplayer (Not implemented)")
 focus_neighbor_bottom = NodePath("../ControlsButton")
-theme_override_styles/normal = ExtResource("3_5jstl")
+theme = ExtResource("4_tfcbk")
 text = "Tutorial (To be done)"
 
 [node name="ControlsButton" type="Button" parent="MarginContainer/RootMenu/ButtonsVbox" unique_id=1898276927]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 focus_neighbor_top = NodePath("../TutorialButton")
 focus_neighbor_bottom = NodePath("../SettingsButton")
-theme_override_styles/normal = ExtResource("3_5jstl")
+theme = ExtResource("4_tfcbk")
 text = "Controls"
 
 [node name="SettingsButton" type="Button" parent="MarginContainer/RootMenu/ButtonsVbox" unique_id=1510851176]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 focus_neighbor_top = NodePath("../ControlsButton")
 focus_neighbor_bottom = NodePath("../QuitButton")
+theme = ExtResource("4_tfcbk")
 text = "Settings"
 
 [node name="QuitButton" type="Button" parent="MarginContainer/RootMenu/ButtonsVbox" unique_id=595023204]
@@ -95,7 +106,7 @@ size_flags_vertical = 4
 focus_neighbor_top = NodePath("../SettingsButton")
 focus_neighbor_bottom = NodePath("../Singleplayer")
 focus_next = NodePath("../Singleplayer")
-theme_override_styles/normal = ExtResource("3_5jstl")
+theme = ExtResource("4_tfcbk")
 text = "Quit to desktop"
 metadata/_edit_use_anchors_ = true
 

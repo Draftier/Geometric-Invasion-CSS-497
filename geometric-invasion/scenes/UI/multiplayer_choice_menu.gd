@@ -11,6 +11,7 @@ extends Control
 var error
 
 func _ready() -> void:
+	AudioManager.setup_ui_button_audio(self)
 	NetworkManager.server_joined.connect(_on_server_connected)
 	NetworkManager.connecting_to_server.connect(_connecting_to_server)
 	NetworkManager.connection_to_server_failed.connect(_on_connection_failed)

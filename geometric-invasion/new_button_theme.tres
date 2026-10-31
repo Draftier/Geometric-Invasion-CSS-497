@@ -1,0 +1,55 @@
+[gd_resource type="Theme" format=3 uid="uid://d21lh0fquueyo"]
+
+[ext_resource type="FontFile" uid="uid://dihhulpjs1064" path="res://assets/fonts/PixelOperator8.ttf" id="1_ef3hu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ngj32"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bm8t2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_scr1a"]
+bg_color = Color(0.1513121, 0.1513121, 0.1513121, 0.6901961)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d6l81"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a1wsg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i7p8e"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mf7fl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sfthw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_um6dh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n3ahy"]
+
+[resource]
+default_font = ExtResource("1_ef3hu")
+Button/colors/font_color = Color(0.8745098, 0.8745098, 0.8745098, 1)
+Button/colors/font_focus_color = Color(0.2509804, 0.38431373, 0.5921569, 1)
+Button/colors/font_hover_color = Color(0.72156864, 0.83137256, 1, 1)
+Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(1, 1, 1, 1)
+Button/colors/icon_disabled_color = Color(1, 1, 1, 0.4)
+Button/colors/icon_focus_color = Color(1, 1, 1, 1)
+Button/colors/icon_hover_color = Color(1, 1, 1, 1)
+Button/colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/icon_normal_color = Color(1, 1, 1, 1)
+Button/colors/icon_pressed_color = Color(1, 1, 1, 1)
+Button/constants/align_to_largest_stylebox = 0
+Button/constants/h_separation = 4
+Button/constants/icon_max_width = 0
+Button/constants/outline_size = 0
+Button/font_sizes/font_size = 16
+Button/fonts/font = ExtResource("1_ef3hu")
+Button/styles/disabled = SubResource("StyleBoxEmpty_ngj32")
+Button/styles/focus = SubResource("StyleBoxEmpty_bm8t2")
+Button/styles/hover = SubResource("StyleBoxFlat_scr1a")
+Button/styles/hover_mirrored = SubResource("StyleBoxEmpty_d6l81")
+Button/styles/hover_pressed = SubResource("StyleBoxEmpty_a1wsg")
+Button/styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_i7p8e")
+Button/styles/normal = SubResource("StyleBoxEmpty_mf7fl")
+Button/styles/normal_mirrored = SubResource("StyleBoxEmpty_sfthw")
+Button/styles/pressed = SubResource("StyleBoxEmpty_um6dh")
+Button/styles/pressed_mirrored = SubResource("StyleBoxEmpty_n3ahy")

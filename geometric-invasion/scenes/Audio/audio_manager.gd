@@ -23,12 +23,19 @@ func _ready() -> void:
 
 func setup_ui_button_audio(node : Node) -> void:
 	for button in node.find_children("*", "Button"):
+		# Connect button pressed and focused state
 		button.pressed.connect(play_ui_select_audio)
 		button.focus_entered.connect(play_ui_focus_audio)
 		
+		# Connect mouse cursor to button signals
+		button.mouse_entered.connect(play_ui_focus_audio)
+		
 		if button is OptionButton:
-			button.item_focused.connect(play_ui_option_select_audio)
 			button.item_selected.connect(play_ui_option_focus_audio)
+			button.item_focused.connect(play_ui_option_select_audio)
+			
+			
+			
 
 #region /// Ui sound functions
 # Ui sound functions, functions made since all ui elements will utilize same ui sounds
