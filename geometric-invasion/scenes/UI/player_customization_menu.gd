@@ -6,6 +6,10 @@ extends Control
 
 signal game_start
 
+func _ready() -> void:
+	shoot_style_dropdown.grab_focus()
+	AudioManager.setup_ui_button_audio(self)
+
 func change_scene() -> void:
 	get_tree().change_scene_to_file("res://scenes/game.tscn")
 

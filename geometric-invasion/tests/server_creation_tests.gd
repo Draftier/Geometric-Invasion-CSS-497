@@ -50,14 +50,7 @@ func test_server_start_and_restart():
 	assert_object(multiplayer.multiplayer_peer).is_not_instanceof(OfflineMultiplayerPeer)
 	assert_int(multiplayer.multiplayer_peer.get_unique_id()).is_equal(1)
 	
-func test_client_creation_on_invalid_server():
-	# Given the network manager attempt to start a client on invalid ip
-	NetworkManager.start_client("999.999.999.999")
-	
-	# After starting the client 
-	
-	
-	pass
+
 
 func after_test() -> void:
 	if multiplayer.multiplayer_peer != null:

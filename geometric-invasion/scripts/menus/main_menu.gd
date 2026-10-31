@@ -6,9 +6,11 @@ signal game_start()
 @onready var background = %StarBackground
 
 func _ready() -> void:
-	print_orphan_nodes()
-	print(Performance.get_monitor(Performance.OBJECT_ORPHAN_NODE_COUNT))
+	#print_orphan_nodes()
+	#print(Performance.get_monitor(Performance.OBJECT_ORPHAN_NODE_COUNT))
+	#focus_button()
 	focus_button()
+	AudioManager.setup_ui_button_audio(self)
 
 func _on_start_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/UI/player_customization_menu.tscn")

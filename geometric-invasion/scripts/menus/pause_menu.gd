@@ -1,7 +1,12 @@
 extends CanvasLayer
 
+@onready var resume_button = %ResumeButton
+@onready var restart_button = %RestartButton
+@onready var quit_menu_button = %QuitToMenu
+@onready var quit_desktop_button = %QuitToDesktop
 
 func _ready() -> void:
+	AudioManager.setup_ui_button_audio(self)
 	hide()
 	
 
@@ -14,8 +19,8 @@ func pause_game() -> void:
 		if NetworkManager.is_solo == true:
 			get_tree().paused = true
 		show()
-		get_node("FinishLabel").hide()
-		get_node("RestartButton").hide()
+		#get_node("FinishLabel").hide()
+		#get_node("RestartButton").hide()
 	else:
 		hide()
 		get_tree().paused = false
@@ -27,7 +32,7 @@ func _on_resume_button_pressed() -> void:
 func _on_quit_to_menu_pressed() -> void:
 	get_tree().paused = false
 	#PoolManager.destroy_pools()
-	PoolManager.reset_pools()
+	#PoolManager.reset_pools()
 	get_tree().call_deferred("change_scene_to_file", "res://scenes/UI/main_menu.tscn")
 
 func _on_quit_to_desktop_pressed() -> void:

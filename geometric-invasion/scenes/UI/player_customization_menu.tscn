@@ -63,6 +63,8 @@ vertical_alignment = 1
 [node name="ShootOptions" type="OptionButton" parent="MarginContainer/CustomizationMenu/MarginContainer/VBoxContainer" unique_id=602087371]
 unique_name_in_owner = true
 layout_mode = 2
+focus_neighbor_top = NodePath("../../../StartGameButton")
+focus_neighbor_bottom = NodePath("../MarginContainer/VBoxContainer/AbilityOptions")
 theme_override_styles/normal = SubResource("StyleBoxFlat_wt8fv")
 alignment = 1
 selected = 0
@@ -91,6 +93,8 @@ horizontal_alignment = 1
 [node name="AbilityOptions" type="OptionButton" parent="MarginContainer/CustomizationMenu/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer" unique_id=1375234477]
 unique_name_in_owner = true
 layout_mode = 2
+focus_neighbor_top = NodePath("../../../ShootOptions")
+focus_neighbor_bottom = NodePath("../../../../../BackButton")
 theme_override_styles/normal = SubResource("StyleBoxFlat_wt8fv")
 alignment = 1
 selected = 0
@@ -103,12 +107,16 @@ popup/item_1/id = 1
 [node name="BackButton" type="Button" parent="MarginContainer/CustomizationMenu" unique_id=1150533557]
 unique_name_in_owner = true
 layout_mode = 2
+focus_neighbor_top = NodePath("../MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/AbilityOptions")
+focus_neighbor_bottom = NodePath("../StartGameButton")
 theme_override_styles/normal = ExtResource("3_vgtkr")
 text = "Back to main menu"
 
 [node name="StartGameButton" type="Button" parent="MarginContainer/CustomizationMenu" unique_id=493892705]
 unique_name_in_owner = true
 layout_mode = 2
+focus_neighbor_top = NodePath("../BackButton")
+focus_neighbor_bottom = NodePath("../MarginContainer/VBoxContainer/ShootOptions")
 theme_override_font_sizes/font_size = 64
 theme_override_styles/normal = ExtResource("3_vgtkr")
 text = "Start game"

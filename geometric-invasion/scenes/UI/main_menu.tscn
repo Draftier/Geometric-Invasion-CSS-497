@@ -53,8 +53,6 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 focus_neighbor_top = NodePath("../QuitButton")
 focus_neighbor_bottom = NodePath("../Multiplayer (Not implemented)")
-focus_next = NodePath("../Multiplayer (Not implemented)")
-focus_previous = NodePath("../QuitButton")
 theme_override_styles/normal = ExtResource("3_5jstl")
 text = "Singleplayer"
 metadata/_edit_use_anchors_ = true
@@ -64,9 +62,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 focus_neighbor_top = NodePath("../Singleplayer")
-focus_neighbor_bottom = NodePath("../QuitButton")
-focus_next = NodePath("../QuitButton")
-focus_previous = NodePath("../Singleplayer")
+focus_neighbor_bottom = NodePath("../TutorialButton")
 theme_override_styles/normal = ExtResource("3_5jstl")
 text = "Multiplayer (To be done)
 "
@@ -74,26 +70,31 @@ metadata/_edit_use_anchors_ = true
 
 [node name="TutorialButton" type="Button" parent="MarginContainer/RootMenu/ButtonsVbox" unique_id=1411541682]
 layout_mode = 2
+focus_neighbor_top = NodePath("../Multiplayer (Not implemented)")
+focus_neighbor_bottom = NodePath("../ControlsButton")
 theme_override_styles/normal = ExtResource("3_5jstl")
 text = "Tutorial (To be done)"
 
 [node name="ControlsButton" type="Button" parent="MarginContainer/RootMenu/ButtonsVbox" unique_id=1898276927]
 layout_mode = 2
+focus_neighbor_top = NodePath("../TutorialButton")
+focus_neighbor_bottom = NodePath("../SettingsButton")
 theme_override_styles/normal = ExtResource("3_5jstl")
 text = "Controls"
 
 [node name="SettingsButton" type="Button" parent="MarginContainer/RootMenu/ButtonsVbox" unique_id=1510851176]
 layout_mode = 2
+focus_neighbor_top = NodePath("../ControlsButton")
+focus_neighbor_bottom = NodePath("../QuitButton")
 text = "Settings"
 
 [node name="QuitButton" type="Button" parent="MarginContainer/RootMenu/ButtonsVbox" unique_id=595023204]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-focus_neighbor_top = NodePath("../Multiplayer (Not implemented)")
+focus_neighbor_top = NodePath("../SettingsButton")
 focus_neighbor_bottom = NodePath("../Singleplayer")
 focus_next = NodePath("../Singleplayer")
-focus_previous = NodePath(".")
 theme_override_styles/normal = ExtResource("3_5jstl")
 text = "Quit to desktop"
 metadata/_edit_use_anchors_ = true

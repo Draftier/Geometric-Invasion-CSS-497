@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://b3hypmmph57ur"]
+
+[ext_resource type="Script" uid="uid://vl8dwh3v7uox" path="res://scenes/Audio/audio_manager.gd" id="1_6jxb6"]
+[ext_resource type="AudioStream" uid="uid://cd2bewngcsjsi" path="res://assets/audio/sfx/ui/uifocus.ogg" id="2_2w1uh"]
+[ext_resource type="AudioStream" uid="uid://ciuw14mrk67on" path="res://assets/audio/sfx/ui/uiselect.ogg" id="3_p8gr7"]
+[ext_resource type="AudioStream" uid="uid://dpmds645ouprg" path="res://assets/audio/sfx/ui/uicancel.ogg" id="4_riki2"]
+[ext_resource type="AudioStream" uid="uid://bpml50r1h80n4" path="res://assets/audio/sfx/ui/uisuccess.ogg" id="5_vvn5r"]
+[ext_resource type="AudioStream" uid="uid://btj0y8kfemxp4" path="res://assets/audio/sfx/ui/uierror.ogg" id="6_3ew24"]
+
+[sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_p2pea"]
+
+[node name="AudioManager" type="Node" unique_id=553232405]
+process_mode = 3
+script = ExtResource("1_6jxb6")
+ui_focus_audio = ExtResource("2_2w1uh")
+ui_select_audio = ExtResource("3_p8gr7")
+ui_cancel_audio = ExtResource("4_riki2")
+ui_success_audio = ExtResource("5_vvn5r")
+ui_error_audio = ExtResource("6_3ew24")
+
+[node name="UiStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=56852661]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamPolyphonic_p2pea")
+max_polyphony = 3
+
+[node name="MusicStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1238546407]
+unique_name_in_owner = true
+
+[node name="MusicStreamPlayer2" type="AudioStreamPlayer" parent="." unique_id=375053205]
+unique_name_in_owner = true
