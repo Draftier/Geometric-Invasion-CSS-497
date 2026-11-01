@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://b2nxf0ct0x4gn" path="res://scripts/level_manager/level_manager.gd" id="1_06fa7"]
 [ext_resource type="PackedScene" uid="uid://dea3ckmfpjcym" path="res://scenes/Ability/ability_pickup.tscn" id="2_4j0go"]
 [ext_resource type="FontFile" uid="uid://dihhulpjs1064" path="res://assets/fonts/PixelOperator8.ttf" id="2_udsve"]
+[ext_resource type="Script" uid="uid://dt1c0f6c5i51q" path="res://scripts/level_manager/multiplayer_spawner.gd" id="4_au7hu"]
 
 [node name="LevelManager" type="Node" unique_id=1305954196 groups=["level_manager"]]
 script = ExtResource("1_06fa7")
@@ -21,6 +22,11 @@ text = "Time left: "
 [node name="Enemies" type="Node2D" parent="." unique_id=432049841]
 
 [node name="Powerup" type="Node2D" parent="." unique_id=201648056]
+
+[node name="Spawner" type="MultiplayerSpawner" parent="." unique_id=787316282 node_paths=PackedStringArray("player_user_interface")]
+spawn_path = NodePath("../..")
+script = ExtResource("4_au7hu")
+player_user_interface = NodePath("")
 
 [connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
 [connection signal="timeout" from="LevelTimer" to="." method="_on_level_timer_timeout"]

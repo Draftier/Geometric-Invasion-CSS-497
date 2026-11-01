@@ -5,6 +5,8 @@
 [ext_resource type="Theme" uid="uid://dy2kgmqgonako" path="res://theme_test.tres" id="2_d0eu6"]
 [ext_resource type="FontFile" uid="uid://dihhulpjs1064" path="res://assets/fonts/PixelOperator8.ttf" id="4_t4w0s"]
 [ext_resource type="Theme" uid="uid://d21lh0fquueyo" path="res://new_button_theme.tres" id="5_lwg20"]
+[ext_resource type="Script" uid="uid://84ox43jyptjb" path="res://scenes/Audio/music_auto_trigger.gd" id="6_c5o1q"]
+[ext_resource type="AudioStream" uid="uid://8qm86b2b1081" path="res://assets/audio/music/Week 21 - Freefall GLIDE.ogg" id="7_uxg4l"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_d8ny1"]
 font_size = 100
@@ -61,9 +63,13 @@ theme_override_fonts/font = ExtResource("4_t4w0s")
 text = "Music Volume"
 horizontal_alignment = 1
 
-[node name="HSlider" type="HSlider" parent="MarginContainer/RootMenu/VBoxContainer/MusicVolume" unique_id=185783860]
+[node name="MusicSlider" type="HSlider" parent="MarginContainer/RootMenu/VBoxContainer/MusicVolume" unique_id=185783860]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+max_value = 1.0
+step = 0.05
+value = 0.5
 
 [node name="SfxVolume" type="HBoxContainer" parent="MarginContainer/RootMenu/VBoxContainer" unique_id=1078000554]
 layout_mode = 2
@@ -76,9 +82,13 @@ theme_override_fonts/font = ExtResource("4_t4w0s")
 text = "Sfx Volume"
 horizontal_alignment = 1
 
-[node name="HSlider" type="HSlider" parent="MarginContainer/RootMenu/VBoxContainer/SfxVolume" unique_id=1102883956]
+[node name="SfxSlider" type="HSlider" parent="MarginContainer/RootMenu/VBoxContainer/SfxVolume" unique_id=1102883956]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+max_value = 1.0
+step = 0.05
+value = 0.5
 
 [node name="UiVolume" type="HBoxContainer" parent="MarginContainer/RootMenu/VBoxContainer" unique_id=1170711306]
 layout_mode = 2
@@ -91,9 +101,13 @@ theme_override_fonts/font = ExtResource("4_t4w0s")
 text = "Ui volume"
 horizontal_alignment = 1
 
-[node name="HSlider" type="HSlider" parent="MarginContainer/RootMenu/VBoxContainer/UiVolume" unique_id=1556247070]
+[node name="UiSoundSlider" type="HSlider" parent="MarginContainer/RootMenu/VBoxContainer/UiVolume" unique_id=1556247070]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+max_value = 1.0
+step = 0.05
+value = 0.5
 
 [node name="FullScreen" type="HBoxContainer" parent="MarginContainer/RootMenu/VBoxContainer" unique_id=1725651105]
 layout_mode = 2
@@ -121,6 +135,11 @@ theme = ExtResource("5_lwg20")
 theme_override_fonts/font = ExtResource("4_t4w0s")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_bl585")
 text = "Back to main menu"
+
+[node name="MusicAutoTrigger" type="Node" parent="." unique_id=3727854]
+script = ExtResource("6_c5o1q")
+track = ExtResource("7_uxg4l")
+metadata/_custom_type_script = "uid://84ox43jyptjb"
 
 [connection signal="toggled" from="MarginContainer/RootMenu/VBoxContainer/FullScreen/DisplaySetting" to="." method="_on_display_setting_toggled"]
 [connection signal="pressed" from="MarginContainer/RootMenu/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

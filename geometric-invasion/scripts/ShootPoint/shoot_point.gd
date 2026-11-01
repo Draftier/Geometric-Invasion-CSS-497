@@ -29,8 +29,10 @@ func shoot() -> void:
 		
 		if shooter == "player":
 			bullet = PoolManager.give_player_bullet()
-			bullet.speed = 2000 * get_parent().get_parent().scale
+			bullet.speed = 3000 * get_parent().get_parent().scale
 			bullet.scale *= get_parent().get_parent().scale
+			
+			AudioManager.play_spatial_sound(preload("res://assets/audio/sfx/player/Shoot.ogg"), global_position)
 		else:
 			bullet = PoolManager.give_enemy_bullet()
 			bullet.speed = 100

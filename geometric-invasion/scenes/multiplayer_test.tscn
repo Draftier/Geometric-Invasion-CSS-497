@@ -17,6 +17,9 @@
 [ext_resource type="PackedScene" uid="uid://cnr36qxaqynbc" path="res://scenes/star_background.tscn" id="15_iudw3"]
 [ext_resource type="Script" uid="uid://dt1c0f6c5i51q" path="res://scripts/level_manager/multiplayer_spawner.gd" id="16_r25ah"]
 [ext_resource type="PackedScene" uid="uid://cw7p0ekjax6t7" path="res://scenes/UI/player_user_interface.tscn" id="17_kvop5"]
+[ext_resource type="Script" uid="uid://84ox43jyptjb" path="res://scenes/Audio/music_auto_trigger.gd" id="18_6mro0"]
+[ext_resource type="AudioStream" uid="uid://cpwdxqxulkiqy" path="res://assets/audio/music/Fields of Ice.ogg" id="19_dg73d"]
+[ext_resource type="PackedScene" uid="uid://d043xpjj4wac0" path="res://scenes/UI/pause_menu.tscn" id="20_dg73d"]
 
 [sub_resource type="Resource" id="Resource_mobb4"]
 script = ExtResource("10_yrd5d")
@@ -34,7 +37,7 @@ script = ExtResource("4_dg73d")
 enemy = ExtResource("5_6qfb6")
 enemy_movement_pattern = SubResource("Resource_3cu50")
 enemy_attack_pattern = Array[ExtResource("6_ibgdi")]([ExtResource("7_0u7d8"), ExtResource("8_8dt1a")])
-number_of_enemies = 4
+number_of_enemies = 30
 metadata/_custom_type_script = "uid://c4twyssjo6an2"
 
 [sub_resource type="Resource" id="Resource_yywf3"]
@@ -44,11 +47,14 @@ time_to_occur = 5.0
 spawns = Array[ExtResource("4_dg73d")]([SubResource("Resource_s8var")])
 metadata/_custom_type_script = "uid://bewu02jnvwcgy"
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_q3bjm"]
-size = Vector2(646, 21)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8kenn"]
+size = Vector2(536, 21)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pg252"]
-size = Vector2(20, 618)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_feea6"]
+size = Vector2(536, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6mro0"]
+size = Vector2(20, 284)
 
 [node name="MultiplayerTest" type="Node2D" unique_id=543451976]
 script = ExtResource("1_8kenn")
@@ -61,6 +67,16 @@ level_time = 120.0
 power_up_charge = ExtResource("12_u5kbj")
 metadata/_custom_type_script = "uid://b2nxf0ct0x4gn"
 
+[node name="Label" type="Label" parent="Level_Manager" unique_id=257772922]
+z_index = 4
+offset_left = -285.0
+offset_top = -159.0
+offset_right = -155.0
+offset_bottom = -136.0
+theme_override_fonts/font = ExtResource("14_bhepv")
+theme_override_font_sizes/font_size = 16
+text = "Time left: "
+
 [node name="EnemySpawnPoint" type="Node2D" parent="Level_Manager" unique_id=1899267310]
 position = Vector2(0, -185)
 script = ExtResource("13_mqxpw")
@@ -69,51 +85,16 @@ metadata/_custom_type_script = "uid://cpbp4ohcaqwle"
 [node name="LevelTimer" type="Timer" parent="Level_Manager" unique_id=1155754645]
 wait_time = 120.0
 
-[node name="Label" type="Label" parent="Level_Manager" unique_id=1208979116]
-offset_left = -282.0
-offset_top = -135.0
-offset_right = -152.0
-offset_bottom = -112.0
-theme_override_fonts/font = ExtResource("14_bhepv")
-theme_override_font_sizes/font_size = 16
-text = "Time left: "
-
 [node name="Enemies" type="Node2D" parent="Level_Manager" unique_id=1082741761]
+
+[node name="Spawner" type="MultiplayerSpawner" parent="Level_Manager" unique_id=1416540720 node_paths=PackedStringArray("player_user_interface")]
+spawn_path = NodePath("../..")
+script = ExtResource("16_r25ah")
+player_user_interface = NodePath("../../PlayerUserInterface")
 
 [node name="StarBackground" parent="." unique_id=1934287316 instance=ExtResource("15_iudw3")]
 position = Vector2(-292, -153)
 scale = Vector2(0.495, 0.495)
-
-[node name="spawner" type="MultiplayerSpawner" parent="." unique_id=1416540720 node_paths=PackedStringArray("player_user_interface")]
-spawn_path = NodePath("..")
-script = ExtResource("16_r25ah")
-player_user_interface = NodePath("../PlayerUserInterface")
-
-[node name="Borders" type="Node2D" parent="." unique_id=522387079]
-
-[node name="top_bottom" type="StaticBody2D" parent="Borders" unique_id=1824013654]
-collision_layer = 32
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/top_bottom" unique_id=1057216338]
-position = Vector2(0, -166)
-shape = SubResource("RectangleShape2D_q3bjm")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Borders/top_bottom" unique_id=1320693876]
-position = Vector2(-12, 175)
-shape = SubResource("RectangleShape2D_q3bjm")
-
-[node name="left_right" type="StaticBody2D" parent="Borders" unique_id=1613845313]
-collision_layer = 32
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/left_right" unique_id=345102067]
-position = Vector2(-298, 9)
-shape = SubResource("RectangleShape2D_pg252")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Borders/left_right" unique_id=45577537]
-position = Vector2(297, 9)
-shape = SubResource("RectangleShape2D_pg252")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1383374677]
 unique_name_in_owner = true
@@ -124,3 +105,85 @@ limit_right = 188
 limit_bottom = 163
 
 [node name="PlayerUserInterface" parent="." unique_id=415349145 instance=ExtResource("17_kvop5")]
+
+[node name="Borders2" type="Node2D" parent="." unique_id=1235097282]
+
+[node name="top_bottom" type="StaticBody2D" parent="Borders2" unique_id=708678912]
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Borders2/top_bottom" unique_id=1869308401]
+position = Vector2(-1, -152)
+shape = SubResource("RectangleShape2D_8kenn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders2/top_bottom" unique_id=1223086285]
+position = Vector2(-1, 119)
+shape = SubResource("RectangleShape2D_feea6")
+
+[node name="left_right" type="StaticBody2D" parent="Borders2" unique_id=56633015]
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders2/left_right" unique_id=1539260806]
+position = Vector2(-279, 0)
+shape = SubResource("RectangleShape2D_6mro0")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Borders2/left_right" unique_id=1918877062]
+position = Vector2(277, 0)
+shape = SubResource("RectangleShape2D_6mro0")
+
+[node name="ColorRect4" type="ColorRect" parent="Borders2" unique_id=620996353]
+z_index = 1
+offset_left = -268.80737
+offset_top = -162.00098
+offset_right = 55.131287
+offset_bottom = -141.80836
+rotation = 1.5708452
+color = Color(0.29219002, 0.29219005, 0.29219002, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect3" type="ColorRect" parent="Borders2" unique_id=1943067209]
+z_index = 1
+offset_left = 287.0
+offset_top = -162.00098
+offset_right = 610.93866
+offset_bottom = -141.80836
+rotation = 1.5708452
+color = Color(0.29219002, 0.29219005, 0.29219002, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="Borders2" unique_id=268982998]
+z_index = 1
+offset_left = -289.0
+offset_top = -162.0
+offset_right = 286.0
+offset_bottom = -142.0
+color = Color(0.29219002, 0.29219005, 0.29219002, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect2" type="ColorRect" parent="Borders2" unique_id=40566199]
+z_index = 1
+offset_left = -289.0
+offset_top = 109.0
+offset_right = 286.0
+offset_bottom = 162.0
+color = Color(0.29219002, 0.29219005, 0.29219002, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Label2" type="Label" parent="." unique_id=1372614107]
+z_index = 4
+offset_left = -47.0
+offset_top = -158.0
+offset_right = 57.0
+offset_bottom = -141.0
+theme_override_fonts/font = ExtResource("14_bhepv")
+theme_override_font_sizes/font_size = 16
+text = "Survive!"
+
+[node name="MusicAutoTrigger" type="Node" parent="." unique_id=2073023150]
+script = ExtResource("18_6mro0")
+track = ExtResource("19_dg73d")
+metadata/_custom_type_script = "uid://84ox43jyptjb"
+
+[node name="PauseMenu" parent="." unique_id=1058867629 instance=ExtResource("20_dg73d")]
+visible = false

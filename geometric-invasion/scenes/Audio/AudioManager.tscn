@@ -22,9 +22,12 @@ ui_error_audio = ExtResource("6_3ew24")
 unique_name_in_owner = true
 stream = SubResource("AudioStreamPolyphonic_p2pea")
 max_polyphony = 3
+bus = &"UI"
 
 [node name="MusicStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1238546407]
 unique_name_in_owner = true
+bus = &"Music"
 
 [node name="MusicStreamPlayer2" type="AudioStreamPlayer" parent="." unique_id=375053205]
 unique_name_in_owner = true
+bus = &"Music"

@@ -109,6 +109,7 @@ func take_damage(damage : int) -> void:
 	if health - damage < 0:
 		health = 0
 	else:
+		AudioManager.play_spatial_sound(preload("res://assets/audio/sfx/Enemy/Hit17.ogg"), self.position)
 		health -= damage
 	
 	## If health zero then free

@@ -2,6 +2,7 @@ class_name Level_Manager
 extends Node
 
 @onready var enemy_node = $Enemies
+@onready var player_spawner = $Spawner
 
 # Variables to set after scene, spawners, events, and time to complete level
 @export var end_change_scene : PackedScene
@@ -13,8 +14,10 @@ extends Node
 var num_enemies
 @export var enemies = {}
 @export var power_up_charge : PackedScene
+@export var boss : PackedScene
 
 signal victory
+
 
 # Utilized to index the event array
 var event_index = 0
@@ -32,7 +35,7 @@ func _ready() -> void:
 	## Temporarily count the number of enemies
 	#num_enemies = enemies.size()
 	#print(enemies.size())	
-	
+	player_spawner.loss.connect(_on_player_loss)
 	
 	#Store the time in the timer
 	$LevelTimer.wait_time = level_time
@@ -163,6 +166,10 @@ func spawn_pickup(id : int, position : Vector2) -> void:
 	
 	get_parent().call_deferred("add_child", power_up)
 
+@rpc("authority", "call_local", "reliable")
+func set_game_state_to_loss() -> void:
+	get_tree().quit()
+
 func prepare_pickup(position : Vector2) -> void:
 	if !multiplayer.is_server():
 		return
@@ -172,6 +179,11 @@ func prepare_pickup(position : Vector2) -> void:
 	
 	spawn_pickup.rpc(id, position)
 
-
 func on_enemy_ready(enemy : basic_enemy) -> void:
 	enemies[enemy.id] = enemy
+
+
+func _on_player_loss() -> void:
+	if !multiplayer.is_server():
+		return
+	set_game_state_to_loss.rpc()

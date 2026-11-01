@@ -4,6 +4,8 @@
 [ext_resource type="Theme" uid="uid://dy2kgmqgonako" path="res://theme_test.tres" id="1_yonvy"]
 [ext_resource type="PackedScene" uid="uid://cnr36qxaqynbc" path="res://scenes/star_background.tscn" id="3_tfcbk"]
 [ext_resource type="Theme" uid="uid://d21lh0fquueyo" path="res://new_button_theme.tres" id="4_tfcbk"]
+[ext_resource type="Script" uid="uid://84ox43jyptjb" path="res://scenes/Audio/music_auto_trigger.gd" id="5_ngj32"]
+[ext_resource type="AudioStream" uid="uid://8qm86b2b1081" path="res://assets/audio/music/Week 21 - Freefall GLIDE.ogg" id="6_ngj32"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t4w0s"]
 bg_color = Color(0.50638676, 0.50638676, 0.50638676, 0.34901962)
@@ -109,6 +111,11 @@ focus_next = NodePath("../Singleplayer")
 theme = ExtResource("4_tfcbk")
 text = "Quit to desktop"
 metadata/_edit_use_anchors_ = true
+
+[node name="MusicAutoTrigger" type="Node" parent="." unique_id=954532159]
+script = ExtResource("5_ngj32")
+track = ExtResource("6_ngj32")
+metadata/_custom_type_script = "uid://84ox43jyptjb"
 
 [connection signal="pressed" from="MarginContainer/RootMenu/ButtonsVbox/Singleplayer" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="MarginContainer/RootMenu/ButtonsVbox/Multiplayer (Not implemented)" to="." method="_on_multiplayer_not_implemented_pressed"]

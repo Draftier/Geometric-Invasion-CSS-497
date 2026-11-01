@@ -2,15 +2,42 @@ extends Control
 
 @onready var display_mode = %DisplaySetting
 
+@onready var music_slider = %MusicSlider
+@onready var sfx_slider = %SfxSlider
+@onready var ui_slider = %UiSoundSlider
+
 var current_display_mode = DisplayServer.window_get_mode()
 
 func _ready() -> void:
+	setup_settings_menu()
+
+func setup_settings_menu() -> void:
+	music_slider.value = AudioServer.get_bus_volume_linear(2)
+	sfx_slider.value = AudioServer.get_bus_volume_linear(3)
+	ui_slider.value = AudioServer.get_bus_volume_linear(4)
+	
+	music_slider.value_changed.connect(_on_music_slider_changed)
+	sfx_slider.value_changed.connect(_on_sfx_slider_changed)
+	ui_slider.value_changed.connect(_on_ui_slider_changed)
+	
 	if current_display_mode == DisplayServer.WINDOW_MODE_FULLSCREEN:
 		display_mode.set_block_signals(true)
 		display_mode.button_pressed = true
 		display_mode.set_block_signals(false)
 		
 	AudioManager.setup_ui_button_audio(self)
+
+func _on_music_slider_changed(volume : float) -> void:
+	AudioServer.set_bus_volume_linear(2, volume)
+	ConfigManager.save_settings_config()
+
+func _on_sfx_slider_changed(volume : float) -> void:
+	AudioServer.set_bus_volume_linear(3, volume)
+	AudioManager.play_spatial_sound(preload("res://assets/audio/sfx/player/Shoot.ogg"), get_viewport_rect().size / 2)
+
+func _on_ui_slider_changed(volume : float) -> void:
+	AudioServer.set_bus_volume_linear(4, volume)
+	AudioManager.play_ui_focus_audio()
 
 func _on_display_setting_toggled(toggled_on: bool) -> void:
 	if current_display_mode == DisplayServer.WINDOW_MODE_FULLSCREEN:

@@ -109,7 +109,7 @@ func take_damage(damage : int) -> void:
 	#print("hit")
 	if invulnerable == false and lives > 0:
 		lives -= damage
-		
+		AudioManager.play_spatial_sound(preload("res://assets/audio/sfx/player/Boom4.ogg"), self.position)
 		if lives <= 0 and is_dead == false:
 			report_death()
 		

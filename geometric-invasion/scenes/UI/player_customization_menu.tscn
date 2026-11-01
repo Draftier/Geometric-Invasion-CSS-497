@@ -4,6 +4,8 @@
 [ext_resource type="Script" uid="uid://bgr0wualwt2sx" path="res://scenes/UI/player_customization_menu.gd" id="2_vgtkr"]
 [ext_resource type="PackedScene" uid="uid://cnr36qxaqynbc" path="res://scenes/star_background.tscn" id="3_ltpn8"]
 [ext_resource type="Theme" uid="uid://d21lh0fquueyo" path="res://new_button_theme.tres" id="4_ltpn8"]
+[ext_resource type="Script" uid="uid://84ox43jyptjb" path="res://scenes/Audio/music_auto_trigger.gd" id="5_2m35m"]
+[ext_resource type="AudioStream" uid="uid://8qm86b2b1081" path="res://assets/audio/music/Week 21 - Freefall GLIDE.ogg" id="6_5blle"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wt8fv"]
 bg_color = Color(0, 0, 0, 0.41568628)
@@ -124,6 +126,11 @@ focus_neighbor_bottom = NodePath("../MarginContainer/VBoxContainer/ShootOptions"
 theme = ExtResource("4_ltpn8")
 theme_override_font_sizes/font_size = 64
 text = "Start game"
+
+[node name="MusicAutoTrigger" type="Node" parent="." unique_id=1123436774]
+script = ExtResource("5_2m35m")
+track = ExtResource("6_5blle")
+metadata/_custom_type_script = "uid://84ox43jyptjb"
 
 [connection signal="item_selected" from="MarginContainer/CustomizationMenu/MarginContainer/VBoxContainer/ShootOptions" to="." method="_on_shoot_options_item_selected"]
 [connection signal="item_selected" from="MarginContainer/CustomizationMenu/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/AbilityOptions" to="." method="_on_ability_options_item_selected"]

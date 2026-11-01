@@ -4,11 +4,47 @@ extends CanvasLayer
 @onready var restart_button = %RestartButton
 @onready var quit_menu_button = %QuitToMenu
 @onready var quit_desktop_button = %QuitToDesktop
+@onready var root_pause_menu = %RootPauseMenu
+@onready var settings_menu = %SettingsMenu
+@onready var music_slider = %MusicSlider
+@onready var sfx_slider = %SfxSlider
+@onready var ui_slider = %UiSoundSlider
+@onready var display_mode = %DisplaySetting
+
+var current_display_mode = DisplayServer.window_get_mode()
 
 func _ready() -> void:
 	AudioManager.setup_ui_button_audio(self)
+	setup_settings_menu()
 	hide()
+
+func setup_settings_menu() -> void:
+	music_slider.value = AudioServer.get_bus_volume_linear(2)
+	sfx_slider.value = AudioServer.get_bus_volume_linear(3)
+	ui_slider.value = AudioServer.get_bus_volume_linear(4)
 	
+	music_slider.value_changed.connect(_on_music_slider_changed)
+	sfx_slider.value_changed.connect(_on_sfx_slider_changed)
+	ui_slider.value_changed.connect(_on_ui_slider_changed)
+	
+	if current_display_mode == DisplayServer.WINDOW_MODE_FULLSCREEN:
+		display_mode.set_block_signals(true)
+		display_mode.button_pressed = true
+		display_mode.set_block_signals(false)
+		
+	AudioManager.setup_ui_button_audio(self)
+
+func _on_music_slider_changed(volume : float) -> void:
+	AudioServer.set_bus_volume_linear(2, volume)
+	ConfigManager.save_settings_config()
+
+func _on_sfx_slider_changed(volume : float) -> void:
+	AudioServer.set_bus_volume_linear(3, volume)
+	AudioManager.play_spatial_sound(preload("res://assets/audio/sfx/player/Shoot.ogg"), root_pause_menu.position)
+
+func _on_ui_slider_changed(volume : float) -> void:
+	AudioServer.set_bus_volume_linear(4, volume)
+	AudioManager.play_ui_focus_audio()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):
@@ -66,3 +102,15 @@ func _on_restart_button_pressed() -> void:
 	
 func player_connect(player : Player) -> void:
 	player.connect("death", _on_player_death)
+
+
+func _on_settings_button_pressed() -> void:
+	root_pause_menu.hide()
+	settings_menu.visible = true
+	pass # Replace with function body.
+
+
+func _on_back_to_pause_menu_pressed() -> void:
+	settings_menu.hide()
+	root_pause_menu.visible = true
+	pass # Replace with function body.

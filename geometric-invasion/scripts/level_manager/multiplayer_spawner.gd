@@ -6,6 +6,7 @@ extends MultiplayerSpawner
 var players = {}
 
 signal player_removed
+signal loss
 
 func _ready() -> void:
 	get_node(spawn_path).child_entered_tree.connect(on_player_entered_tree)
@@ -81,8 +82,7 @@ func remove_player(id : int) -> void:
 	disable_player.rpc(id)
 
 @rpc("authority", "call_local", "reliable")
-func disable_player(id : int) -> void:
-	
+func disable_player(id : int) -> void:	
 	var player_to_remove = players.get(id)
 	
 	if player_to_remove == null:
@@ -90,9 +90,11 @@ func disable_player(id : int) -> void:
 	
 	if player_to_remove.lives <= 0:
 		player_to_remove.is_dead = true
-		player_user_interface.set_entry_dead(id)
+		if multiplayer.is_server():
+			player_user_interface.set_entry_dead.rpc(id)
 	else:
-		player_user_interface.set_entry_disconnected(id)
+		if multiplayer.is_server():
+			player_user_interface.set_entry_disconnected.rpc(id)
 	
 	
 	player_to_remove.hide()
@@ -110,6 +112,15 @@ func disable_player(id : int) -> void:
 	
 	if player_to_remove.death.is_connected(remove_player):
 		player_to_remove.death.disconnect(remove_player)
+	
+	var loss_check : bool = true
+	
+	for player in players.values():
+		if player.is_dead == false:
+			loss_check = false
+	
+	if loss_check == true:
+		loss.emit()
 	
 func on_player_entered_tree(player : Node) -> void:
 	if player is not Player:

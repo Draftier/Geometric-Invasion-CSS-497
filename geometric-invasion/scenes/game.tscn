@@ -16,14 +16,18 @@
 [ext_resource type="Script" uid="uid://c4twyssjo6an2" path="res://scripts/event/spawn.gd" id="12_dinhu"]
 [ext_resource type="Script" uid="uid://dmjfjfilssxt6" path="res://scripts/enemy/movement_base.gd" id="13_ir15t"]
 [ext_resource type="FontFile" uid="uid://dihhulpjs1064" path="res://assets/fonts/PixelOperator8.ttf" id="14_trtic"]
-[ext_resource type="Script" uid="uid://dt1c0f6c5i51q" path="res://scripts/level_manager/multiplayer_spawner.gd" id="16_ca42v"]
 [ext_resource type="PackedScene" uid="uid://cw7p0ekjax6t7" path="res://scenes/UI/player_user_interface.tscn" id="17_rysoc"]
+[ext_resource type="Script" uid="uid://84ox43jyptjb" path="res://scenes/Audio/music_auto_trigger.gd" id="19_1kice"]
+[ext_resource type="AudioStream" uid="uid://cpwdxqxulkiqy" path="res://assets/audio/music/Fields of Ice.ogg" id="20_1kice"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d8ny1"]
-size = Vector2(646, 21)
+size = Vector2(536, 21)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1tcrw"]
+size = Vector2(536, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iywne"]
-size = Vector2(20, 618)
+size = Vector2(20, 284)
 
 [sub_resource type="Resource" id="Resource_2eb2s"]
 script = ExtResource("9_ssvqc")
@@ -179,28 +183,66 @@ scale = Vector2(0.5190562, 0.49451283)
 collision_layer = 32
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/top_bottom" unique_id=1249229360]
-position = Vector2(0, -174)
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Borders/top_bottom" unique_id=98704334]
+position = Vector2(-1, -152)
 shape = SubResource("RectangleShape2D_d8ny1")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Borders/top_bottom" unique_id=973272431]
-position = Vector2(-12, 175)
-shape = SubResource("RectangleShape2D_d8ny1")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/top_bottom" unique_id=1746567068]
+position = Vector2(-1, 119)
+shape = SubResource("RectangleShape2D_1tcrw")
 
 [node name="left_right" type="StaticBody2D" parent="Borders" unique_id=2066459629]
 collision_layer = 32
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/left_right" unique_id=408583383]
-position = Vector2(-298, 9)
+position = Vector2(-279, 0)
 shape = SubResource("RectangleShape2D_iywne")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Borders/left_right" unique_id=2038551322]
-position = Vector2(297, 9)
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Borders/left_right" unique_id=1460387018]
+position = Vector2(277, 0)
 shape = SubResource("RectangleShape2D_iywne")
+
+[node name="ColorRect4" type="ColorRect" parent="Borders" unique_id=1298630426]
+z_index = 1
+offset_left = -268.80737
+offset_top = -162.00098
+offset_right = 55.131287
+offset_bottom = -141.80836
+rotation = 1.5708452
+color = Color(0.29219002, 0.29219005, 0.29219002, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect3" type="ColorRect" parent="Borders" unique_id=763061406]
+z_index = 1
+offset_left = 287.0
+offset_top = -162.00098
+offset_right = 610.93866
+offset_bottom = -141.80836
+rotation = 1.5708452
+color = Color(0.29219002, 0.29219005, 0.29219002, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="Borders" unique_id=83602436]
+z_index = 1
+offset_left = -289.0
+offset_top = -162.0
+offset_right = 286.0
+offset_bottom = -142.0
+color = Color(0.29219002, 0.29219005, 0.29219002, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect2" type="ColorRect" parent="Borders" unique_id=1931852487]
+z_index = 1
+offset_left = -289.0
+offset_top = 109.0
+offset_right = 286.0
+offset_bottom = 162.0
+color = Color(0.29219002, 0.29219005, 0.29219002, 1)
+metadata/_edit_use_anchors_ = true
 
 [node name="SpawnPoint" type="Marker2D" parent="." unique_id=732362670]
-position = Vector2(-6, 130)
+position = Vector2(-6, 69)
 
 [node name="LevelManager" parent="." unique_id=1305954196 node_paths=PackedStringArray("spawners") instance=ExtResource("2_gee14")]
 spawners = [NodePath("EnemySpawnPoint"), NodePath("EnemySpawnPoint2"), NodePath("EnemySpawnPoint4"), NodePath("EnemySpawnPoint5")]
@@ -208,10 +250,14 @@ events = Array[ExtResource("4_kvpfn")]([SubResource("Resource_kvuet"), SubResour
 level_time = 30.0
 
 [node name="Label" parent="LevelManager" index="1" unique_id=405150559]
-offset_left = -282.0
-offset_top = -135.0
-offset_right = -152.0
-offset_bottom = -112.0
+z_index = 4
+offset_left = -285.0
+offset_top = -159.0
+offset_right = -155.0
+offset_bottom = -136.0
+
+[node name="Spawner" parent="LevelManager" index="4" unique_id=787316282 node_paths=PackedStringArray("player_user_interface")]
+player_user_interface = NodePath("../../PlayerUserInterface")
 
 [node name="EnemySpawnPoint" type="Node2D" parent="LevelManager" unique_id=966124853]
 position = Vector2(1, -214)
@@ -249,12 +295,13 @@ spawn_interval = 1.0
 metadata/_custom_type_script = "uid://cpbp4ohcaqwle"
 
 [node name="Label" type="Label" parent="." unique_id=675057189]
-offset_left = -105.0
-offset_top = -157.0
-offset_right = 103.0
-offset_bottom = -125.0
+z_index = 4
+offset_left = -47.0
+offset_top = -158.0
+offset_right = 57.0
+offset_bottom = -141.0
 theme_override_fonts/font = ExtResource("14_trtic")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 16
 text = "Survive!"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1122154381]
@@ -265,12 +312,12 @@ limit_top = -162
 limit_right = 188
 limit_bottom = 163
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1298966056 node_paths=PackedStringArray("player_user_interface")]
-spawn_path = NodePath("..")
-script = ExtResource("16_ca42v")
-player_user_interface = NodePath("../PlayerUserInterface")
-
 [node name="PlayerUserInterface" parent="." unique_id=330220776 instance=ExtResource("17_rysoc")]
+
+[node name="MusicAutoTrigger" type="Node" parent="." unique_id=1110296939]
+script = ExtResource("19_1kice")
+track = ExtResource("20_1kice")
+metadata/_custom_type_script = "uid://84ox43jyptjb"
 
 [connection signal="victory" from="LevelManager" to="PauseMenu" method="_on_level_manager_victory"]
 

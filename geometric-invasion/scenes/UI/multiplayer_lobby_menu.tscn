@@ -4,6 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://cnr36qxaqynbc" path="res://scenes/star_background.tscn" id="2_sk1sy"]
 [ext_resource type="Theme" uid="uid://dy2kgmqgonako" path="res://theme_test.tres" id="3_xv84o"]
 [ext_resource type="StyleBox" uid="uid://dn5gd6byuqut8" path="res://button_theme.tres" id="4_oeyph"]
+[ext_resource type="Script" uid="uid://84ox43jyptjb" path="res://scenes/Audio/music_auto_trigger.gd" id="5_xv84o"]
+[ext_resource type="AudioStream" uid="uid://8qm86b2b1081" path="res://assets/audio/music/Week 21 - Freefall GLIDE.ogg" id="6_xv84o"]
 
 [node name="MultiplayerLobbyMenu" type="Control" unique_id=1575445770]
 layout_mode = 3
@@ -86,6 +88,11 @@ horizontal_alignment = 1
 
 [node name="BroadcastTimer" type="Timer" parent="." unique_id=1694062293]
 unique_name_in_owner = true
+
+[node name="MusicAutoTrigger" type="Node" parent="." unique_id=1597543232]
+script = ExtResource("5_xv84o")
+track = ExtResource("6_xv84o")
+metadata/_custom_type_script = "uid://84ox43jyptjb"
 
 [connection signal="pressed" from="MarginContainer/Lobby/MarginContainer/VBoxContainer/StartGameButton" to="." method="_on_start_game_button_pressed"]
 [connection signal="pressed" from="MarginContainer/Lobby/MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
