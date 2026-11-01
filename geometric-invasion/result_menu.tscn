@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://de3e204er2eag"]
+
+[ext_resource type="Script" uid="uid://d7l4a3s7vuvw" path="res://result_menu.gd" id="1_cw10h"]
+
+[node name="ResultMenu" type="CanvasLayer" unique_id=340385810]
+process_mode = 3
+script = ExtResource("1_cw10h")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=2005749610]
+offset_right = 1155.0
+offset_bottom = 649.0
+theme_override_constants/margin_left = 256
+theme_override_constants/margin_top = 160
+theme_override_constants/margin_right = 256
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=26552067]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="ResultMessageLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1849780560]
+unique_name_in_owner = true
+layout_mode = 2
+text = "You Won!"
+horizontal_alignment = 1
+
+[node name="QuitToMenuButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1808910002]
+layout_mode = 2
+text = "Quit to Main Menu"
+
+[node name="QuitToDesktopButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=167350414]
+layout_mode = 2
+text = "Quit to Desktop"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/QuitToMenuButton" to="." method="_on_quit_to_menu_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/QuitToDesktopButton" to="." method="_on_quit_to_desktop_button_pressed"]

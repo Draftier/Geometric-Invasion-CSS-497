@@ -168,9 +168,6 @@ script = ExtResource("1_vtaks")
 metadata/_edit_vertical_guides_ = [-289.0, 239.0]
 metadata/_edit_horizontal_guides_ = [-162.0, 163.0]
 
-[node name="PauseMenu" parent="." unique_id=1058867629 instance=ExtResource("1_u5sy4")]
-visible = false
-
 [node name="StarBackground" parent="." unique_id=1934287316 instance=ExtResource("3_rysoc")]
 position = Vector2(-292, -153.00005)
 scale = Vector2(0.5190562, 0.49451283)
@@ -294,6 +291,9 @@ id = 3
 spawn_interval = 1.0
 metadata/_custom_type_script = "uid://cpbp4ohcaqwle"
 
+[node name="PauseMenu" parent="LevelManager" unique_id=1058867629 instance=ExtResource("1_u5sy4")]
+visible = false
+
 [node name="Label" type="Label" parent="." unique_id=675057189]
 z_index = 4
 offset_left = -47.0
@@ -318,7 +318,5 @@ limit_bottom = 163
 script = ExtResource("19_1kice")
 track = ExtResource("20_1kice")
 metadata/_custom_type_script = "uid://84ox43jyptjb"
-
-[connection signal="victory" from="LevelManager" to="PauseMenu" method="_on_level_manager_victory"]
 
 [editable path="LevelManager"]

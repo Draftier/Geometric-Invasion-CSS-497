@@ -112,6 +112,16 @@ func fade_track_in(player : AudioStreamPlayer) -> void:
 	var tween : Tween = create_tween()
 	music_tweens.append(tween)
 	tween.tween_property(player, "volume_linear", 1.0, 1.0)
+	
+func stop_cur_player() -> void:
+	var cur_player : AudioStreamPlayer = get_music_player(cur_track)
+	
+	for tween in music_tweens:
+		tween.kill()
+	music_tweens.clear()
+	
+	fade_track_out(cur_player)
+	
 #endregion
 
 #region // SFX playing functions

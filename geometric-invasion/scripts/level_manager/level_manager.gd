@@ -3,6 +3,7 @@ extends Node
 
 @onready var enemy_node = $Enemies
 @onready var player_spawner = $Spawner
+@onready var result_menu = $ResultMenu
 
 # Variables to set after scene, spawners, events, and time to complete level
 @export var end_change_scene : PackedScene
@@ -168,7 +169,8 @@ func spawn_pickup(id : int, position : Vector2) -> void:
 
 @rpc("authority", "call_local", "reliable")
 func set_game_state_to_loss() -> void:
-	get_tree().quit()
+	result_menu.show_loss_menu()
+	#get_tree().quit()
 
 func prepare_pickup(position : Vector2) -> void:
 	if !multiplayer.is_server():

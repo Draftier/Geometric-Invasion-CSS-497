@@ -5,7 +5,7 @@ extends Node
 @export var level_manager : Level_Manager
 @export var ui: UI
 
-@onready var pause_menu = $PauseMenu
+
 
 var player : Player
 var level
