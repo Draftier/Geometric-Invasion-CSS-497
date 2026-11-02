@@ -75,42 +75,27 @@ func _on_quit_to_desktop_pressed() -> void:
 	get_tree().quit()
 
 
-func _on_player_death() -> void:
-	get_tree().paused = true
-	show()
-	get_node("ResumeButton").hide()
-	get_node("RestartButton").show()
-	get_node("FinishLabel").text = "You lost!"
-	get_node("FinishLabel").show()
-
-
-func _on_level_manager_victory() -> void:
-	# pause_game()
-	get_tree().paused = true
-	show()
-	get_node("ResumeButton").hide()
-	get_node("RestartButton").show()
-	get_node("FinishLabel").text = "You won"
-	get_node("FinishLabel").show()
-
-
 func _on_restart_button_pressed() -> void:
 	pause_game()
 	#PoolManager.destroy_pools()
 	#PoolManager.init_pools()
 	get_tree().reload_current_scene()
 	
-func player_connect(player : Player) -> void:
-	player.connect("death", _on_player_death)
-
 
 func _on_settings_button_pressed() -> void:
 	root_pause_menu.hide()
 	settings_menu.visible = true
-	pass # Replace with function body.
+	
 
 
 func _on_back_to_pause_menu_pressed() -> void:
 	settings_menu.hide()
 	root_pause_menu.visible = true
-	pass # Replace with function body.
+	
+
+
+func _on_fps_settings_toggled(toggled_on: bool) -> void:
+	if toggled_on == false:
+		Overlay.disable_fps_overlay()
+	else:
+		Overlay.enable_fps_overlay()

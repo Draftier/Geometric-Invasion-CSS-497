@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EnemyAttackData" format=3 uid="uid://xdd8hbbe2aco"]
+
+[ext_resource type="Script" uid="uid://baq3m8rspbgqo" path="res://scripts/enemy/enemy_attack_data.gd" id="1_cj3qq"]
+
+[resource]
+script = ExtResource("1_cj3qq")
+change_in_angle = 3.798
+num_spawn_points = 15
+angular_spread = 2.5
+bullet_speed = 200.0
+max_times_to_fire = 999999
+fire_rate = 0.1
+is_rotate = true
+max_times_to_rotate = 1000
+metadata/_custom_type_script = "uid://baq3m8rspbgqo"

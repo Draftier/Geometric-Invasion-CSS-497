@@ -159,7 +159,7 @@ func stop_server() -> void:
 	
 	peer = null
 	is_solo = true
-
+	game_started = false
 # Function that is called when server is successfully joined
 func _on_connection_to_server() -> void:
 		is_solo = false

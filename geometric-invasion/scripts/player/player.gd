@@ -35,6 +35,7 @@ var ability : Ability
 
 var is_solo : bool
 var is_dead : bool
+var is_exploding : bool = false
 
 var id : int
 
@@ -59,6 +60,12 @@ func _process(_delta: float) -> void:
 	
 	# Get an input vector and modify velocity of player based on it
 	direction = Input.get_vector("left", "right", "up", "down")
+	
+	if is_exploding == false && direction == Vector2.UP:
+		$AnimatedSprite2D.play("thrust_up")
+	elif is_exploding == false && direction != Vector2.UP:
+		$AnimatedSprite2D.play("default")
+	
 	velocity = direction * player_class.speed
 	
 	# Fire bullets from player guns if shoot button held
@@ -109,7 +116,7 @@ func take_damage(damage : int) -> void:
 	#print("hit")
 	if invulnerable == false and lives > 0:
 		lives -= damage
-		AudioManager.play_spatial_sound(preload("res://assets/audio/sfx/player/Boom4.ogg"), self.position)
+		AudioManager.play_spatial_sound(preload("res://assets/audio/sfx/enemy/Boom4.ogg"), self.position)
 		if lives <= 0 and is_dead == false:
 			report_death()
 		
@@ -167,6 +174,8 @@ func report_death() -> void:
 
 @rpc("any_peer", "call_local", "reliable")
 func flash_player() -> void:
+	is_exploding = true
+	
 	$CanvasLayer/Label.text = "Lives : " + str(lives)
 	var timer = get_tree().create_timer(0.7)
 	$AnimatedSprite2D.play("explosion")
@@ -181,3 +190,5 @@ func flash_player() -> void:
 	
 	$AnimationPlayer.play("flash")
 	
+	await $AnimationPlayer.animation_finished
+	is_exploding = false

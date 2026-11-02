@@ -26,6 +26,7 @@ PoolManager="*uid://cutw3vbksk1lv"
 NetworkManager="*uid://hvsdddbxyut3"
 AudioManager="*uid://b3hypmmph57ur"
 ConfigManager="*uid://jn3rk4oujodl"
+Overlay="*uid://c457felf80qla"
 
 [display]
 

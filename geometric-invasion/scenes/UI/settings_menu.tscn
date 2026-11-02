@@ -6,7 +6,7 @@
 [ext_resource type="FontFile" uid="uid://dihhulpjs1064" path="res://assets/fonts/PixelOperator8.ttf" id="4_t4w0s"]
 [ext_resource type="Theme" uid="uid://d21lh0fquueyo" path="res://new_button_theme.tres" id="5_lwg20"]
 [ext_resource type="Script" uid="uid://84ox43jyptjb" path="res://scenes/Audio/music_auto_trigger.gd" id="6_c5o1q"]
-[ext_resource type="AudioStream" uid="uid://8qm86b2b1081" path="res://assets/audio/music/Week 21 - Freefall GLIDE.ogg" id="7_uxg4l"]
+[ext_resource type="AudioStream" uid="uid://8qm86b2b1081" path="res://assets/audio/music/menu_theme/Week 21 - Freefall GLIDE.ogg" id="7_uxg4l"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_d8ny1"]
 font_size = 100
@@ -112,7 +112,7 @@ value = 0.5
 [node name="FullScreen" type="HBoxContainer" parent="MarginContainer/RootMenu/VBoxContainer" unique_id=1725651105]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/RootMenu/VBoxContainer/FullScreen" unique_id=1221456571]
+[node name="FullScreenLabel" type="Label" parent="MarginContainer/RootMenu/VBoxContainer/FullScreen" unique_id=1221456571]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.45
@@ -122,6 +122,23 @@ horizontal_alignment = 1
 
 [node name="DisplaySetting" type="CheckBox" parent="MarginContainer/RootMenu/VBoxContainer/FullScreen" unique_id=859934268]
 unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_fonts/font = ExtResource("4_t4w0s")
+alignment = 1
+
+[node name="FpsCounter" type="HBoxContainer" parent="MarginContainer/RootMenu/VBoxContainer" unique_id=53918239]
+layout_mode = 2
+
+[node name="FpsCounterLabel" type="Label" parent="MarginContainer/RootMenu/VBoxContainer/FpsCounter" unique_id=681741764]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.45
+theme_override_fonts/font = ExtResource("4_t4w0s")
+text = "FPS Counter"
+horizontal_alignment = 1
+
+[node name="FpsSettings" type="CheckBox" parent="MarginContainer/RootMenu/VBoxContainer/FpsCounter" unique_id=1045787216]
 layout_mode = 2
 size_flags_horizontal = 6
 theme_override_fonts/font = ExtResource("4_t4w0s")
@@ -142,4 +159,5 @@ track = ExtResource("7_uxg4l")
 metadata/_custom_type_script = "uid://84ox43jyptjb"
 
 [connection signal="toggled" from="MarginContainer/RootMenu/VBoxContainer/FullScreen/DisplaySetting" to="." method="_on_display_setting_toggled"]
+[connection signal="toggled" from="MarginContainer/RootMenu/VBoxContainer/FpsCounter/FpsSettings" to="." method="_on_fps_settings_toggled"]
 [connection signal="pressed" from="MarginContainer/RootMenu/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

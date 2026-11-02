@@ -49,3 +49,10 @@ func _on_display_setting_toggled(toggled_on: bool) -> void:
 
 func _on_back_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/UI/main_menu.tscn")
+
+
+func _on_fps_settings_toggled(toggled_on: bool) -> void:
+	if toggled_on == false:
+		Overlay.disable_fps_overlay()
+	else:
+		Overlay.enable_fps_overlay()

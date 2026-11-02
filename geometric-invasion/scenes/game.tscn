@@ -1,24 +1,24 @@
 [gd_scene format=3 uid="uid://btytpnf13ov48"]
 
-[ext_resource type="PackedScene" uid="uid://d043xpjj4wac0" path="res://scenes/UI/pause_menu.tscn" id="1_u5sy4"]
 [ext_resource type="Script" uid="uid://cejwab54dw4r5" path="res://scripts/singleton/game.gd" id="1_vtaks"]
 [ext_resource type="PackedScene" uid="uid://cjye6s0e01omf" path="res://scenes/Managers/level_manager.tscn" id="2_gee14"]
 [ext_resource type="PackedScene" uid="uid://cnr36qxaqynbc" path="res://scenes/star_background.tscn" id="3_rysoc"]
 [ext_resource type="Script" uid="uid://bewu02jnvwcgy" path="res://scripts/event/spawn_event_data.gd" id="4_kvpfn"]
-[ext_resource type="PackedScene" uid="uid://bpouseiggfiit" path="res://scenes/Enemy/fixed_shoot_enemy.tscn" id="6_gee14"]
 [ext_resource type="PackedScene" uid="uid://cp837cm6qinkj" path="res://scenes/Enemy/enemy.tscn" id="6_kvuet"]
 [ext_resource type="Script" uid="uid://thlx0gtur2d4" path="res://scripts/enemy/enemy_movement_data.gd" id="7_trtic"]
 [ext_resource type="Script" uid="uid://baq3m8rspbgqo" path="res://scripts/enemy/enemy_attack_data.gd" id="8_ssvqc"]
 [ext_resource type="Script" uid="uid://cpbp4ohcaqwle" path="res://scripts/spawn_point.gd" id="9_0tnpc"]
 [ext_resource type="Script" uid="uid://c8u5b5y0i25wp" path="res://scripts/enemy/directional_movement.gd" id="9_ca42v"]
-[ext_resource type="Script" uid="uid://beg1vql3x734k" path="res://scripts/enemy/point.gd" id="9_ssvqc"]
-[ext_resource type="Script" uid="uid://bho4wgornhjo7" path="res://scripts/enemy/curve_movement.gd" id="10_264po"]
 [ext_resource type="Script" uid="uid://c4twyssjo6an2" path="res://scripts/event/spawn.gd" id="12_dinhu"]
+[ext_resource type="Resource" uid="uid://c3odk6bmthjms" path="res://fan_4_10_1_downward.tres" id="12_ssvqc"]
 [ext_resource type="Script" uid="uid://dmjfjfilssxt6" path="res://scripts/enemy/movement_base.gd" id="13_ir15t"]
+[ext_resource type="Resource" uid="uid://xdd8hbbe2aco" path="res://spiral_1.tres" id="13_ssvqc"]
+[ext_resource type="PackedScene" uid="uid://dwtrxu3symb3h" path="res://scenes/Enemy/boss_1.tscn" id="14_1kice"]
+[ext_resource type="Resource" uid="uid://bxtpc3ykjuuml" path="res://circle_15_0_1.tres" id="14_264po"]
 [ext_resource type="FontFile" uid="uid://dihhulpjs1064" path="res://assets/fonts/PixelOperator8.ttf" id="14_trtic"]
 [ext_resource type="PackedScene" uid="uid://cw7p0ekjax6t7" path="res://scenes/UI/player_user_interface.tscn" id="17_rysoc"]
 [ext_resource type="Script" uid="uid://84ox43jyptjb" path="res://scenes/Audio/music_auto_trigger.gd" id="19_1kice"]
-[ext_resource type="AudioStream" uid="uid://cpwdxqxulkiqy" path="res://assets/audio/music/Fields of Ice.ogg" id="20_1kice"]
+[ext_resource type="AudioStream" uid="uid://cpwdxqxulkiqy" path="res://assets/audio/music/level_music/Fields of Ice.ogg" id="20_1kice"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d8ny1"]
 size = Vector2(536, 21)
@@ -29,138 +29,328 @@ size = Vector2(536, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iywne"]
 size = Vector2(20, 284)
 
-[sub_resource type="Resource" id="Resource_2eb2s"]
-script = ExtResource("9_ssvqc")
-x_percent = 0.1
-y_percent = 1.0
-metadata/_custom_type_script = "uid://beg1vql3x734k"
-
-[sub_resource type="Resource" id="Resource_o0ty1"]
-script = ExtResource("9_ssvqc")
-x_percent = 0.2
-metadata/_custom_type_script = "uid://beg1vql3x734k"
-
-[sub_resource type="Curve" id="Curve_qcmcn"]
-_data = [Vector2(0.0060060024, 0.45736432), 0.0, 0.0, 0, 0, Vector2(0.5315315, 0.1705426), 0.0, 0.0, 0, 0, Vector2(1, 0.4728682), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="Resource" id="Resource_odhan"]
-script = ExtResource("10_264po")
-point_array = Array[ExtResource("9_ssvqc")]([SubResource("Resource_2eb2s"), SubResource("Resource_o0ty1")])
-speed_curve = SubResource("Curve_qcmcn")
-metadata/_custom_type_script = "uid://bho4wgornhjo7"
-
-[sub_resource type="Resource" id="Resource_ir15t"]
-script = ExtResource("7_trtic")
-movement_array = Array[ExtResource("13_ir15t")]([SubResource("Resource_odhan")])
-leave_screen = true
-metadata/_custom_type_script = "uid://thlx0gtur2d4"
-
-[sub_resource type="Resource" id="Resource_trtic"]
-script = ExtResource("12_dinhu")
-enemy = ExtResource("6_kvuet")
-enemy_movement_pattern = SubResource("Resource_ir15t")
-number_of_enemies = 10
-metadata/_custom_type_script = "uid://c4twyssjo6an2"
-
-[sub_resource type="Resource" id="Resource_kvuet"]
-script = ExtResource("4_kvpfn")
-spawner = 1
-time_between_spawns = 0.5
-time_to_occur = 5.0
-spawns = Array[ExtResource("12_dinhu")]([SubResource("Resource_trtic")])
-metadata/_custom_type_script = "uid://bewu02jnvwcgy"
-
-[sub_resource type="Resource" id="Resource_ca42v"]
-script = ExtResource("9_ca42v")
-distance = 0.9
-metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+[sub_resource type="Curve" id="Curve_1kice"]
+_data = [Vector2(0.0058479607, 0.5074626), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="Resource" id="Resource_264po"]
+script = ExtResource("9_ca42v")
+direction = 3
+distance = 0.4
+speed_curve = SubResource("Curve_1kice")
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Curve" id="Curve_37s47"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.6044775), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_5newe"]
+script = ExtResource("9_ca42v")
+direction = 2
+distance = 0.4
+speed_curve = SubResource("Curve_37s47")
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_ssvqc"]
 script = ExtResource("7_trtic")
-movement_array = Array[ExtResource("13_ir15t")]([SubResource("Resource_ca42v")])
+movement_array = Array[ExtResource("13_ir15t")]([SubResource("Resource_264po"), SubResource("Resource_5newe")])
 leave_screen = true
 metadata/_custom_type_script = "uid://thlx0gtur2d4"
 
 [sub_resource type="Resource" id="Resource_rysoc"]
 script = ExtResource("12_dinhu")
-enemy = ExtResource("6_gee14")
-enemy_movement_pattern = SubResource("Resource_264po")
-number_of_enemies = 5
-rotation = -90.0
+enemy = ExtResource("6_kvuet")
+enemy_movement_pattern = SubResource("Resource_ssvqc")
+enemy_attack_pattern = Array[ExtResource("8_ssvqc")]([ExtResource("12_ssvqc")])
+number_of_enemies = 4
 metadata/_custom_type_script = "uid://c4twyssjo6an2"
 
-[sub_resource type="Resource" id="Resource_37s47"]
+[sub_resource type="Resource" id="Resource_ca42v"]
 script = ExtResource("4_kvpfn")
-spawner = 2
-time_between_spawns = 2.5
-time_to_occur = 15.0
+spawner = 4
+time_between_spawns = 2.0
+time_to_occur = 10.0
 spawns = Array[ExtResource("12_dinhu")]([SubResource("Resource_rysoc")])
 metadata/_custom_type_script = "uid://bewu02jnvwcgy"
 
-[sub_resource type="Curve" id="Curve_bt5mj"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.8958334, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 3
+[sub_resource type="Curve" id="Curve_ssvqc"]
+_data = [Vector2(0.014619887, 0.6044775), 0.0, 0.0, 0, 0, Vector2(0.99415207, 0.5820895), 0.0, 0.0, 0, 0]
+point_count = 2
 
-[sub_resource type="Resource" id="Resource_js0lu"]
+[sub_resource type="Resource" id="Resource_37s47"]
+script = ExtResource("9_ca42v")
+distance = 0.4
+speed_curve = SubResource("Curve_ssvqc")
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_1kice"]
+script = ExtResource("7_trtic")
+movement_array = Array[ExtResource("13_ir15t")]([SubResource("Resource_37s47")])
+leave_screen = true
+metadata/_custom_type_script = "uid://thlx0gtur2d4"
+
+[sub_resource type="Resource" id="Resource_bt5mj"]
+script = ExtResource("12_dinhu")
+enemy = ExtResource("6_kvuet")
+enemy_movement_pattern = SubResource("Resource_1kice")
+enemy_attack_pattern = Array[ExtResource("8_ssvqc")]([ExtResource("14_264po")])
+number_of_enemies = 1
+metadata/_custom_type_script = "uid://c4twyssjo6an2"
+
+[sub_resource type="Resource" id="Resource_e1j6l"]
+script = ExtResource("4_kvpfn")
+spawner = 5
+time_to_occur = 25.0
+spawns = Array[ExtResource("12_dinhu")]([SubResource("Resource_bt5mj")])
+metadata/_custom_type_script = "uid://bewu02jnvwcgy"
+
+[sub_resource type="Resource" id="Resource_orsij"]
+script = ExtResource("9_ca42v")
+direction = 1
+distance = 0.4
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_s4dvs"]
+script = ExtResource("7_trtic")
+movement_array = Array[ExtResource("13_ir15t")]([SubResource("Resource_orsij")])
+leave_screen = true
+metadata/_custom_type_script = "uid://thlx0gtur2d4"
+
+[sub_resource type="Resource" id="Resource_byxtg"]
+script = ExtResource("12_dinhu")
+enemy = ExtResource("6_kvuet")
+enemy_movement_pattern = SubResource("Resource_s4dvs")
+enemy_attack_pattern = Array[ExtResource("8_ssvqc")]([ExtResource("14_264po")])
+number_of_enemies = 1
+metadata/_custom_type_script = "uid://c4twyssjo6an2"
+
+[sub_resource type="Resource" id="Resource_widfi"]
+script = ExtResource("4_kvpfn")
+spawner = 3
+time_to_occur = 30.0
+spawns = Array[ExtResource("12_dinhu")]([SubResource("Resource_byxtg")])
+metadata/_custom_type_script = "uid://bewu02jnvwcgy"
+
+[sub_resource type="Curve" id="Curve_5newe"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_pl11u"]
+script = ExtResource("9_ca42v")
+direction = 1
+distance = 0.7
+speed_curve = SubResource("Curve_5newe")
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_bhx41"]
+script = ExtResource("7_trtic")
+movement_array = Array[ExtResource("13_ir15t")]([SubResource("Resource_pl11u")])
+metadata/_custom_type_script = "uid://thlx0gtur2d4"
+
+[sub_resource type="Resource" id="Resource_qnb83"]
+script = ExtResource("12_dinhu")
+enemy = ExtResource("6_kvuet")
+enemy_movement_pattern = SubResource("Resource_bhx41")
+number_of_enemies = 20
+metadata/_custom_type_script = "uid://c4twyssjo6an2"
+
+[sub_resource type="Resource" id="Resource_sww3w"]
+script = ExtResource("4_kvpfn")
+spawner = 1
+time_between_spawns = 0.5
+time_to_occur = 30.0
+spawns = Array[ExtResource("12_dinhu")]([SubResource("Resource_qnb83")])
+metadata/_custom_type_script = "uid://bewu02jnvwcgy"
+
+[sub_resource type="Curve" id="Curve_rysoc"]
+_data = [Vector2(0, 0.97761184), 0.0, 0.0, 0, 0, Vector2(1, 0.9552238), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_suyxu"]
 script = ExtResource("9_ca42v")
 direction = 3
 distance = 0.5
-speed_curve = SubResource("Curve_bt5mj")
+speed_curve = SubResource("Curve_rysoc")
 metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
 
-[sub_resource type="Curve" id="Curve_pl11u"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.97916675, 1), 0.0, 0.0, 0, 0]
-point_count = 2
+[sub_resource type="Resource" id="Resource_sgl2t"]
+script = ExtResource("7_trtic")
+movement_array = Array[ExtResource("13_ir15t")]([SubResource("Resource_suyxu")])
+leave_screen = true
+metadata/_custom_type_script = "uid://thlx0gtur2d4"
+
+[sub_resource type="Resource" id="Resource_qouja"]
+script = ExtResource("12_dinhu")
+enemy = ExtResource("6_kvuet")
+enemy_movement_pattern = SubResource("Resource_sgl2t")
+number_of_enemies = 20
+metadata/_custom_type_script = "uid://c4twyssjo6an2"
+
+[sub_resource type="Resource" id="Resource_wljb1"]
+script = ExtResource("4_kvpfn")
+spawner = 2
+time_between_spawns = 0.5
+time_to_occur = 38.0
+spawns = Array[ExtResource("12_dinhu")]([SubResource("Resource_qouja")])
+metadata/_custom_type_script = "uid://bewu02jnvwcgy"
+
+[sub_resource type="Resource" id="Resource_twgab"]
+script = ExtResource("9_ca42v")
+distance = 0.01
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
 
 [sub_resource type="Resource" id="Resource_gxtfn"]
+script = ExtResource("7_trtic")
+movement_array = Array[ExtResource("13_ir15t")]([SubResource("Resource_twgab")])
+time_between_movements = 10.0
+metadata/_custom_type_script = "uid://thlx0gtur2d4"
+
+[sub_resource type="Resource" id="Resource_js0lu"]
+script = ExtResource("12_dinhu")
+enemy = ExtResource("6_kvuet")
+enemy_movement_pattern = SubResource("Resource_gxtfn")
+enemy_attack_pattern = Array[ExtResource("8_ssvqc")]([ExtResource("13_ssvqc")])
+number_of_enemies = 1
+metadata/_custom_type_script = "uid://c4twyssjo6an2"
+
+[sub_resource type="Resource" id="Resource_v2yb1"]
+script = ExtResource("4_kvpfn")
+spawner = 5
+time_to_occur = 38.0
+spawns = Array[ExtResource("12_dinhu")]([SubResource("Resource_js0lu")])
+metadata/_custom_type_script = "uid://bewu02jnvwcgy"
+
+[sub_resource type="Resource" id="Resource_enk72"]
 script = ExtResource("9_ca42v")
-direction = 2
-distance = 0.4
-speed_curve = SubResource("Curve_pl11u")
+distance = 0.5
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_evbdg"]
+script = ExtResource("7_trtic")
+movement_array = Array[ExtResource("13_ir15t")]([SubResource("Resource_enk72")])
+leave_screen = true
+metadata/_custom_type_script = "uid://thlx0gtur2d4"
+
+[sub_resource type="Resource" id="Resource_couit"]
+script = ExtResource("12_dinhu")
+enemy = ExtResource("6_kvuet")
+enemy_movement_pattern = SubResource("Resource_evbdg")
+enemy_attack_pattern = Array[ExtResource("8_ssvqc")]([ExtResource("13_ssvqc")])
+number_of_enemies = 1
+metadata/_custom_type_script = "uid://c4twyssjo6an2"
+
+[sub_resource type="Resource" id="Resource_eun57"]
+script = ExtResource("4_kvpfn")
+spawner = 6
+time_to_occur = 49.0
+spawns = Array[ExtResource("12_dinhu")]([SubResource("Resource_couit")])
+metadata/_custom_type_script = "uid://bewu02jnvwcgy"
+
+[sub_resource type="Resource" id="Resource_m4url"]
+script = ExtResource("9_ca42v")
+direction = 1
+distance = 0.8
 metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
 
 [sub_resource type="Resource" id="Resource_7025r"]
-script = ExtResource("9_ssvqc")
-x_percent = 0.1
-y_percent = 0.3
-metadata/_custom_type_script = "uid://beg1vql3x734k"
-
-[sub_resource type="Resource" id="Resource_8f35d"]
-script = ExtResource("9_ssvqc")
-x_percent = 0.1
-metadata/_custom_type_script = "uid://beg1vql3x734k"
-
-[sub_resource type="Curve" id="Curve_nhfu3"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.53472227, 0.5842697), 0.0, 0.0, 0, 0, Vector2(1, 0.9662922), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="Resource" id="Resource_m4url"]
-script = ExtResource("10_264po")
-point_array = Array[ExtResource("9_ssvqc")]([SubResource("Resource_7025r"), SubResource("Resource_8f35d")])
-speed_curve = SubResource("Curve_nhfu3")
-metadata/_custom_type_script = "uid://bho4wgornhjo7"
-
-[sub_resource type="Resource" id="Resource_twgab"]
 script = ExtResource("7_trtic")
-movement_array = Array[ExtResource("13_ir15t")]([SubResource("Resource_js0lu"), SubResource("Resource_gxtfn"), SubResource("Resource_m4url")])
-wrap_movements = true
+movement_array = Array[ExtResource("13_ir15t")]([SubResource("Resource_m4url")])
+leave_screen = true
 metadata/_custom_type_script = "uid://thlx0gtur2d4"
 
-[sub_resource type="Resource" id="Resource_02fa5"]
+[sub_resource type="Resource" id="Resource_nepv3"]
 script = ExtResource("12_dinhu")
-enemy = ExtResource("6_gee14")
-enemy_movement_pattern = SubResource("Resource_twgab")
-number_of_enemies = 10
-rotation = 180.0
+enemy = ExtResource("6_kvuet")
+enemy_movement_pattern = SubResource("Resource_7025r")
+enemy_attack_pattern = Array[ExtResource("8_ssvqc")]([ExtResource("13_ssvqc")])
+number_of_enemies = 1
 metadata/_custom_type_script = "uid://c4twyssjo6an2"
 
-[sub_resource type="Resource" id="Resource_nepv3"]
+[sub_resource type="Resource" id="Resource_02fa5"]
+script = ExtResource("4_kvpfn")
+spawner = 7
+time_to_occur = 55.0
+spawns = Array[ExtResource("12_dinhu")]([SubResource("Resource_nepv3")])
+metadata/_custom_type_script = "uid://bewu02jnvwcgy"
+
+[sub_resource type="Curve" id="Curve_e1j6l"]
+_data = [Vector2(0, 0.8059701), 0.0, 0.0, 0, 0, Vector2(0.5204679, 0.48507458), 0.0, 0.0, 0, 0, Vector2(1, 0.8582089), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Resource" id="Resource_8ool0"]
+script = ExtResource("9_ca42v")
+direction = 3
+distance = 0.8
+speed_curve = SubResource("Curve_e1j6l")
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_pr1ej"]
+script = ExtResource("7_trtic")
+movement_array = Array[ExtResource("13_ir15t")]([SubResource("Resource_8ool0")])
+metadata/_custom_type_script = "uid://thlx0gtur2d4"
+
+[sub_resource type="Resource" id="Resource_05nbr"]
+script = ExtResource("12_dinhu")
+enemy = ExtResource("6_kvuet")
+enemy_movement_pattern = SubResource("Resource_pr1ej")
+enemy_attack_pattern = Array[ExtResource("8_ssvqc")]([ExtResource("12_ssvqc")])
+number_of_enemies = 4
+metadata/_custom_type_script = "uid://c4twyssjo6an2"
+
+[sub_resource type="Resource" id="Resource_0sl42"]
 script = ExtResource("4_kvpfn")
 spawner = 4
-time_between_spawns = 1.5
-time_to_occur = 10.0
-spawns = Array[ExtResource("12_dinhu")]([SubResource("Resource_02fa5")])
+time_between_spawns = 1.0
+time_to_occur = 60.0
+spawns = Array[ExtResource("12_dinhu")]([SubResource("Resource_05nbr")])
+metadata/_custom_type_script = "uid://bewu02jnvwcgy"
+
+[sub_resource type="Resource" id="Resource_oaba0"]
+script = ExtResource("8_ssvqc")
+num_spawn_points = 15
+angular_spread = 6.283
+bullet_speed = 300.0
+max_times_to_fire = 10
+fire_rate = 1.0
+max_times_to_rotate = 3
+metadata/_custom_type_script = "uid://baq3m8rspbgqo"
+
+[sub_resource type="Resource" id="Resource_458eo"]
+script = ExtResource("8_ssvqc")
+change_in_angle = 3.798
+num_spawn_points = 15
+angular_spread = 2.5
+bullet_speed = 150.0
+max_times_to_fire = 20
+fire_rate = 0.1
+is_rotate = true
+max_times_to_rotate = 1000
+metadata/_custom_type_script = "uid://baq3m8rspbgqo"
+
+[sub_resource type="Resource" id="Resource_syw4j"]
+script = ExtResource("9_ca42v")
+direction = 1
+distance = 0.1
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_nfufp"]
+script = ExtResource("7_trtic")
+movement_array = Array[ExtResource("13_ir15t")]([SubResource("Resource_syw4j")])
+metadata/_custom_type_script = "uid://thlx0gtur2d4"
+
+[sub_resource type="Resource" id="Resource_dcinp"]
+script = ExtResource("12_dinhu")
+enemy = ExtResource("14_1kice")
+enemy_movement_pattern = SubResource("Resource_nfufp")
+enemy_attack_pattern = Array[ExtResource("8_ssvqc")]([SubResource("Resource_oaba0"), SubResource("Resource_458eo")])
+number_of_enemies = 1
+metadata/_custom_type_script = "uid://c4twyssjo6an2"
+
+[sub_resource type="Resource" id="Resource_kv8r3"]
+script = ExtResource("4_kvpfn")
+spawner = 1
+time_to_occur = 1.0
+spawns = Array[ExtResource("12_dinhu")]([SubResource("Resource_dcinp")])
 metadata/_custom_type_script = "uid://bewu02jnvwcgy"
 
 [node name="Game" type="Node" unique_id=717147830]
@@ -193,28 +383,28 @@ collision_layer = 32
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/left_right" unique_id=408583383]
-position = Vector2(-279, 0)
+position = Vector2(-282, 0)
 shape = SubResource("RectangleShape2D_iywne")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Borders/left_right" unique_id=1460387018]
-position = Vector2(277, 0)
+position = Vector2(280, 0)
 shape = SubResource("RectangleShape2D_iywne")
 
 [node name="ColorRect4" type="ColorRect" parent="Borders" unique_id=1298630426]
 z_index = 1
-offset_left = -268.80737
-offset_top = -162.00098
-offset_right = 55.131287
-offset_bottom = -141.80836
+offset_left = -272.0
+offset_top = -163.0
+offset_right = 51.93866
+offset_bottom = -142.80739
 rotation = 1.5708452
 color = Color(0.29219002, 0.29219005, 0.29219002, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="ColorRect3" type="ColorRect" parent="Borders" unique_id=763061406]
 z_index = 1
-offset_left = 287.0
+offset_left = 290.0
 offset_top = -162.00098
-offset_right = 610.93866
+offset_right = 613.93866
 offset_bottom = -141.80836
 rotation = 1.5708452
 color = Color(0.29219002, 0.29219005, 0.29219002, 1)
@@ -242,57 +432,69 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(-6, 69)
 
 [node name="LevelManager" parent="." unique_id=1305954196 node_paths=PackedStringArray("spawners") instance=ExtResource("2_gee14")]
-spawners = [NodePath("EnemySpawnPoint"), NodePath("EnemySpawnPoint2"), NodePath("EnemySpawnPoint4"), NodePath("EnemySpawnPoint5")]
-events = Array[ExtResource("4_kvpfn")]([SubResource("Resource_kvuet"), SubResource("Resource_37s47"), SubResource("Resource_nepv3")])
-level_time = 30.0
+spawners = [NodePath("EnemySpawnPoint"), NodePath("EnemySpawnPoint2"), NodePath("EnemySpawnPoint4"), NodePath("EnemySpawnPoint5"), NodePath("EnemySpawnPoint3"), NodePath("EnemySpawnPoint6"), NodePath("EnemySpawnPoint7")]
+events = Array[ExtResource("4_kvpfn")]([SubResource("Resource_ca42v"), SubResource("Resource_e1j6l"), SubResource("Resource_widfi"), SubResource("Resource_sww3w"), SubResource("Resource_wljb1"), SubResource("Resource_v2yb1"), SubResource("Resource_eun57"), SubResource("Resource_02fa5"), SubResource("Resource_0sl42")])
+level_time = 75.0
+boss_spawn_event = SubResource("Resource_kv8r3")
 
-[node name="Label" parent="LevelManager" index="1" unique_id=405150559]
+[node name="Label" parent="LevelManager" index="2" unique_id=405150559]
 z_index = 4
 offset_left = -285.0
 offset_top = -159.0
 offset_right = -155.0
 offset_bottom = -136.0
 
-[node name="Spawner" parent="LevelManager" index="4" unique_id=787316282 node_paths=PackedStringArray("player_user_interface")]
+[node name="Spawner" parent="LevelManager" index="5" unique_id=787316282 node_paths=PackedStringArray("player_user_interface")]
 player_user_interface = NodePath("../../PlayerUserInterface")
 
 [node name="EnemySpawnPoint" type="Node2D" parent="LevelManager" unique_id=966124853]
-position = Vector2(1, -214)
+position = Vector2(1, -142)
 script = ExtResource("9_0tnpc")
 id = 1
 spawn_interval = 1.0
 metadata/_custom_type_script = "uid://cpbp4ohcaqwle"
 
 [node name="EnemySpawnPoint4" type="Node2D" parent="LevelManager" unique_id=961822767]
-position = Vector2(-377, -70)
+position = Vector2(-269, -72)
 script = ExtResource("9_0tnpc")
 id = 4
 spawn_interval = 1.0
 metadata/_custom_type_script = "uid://cpbp4ohcaqwle"
 
 [node name="EnemySpawnPoint5" type="Node2D" parent="LevelManager" unique_id=1344813384]
-position = Vector2(377, -60)
+position = Vector2(197, 110)
 script = ExtResource("9_0tnpc")
 id = 5
 spawn_interval = 1.0
 metadata/_custom_type_script = "uid://cpbp4ohcaqwle"
 
 [node name="EnemySpawnPoint2" type="Node2D" parent="LevelManager" unique_id=916848794]
-position = Vector2(184, 220)
+position = Vector2(-268, 0)
 script = ExtResource("9_0tnpc")
 id = 2
 spawn_interval = 1.0
 metadata/_custom_type_script = "uid://cpbp4ohcaqwle"
 
 [node name="EnemySpawnPoint3" type="Node2D" parent="LevelManager" unique_id=1311989074]
-position = Vector2(-210, -220)
+position = Vector2(-170, -142)
 script = ExtResource("9_0tnpc")
 id = 3
 spawn_interval = 1.0
 metadata/_custom_type_script = "uid://cpbp4ohcaqwle"
 
-[node name="PauseMenu" parent="LevelManager" unique_id=1058867629 instance=ExtResource("1_u5sy4")]
-visible = false
+[node name="EnemySpawnPoint6" type="Node2D" parent="LevelManager" unique_id=1884373698]
+position = Vector2(-188, 109)
+script = ExtResource("9_0tnpc")
+id = 6
+spawn_interval = 1.0
+metadata/_custom_type_script = "uid://cpbp4ohcaqwle"
+
+[node name="EnemySpawnPoint7" type="Node2D" parent="LevelManager" unique_id=940565125]
+position = Vector2(140, -140)
+script = ExtResource("9_0tnpc")
+id = 7
+spawn_interval = 1.0
+metadata/_custom_type_script = "uid://cpbp4ohcaqwle"
 
 [node name="Label" type="Label" parent="." unique_id=675057189]
 z_index = 4

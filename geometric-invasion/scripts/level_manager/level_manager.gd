@@ -15,7 +15,8 @@ extends Node
 var num_enemies
 @export var enemies = {}
 @export var power_up_charge : PackedScene
-@export var boss : PackedScene
+@export var boss_spawn_event : Spawn_Event
+
 
 signal victory
 
@@ -28,6 +29,7 @@ var current_time
 var current_enemy_id = 0
 var current_power_up_id = 0
 
+
 func _ready() -> void:	
 	## Connect enemy death signals
 	#for i in enemies:
@@ -37,6 +39,9 @@ func _ready() -> void:
 	#num_enemies = enemies.size()
 	#print(enemies.size())	
 	player_spawner.loss.connect(_on_player_loss)
+	
+	if !$LevelTimer.timeout.is_connected(_on_level_timer_timeout):
+		$LevelTimer.timeout.connect(_on_level_timer_timeout)
 	
 	#Store the time in the timer
 	$LevelTimer.wait_time = level_time
@@ -77,7 +82,11 @@ func _process(_delta: float) -> void:
 
 # At end of level change scene
 func _on_level_timer_timeout() -> void:
-	victory.emit()
+	#print("TIMEOUT on peer ", multiplayer.get_unique_id())
+	if !multiplayer.is_server():
+		return
+	spawn_boss.rpc()
+	#victory.emit()
 	
 
 # Function to execute an event
@@ -147,14 +156,26 @@ func remove_enemy(id : int) -> void:
 		
 		if multiplayer.is_server():
 			# Roll the dice for spawning a ability pickup
-			if randf() < 0.5:
+			if randf() < 0.1:
 				#spawn_pickup(enemy.position)
 				prepare_pickup(enemy.position)
 				pass
 		
 		enemies.erase(id)
+		#AudioManager.play_spatial_sound(preload("res://assets/audio/sfx/enemy/Boom4.ogg"), enemy.position)
+		#
+		#enemy.animated_sprite_2d.play("explosion")
+		#await enemy.animated_sprite_2d.animation_finished
+		
+		var is_boss : bool = enemy.is_boss
+		
 		enemy.queue_free()
-	pass
+		
+		if is_boss == true:
+			if !multiplayer.is_server():
+				return
+			else:
+				set_game_state_to_victory.rpc()
 
 
 @rpc("authority", "call_local", "reliable")
@@ -171,6 +192,10 @@ func spawn_pickup(id : int, position : Vector2) -> void:
 func set_game_state_to_loss() -> void:
 	result_menu.show_loss_menu()
 	#get_tree().quit()
+
+@rpc("authority", "call_local", "reliable")
+func set_game_state_to_victory() -> void:
+	result_menu.show_victory_menu()
 
 func prepare_pickup(position : Vector2) -> void:
 	if !multiplayer.is_server():
@@ -189,3 +214,12 @@ func _on_player_loss() -> void:
 	if !multiplayer.is_server():
 		return
 	set_game_state_to_loss.rpc()
+
+@rpc("authority", "call_local", "reliable")
+func spawn_boss() -> void:
+	print("Boss Spawning")
+	$LevelTimer.stop()
+	
+	for i in spawners:
+		if i.id == boss_spawn_event.spawner:
+			i.execute_spawn_event(boss_spawn_event)

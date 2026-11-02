@@ -7,6 +7,7 @@
 [ext_resource type="Shader" uid="uid://ccvumau4xgwhx" path="res://shaders/flicker.gdshader" id="4_tuyoq"]
 [ext_resource type="Script" uid="uid://12171bvbqp8w" path="res://scripts/hurt_and_hit_box/hurtbox.gd" id="6_hvfru"]
 [ext_resource type="Texture2D" uid="uid://rjf6qb8ty32e" path="res://assets/sprites/eplosion_1.png" id="6_tuyoq"]
+[ext_resource type="Texture2D" uid="uid://c6r38awumrlts" path="res://assets/sprites/player_thrust.png" id="7_7tfl1"]
 [ext_resource type="Script" uid="uid://dhan5ja6q4fjx" path="res://scripts/hurt_and_hit_box/hitbox.gd" id="7_dl1wr"]
 [ext_resource type="Texture2D" uid="uid://uvk4s6j4ws4c" path="res://assets/sprites/circle_1.png" id="9_wwtew"]
 [ext_resource type="FontFile" uid="uid://dihhulpjs1064" path="res://assets/fonts/PixelOperator8.ttf" id="10_uxo23"]
@@ -45,6 +46,10 @@ region = Rect2(48, 0, 16, 16)
 atlas = ExtResource("6_tuyoq")
 region = Rect2(64, 0, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_jxtnq"]
+atlas = ExtResource("7_7tfl1")
+region = Rect2(0, 0, 16, 16)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_d8ny1"]
 animations = [{
 "frames": [{
@@ -74,6 +79,14 @@ animations = [{
 "loop": 0,
 "name": &"explosion",
 "speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jxtnq")
+}],
+"loop": 1,
+"name": &"thrust_up",
+"speed": 5.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u8vuu"]
@@ -130,7 +143,7 @@ collision_mask = 32
 motion_mode = 1
 script = ExtResource("1_g2els")
 player_class = ExtResource("2_a06cl")
-lives = 2
+lives = 3
 ability_scene = ExtResource("3_dl1wr")
 
 [node name="AbilityPickUpCollisionShape" type="Area2D" parent="." unique_id=1308904982]

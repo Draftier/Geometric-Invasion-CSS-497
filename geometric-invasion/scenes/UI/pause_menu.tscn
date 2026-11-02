@@ -19,6 +19,7 @@ theme_override_constants/margin_right = 256
 
 [node name="RootPauseMenu" type="VBoxContainer" parent="MarginContainer" unique_id=757549761]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 56
 
@@ -58,7 +59,6 @@ metadata/_edit_use_anchors_ = true
 
 [node name="SettingsMenu" type="VBoxContainer" parent="MarginContainer" unique_id=11262159]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 theme_override_constants/separation = 20
 
@@ -141,6 +141,23 @@ size_flags_horizontal = 6
 theme_override_fonts/font = ExtResource("2_bl585")
 alignment = 1
 
+[node name="FpsCounter" type="HBoxContainer" parent="MarginContainer/SettingsMenu/VBoxContainer" unique_id=574754418]
+layout_mode = 2
+
+[node name="FpsCounterLabel" type="Label" parent="MarginContainer/SettingsMenu/VBoxContainer/FpsCounter" unique_id=64425460]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.45
+theme_override_fonts/font = ExtResource("2_bl585")
+text = "FPS Counter"
+horizontal_alignment = 1
+
+[node name="FpsSettings" type="CheckBox" parent="MarginContainer/SettingsMenu/VBoxContainer/FpsCounter" unique_id=1790843935]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_fonts/font = ExtResource("2_bl585")
+alignment = 1
+
 [node name="BackToPauseMenu" type="Button" parent="MarginContainer/SettingsMenu/VBoxContainer" unique_id=1574968155]
 layout_mode = 2
 size_flags_horizontal = 4
@@ -166,4 +183,5 @@ text = "You won!"
 [connection signal="pressed" from="MarginContainer/RootPauseMenu/RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="MarginContainer/RootPauseMenu/QuitToMenu" to="." method="_on_quit_to_menu_pressed"]
 [connection signal="pressed" from="MarginContainer/RootPauseMenu/QuitToDesktop" to="." method="_on_quit_to_desktop_pressed"]
+[connection signal="toggled" from="MarginContainer/SettingsMenu/VBoxContainer/FpsCounter/FpsSettings" to="." method="_on_fps_settings_toggled"]
 [connection signal="pressed" from="MarginContainer/SettingsMenu/VBoxContainer/BackToPauseMenu" to="." method="_on_back_to_pause_menu_pressed"]

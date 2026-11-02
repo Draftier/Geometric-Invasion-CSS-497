@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cnr36qxaqynbc" path="res://scenes/star_background.tscn" id="3_ltpn8"]
 [ext_resource type="Theme" uid="uid://d21lh0fquueyo" path="res://new_button_theme.tres" id="4_ltpn8"]
 [ext_resource type="Script" uid="uid://84ox43jyptjb" path="res://scenes/Audio/music_auto_trigger.gd" id="5_2m35m"]
-[ext_resource type="AudioStream" uid="uid://8qm86b2b1081" path="res://assets/audio/music/Week 21 - Freefall GLIDE.ogg" id="6_5blle"]
+[ext_resource type="AudioStream" uid="uid://8qm86b2b1081" path="res://assets/audio/music/menu_theme/Week 21 - Freefall GLIDE.ogg" id="6_5blle"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wt8fv"]
 bg_color = Color(0, 0, 0, 0.41568628)

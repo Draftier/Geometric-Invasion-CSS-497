@@ -1,0 +1,165 @@
+[gd_scene format=3 uid="uid://dwtrxu3symb3h"]
+
+[ext_resource type="Script" uid="uid://pqste00swnss" path="res://scripts/enemy/base_enemy.gd" id="1_w0mqk"]
+[ext_resource type="Script" uid="uid://dmjfjfilssxt6" path="res://scripts/enemy/movement_base.gd" id="2_qmbp8"]
+[ext_resource type="Script" uid="uid://c8u5b5y0i25wp" path="res://scripts/enemy/directional_movement.gd" id="3_x8p32"]
+[ext_resource type="Script" uid="uid://thlx0gtur2d4" path="res://scripts/enemy/enemy_movement_data.gd" id="6_pt8yo"]
+[ext_resource type="Script" uid="uid://baq3m8rspbgqo" path="res://scripts/enemy/enemy_attack_data.gd" id="7_d4b75"]
+[ext_resource type="PackedScene" uid="uid://dea3ckmfpjcym" path="res://scenes/Ability/ability_pickup.tscn" id="10_s07ti"]
+[ext_resource type="PackedScene" uid="uid://lha1c308vq6j" path="res://scenes/Enemy/emitter.tscn" id="11_feyha"]
+[ext_resource type="Shader" uid="uid://cqv7cjdn8x0b5" path="res://shaders/flash.tres" id="12_kt1hu"]
+[ext_resource type="Texture2D" uid="uid://dtb2vka5e01d3" path="res://assets/sprites/enemy.png" id="13_cw3tg"]
+[ext_resource type="Script" uid="uid://12171bvbqp8w" path="res://scripts/hurt_and_hit_box/hurtbox.gd" id="14_qil7p"]
+[ext_resource type="Script" uid="uid://dhan5ja6q4fjx" path="res://scripts/hurt_and_hit_box/hitbox.gd" id="15_ikpv4"]
+[ext_resource type="Texture2D" uid="uid://rjf6qb8ty32e" path="res://assets/sprites/eplosion_1.png" id="16_at7ev"]
+
+[sub_resource type="Resource" id="Resource_ixhtt"]
+script = ExtResource("3_x8p32")
+direction = 1
+distance = 0.2
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_eacat"]
+script = ExtResource("6_pt8yo")
+movement_array = Array[ExtResource("2_qmbp8")]([SubResource("Resource_ixhtt")])
+metadata/_custom_type_script = "uid://thlx0gtur2d4"
+
+[sub_resource type="Resource" id="Resource_nyd7y"]
+script = ExtResource("7_d4b75")
+num_spawn_points = 15
+angular_spread = 6.283
+bullet_speed = 300.0
+max_times_to_fire = 5
+fire_rate = 1.0
+max_times_to_rotate = 3
+metadata/_custom_type_script = "uid://baq3m8rspbgqo"
+
+[sub_resource type="Resource" id="Resource_32bw0"]
+script = ExtResource("7_d4b75")
+change_in_angle = 3.798
+num_spawn_points = 15
+angular_spread = 2.5
+bullet_speed = 200.0
+max_times_to_fire = 20
+fire_rate = 0.1
+is_rotate = true
+max_times_to_rotate = 1000
+metadata/_custom_type_script = "uid://baq3m8rspbgqo"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iywne"]
+resource_local_to_scene = true
+shader = ExtResource("12_kt1hu")
+shader_parameter/Color = Color(1, 1, 1, 1)
+shader_parameter/Progress = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8tegq"]
+size = Vector2(14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t4kp2"]
+atlas = ExtResource("16_at7ev")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k06wl"]
+atlas = ExtResource("16_at7ev")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fqx87"]
+atlas = ExtResource("16_at7ev")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j6s03"]
+atlas = ExtResource("16_at7ev")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ipswl"]
+atlas = ExtResource("16_at7ev")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fxkbx"]
+animations = [{
+"frames": [],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t4kp2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k06wl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fqx87")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j6s03")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ipswl")
+}],
+"loop": 0,
+"name": &"explosion",
+"speed": 15.0
+}]
+
+[sub_resource type="Animation" id="Animation_f5wgj"]
+resource_name = "explosion"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_47vae"]
+_data = {
+&"explosion": SubResource("Animation_f5wgj")
+}
+
+[node name="Boss" type="Node2D" unique_id=682992089 groups=["enemy"]]
+position = Vector2(507, 227)
+scale = Vector2(8.440001, 8.440001)
+script = ExtResource("1_w0mqk")
+movement_events = SubResource("Resource_eacat")
+attack_events = Array[ExtResource("7_d4b75")]([SubResource("Resource_nyd7y"), SubResource("Resource_32bw0")])
+speed = 100
+health = 500
+power_up_charge = ExtResource("10_s07ti")
+loop_attack_events = true
+is_boss = true
+
+[node name="emitter" parent="." unique_id=1019809325 instance=ExtResource("11_feyha")]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1252295741]
+material = SubResource("ShaderMaterial_iywne")
+texture = ExtResource("13_cw3tg")
+
+[node name="Hurtbox" type="Area2D" parent="Sprite2D" unique_id=725762865]
+collision_layer = 8
+collision_mask = 129
+monitorable = false
+script = ExtResource("14_qil7p")
+metadata/_custom_type_script = "uid://12171bvbqp8w"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Hurtbox" unique_id=1199752919]
+shape = SubResource("RectangleShape2D_8tegq")
+
+[node name="Hitbox" type="Area2D" parent="Sprite2D" unique_id=1414706671]
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+script = ExtResource("15_ikpv4")
+damage = 1
+metadata/_custom_type_script = "uid://dhan5ja6q4fjx"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Hitbox" unique_id=667564901]
+shape = SubResource("RectangleShape2D_8tegq")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=247689940]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1465384279]
+sprite_frames = SubResource("SpriteFrames_fxkbx")
+autoplay = "default"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=857330204]
+libraries/ = SubResource("AnimationLibrary_47vae")
+
+[connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+
+[editable path="emitter"]

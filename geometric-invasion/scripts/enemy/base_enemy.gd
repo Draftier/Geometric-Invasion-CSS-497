@@ -13,6 +13,8 @@ signal hit_report(id : int, damage : float)
 
 @onready var screen : Vector2 = get_viewport_rect().size
 @onready var emitter : Emitter = $emitter
+@onready var animated_sprite_2d : AnimatedSprite2D = $AnimatedSprite2D
+@onready var sprite_2d : Sprite2D = $Sprite2D
 
 # Movement and attack resources that enemies will utilize
 @export var movement_events : EnemyMovementData
@@ -24,6 +26,8 @@ signal hit_report(id : int, damage : float)
 # Variable that stores the packed scene for ability pickup
 @export var power_up_charge : PackedScene
 
+@export var loop_attack_events : bool = false
+@export var is_boss : bool = false
 # Movement variables for directional movmeent
 var direction_vector
 var target_pos : Vector2
@@ -46,7 +50,7 @@ var id : int
 func _ready() -> void:
 	#id = Global.current_enemy_id
 	#Global.current_enemy_id += 1 
-	
+	animated_sprite_2d.play("default")
 	self.name = str(id)
 	# Run the movement events as a coroutine
 	temp_speed = speed
@@ -109,13 +113,21 @@ func take_damage(damage : int) -> void:
 	if health - damage < 0:
 		health = 0
 	else:
-		AudioManager.play_spatial_sound(preload("res://assets/audio/sfx/Enemy/Hit17.ogg"), self.position)
+		AudioManager.play_spatial_sound(preload("res://assets/audio/sfx/enemy/Hit17.ogg"), self.position)
 		health -= damage
 	
 	## If health zero then free
 	if health == 0 and is_dead == false:
 		is_dead = true
+		
+		AudioManager.play_spatial_sound(preload("res://assets/audio/sfx/enemy/Boom4.ogg"), position)
+		
+		sprite_2d.hide()
+		animated_sprite_2d.play("explosion")
+		await animated_sprite_2d.animation_finished
+		
 		death.emit(id)
+		
 		print("dying")
 		return
 		
@@ -142,10 +154,13 @@ func execute_movement_events() -> void:
 		assert(i != null, "Current movement event is null")
 		# Wait for current movement to finish then do next movement		
 		await movement_finished
+		
+		await get_tree().create_timer(movement_events.time_between_movements).timeout
 
 	# Stop moving
 	function_direction = Vector2.ZERO
-		
+	
+	
 	# Check if we want to loop or leave screen
 	if movement_events.leave_screen == true:
 		leave_screen()
@@ -206,6 +221,7 @@ func report_hit(damage : float) -> void:
 
 @rpc("any_peer", "call_local", "reliable")
 func flash_enemy() -> void:
+	AudioManager.play_spatial_sound(preload("res://assets/audio/sfx/enemy/Hit17.ogg"), self.position)
 	var tween = create_tween()
 	tween.tween_property($Sprite2D.material, 'shader_parameter/Progress', 0.0, 0.01)
 	tween.tween_property($Sprite2D.material, 'shader_parameter/Progress', 1.0, 0.02)	
@@ -223,3 +239,6 @@ func execute_attack_events() -> void:
 		emitter.set_attack_event(attack_data)
 		
 		await emitter.event_finished
+	
+	if loop_attack_events == true:
+		execute_attack_events()

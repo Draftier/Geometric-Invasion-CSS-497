@@ -10,3 +10,5 @@ class_name EnemyMovementData
 # Var to check if we want movement to loop
 @export var wrap_movements : bool
 @export var leave_screen : bool
+
+@export var time_between_movements : float = 0

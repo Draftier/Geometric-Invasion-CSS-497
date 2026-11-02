@@ -12,8 +12,13 @@ var theta : float
 
 @export var bullet : PackedScene
 
+
 var num_times_fired : int = 0
 var num_times_rotated : int = 0
+
+#func _ready() -> void:
+	#$Timer.start()
+	#$Timer.wait_time = attack_event.fire_rate
 
 func set_attack_event(attack : EnemyAttackData) -> void:
 	num_times_fired = 0

@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cv773lb080he7"
+path="res://.godot/imported/Fallen in Battle.ogg-1a5b070d37a6b0a612f09199014f48ab.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/music/level_music/Fallen in Battle.ogg"
+dest_files=["res://.godot/imported/Fallen in Battle.ogg-1a5b070d37a6b0a612f09199014f48ab.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4
