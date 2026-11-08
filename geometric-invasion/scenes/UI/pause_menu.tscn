@@ -19,7 +19,6 @@ theme_override_constants/margin_right = 256
 
 [node name="RootPauseMenu" type="VBoxContainer" parent="MarginContainer" unique_id=757549761]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 theme_override_constants/separation = 56
 
@@ -59,6 +58,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="SettingsMenu" type="VBoxContainer" parent="MarginContainer" unique_id=11262159]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 20
 
@@ -123,28 +123,33 @@ max_value = 1.0
 step = 0.05
 value = 0.5
 
-[node name="FullScreen" type="HBoxContainer" parent="MarginContainer/SettingsMenu/VBoxContainer" unique_id=225597031]
+[node name="Displaymode" type="HBoxContainer" parent="MarginContainer/SettingsMenu/VBoxContainer" unique_id=1022236815]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/SettingsMenu/VBoxContainer/FullScreen" unique_id=1264637894]
+[node name="DisplayModeLabel" type="Label" parent="MarginContainer/SettingsMenu/VBoxContainer/Displaymode" unique_id=1883996690]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.45
+size_flags_vertical = 1
 theme_override_fonts/font = ExtResource("2_bl585")
-text = "Fullscreen"
+text = "Display Mode"
 horizontal_alignment = 1
 
-[node name="DisplaySetting" type="CheckBox" parent="MarginContainer/SettingsMenu/VBoxContainer/FullScreen" unique_id=1255135917]
+[node name="DisplayMode" type="OptionButton" parent="MarginContainer/SettingsMenu/VBoxContainer/Displaymode" unique_id=1780619915]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 6
-theme_override_fonts/font = ExtResource("2_bl585")
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.3
 alignment = 1
+item_count = 2
+popup/item_0/text = "Fullscreen"
+popup/item_0/id = 0
+popup/item_1/text = "Windowed"
+popup/item_1/id = 2
 
-[node name="FpsCounter" type="HBoxContainer" parent="MarginContainer/SettingsMenu/VBoxContainer" unique_id=574754418]
+[node name="FpsCounter2" type="HBoxContainer" parent="MarginContainer/SettingsMenu/VBoxContainer" unique_id=414368436]
 layout_mode = 2
 
-[node name="FpsCounterLabel" type="Label" parent="MarginContainer/SettingsMenu/VBoxContainer/FpsCounter" unique_id=64425460]
+[node name="FpsCounterLabel" type="Label" parent="MarginContainer/SettingsMenu/VBoxContainer/FpsCounter2" unique_id=33790429]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.45
@@ -152,11 +157,16 @@ theme_override_fonts/font = ExtResource("2_bl585")
 text = "FPS Counter"
 horizontal_alignment = 1
 
-[node name="FpsSettings" type="CheckBox" parent="MarginContainer/SettingsMenu/VBoxContainer/FpsCounter" unique_id=1790843935]
+[node name="FpsSettingDropDown" type="OptionButton" parent="MarginContainer/SettingsMenu/VBoxContainer/FpsCounter2" unique_id=1299609597]
+unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 6
-theme_override_fonts/font = ExtResource("2_bl585")
+size_flags_horizontal = 3
 alignment = 1
+item_count = 2
+popup/item_0/text = "Off"
+popup/item_0/id = 1
+popup/item_1/text = "On"
+popup/item_1/id = 0
 
 [node name="BackToPauseMenu" type="Button" parent="MarginContainer/SettingsMenu/VBoxContainer" unique_id=1574968155]
 layout_mode = 2
@@ -183,5 +193,6 @@ text = "You won!"
 [connection signal="pressed" from="MarginContainer/RootPauseMenu/RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="MarginContainer/RootPauseMenu/QuitToMenu" to="." method="_on_quit_to_menu_pressed"]
 [connection signal="pressed" from="MarginContainer/RootPauseMenu/QuitToDesktop" to="." method="_on_quit_to_desktop_pressed"]
-[connection signal="toggled" from="MarginContainer/SettingsMenu/VBoxContainer/FpsCounter/FpsSettings" to="." method="_on_fps_settings_toggled"]
+[connection signal="item_selected" from="MarginContainer/SettingsMenu/VBoxContainer/Displaymode/DisplayMode" to="." method="_on_display_mode_item_selected"]
+[connection signal="item_selected" from="MarginContainer/SettingsMenu/VBoxContainer/FpsCounter2/FpsSettingDropDown" to="." method="_on_fps_setting_drop_down_item_selected"]
 [connection signal="pressed" from="MarginContainer/SettingsMenu/VBoxContainer/BackToPauseMenu" to="." method="_on_back_to_pause_menu_pressed"]

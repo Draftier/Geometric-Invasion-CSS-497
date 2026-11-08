@@ -70,7 +70,7 @@ size_flags_vertical = 4
 focus_neighbor_top = NodePath("../Singleplayer")
 focus_neighbor_bottom = NodePath("../TutorialButton")
 theme = ExtResource("4_tfcbk")
-text = "Multiplayer (To be done)
+text = "Multiplayer
 "
 metadata/_edit_use_anchors_ = true
 

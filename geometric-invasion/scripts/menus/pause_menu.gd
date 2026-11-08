@@ -9,7 +9,8 @@ extends CanvasLayer
 @onready var music_slider = %MusicSlider
 @onready var sfx_slider = %SfxSlider
 @onready var ui_slider = %UiSoundSlider
-@onready var display_mode = %DisplaySetting
+@onready var display_mode = %DisplayMode
+@onready var fps_dropwdown = %FpsSettingDropDown
 
 var current_display_mode = DisplayServer.window_get_mode()
 
@@ -28,9 +29,12 @@ func setup_settings_menu() -> void:
 	ui_slider.value_changed.connect(_on_ui_slider_changed)
 	
 	if current_display_mode == DisplayServer.WINDOW_MODE_FULLSCREEN:
-		display_mode.set_block_signals(true)
-		display_mode.button_pressed = true
-		display_mode.set_block_signals(false)
+		display_mode.select(0)
+	
+	if Overlay.is_fps_overlay_enabled == true:
+		fps_dropwdown.select(1)
+	else:
+		fps_dropwdown.select(0)
 		
 	AudioManager.setup_ui_button_audio(self)
 
@@ -87,7 +91,6 @@ func _on_settings_button_pressed() -> void:
 	settings_menu.visible = true
 	
 
-
 func _on_back_to_pause_menu_pressed() -> void:
 	settings_menu.hide()
 	root_pause_menu.visible = true
@@ -99,3 +102,18 @@ func _on_fps_settings_toggled(toggled_on: bool) -> void:
 		Overlay.disable_fps_overlay()
 	else:
 		Overlay.enable_fps_overlay()
+
+
+func _on_fps_setting_drop_down_item_selected(index: int) -> void:
+	match index:
+		0:
+			Overlay.disable_fps_overlay()
+		1:
+			Overlay.enable_fps_overlay()
+			
+func _on_display_mode_item_selected(index: int) -> void:
+	match index:
+		0:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+		1:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
