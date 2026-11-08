@@ -81,7 +81,7 @@ size_flags_vertical = 4
 focus_neighbor_top = NodePath("../Multiplayer (Not implemented)")
 focus_neighbor_bottom = NodePath("../ControlsButton")
 theme = ExtResource("4_tfcbk")
-text = "Tutorial (To be done)"
+text = "Tutorial"
 
 [node name="ControlsButton" type="Button" parent="MarginContainer/RootMenu/ButtonsVbox" unique_id=1898276927]
 layout_mode = 2

@@ -45,6 +45,7 @@ func spawn_player(id : int) -> void:
 	player.ability_scene = Global.ability
 	player.name = str(id)
 	
+	
 	get_node(spawn_path).call_deferred("add_child", player)
 
 	players[id] = player

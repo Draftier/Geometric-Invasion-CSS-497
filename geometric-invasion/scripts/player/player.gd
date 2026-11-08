@@ -57,7 +57,6 @@ func _process(_delta: float) -> void:
 	if !NetworkManager.is_solo and !is_multiplayer_authority():
 		return
 
-	
 	# Get an input vector and modify velocity of player based on it
 	direction = Input.get_vector("left", "right", "up", "down")
 	

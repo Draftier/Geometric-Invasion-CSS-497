@@ -33,8 +33,7 @@ func focus_button() -> void:
 			button.grab_focus()
 
 func _on_tutorial_button_pressed() -> void:
-	#get_tree().change_scene_to_file("res:://scenes/tutorial.tscn")
-	pass
+	get_tree().change_scene_to_file("res://overall_tutorial_level.tscn")
 
 
 func _on_controls_button_pressed() -> void:

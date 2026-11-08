@@ -29,6 +29,7 @@ func update_entry_lives(id : int, lives : int) -> void:
 
 @rpc("authority", "call_local", "reliable")
 func update_entry_charge_state(id : int, charge : bool) -> void:
+	print("Updating charge state")
 	var entry = player_info.get(id) as PlayerUIEntry
 	entry.set_ability_state(charge)
 

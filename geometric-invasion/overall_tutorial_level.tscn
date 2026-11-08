@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bjsdsl4op0k27" path="res://tutorial_label.tscn" id="2_ydimf"]
 [ext_resource type="PackedScene" uid="uid://dea3ckmfpjcym" path="res://scenes/Ability/ability_pickup.tscn" id="3_b2siv"]
 [ext_resource type="Script" uid="uid://dt1c0f6c5i51q" path="res://scripts/level_manager/multiplayer_spawner.gd" id="8_ydimf"]
+[ext_resource type="FontFile" uid="uid://dihhulpjs1064" path="res://assets/fonts/PixelOperator8.ttf" id="11_ggpxj"]
 [ext_resource type="PackedScene" uid="uid://cw7p0ekjax6t7" path="res://scenes/UI/player_user_interface.tscn" id="17_8lcv5"]
 [ext_resource type="Script" uid="uid://84ox43jyptjb" path="res://scenes/Audio/music_auto_trigger.gd" id="18_611ta"]
 [ext_resource type="AudioStream" uid="uid://cpwdxqxulkiqy" path="res://assets/audio/music/level_music/Fields of Ice.ogg" id="19_wtpwo"]
@@ -131,3 +132,36 @@ player_user_interface = NodePath("../PlayerUserInterface")
 [node name="EnemySpawnPoint" type="Marker2D" parent="." unique_id=1719665069]
 unique_name_in_owner = true
 position = Vector2(128, -85)
+
+[node name="TimeLabel" type="Label" parent="." unique_id=1773138080]
+unique_name_in_owner = true
+visible = false
+z_index = 4
+offset_left = -285.0
+offset_top = -159.0
+offset_right = -155.0
+offset_bottom = -136.0
+theme_override_fonts/font = ExtResource("11_ggpxj")
+theme_override_font_sizes/font_size = 16
+text = "Time left: "
+
+[node name="TitleLabel" type="Label" parent="." unique_id=393922433]
+z_index = 4
+offset_left = -47.0
+offset_top = -158.0
+offset_right = 57.0
+offset_bottom = -141.0
+theme_override_fonts/font = ExtResource("11_ggpxj")
+theme_override_font_sizes/font_size = 16
+text = "Tutorial"
+
+[node name="QuitToMainMenuButton" type="Button" parent="." unique_id=53030369]
+unique_name_in_owner = true
+visible = false
+offset_left = -75.0
+offset_top = 18.0
+offset_right = 80.0
+offset_bottom = 49.0
+text = "Quit to main menu"
+
+[connection signal="pressed" from="QuitToMainMenuButton" to="." method="_on_quit_to_main_menu_button_pressed"]
