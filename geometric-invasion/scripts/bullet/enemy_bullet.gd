@@ -1,10 +1,14 @@
 extends Bullet
+class_name EnemyBullet
 
 @onready var bullet_hurtbox = %Hurtbox
 
+
+
 func _ready() -> void:
 	super._ready()
-	self.reset()
+	#self.set_physics_process(false)
+	#self.reset()
 
 
 func reset() -> void:

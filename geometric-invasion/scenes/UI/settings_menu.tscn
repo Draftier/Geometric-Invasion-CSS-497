@@ -109,23 +109,28 @@ max_value = 1.0
 step = 0.05
 value = 0.5
 
-[node name="FullScreen" type="HBoxContainer" parent="MarginContainer/RootMenu/VBoxContainer" unique_id=1725651105]
+[node name="Displaymode" type="HBoxContainer" parent="MarginContainer/RootMenu/VBoxContainer" unique_id=1679406428]
 layout_mode = 2
 
-[node name="FullScreenLabel" type="Label" parent="MarginContainer/RootMenu/VBoxContainer/FullScreen" unique_id=1221456571]
+[node name="DisplayModeLabel" type="Label" parent="MarginContainer/RootMenu/VBoxContainer/Displaymode" unique_id=2000236951]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.45
+size_flags_vertical = 1
 theme_override_fonts/font = ExtResource("4_t4w0s")
-text = "Fullscreen"
+text = "Display Mode"
 horizontal_alignment = 1
 
-[node name="DisplaySetting" type="CheckBox" parent="MarginContainer/RootMenu/VBoxContainer/FullScreen" unique_id=859934268]
+[node name="DisplayMode" type="OptionButton" parent="MarginContainer/RootMenu/VBoxContainer/Displaymode" unique_id=691270751]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 6
-theme_override_fonts/font = ExtResource("4_t4w0s")
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.3
 alignment = 1
+item_count = 2
+popup/item_0/text = "Fullscreen"
+popup/item_0/id = 0
+popup/item_1/text = "Windowed"
+popup/item_1/id = 2
 
 [node name="FpsCounter" type="HBoxContainer" parent="MarginContainer/RootMenu/VBoxContainer" unique_id=53918239]
 layout_mode = 2
@@ -138,11 +143,16 @@ theme_override_fonts/font = ExtResource("4_t4w0s")
 text = "FPS Counter"
 horizontal_alignment = 1
 
-[node name="FpsSettings" type="CheckBox" parent="MarginContainer/RootMenu/VBoxContainer/FpsCounter" unique_id=1045787216]
+[node name="FpsSettingDropDown" type="OptionButton" parent="MarginContainer/RootMenu/VBoxContainer/FpsCounter" unique_id=1362277290]
+unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 6
-theme_override_fonts/font = ExtResource("4_t4w0s")
+size_flags_horizontal = 3
 alignment = 1
+item_count = 2
+popup/item_0/text = "Off"
+popup/item_0/id = 1
+popup/item_1/text = "On"
+popup/item_1/id = 0
 
 [node name="BackButton" type="Button" parent="MarginContainer/RootMenu/VBoxContainer" unique_id=1024788489]
 layout_mode = 2
@@ -158,6 +168,6 @@ script = ExtResource("6_c5o1q")
 track = ExtResource("7_uxg4l")
 metadata/_custom_type_script = "uid://84ox43jyptjb"
 
-[connection signal="toggled" from="MarginContainer/RootMenu/VBoxContainer/FullScreen/DisplaySetting" to="." method="_on_display_setting_toggled"]
-[connection signal="toggled" from="MarginContainer/RootMenu/VBoxContainer/FpsCounter/FpsSettings" to="." method="_on_fps_settings_toggled"]
+[connection signal="item_selected" from="MarginContainer/RootMenu/VBoxContainer/Displaymode/DisplayMode" to="." method="_on_option_button_item_selected"]
+[connection signal="item_selected" from="MarginContainer/RootMenu/VBoxContainer/FpsCounter/FpsSettingDropDown" to="." method="_on_fps_setting_drop_down_item_selected"]
 [connection signal="pressed" from="MarginContainer/RootMenu/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

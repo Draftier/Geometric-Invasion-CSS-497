@@ -17,6 +17,7 @@ modulate = Color(0.9470256, 0.5152414, 0.49112654, 1)
 texture = ExtResource("2_caht2")
 
 [node name="Hitbox" type="Area2D" parent="Sprite2D" unique_id=280840225]
+unique_name_in_owner = true
 collision_layer = 4
 collision_mask = 0
 monitoring = false

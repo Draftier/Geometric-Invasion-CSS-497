@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://bjsdsl4op0k27"]
+
+[ext_resource type="Script" uid="uid://ct2acn6ctkxkb" path="res://tutorial_label.gd" id="1_bc6mo"]
+
+[node name="TutorialLabel" type="Label" unique_id=1775916262]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -81.0
+offset_right = 125.0
+offset_bottom = -58.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bc6mo")
+text_to_display = "Welcome to geometric invasion!"
+time_between_chars = 0.1
+
+[node name="Timer" type="Timer" parent="." unique_id=1272834100]
+unique_name_in_owner = true
+wait_time = 0.4
+autostart = true

@@ -17,6 +17,7 @@ var num_enemies
 @export var power_up_charge : PackedScene
 @export var boss_spawn_event : Spawn_Event
 
+@export var ability_pickup_drop_chance : float = 0.1
 
 signal victory
 
@@ -156,7 +157,7 @@ func remove_enemy(id : int) -> void:
 		
 		if multiplayer.is_server():
 			# Roll the dice for spawning a ability pickup
-			if randf() < 0.1:
+			if randf() < ability_pickup_drop_chance:
 				#spawn_pickup(enemy.position)
 				prepare_pickup(enemy.position)
 				pass

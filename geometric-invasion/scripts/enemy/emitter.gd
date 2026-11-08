@@ -7,10 +7,9 @@ signal event_finished
 @export var attack_event : EnemyAttackData
 
 @export var bullet_speed : float
+@export var is_home : bool = false
 
 var theta : float
-
-@export var bullet : PackedScene
 
 
 var num_times_fired : int = 0
@@ -24,6 +23,7 @@ func set_attack_event(attack : EnemyAttackData) -> void:
 	num_times_fired = 0
 	num_times_rotated = 0
 	theta = attack.initial_theta
+	is_home = attack.is_homing
 	
 	$Marker2D.rotation = attack.initial_theta
 	theta = $Marker2D.rotation
@@ -41,7 +41,15 @@ func _on_timer_timeout() -> void:
 		return
 	
 	for i in range (1, attack_event.num_spawn_points+1):
-		var bullet = PoolManager.give_enemy_bullet()
+		var bullet	
+		if is_home == true:
+			bullet = PoolManager.give_enemy_homing_bullet()
+			print("Obtaining homing bullet")
+		else:
+			bullet = PoolManager.give_enemy_bullet()		
+		
+		#var bullet = bullet_scene.instantiate()
+		
 		bullet.speed = attack_event.bullet_speed
 		
 		bullet.global_position = self.global_position
@@ -49,6 +57,7 @@ func _on_timer_timeout() -> void:
 		var space_between_bullets = attack_event.angular_spread / attack_event.num_spawn_points
 		bullet.global_rotation = global_rotation + space_between_bullets * i + theta
 		
+		#add_child(bullet)
 		bullet.activate()
 		
 	if attack_event.is_rotate == true:

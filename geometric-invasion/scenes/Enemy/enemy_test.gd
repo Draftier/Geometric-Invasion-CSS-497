@@ -1,0 +1,297 @@
+extends Node2D
+
+# TODO Make it so that bullet scenes can be varied
+# TODO Tie many variables to a class that inherits some variables, but has things like a rotater
+# TODO Consider making pathing based on set mathematical directions given by resources since pathing could get painful
+# Depending on how levels are going to be designed
+
+# Test code
+@export var paths_test : Array[Path2D]
+var path_start_pos
+var is_at_path_start : bool = false
+
+# Temp death signal for playatest
+signal death
+signal movement_finished
+signal hit_report(id : int, damage : float)
+
+@onready var screen : Vector2 = get_viewport_rect().size
+#@onready var screen : Vector2 = get_tree().get_first_node_in_group("PlayArea").size
+@onready var emitter : Emitter = $emitter
+@onready var animated_sprite_2d : AnimatedSprite2D = $AnimatedSprite2D
+@onready var sprite_2d : Sprite2D = $Sprite2D
+@onready var current_path : Path2D = $Path2D
+
+# Movement and attack resources that enemies will utilize
+@export var movement_events : EnemyMovementData
+@export var attack_events : Array[EnemyAttackData]
+
+# Variables to controll full speed, health, and move distance
+@export var speed = 10
+@export var health = 100
+# Variable that stores the packed scene for ability pickup
+@export var power_up_charge : PackedScene
+
+@export var loop_attack_events : bool = false
+@export var is_boss : bool = false
+# Movement variables for directional movmeent
+var direction_vector
+var target_pos : Vector2
+var function_direction
+var distance_to_move : float
+var start_pos : Vector2
+var distance_traveled : float
+
+# Death and time state variables
+var curve_time : float = 0.0
+var is_dead : bool = false
+
+# Changing variables
+var cur_event : Movement
+var distance_traveled_progress : float
+var temp_speed : float
+
+var points_copy : Array[Vector2]
+
+var id : int
+
+func _ready() -> void:
+	#id = Global.current_enemy_id
+	#Global.current_enemy_id += 1 
+	animated_sprite_2d.play("default")
+	self.name = str(id)
+	# Run the movement events as a coroutine
+	temp_speed = speed
+	execute_movement_events()
+	execute_attack_events()
+
+	pass
+	
+func _physics_process(delta: float) -> void:
+	# Check if the current movement event is directional or curved
+	#print("global position: ", self.global_position)
+	#print("target position: ", target_pos)
+	if cur_event is DirectionalMovement:
+		# If direction then check speed curve and move specified distance in direction at speed of current sampled speed curve
+		# If there's a speed curve then sample the curve based on distance traveled and take speed from curve
+		if cur_event != null and cur_event.speed_curve != null:
+			distance_traveled_progress = (distance_to_move - global_position.distance_to(target_pos)) / distance_to_move
+			temp_speed = speed * cur_event.speed_curve.sample(distance_traveled_progress)
+			
+		
+		if cur_event.speed_curve != null:
+			distance_traveled += speed * cur_event.speed_curve.sample(distance_traveled_progress) * delta
+		else:
+			distance_traveled += speed * delta
+		
+		if distance_traveled >= distance_to_move:
+			global_position = target_pos
+			movement_finished.emit()
+		else:
+			# Move the enemy
+			global_position += function_direction * temp_speed * delta
+		
+		#print("Current position: ", global_position)
+		#print("Target position: ", target_pos)
+		# Check if global position is about equal to target pos
+		# If so then movement is finished
+		#if  global_position.distance_to(target_pos) < 1.0:
+			##print("Directional end pos:" ,global_position)
+			#
+			#movement_finished.emit()
+		
+		#if round(global_position) == round(target_pos):
+			#movement_finished.emit()
+	# If curved movement, then check if the current position is not equal to target position at end of curve
+	elif cur_event is CurveMovement:
+		# If current position not equal to target pos at end of curve
+		if round(position) != round(cur_event.target_pos):
+			# Check if we have a set speed curve
+			if cur_event.speed_curve != null:
+				# If we have a speed curve move along the bezier curve with sampled speed based on speed curve
+				global_position = set_curved_movement(cur_event, clamp(curve_time * cur_event.speed_curve.sample(global_position.length() / cur_event.estimated_curve_length), 0.0, 1.0))
+			else:
+				# If no speed curve, move based on time taken to move through curve
+				global_position = set_curved_movement(cur_event, clamp(curve_time, 0.0, 1.0))
+			# Update the time value for curve
+			curve_time += delta
+		else:
+			# Reset curve time to 0 after enemy is about in the target position
+			curve_time = 0
+			#cur_event.normalized_vec2_array.clear()
+			
+			movement_finished.emit()
+	elif cur_event is PathMovementData:
+		if is_at_path_start == false:
+			if !global_position.is_equal_approx(path_start_pos):
+				global_position = global_position.move_toward(path_start_pos, speed * delta)
+			else:
+				is_at_path_start = true
+				start_pos = global_position
+				return
+		
+		if is_at_path_start == true:
+			if distance_traveled >= current_path.curve.get_baked_length():
+				is_at_path_start = false
+				movement_finished.emit()
+			
+			distance_traveled += speed * delta
+			global_position = start_pos + current_path.curve.sample_baked(distance_traveled) - current_path.curve.sample_baked(0.0)	
+		pass
+
+# Function to calculate health and hit upon getting hit by player bullet
+func take_damage(damage : int) -> void:
+	if !multiplayer.is_server():
+		return
+	
+	# Subtract one  health	
+	if health - damage < 0:
+		health = 0
+	else:
+		AudioManager.play_spatial_sound(preload("res://assets/audio/sfx/enemy/Hit17.ogg"), self.position)
+		health -= damage
+	
+	## If health zero then free
+	if health == 0 and is_dead == false:
+		is_dead = true
+		
+		AudioManager.play_spatial_sound(preload("res://assets/audio/sfx/enemy/Boom4.ogg"), position)
+		
+		sprite_2d.hide()
+		animated_sprite_2d.play("explosion")
+		await animated_sprite_2d.animation_finished
+		
+		death.emit(id)
+		
+		print("dying")
+		return
+		
+	flash_enemy.rpc()
+
+
+# If the enemy exits the screen then free it
+func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+	death.emit(id)
+	#queue_free()
+
+
+func execute_movement_events() -> void:
+	if movement_events == null:
+		return
+	
+	distance_traveled = 0
+	
+	for i in movement_events.movement_array:
+		distance_traveled = 0
+		# If is directional movement then set relevant vars for directional movement
+		if i is DirectionalMovement:
+			set_directional_movement(i)
+		# If is curved movement then set relevant vars for curved movement via screen size and self global pos
+		elif i is CurveMovement:
+			i.normalize_points(self, screen)
+		elif i is PathMovementData:
+			move_across_curve_path(i)
+		cur_event = i
+		
+		# Check if the current mzovement event is null
+		assert(i != null, "Currezzznt movement event is null")
+		# Wait for current movement to finish then do next movement		
+		await movement_finished
+		print("Ending position: ", self.global_position)
+		cur_event = null
+		await get_tree().create_timer(movement_events.time_between_movements).timeout
+
+	# Stop moving
+	function_direction = Vector2.ZERO
+	
+	
+	# Check if we want to loop or leave screen
+	if movement_events.leave_screen == true:
+		leave_screen()
+	elif movement_events.wrap_movements == true:
+		print("Executing movement events again")
+		execute_movement_events()
+		
+
+func set_directional_movement(movement : DirectionalMovement) -> void:
+	# Check the direction type enum
+		match movement.direction:
+			DirectionalMovement.direction_type.UP, DirectionalMovement.direction_type.DOWN:
+				# Claculate distance based off percentage of screen
+				distance_to_move = movement.distance * screen.y
+				if movement.direction == DirectionalMovement.direction_type.UP:
+					direction_vector = Vector2.UP
+				elif movement.direction == DirectionalMovement.direction_type.DOWN:
+					direction_vector = Vector2.DOWN
+			DirectionalMovement.direction_type.LEFT, DirectionalMovement.direction_type.RIGHT:
+				# Claculate distance based off percentage of screen
+				distance_to_move = movement.distance * screen.x
+				if movement.direction == DirectionalMovement.direction_type.LEFT:
+					direction_vector = Vector2.LEFT
+				elif movement.direction == DirectionalMovement.direction_type.RIGHT:
+					direction_vector = Vector2.RIGHT
+			_:
+				direction_vector = Vector2.ZERO
+		# Calculate the target position of the current movement
+		target_pos = self.global_position + (direction_vector.normalized() * distance_to_move)
+		#print(target_pos)
+		#var test = direction_vector.normalized() * distance_to_move
+		
+		print("Starting position: ", self.global_position)
+		print("Distance to move: ", distance_to_move)
+		
+		# Variables to store initial direction and angle
+		function_direction = direction_vector
+
+# This function lerps through the points given in the point array for the curved movemment
+func set_curved_movement(movement : CurveMovement, t : float) -> Vector2:
+	# Temp array to store prev lerped values
+	var temp_array : Array[Vector2] = []
+	
+	# Loop through the given point array and lerp cur point by point after it
+	for i in range(movement.normalized_vec2_array.size()):
+		if i + 1 < movement.normalized_vec2_array.size():
+			# Then add lerped point to temp array for return
+			var temp : Vector2 = movement.normalized_vec2_array[i].lerp(movement.normalized_vec2_array[i+1], t)
+			temp_array.append(temp)
+
+	# Return the final interpolated point
+	var to_return = temp_array[0].lerp(temp_array[temp_array.size()-1], t)
+	return to_return
+
+func leave_screen() -> void:
+	# Move using previous direction vector until out of screen
+	function_direction = direction_vector
+	
+func report_hit(damage : float) -> void:
+	hit_report.emit(id, damage)
+
+@rpc("any_peer", "call_local", "reliable")
+func flash_enemy() -> void:
+	AudioManager.play_spatial_sound(preload("res://assets/audio/sfx/enemy/Hit17.ogg"), self.position)
+	var tween = create_tween()
+	tween.tween_property($Sprite2D.material, 'shader_parameter/Progress', 0.0, 0.01)
+	tween.tween_property($Sprite2D.material, 'shader_parameter/Progress', 1.0, 0.02)	
+	
+func execute_attack_events() -> void:
+	if attack_events.is_empty():
+		print("No attacks present")
+		return
+	
+	for i in attack_events:
+		print("Executing event")
+		var attack_data = i as EnemyAttackData
+		
+		
+		emitter.set_attack_event(attack_data)
+		
+		await emitter.event_finished
+	
+	if loop_attack_events == true:
+		execute_attack_events()
+
+func move_across_curve_path(path : PathMovementData) -> void:
+	distance_traveled = 0
+	current_path.curve = path.curve
+	start_pos = global_position
+	path_start_pos = current_path.curve.get_point_position(0)

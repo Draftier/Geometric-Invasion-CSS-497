@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://c1ap2vhq0urmq"]
+
+[ext_resource type="Script" uid="uid://30f14oev2j8j" path="res://scenes/Enemy/enemy_homing_bullet.gd" id="1_h31wh"]
+[ext_resource type="Texture2D" uid="uid://blwmetdipeqh6" path="res://assets/sprites/bullet_2.png" id="2_wkyyu"]
+[ext_resource type="Script" uid="uid://dhan5ja6q4fjx" path="res://scripts/hurt_and_hit_box/hitbox.gd" id="3_wpfdu"]
+[ext_resource type="Script" uid="uid://12171bvbqp8w" path="res://scripts/hurt_and_hit_box/hurtbox.gd" id="4_rlamu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v4deb"]
+radius = 6.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d8ny1"]
+radius = 278.0
+
+[node name="obstacle_bullet_base" type="Node2D" unique_id=963541856]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_h31wh")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=905764174]
+modulate = Color(0.9470256, 0.5152414, 0.49112654, 1)
+texture = ExtResource("2_wkyyu")
+
+[node name="Hitbox" type="Area2D" parent="Sprite2D" unique_id=280840225]
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+script = ExtResource("3_wpfdu")
+damage = 1
+metadata/_custom_type_script = "uid://dhan5ja6q4fjx"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Hitbox" unique_id=1786711591]
+shape = SubResource("CircleShape2D_v4deb")
+
+[node name="Hurtbox" type="Area2D" parent="Sprite2D" unique_id=1620675658]
+unique_name_in_owner = true
+collision_layer = 8
+collision_mask = 128
+monitorable = false
+script = ExtResource("4_rlamu")
+metadata/_custom_type_script = "uid://12171bvbqp8w"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Hurtbox" unique_id=1149197893]
+shape = SubResource("CircleShape2D_v4deb")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1619883727]
+
+[node name="DetectionArea" type="Area2D" parent="." unique_id=979447503]
+collision_layer = 0
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=315263921]
+shape = SubResource("CircleShape2D_d8ny1")
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="area_entered" from="DetectionArea" to="." method="_on_detection_area_area_entered"]
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]

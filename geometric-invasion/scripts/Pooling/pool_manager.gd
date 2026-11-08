@@ -4,7 +4,7 @@ extends Node2D
 # These are the pools that the manager is managing
 @onready var player_bullet_pool : ObjectPool = %PlayerBulletPool
 @onready var enemy_bullet_pool : ObjectPool = %EnemyBulletPool
-@onready var emitter_pool : ObjectPool = %EmitterPool
+@onready var enemy_homing_bullet_pool : ObjectPool = %EnemyHomingBulletPool
 
 func _ready() -> void:
 	init_pools()
@@ -15,6 +15,9 @@ func give_player_bullet() -> Bullet:
 
 func give_enemy_bullet() -> Bullet:
 	return enemy_bullet_pool.pull_from_pool()
+	
+func give_enemy_homing_bullet() -> Bullet:
+	return enemy_homing_bullet_pool.pull_from_pool()
 
 # These function return bullets from their respective pool
 func return_to_player_pool(bullet : Bullet) -> void:
@@ -23,20 +26,21 @@ func return_to_player_pool(bullet : Bullet) -> void:
 func return_to_enemy_pool(bullet : Bullet) -> void:
 	enemy_bullet_pool.call_deferred("add_to_pool", bullet)
 
-#func give_emitter() -> emitter_test:
-	#return emitter_pool.pull_from_pool()
-	
+func return_to_enemy_homing_pool(bullet : enemy_homing_bullet) -> void:
+	enemy_homing_bullet_pool.call_deferred("add_to_pool", bullet)
+
 # These functions are utilized to destroy and initiailize pools upon level loading
 func destroy_pools() -> void:
 	enemy_bullet_pool.destroy_pool()
 	player_bullet_pool.destroy_pool()
+	enemy_homing_bullet_pool.destroy_pool()
 	
 func init_pools() -> void:
 	enemy_bullet_pool.initialize_pool()
 	player_bullet_pool.initialize_pool()
-	#emitter_pool.initialize_pool()
+	enemy_homing_bullet_pool.initialize_pool()
 	
 func reset_pools() -> void:
 	enemy_bullet_pool.reset_pool()
 	player_bullet_pool.reset_pool()
-	
+	enemy_homing_bullet_pool.reset_pool()

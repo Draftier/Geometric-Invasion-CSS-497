@@ -36,7 +36,7 @@ point_count = 2
 [sub_resource type="Resource" id="Resource_264po"]
 script = ExtResource("9_ca42v")
 direction = 3
-distance = 0.4
+distance = 0.9
 speed_curve = SubResource("Curve_1kice")
 metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
 
@@ -47,7 +47,7 @@ point_count = 2
 [sub_resource type="Resource" id="Resource_5newe"]
 script = ExtResource("9_ca42v")
 direction = 2
-distance = 0.4
+distance = 1.0
 speed_curve = SubResource("Curve_37s47")
 metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
 
@@ -79,7 +79,7 @@ point_count = 2
 
 [sub_resource type="Resource" id="Resource_37s47"]
 script = ExtResource("9_ca42v")
-distance = 0.4
+distance = 1.1
 speed_curve = SubResource("Curve_ssvqc")
 metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
 
@@ -107,7 +107,7 @@ metadata/_custom_type_script = "uid://bewu02jnvwcgy"
 [sub_resource type="Resource" id="Resource_orsij"]
 script = ExtResource("9_ca42v")
 direction = 1
-distance = 0.4
+distance = 1.5
 metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
 
 [sub_resource type="Resource" id="Resource_s4dvs"]
@@ -138,7 +138,7 @@ point_count = 2
 [sub_resource type="Resource" id="Resource_pl11u"]
 script = ExtResource("9_ca42v")
 direction = 1
-distance = 0.7
+distance = 1.5
 speed_curve = SubResource("Curve_5newe")
 metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
 
@@ -169,7 +169,7 @@ point_count = 2
 [sub_resource type="Resource" id="Resource_suyxu"]
 script = ExtResource("9_ca42v")
 direction = 3
-distance = 0.5
+distance = 1.5
 speed_curve = SubResource("Curve_rysoc")
 metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
 
@@ -196,7 +196,7 @@ metadata/_custom_type_script = "uid://bewu02jnvwcgy"
 
 [sub_resource type="Resource" id="Resource_twgab"]
 script = ExtResource("9_ca42v")
-distance = 0.01
+distance = 1.5
 metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
 
 [sub_resource type="Resource" id="Resource_gxtfn"]
@@ -222,7 +222,7 @@ metadata/_custom_type_script = "uid://bewu02jnvwcgy"
 
 [sub_resource type="Resource" id="Resource_enk72"]
 script = ExtResource("9_ca42v")
-distance = 0.5
+distance = 1.5
 metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
 
 [sub_resource type="Resource" id="Resource_evbdg"]
@@ -249,7 +249,7 @@ metadata/_custom_type_script = "uid://bewu02jnvwcgy"
 [sub_resource type="Resource" id="Resource_m4url"]
 script = ExtResource("9_ca42v")
 direction = 1
-distance = 0.8
+distance = 1.5
 metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
 
 [sub_resource type="Resource" id="Resource_7025r"]
@@ -280,7 +280,7 @@ point_count = 3
 [sub_resource type="Resource" id="Resource_8ool0"]
 script = ExtResource("9_ca42v")
 direction = 3
-distance = 0.8
+distance = 1.5
 speed_curve = SubResource("Curve_e1j6l")
 metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
 
@@ -520,5 +520,12 @@ limit_bottom = 163
 script = ExtResource("19_1kice")
 track = ExtResource("20_1kice")
 metadata/_custom_type_script = "uid://84ox43jyptjb"
+
+[node name="PlayArea" type="ColorRect" parent="." unique_id=1288047611 groups=["PlayArea"]]
+visible = false
+offset_left = -272.0
+offset_top = -142.0
+offset_right = 270.0
+offset_bottom = 109.0
 
 [editable path="LevelManager"]

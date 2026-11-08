@@ -1,0 +1,133 @@
+[gd_scene format=3 uid="uid://csogjub1ogeul"]
+
+[ext_resource type="Script" uid="uid://bs18qw4cbfj0c" path="res://overall_tutorial_level.gd" id="1_x4w5d"]
+[ext_resource type="PackedScene" uid="uid://cnr36qxaqynbc" path="res://scenes/star_background.tscn" id="2_841ui"]
+[ext_resource type="PackedScene" uid="uid://cp837cm6qinkj" path="res://scenes/Enemy/enemy.tscn" id="2_j8os0"]
+[ext_resource type="PackedScene" uid="uid://bjsdsl4op0k27" path="res://tutorial_label.tscn" id="2_ydimf"]
+[ext_resource type="PackedScene" uid="uid://dea3ckmfpjcym" path="res://scenes/Ability/ability_pickup.tscn" id="3_b2siv"]
+[ext_resource type="Script" uid="uid://dt1c0f6c5i51q" path="res://scripts/level_manager/multiplayer_spawner.gd" id="8_ydimf"]
+[ext_resource type="PackedScene" uid="uid://cw7p0ekjax6t7" path="res://scenes/UI/player_user_interface.tscn" id="17_8lcv5"]
+[ext_resource type="Script" uid="uid://84ox43jyptjb" path="res://scenes/Audio/music_auto_trigger.gd" id="18_611ta"]
+[ext_resource type="AudioStream" uid="uid://cpwdxqxulkiqy" path="res://assets/audio/music/level_music/Fields of Ice.ogg" id="19_wtpwo"]
+[ext_resource type="PackedScene" uid="uid://d043xpjj4wac0" path="res://scenes/UI/pause_menu.tscn" id="20_t1ih7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x4w5d"]
+size = Vector2(536, 21)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_841ui"]
+size = Vector2(536, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6l3tw"]
+size = Vector2(20, 284)
+
+[node name="OverallTutorialLevel" type="Node2D" unique_id=1463401978]
+script = ExtResource("1_x4w5d")
+tutorial_enemy = ExtResource("2_j8os0")
+power_up_scene = ExtResource("3_b2siv")
+strings_to_display = Array[String](["Welcome to the Geometric Invasion tutorial!", "Press the arrow keys to move around"])
+
+[node name="PlayArea" type="ColorRect" parent="." unique_id=404066294 groups=["PlayArea"]]
+visible = false
+offset_left = -272.0
+offset_top = -142.0
+offset_right = 270.0
+offset_bottom = 109.0
+
+[node name="TutorialLabel" parent="." unique_id=1775916262 instance=ExtResource("2_ydimf")]
+horizontal_alignment = 1
+text_to_display = ""
+
+[node name="StarBackground" parent="." unique_id=1934287316 instance=ExtResource("2_841ui")]
+position = Vector2(-274, -142.00002)
+scale = Vector2(0.4752663, 0.45084146)
+
+[node name="Borders" type="Node2D" parent="." unique_id=2056301927]
+
+[node name="top_bottom" type="StaticBody2D" parent="Borders" unique_id=1127189687]
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Borders/top_bottom" unique_id=2143079405]
+position = Vector2(-1, -152)
+shape = SubResource("RectangleShape2D_x4w5d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/top_bottom" unique_id=5113533]
+position = Vector2(-1, 119)
+shape = SubResource("RectangleShape2D_841ui")
+
+[node name="left_right" type="StaticBody2D" parent="Borders" unique_id=448213300]
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/left_right" unique_id=376525198]
+position = Vector2(-282, 0)
+shape = SubResource("RectangleShape2D_6l3tw")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Borders/left_right" unique_id=1809913734]
+position = Vector2(280, 0)
+shape = SubResource("RectangleShape2D_6l3tw")
+
+[node name="ColorRect4" type="ColorRect" parent="Borders" unique_id=442520811]
+z_index = 1
+offset_left = -272.0
+offset_top = -163.0
+offset_right = 51.93866
+offset_bottom = -142.80739
+rotation = 1.5708452
+color = Color(0.29219002, 0.29219005, 0.29219002, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect3" type="ColorRect" parent="Borders" unique_id=1978950531]
+z_index = 1
+offset_left = 290.0
+offset_top = -162.00098
+offset_right = 613.93866
+offset_bottom = -141.80836
+rotation = 1.5708452
+color = Color(0.29219002, 0.29219005, 0.29219002, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="Borders" unique_id=2068137270]
+z_index = 1
+offset_left = -289.0
+offset_top = -162.0
+offset_right = 286.0
+offset_bottom = -142.0
+color = Color(0.29219002, 0.29219005, 0.29219002, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect2" type="ColorRect" parent="Borders" unique_id=1638337927]
+z_index = 1
+offset_left = -289.0
+offset_top = 109.0
+offset_right = 286.0
+offset_bottom = 162.0
+color = Color(0.29219002, 0.29219005, 0.29219002, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=363630116]
+unique_name_in_owner = true
+zoom = Vector2(2, 2)
+limit_left = -191
+limit_top = -162
+limit_right = 188
+limit_bottom = 163
+
+[node name="PlayerUserInterface" parent="." unique_id=330220776 instance=ExtResource("17_8lcv5")]
+
+[node name="MusicAutoTrigger" type="Node" parent="." unique_id=1375658156]
+script = ExtResource("18_611ta")
+track = ExtResource("19_wtpwo")
+metadata/_custom_type_script = "uid://84ox43jyptjb"
+
+[node name="PauseMenu" parent="." unique_id=1058867629 instance=ExtResource("20_t1ih7")]
+visible = false
+
+[node name="Spawner" type="MultiplayerSpawner" parent="." unique_id=34237363 node_paths=PackedStringArray("player_user_interface")]
+spawn_path = NodePath("..")
+script = ExtResource("8_ydimf")
+player_user_interface = NodePath("../PlayerUserInterface")
+
+[node name="EnemySpawnPoint" type="Marker2D" parent="." unique_id=1719665069]
+unique_name_in_owner = true
+position = Vector2(128, -85)

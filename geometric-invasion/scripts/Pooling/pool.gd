@@ -4,12 +4,18 @@
 extends Node
 class_name ObjectPool
 
+# Variable used to id objects in a pool
+var current_id : int = 0
+
 # Bullet scene that we pool
 @export var bullet_scene : PackedScene
 
 # Variables to store bullets and the max number of objects in pool
 @export var max_bullet_count : int = 1000
 var bullets : Array [ Bullet ]
+
+func _ready() -> void:
+	get_tree().scene_changed.connect(_on_scene_change)
 
 # Function to add bullets to the object pool
 func add_to_pool(bullet : Node) -> void:
@@ -18,6 +24,11 @@ func add_to_pool(bullet : Node) -> void:
 	## We reparent the bullet to make sure it appears correctly in scene tree
 	## Without this the bullet is visually invisible
 	#bullets.append(bullet)
+	if bullet is enemy_homing_bullet:
+		bullet.id = current_id + 1
+		current_id = bullet.id
+		bullet.name = "Homing_bullet" + str(bullet.id)
+	
 	bullet.reset()
 	bullet.is_active = false
 	bullets.append(bullet)
@@ -76,3 +87,6 @@ func reset_pool() -> void:
 	for i in bullets:
 		if i.is_active == true:
 			i.reset()
+
+func _on_scene_change() -> void:
+	reset_pool()

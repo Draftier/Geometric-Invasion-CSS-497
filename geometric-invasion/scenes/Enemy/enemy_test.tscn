@@ -1,0 +1,161 @@
+[gd_scene format=3 uid="uid://l27s1wapekoi"]
+
+[ext_resource type="Script" uid="uid://cmodik856vhjv" path="res://scenes/Enemy/enemy_test.gd" id="1_7g2bs"]
+[ext_resource type="Script" uid="uid://dmjfjfilssxt6" path="res://scripts/enemy/movement_base.gd" id="2_ycm0v"]
+[ext_resource type="Script" uid="uid://c8u5b5y0i25wp" path="res://scripts/enemy/directional_movement.gd" id="3_50dfu"]
+[ext_resource type="Script" uid="uid://byofbiiwp016c" path="res://scenes/Enemy/path_movement_data.gd" id="3_t47cn"]
+[ext_resource type="Script" uid="uid://thlx0gtur2d4" path="res://scripts/enemy/enemy_movement_data.gd" id="6_3oq7i"]
+[ext_resource type="PackedScene" uid="uid://lha1c308vq6j" path="res://scenes/Enemy/emitter.tscn" id="11_sjr6y"]
+[ext_resource type="Shader" uid="uid://cqv7cjdn8x0b5" path="res://shaders/flash.tres" id="12_glrmi"]
+[ext_resource type="Texture2D" uid="uid://dtb2vka5e01d3" path="res://assets/sprites/enemy.png" id="13_ub5fu"]
+[ext_resource type="Script" uid="uid://12171bvbqp8w" path="res://scripts/hurt_and_hit_box/hurtbox.gd" id="14_s03dn"]
+[ext_resource type="Script" uid="uid://dhan5ja6q4fjx" path="res://scripts/hurt_and_hit_box/hitbox.gd" id="15_mol5q"]
+[ext_resource type="Texture2D" uid="uid://rjf6qb8ty32e" path="res://assets/sprites/eplosion_1.png" id="16_lhu4s"]
+
+[sub_resource type="Curve2D" id="Curve2D_t47cn"]
+_data = {
+"points": PackedVector2Array(-23.132593, -16.473211, 0, 0, 3, 2, 49.069138, 15.772223, -49.069138, -15.772223, 60, -71, 59.23346, 12.267284, -59.23346, -12.267284, -58, -107, -23.132593, -16.473211, 0, 0, -170, -15)
+}
+point_count = 4
+
+[sub_resource type="Resource" id="Resource_wq4wq"]
+script = ExtResource("3_t47cn")
+curve = SubResource("Curve2D_t47cn")
+metadata/_custom_type_script = "uid://byofbiiwp016c"
+
+[sub_resource type="Curve2D" id="Curve2D_ba4hg"]
+_data = {
+"points": PackedVector2Array(-23.132593, -16.473211, -59.23346, -12.267284, -170, -15, 0, 0, 0, 0, -70, 66, 0, 0, 0, 0, 63, 74)
+}
+point_count = 3
+
+[sub_resource type="Resource" id="Resource_t47cn"]
+script = ExtResource("3_t47cn")
+curve = SubResource("Curve2D_ba4hg")
+metadata/_custom_type_script = "uid://byofbiiwp016c"
+
+[sub_resource type="Resource" id="Resource_d4k74"]
+script = ExtResource("3_50dfu")
+direction = 1
+distance = 0.1
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_7g2bs"]
+script = ExtResource("6_3oq7i")
+movement_array = Array[ExtResource("2_ycm0v")]([SubResource("Resource_wq4wq"), SubResource("Resource_t47cn"), SubResource("Resource_d4k74")])
+metadata/_custom_type_script = "uid://thlx0gtur2d4"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iywne"]
+resource_local_to_scene = true
+shader = ExtResource("12_glrmi")
+shader_parameter/Color = Color(1, 1, 1, 1)
+shader_parameter/Progress = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8tegq"]
+size = Vector2(14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t4kp2"]
+atlas = ExtResource("16_lhu4s")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k06wl"]
+atlas = ExtResource("16_lhu4s")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fqx87"]
+atlas = ExtResource("16_lhu4s")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j6s03"]
+atlas = ExtResource("16_lhu4s")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ipswl"]
+atlas = ExtResource("16_lhu4s")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fxkbx"]
+animations = [{
+"frames": [],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t4kp2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k06wl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fqx87")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j6s03")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ipswl")
+}],
+"loop": 0,
+"name": &"explosion",
+"speed": 15.0
+}]
+
+[sub_resource type="Animation" id="Animation_f5wgj"]
+resource_name = "explosion"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_47vae"]
+_data = {
+&"explosion": SubResource("Animation_f5wgj")
+}
+
+[node name="EnemyTest" type="Node2D" unique_id=682992089 node_paths=PackedStringArray("paths_test") groups=["enemy"]]
+position = Vector2(507, 227)
+script = ExtResource("1_7g2bs")
+paths_test = [null]
+movement_events = SubResource("Resource_7g2bs")
+speed = 100
+
+[node name="emitter" parent="." unique_id=1019809325 instance=ExtResource("11_sjr6y")]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1252295741]
+material = SubResource("ShaderMaterial_iywne")
+texture = ExtResource("13_ub5fu")
+
+[node name="Hurtbox" type="Area2D" parent="Sprite2D" unique_id=725762865]
+collision_layer = 8
+collision_mask = 129
+monitorable = false
+script = ExtResource("14_s03dn")
+metadata/_custom_type_script = "uid://12171bvbqp8w"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Hurtbox" unique_id=1199752919]
+shape = SubResource("RectangleShape2D_8tegq")
+
+[node name="Hitbox" type="Area2D" parent="Sprite2D" unique_id=1414706671]
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+script = ExtResource("15_mol5q")
+damage = 1
+metadata/_custom_type_script = "uid://dhan5ja6q4fjx"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Hitbox" unique_id=667564901]
+shape = SubResource("RectangleShape2D_8tegq")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=247689940]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1465384279]
+sprite_frames = SubResource("SpriteFrames_fxkbx")
+autoplay = "default"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=857330204]
+libraries/ = SubResource("AnimationLibrary_47vae")
+
+[node name="Path2D" type="Path2D" parent="." unique_id=31475378]
+
+[connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+
+[editable path="emitter"]

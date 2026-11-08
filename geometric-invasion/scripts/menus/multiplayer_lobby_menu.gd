@@ -64,6 +64,10 @@ func _on_start_game_button_pressed() -> void:
 	#NetworkManager.server_level_entered.emit()
 	NetworkManager.game_started = true
 	NetworkManager.change_scene_for_all_players.rpc("res://scenes/multiplayer_test.tscn")
+	
+	# Todo
+	# When start is hit check all player's except hosts, ready state, if everyone is ready start game 
+	# If not everyone is ready show warning then allow host to override
 	pass
 
 # Function utilized to update player count, made since
@@ -106,4 +110,8 @@ func _exit_tree() -> void:
 	if multiplayer.is_server():
 		NetworkManager.stop_broadcast()
 	pass
-	
+
+# How does the server obtain player name info
+## If the player is a server then open a listen port and listen for packets from clients
+## When a packet comes through, update the player lobby entry and update the server's network manager players dictionary
+## This update includes ready state and player name

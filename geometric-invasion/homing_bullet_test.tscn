@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://bu1rxwyrtd3bn"]
+
+[ext_resource type="PackedScene" uid="uid://u1mg53l5kgsv" path="res://scenes/Player/player_default_shooting_style.tscn" id="1_syui6"]
+[ext_resource type="PackedScene" uid="uid://l27s1wapekoi" path="res://scenes/Enemy/enemy_test.tscn" id="1_t78d1"]
+[ext_resource type="Script" uid="uid://dmjfjfilssxt6" path="res://scripts/enemy/movement_base.gd" id="2_hec7w"]
+[ext_resource type="Script" uid="uid://thlx0gtur2d4" path="res://scripts/enemy/enemy_movement_data.gd" id="4_bmj77"]
+[ext_resource type="Script" uid="uid://baq3m8rspbgqo" path="res://scripts/enemy/enemy_attack_data.gd" id="4_t78d1"]
+
+[sub_resource type="Resource" id="Resource_e2nyg"]
+script = ExtResource("4_bmj77")
+leave_screen = true
+metadata/_custom_type_script = "uid://thlx0gtur2d4"
+
+[sub_resource type="Resource" id="Resource_t78d1"]
+script = ExtResource("4_t78d1")
+num_spawn_points = 4
+angular_spread = 1.309
+bullet_speed = 200.0
+max_times_to_fire = 10
+fire_rate = 1.0
+initial_theta = 0.785
+is_homing = true
+metadata/_custom_type_script = "uid://baq3m8rspbgqo"
+
+[node name="HomingBulletTest" type="Node2D" unique_id=869545278]
+
+[node name="EnemyTest" parent="." unique_id=682992089 instance=ExtResource("1_t78d1")]
+position = Vector2(-1, -199)
+movement_events = SubResource("Resource_e2nyg")
+attack_events = Array[ExtResource("4_t78d1")]([SubResource("Resource_t78d1")])
+
+[node name="Player" parent="." unique_id=1651887187 instance=ExtResource("1_syui6")]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1094092064]
+limit_enabled = false
+
+[node name="Path2D" type="Path2D" parent="." unique_id=1578887098]
+position = Vector2(81, -37)

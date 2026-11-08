@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://c8u5b5y0i25wp" path="res://scripts/enemy/directional_movement.gd" id="10_yrd5d"]
 [ext_resource type="Script" uid="uid://thlx0gtur2d4" path="res://scripts/enemy/enemy_movement_data.gd" id="11_indfc"]
 [ext_resource type="PackedScene" uid="uid://dea3ckmfpjcym" path="res://scenes/Ability/ability_pickup.tscn" id="12_u5kbj"]
+[ext_resource type="PackedScene" uid="uid://dwtrxu3symb3h" path="res://scenes/Enemy/boss_1.tscn" id="13_ibgdi"]
 [ext_resource type="Script" uid="uid://cpbp4ohcaqwle" path="res://scripts/spawn_point.gd" id="13_mqxpw"]
 [ext_resource type="FontFile" uid="uid://dihhulpjs1064" path="res://assets/fonts/PixelOperator8.ttf" id="14_bhepv"]
 [ext_resource type="PackedScene" uid="uid://cnr36qxaqynbc" path="res://scenes/star_background.tscn" id="15_iudw3"]
@@ -25,7 +26,7 @@
 [sub_resource type="Resource" id="Resource_mobb4"]
 script = ExtResource("10_yrd5d")
 direction = 1
-distance = 0.8
+distance = 0.5
 metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
 
 [sub_resource type="Resource" id="Resource_3cu50"]
@@ -38,7 +39,7 @@ script = ExtResource("4_dg73d")
 enemy = ExtResource("5_6qfb6")
 enemy_movement_pattern = SubResource("Resource_3cu50")
 enemy_attack_pattern = Array[ExtResource("6_ibgdi")]([ExtResource("7_0u7d8"), ExtResource("8_8dt1a")])
-number_of_enemies = 30
+number_of_enemies = 1
 metadata/_custom_type_script = "uid://c4twyssjo6an2"
 
 [sub_resource type="Resource" id="Resource_yywf3"]
@@ -46,6 +47,53 @@ script = ExtResource("3_6mro0")
 time_between_spawns = 1.0
 time_to_occur = 5.0
 spawns = Array[ExtResource("4_dg73d")]([SubResource("Resource_s8var")])
+metadata/_custom_type_script = "uid://bewu02jnvwcgy"
+
+[sub_resource type="Resource" id="Resource_0u7d8"]
+script = ExtResource("6_ibgdi")
+num_spawn_points = 15
+angular_spread = 6.283
+bullet_speed = 400.0
+max_times_to_fire = 5
+fire_rate = 1.0
+max_times_to_rotate = 3
+metadata/_custom_type_script = "uid://baq3m8rspbgqo"
+
+[sub_resource type="Resource" id="Resource_8dt1a"]
+script = ExtResource("6_ibgdi")
+change_in_angle = 3.798
+num_spawn_points = 15
+angular_spread = 2.5
+bullet_speed = 200.0
+max_times_to_fire = 20
+fire_rate = 0.1
+is_rotate = true
+max_times_to_rotate = 1000
+metadata/_custom_type_script = "uid://baq3m8rspbgqo"
+
+[sub_resource type="Resource" id="Resource_se7ul"]
+script = ExtResource("10_yrd5d")
+direction = 1
+distance = 0.1
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_tmpkg"]
+script = ExtResource("11_indfc")
+movement_array = Array[ExtResource("9_yvbbh")]([SubResource("Resource_se7ul")])
+metadata/_custom_type_script = "uid://thlx0gtur2d4"
+
+[sub_resource type="Resource" id="Resource_yvbbh"]
+script = ExtResource("4_dg73d")
+enemy = ExtResource("13_ibgdi")
+enemy_movement_pattern = SubResource("Resource_tmpkg")
+enemy_attack_pattern = Array[ExtResource("6_ibgdi")]([SubResource("Resource_0u7d8"), SubResource("Resource_8dt1a")])
+number_of_enemies = 1
+metadata/_custom_type_script = "uid://c4twyssjo6an2"
+
+[sub_resource type="Resource" id="Resource_knj3b"]
+script = ExtResource("3_6mro0")
+time_to_occur = 40.0
+spawns = Array[ExtResource("4_dg73d")]([SubResource("Resource_yvbbh")])
 metadata/_custom_type_script = "uid://bewu02jnvwcgy"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8kenn"]
@@ -64,8 +112,9 @@ script = ExtResource("1_8kenn")
 script = ExtResource("2_feea6")
 spawners = [NodePath("EnemySpawnPoint")]
 events = Array[ExtResource("3_6mro0")]([SubResource("Resource_yywf3")])
-level_time = 10.0
+level_time = 60.0
 power_up_charge = ExtResource("12_u5kbj")
+boss_spawn_event = SubResource("Resource_knj3b")
 metadata/_custom_type_script = "uid://b2nxf0ct0x4gn"
 
 [node name="Label" type="Label" parent="Level_Manager" unique_id=257772922]
@@ -79,7 +128,7 @@ theme_override_font_sizes/font_size = 16
 text = "Time left: "
 
 [node name="EnemySpawnPoint" type="Node2D" parent="Level_Manager" unique_id=1899267310]
-position = Vector2(0, -185)
+position = Vector2(0, -142)
 script = ExtResource("13_mqxpw")
 metadata/_custom_type_script = "uid://cpbp4ohcaqwle"
 
@@ -190,3 +239,10 @@ text = "Survive!"
 script = ExtResource("18_6mro0")
 track = ExtResource("19_dg73d")
 metadata/_custom_type_script = "uid://84ox43jyptjb"
+
+[node name="PlayArea" type="ColorRect" parent="." unique_id=1270960523 groups=["PlayArea"]]
+visible = false
+offset_left = -269.0
+offset_top = -142.0
+offset_right = 267.0
+offset_bottom = 109.0

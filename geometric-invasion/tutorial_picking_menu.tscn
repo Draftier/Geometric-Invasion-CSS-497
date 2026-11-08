@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://c5sutkl2o64e4"]
+
+[ext_resource type="PackedScene" uid="uid://cnr36qxaqynbc" path="res://scenes/star_background.tscn" id="1_wddpl"]
+[ext_resource type="Theme" uid="uid://dy2kgmqgonako" path="res://theme_test.tres" id="2_tige0"]
+[ext_resource type="Theme" uid="uid://d21lh0fquueyo" path="res://new_button_theme.tres" id="3_jaa3t"]
+[ext_resource type="FontFile" uid="uid://dihhulpjs1064" path="res://assets/fonts/PixelOperator8.ttf" id="4_jkfkh"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_b48c3"]
+font_size = 50
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p8cxl"]
+
+[node name="TutorialPickingMenu" type="Control" unique_id=1138925028]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1152.0
+offset_bottom = -648.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StarBackground" parent="." unique_id=1934287316 instance=ExtResource("1_wddpl")]
+unique_name_in_owner = true
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=305092110]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=36112763]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1353345806]
+layout_mode = 2
+theme = ExtResource("2_tige0")
+text = "Tutorial Selection 
+Menu"
+label_settings = SubResource("LabelSettings_b48c3")
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1870099405]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="OverallTutorialButton" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=1541561746]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Overall Tutorial"
+
+[node name="ShootingTutorialButton" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=1436439606]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Shooting Tutorial"
+
+[node name="AbilityTutorialButton" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=1626356621]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Ability Tutorial"
+
+[node name="LevelTutorialButton" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=1702902360]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Level Tutorial"
+
+[node name="BackButton" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=798747226]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("3_jaa3t")
+theme_override_fonts/font = ExtResource("4_jkfkh")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_p8cxl")
+text = "Back to main menu"

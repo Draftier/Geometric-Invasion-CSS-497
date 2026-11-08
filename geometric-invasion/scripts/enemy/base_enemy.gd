@@ -1,20 +1,25 @@
 class_name basic_enemy
 extends Node2D
 
-# TODO Make it so that bullet scenes can be varied
-# TODO Tie many variables to a class that inherits some variables, but has things like a rotater
-# TODO Consider making pathing based on set mathematical directions given by resources since pathing could get painful
-# Depending on how levels are going to be designed
+# Test code
+@export var paths_test : Array[Path2D]
+var path_start_pos
+var is_at_path_start : bool = false
 
 # Temp death signal for playatest
 signal death
 signal movement_finished
 signal hit_report(id : int, damage : float)
 
-@onready var screen : Vector2 = get_viewport_rect().size
+
+#@onready var screen : Vector2 = get_viewport_rect().size
+@onready var screen : Vector2 = get_tree().get_first_node_in_group("PlayArea").size
 @onready var emitter : Emitter = $emitter
 @onready var animated_sprite_2d : AnimatedSprite2D = $AnimatedSprite2D
 @onready var sprite_2d : Sprite2D = $Sprite2D
+@onready var current_path : Path2D = $Path2D
+@onready var hitbox : Hitbox = %Hitbox
+@onready var hurtbox : Hurtbox = %Hurtbox
 
 # Movement and attack resources that enemies will utilize
 @export var movement_events : EnemyMovementData
@@ -33,6 +38,8 @@ var direction_vector
 var target_pos : Vector2
 var function_direction
 var distance_to_move : float
+var distance_traveled : float
+var start_pos : Vector2
 
 # Death and time state variables
 var curve_time : float = 0.0
@@ -79,6 +86,7 @@ func _physics_process(delta: float) -> void:
 		# If so then movement is finished
 		if  global_position.distance_to(target_pos) < 1.0:
 			#print("Directional end pos:" ,global_position)
+			
 			movement_finished.emit()
 		
 		#if round(global_position) == round(target_pos):
@@ -100,9 +108,26 @@ func _physics_process(delta: float) -> void:
 			# Reset curve time to 0 after enemy is about in the target position
 			curve_time = 0
 			#cur_event.normalized_vec2_array.clear()
-			movement_finished.emit()
 			
+			movement_finished.emit()
+	elif cur_event is PathMovementData:
+		if is_at_path_start == false:
+			if !global_position.is_equal_approx(path_start_pos):
+				global_position = global_position.move_toward(path_start_pos, speed * delta)
+			else:
+				is_at_path_start = true
+				start_pos = global_position
+				return
+		
+		if is_at_path_start == true:
+			if distance_traveled >= current_path.curve.get_baked_length():
+				is_at_path_start = false
+				movement_finished.emit()
+			
+			distance_traveled += speed * delta
+			global_position = start_pos + current_path.curve.sample_baked(distance_traveled) - current_path.curve.sample_baked(0.0)	
 		pass
+
 
 # Function to calculate health and hit upon getting hit by player bullet
 func take_damage(damage : int) -> void:
@@ -141,6 +166,9 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 
 
 func execute_movement_events() -> void:
+	if movement_events == null:
+		return
+	
 	for i in movement_events.movement_array:
 		# If is directional movement then set relevant vars for directional movement
 		if i is DirectionalMovement:
@@ -148,13 +176,16 @@ func execute_movement_events() -> void:
 		# If is curved movement then set relevant vars for curved movement via screen size and self global pos
 		elif i is CurveMovement:
 			i.normalize_points(self, screen)
+		elif i is PathMovementData:
+			move_across_curve_path(i)
 		cur_event = i
 		
 		# Check if the current movement event is null
 		assert(i != null, "Current movement event is null")
 		# Wait for current movement to finish then do next movement		
 		await movement_finished
-		
+		print("Ending position: ", self.global_position)
+		cur_event = null
 		await get_tree().create_timer(movement_events.time_between_movements).timeout
 
 	# Stop moving
@@ -192,6 +223,9 @@ func set_directional_movement(movement : DirectionalMovement) -> void:
 		target_pos = self.global_position + (direction_vector.normalized() * distance_to_move)
 		#print(target_pos)
 		#var test = direction_vector.normalized() * distance_to_move
+		
+		print("Starting position: ", self.global_position)
+		print("Distance to move: ", distance_to_move)
 		
 		# Variables to store initial direction and angle
 		function_direction = direction_vector
@@ -242,3 +276,35 @@ func execute_attack_events() -> void:
 	
 	if loop_attack_events == true:
 		execute_attack_events()
+
+func move_across_curve_path(path : PathMovementData) -> void:
+	distance_traveled = 0
+	current_path.curve = path.curve
+	start_pos = global_position
+	path_start_pos = current_path.curve.get_point_position(0)
+
+func disable() -> void:
+	self.set_block_signals(true)
+	self.set_process(false)
+	self.set_physics_process(false)
+	
+	hurtbox.monitoring = false
+	hurtbox.monitorable = false
+	
+	hitbox.monitoring = false
+	hitbox.monitorable = false
+	
+	self.visible = false
+
+func activate() -> void:
+	self.set_block_signals(false)
+	self.set_process(true)
+	self.set_physics_process(true)
+	
+	hurtbox.monitoring = true
+	hurtbox.monitorable = true
+	
+	hitbox.monitoring = true
+	hitbox.monitorable = true
+	
+	self.visible = true

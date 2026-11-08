@@ -31,7 +31,6 @@ Overlay="*uid://c457felf80qla"
 [display]
 
 window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
 window/vsync/vsync_mode=2
 
 [editor_plugins]
@@ -41,6 +40,10 @@ enabled=PackedStringArray("res://addons/gdUnit4/plugin.cfg")
 [gdunit4]
 
 settings/test/test_discovery=true
+
+[global_group]
+
+PlayArea=""
 
 [input]
 

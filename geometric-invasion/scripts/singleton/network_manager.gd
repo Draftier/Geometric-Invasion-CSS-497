@@ -251,3 +251,24 @@ func stop_broadcast() -> void:
 
 func stop_listen() -> void:
 	listen_peer.close()
+	
+# To send player names to the server
+## When the player successfully connects to the server
+## The player network manager creates a packetpeer udp and binds it to the sending port
+## The packetpeer udp is given a packet of player info set by the player that contains a player name and ready state
+## The packetpeer udp is constantly sent on a tiemr to the server if the player is connected to the server
+## When the player is disconnected from the server then stop sending the packet
+## When the game is started by the server then stop sending packets
+## The player network manager sends the server a tcp packet that contains the player's name and ready states
+
+
+# What the server does before during and after player ready state is sent to the server
+## The server opens up a listening port on a new packetpeer udp onject
+## The server's lobby menu checks if a new packet has been received and parses it
+## When the server recieves a new packet the server obtains a player name and ready state
+## The player name and ready state are utilized to update a player lobby entry
+## Player lobby entries are displayed in the lobby menu
+## If all players are ready then when the host hits start game no message
+## If not all players are ready then when host hits start game a warning appears that not all players are ready
+## And asks if they want to still start game, if yes then game started, if no then don't start
+## Once the game is started the server closes it's listening port

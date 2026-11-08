@@ -1,10 +1,11 @@
 extends Control
 
-@onready var display_mode = %DisplaySetting
+@onready var display_mode = %DisplayMode
 
 @onready var music_slider = %MusicSlider
 @onready var sfx_slider = %SfxSlider
 @onready var ui_slider = %UiSoundSlider
+@onready var fps_dropwdown = %FpsSettingDropDown
 
 var current_display_mode = DisplayServer.window_get_mode()
 
@@ -21,9 +22,11 @@ func setup_settings_menu() -> void:
 	ui_slider.value_changed.connect(_on_ui_slider_changed)
 	
 	if current_display_mode == DisplayServer.WINDOW_MODE_FULLSCREEN:
-		display_mode.set_block_signals(true)
-		display_mode.button_pressed = true
-		display_mode.set_block_signals(false)
+		display_mode.select(0)
+	else:
+		display_mode.select(1)
+	
+	fps_dropwdown.select(0)
 		
 	AudioManager.setup_ui_button_audio(self)
 
@@ -39,20 +42,22 @@ func _on_ui_slider_changed(volume : float) -> void:
 	AudioServer.set_bus_volume_linear(4, volume)
 	AudioManager.play_ui_focus_audio()
 
-func _on_display_setting_toggled(toggled_on: bool) -> void:
-	if current_display_mode == DisplayServer.WINDOW_MODE_FULLSCREEN:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
-	elif current_display_mode == DisplayServer.WINDOW_MODE_WINDOWED:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
-	current_display_mode = DisplayServer.window_get_mode()
-
-
 func _on_back_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/UI/main_menu.tscn")
 
 
-func _on_fps_settings_toggled(toggled_on: bool) -> void:
-	if toggled_on == false:
-		Overlay.disable_fps_overlay()
-	else:
-		Overlay.enable_fps_overlay()
+func _on_option_button_item_selected(index: int) -> void:
+	match index:
+		0:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+		1:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+
+
+func _on_fps_setting_drop_down_item_selected(index: int) -> void:
+	match index:
+		0:
+			Overlay.disable_fps_overlay()
+		1:
+			Overlay.enable_fps_overlay()
+			

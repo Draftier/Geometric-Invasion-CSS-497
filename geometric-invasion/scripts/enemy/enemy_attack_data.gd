@@ -12,3 +12,5 @@ class_name EnemyAttackData
 @export var is_rotate : bool
 @export var max_times_to_rotate : int
 @export_range(0, 2 * PI) var initial_theta : float
+
+@export var is_homing : bool = false
