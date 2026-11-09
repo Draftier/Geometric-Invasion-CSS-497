@@ -7,6 +7,7 @@ var players = {}
 
 signal player_removed
 signal loss
+signal all_players_spawned
 
 func _ready() -> void:
 	get_node(spawn_path).child_entered_tree.connect(on_player_entered_tree)
@@ -34,6 +35,7 @@ func _on_server_level_entered():
 		spawn_player(id)
 		player_user_interface.init_entry.rpc(id, 3, true)
 	
+	all_players_spawned.emit()
 
 func spawn_player(id : int) -> void:
 	
@@ -53,12 +55,8 @@ func spawn_player(id : int) -> void:
 	print("spawned player with id of: " + player.name)
 
 func on_player_hit_reported(id : int, damage : float) -> void:
-	if multiplayer.is_server():
-		request_take_damage(id, damage)
-	else:
-		request_take_damage.rpc_id(1, id, damage)
+	request_take_damage(id, damage)
 
-@rpc("any_peer", "call_remote", "reliable")
 func request_take_damage(id : int, damage : float) -> void:	
 	if !multiplayer.is_server():
 		return

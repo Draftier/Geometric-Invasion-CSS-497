@@ -10,6 +10,7 @@ var is_active : bool = false
 signal charge_state_changed(id : int, state : bool)
 
 var player_id : int
+var activation_count = 0
 
 #@onready var ability_hitbox : Hitbox = $Sprite2D/Hitbox
 
@@ -49,6 +50,8 @@ func activate() -> bool:
 	
 	# Wait for ability timer to stop
 	await get_tree().create_timer(data.active_time).timeout
+	
+	activation_count += 1
 	
 	# Discharge the ability
 	discharge()

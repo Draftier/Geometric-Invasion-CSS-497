@@ -4,6 +4,8 @@ extends Node2D
 @export var shooter : String = ""
 @onready var level_manager = get_tree().get_first_node_in_group("level_manager")
 
+var times_shot : int = 0
+
 # Variable used to track whether or not point can fire another bullet within timer
 var can_shoot : bool = true
 
@@ -18,6 +20,7 @@ func _on_fire_rate_timer_timeout() -> void:
 
 @rpc("any_peer", "call_local", "reliable")
 func shoot() -> void:
+	times_shot += 1
 	# Fire bullet then reset can_shoot flag so that we can keep bullet fire rate within timer time
 	if can_shoot == true:
 		# Instantiate the bullet shot by player, set speed, positiona, and rotation and start firerate timer

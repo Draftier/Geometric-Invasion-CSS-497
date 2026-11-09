@@ -117,7 +117,6 @@ func _on_enemy_death() -> void:
 	num_enemies -= 1
 	# print(num_enemies)
 
-@rpc("any_peer", "call_remote", "reliable")
 func request_take_damage(id : int, damage : float) -> void:
 	if !multiplayer.is_server():
 		return
@@ -138,8 +137,8 @@ func request_take_damage(id : int, damage : float) -> void:
 func on_enemy_hit_reported(id : int, damage : float) -> void:
 	if multiplayer.is_server():
 		request_take_damage(id, damage)
-	else:
-		request_take_damage.rpc_id(1, id, damage)
+	#else:
+		#request_take_damage.rpc_id(1, id, damage)
 
 func on_enemy_death(id : int) -> void:
 	if !multiplayer.is_server():

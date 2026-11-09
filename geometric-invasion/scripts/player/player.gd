@@ -9,6 +9,9 @@ extends CharacterBody2D
 # Check to see if player is in control
 var preview_mode : bool = false
 
+var times_shot : int = 0
+var times_ability_activated : int = 0
+var times_lost_health : int = 0
 
 # Signal for player death
 signal death
@@ -36,6 +39,7 @@ var ability : Ability
 var is_solo : bool
 var is_dead : bool
 var is_exploding : bool = false
+var guns : Array[ShootPoint]
 
 var id : int
 
@@ -51,6 +55,9 @@ func _ready() -> void:
 	is_dead = false
 	
 	$AnimationPlayer.get_animation("flash").loop_mode = Animation.LOOP_LINEAR
+	
+	for i in $guns.get_children():
+		guns.append(i)
 	
 # Called every physics tick
 func _process(_delta: float) -> void:

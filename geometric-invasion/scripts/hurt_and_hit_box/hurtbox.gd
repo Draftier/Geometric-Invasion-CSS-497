@@ -22,7 +22,10 @@ func _on_area_entered(hitbox: Hitbox) -> void:
 	# There's another interaction with owner node that is detailed in if statement
 	# If owner of hitbox is not ability then check if it can take damage if so dish out damage
 	if owner.has_method("report_hit") and hitbox.owner is not Ability:
-		owner.report_hit(hitbox.damage)
+		if multiplayer.is_server():
+			owner.report_hit(hitbox.damage)
+		else:
+			return
 
 	# If the owner of the hitbox is an ability then do different checks
 	elif hitbox.owner is Ability:

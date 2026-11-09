@@ -21,7 +21,13 @@ func test_client_creation_on_local_host():
 	assert_object(multiplayer.multiplayer_peer).is_not_null()
 	assert_object(multiplayer.multiplayer_peer).is_not_same(OfflineMultiplayerPeer)
 
+# Server must be running and game already started
 func test_client_creation_on_server_already_started():
+	# Given the network manager attempt to start client on server already started
+	var check : bool = NetworkManager.start_client("127.0.0.1")
 	
+	# After connection attempt starts authentication, connection should be disconnected
+	assert_signal(NetworkManager).is_emitted("game_started_signal")
 	
-	pass
+	# Multiplayer peer should not be OK
+	assert_object(multiplayer.multiplayer_peer).is_not_equal(OK)

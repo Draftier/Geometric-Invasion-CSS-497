@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuites id="2026-11-01" name="report_1" tests="6" failures="0" skipped="0" flaky="0" time="0.000">
-	<testsuite id="0" name="client_connection_tests" package="tests" timestamp="2026-11-02T05:30:04" hostname="localhost" tests="3" failures="0" errors="0" skipped="0" flaky="0" time="29.978">
-		<testcase name="test_client_creation_on_invalid_server" classname="client_connection_tests" time="29.964">
+<testsuites id="2026-11-08" name="report_1" tests="7" failures="0" skipped="0" flaky="0" time="0.000">
+	<testsuite id="0" name="client_to_server_rpc_tests" package="tests" timestamp="2026-11-09T06:03:05" hostname="localhost" tests="7" failures="0" errors="0" skipped="0" flaky="0" time="13.920">
+		<testcase name="test_invalid_shoot_request" classname="client_to_server_rpc_tests" time="2.936">
 		</testcase>
-		<testcase name="test_client_creation_on_local_host" classname="client_connection_tests" time="0.003">
+		<testcase name="test_invalid_ability_activation_request" classname="client_to_server_rpc_tests" time="6.002">
 		</testcase>
-		<testcase name="test_client_creation_on_server_already_started" classname="client_connection_tests" time="0.003">
+		<testcase name="test_invalid_damage_on_player_request" classname="client_to_server_rpc_tests" time="0.003">
 		</testcase>
-	</testsuite>
-	<testsuite id="1" name="server_creation_tests" package="tests" timestamp="2026-11-02T05:30:34" hostname="localhost" tests="3" failures="0" errors="0" skipped="0" flaky="0" time="0.018">
-		<testcase name="test_server_creation" classname="server_creation_tests" time="0.003">
+		<testcase name="test_invalid_victory_request" classname="client_to_server_rpc_tests" time="0.003">
 		</testcase>
-		<testcase name="test_server_stop" classname="server_creation_tests" time="0.002">
+		<testcase name="test_invalid_ability_pickup_request" classname="client_to_server_rpc_tests" time="0.003">
 		</testcase>
-		<testcase name="test_server_start_and_restart" classname="server_creation_tests" time="0.003">
+		<testcase name="test_invalid_enemy_death_request" classname="client_to_server_rpc_tests" time="0.002">
+		</testcase>
+		<testcase name="test_invalid_player_death_request" classname="client_to_server_rpc_tests" time="0.003">
 		</testcase>
 	</testsuite>
 </testsuites>
