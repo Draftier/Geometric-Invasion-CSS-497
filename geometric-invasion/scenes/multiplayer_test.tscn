@@ -39,7 +39,6 @@ script = ExtResource("4_dg73d")
 enemy = ExtResource("5_6qfb6")
 enemy_movement_pattern = SubResource("Resource_3cu50")
 enemy_attack_pattern = Array[ExtResource("6_ibgdi")]([ExtResource("7_0u7d8"), ExtResource("8_8dt1a")])
-number_of_enemies = 1
 metadata/_custom_type_script = "uid://c4twyssjo6an2"
 
 [sub_resource type="Resource" id="Resource_yywf3"]

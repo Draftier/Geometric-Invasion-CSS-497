@@ -190,12 +190,16 @@ func spawn_pickup(id : int, position : Vector2) -> void:
 
 @rpc("authority", "call_local", "reliable")
 func set_game_state_to_loss() -> void:
-	result_menu.show_loss_menu()
+	if multiplayer.is_server() || NetworkManager.is_solo:
+		result_menu.show_loss_menu.rpc()
+	
+	
 	#get_tree().quit()
 
 @rpc("authority", "call_local", "reliable")
 func set_game_state_to_victory() -> void:
-	result_menu.show_victory_menu()
+	if multiplayer.is_server() || NetworkManager.is_solo:
+		result_menu.show_victory_menu.rpc()
 
 func prepare_pickup(position : Vector2) -> void:
 	if !multiplayer.is_server():

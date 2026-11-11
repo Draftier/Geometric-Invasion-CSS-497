@@ -147,8 +147,9 @@ func take_damage(damage : int) -> void:
 		
 		AudioManager.play_spatial_sound(preload("res://assets/audio/sfx/enemy/Boom4.ogg"), position)
 		
-		sprite_2d.hide()
-		animated_sprite_2d.play("explosion")
+		#sprite_2d.hide()
+		#animated_sprite_2d.play("explosion")
+		explode_enemy.rpc()
 		await animated_sprite_2d.animation_finished
 		
 		death.emit(id)
@@ -158,6 +159,10 @@ func take_damage(damage : int) -> void:
 		
 	flash_enemy.rpc()
 
+@rpc("any_peer", "call_local", "reliable")
+func explode_enemy() -> void:
+	sprite_2d.hide()
+	animated_sprite_2d.play("explosion")
 
 # If the enemy exits the screen then free it
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:

@@ -4,14 +4,16 @@ extends CanvasLayer
 
 func _ready() -> void:
 	hide()
-	
+
+@rpc("authority", "call_local", "reliable")
 func show_loss_menu() -> void:
 	#AudioManager.stop_cur_player()
 	AudioManager.play_music_track(preload("res://assets/audio/music/level_music/Fallen in Battle.ogg"))
 	pause_game()
 	result_label.text = "You lost!"
 	show()
-	
+
+@rpc("authority", "call_local", "reliable")
 func show_victory_menu() -> void:
 	#AudioManager.stop_cur_player()
 	AudioManager.play_music_track(preload("res://assets/audio/music/level_music/Victory! All Clear.ogg"))
