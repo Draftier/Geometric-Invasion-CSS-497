@@ -4,29 +4,167 @@
 [ext_resource type="Script" uid="uid://b2nxf0ct0x4gn" path="res://scripts/level_manager/level_manager.gd" id="2_feea6"]
 [ext_resource type="Script" uid="uid://bewu02jnvwcgy" path="res://scripts/event/spawn_event_data.gd" id="3_6mro0"]
 [ext_resource type="Script" uid="uid://c4twyssjo6an2" path="res://scripts/event/spawn.gd" id="4_dg73d"]
-[ext_resource type="PackedScene" uid="uid://cp837cm6qinkj" path="res://scenes/Enemy/enemy.tscn" id="5_6qfb6"]
+[ext_resource type="Script" uid="uid://pqste00swnss" path="res://scripts/enemy/base_enemy.gd" id="5_u5kbj"]
 [ext_resource type="Script" uid="uid://baq3m8rspbgqo" path="res://scripts/enemy/enemy_attack_data.gd" id="6_ibgdi"]
-[ext_resource type="Resource" uid="uid://c3odk6bmthjms" path="res://fan_4_10_1_downward.tres" id="7_0u7d8"]
-[ext_resource type="Resource" uid="uid://bxtpc3ykjuuml" path="res://circle_15_0_1.tres" id="8_8dt1a"]
+[ext_resource type="Script" uid="uid://beg1vql3x734k" path="res://scripts/enemy/point.gd" id="8_mqxpw"]
+[ext_resource type="Script" uid="uid://bho4wgornhjo7" path="res://scripts/enemy/curve_movement.gd" id="9_bhepv"]
 [ext_resource type="Script" uid="uid://dmjfjfilssxt6" path="res://scripts/enemy/movement_base.gd" id="9_yvbbh"]
 [ext_resource type="Script" uid="uid://c8u5b5y0i25wp" path="res://scripts/enemy/directional_movement.gd" id="10_yrd5d"]
 [ext_resource type="Script" uid="uid://thlx0gtur2d4" path="res://scripts/enemy/enemy_movement_data.gd" id="11_indfc"]
+[ext_resource type="PackedScene" uid="uid://lha1c308vq6j" path="res://scenes/Enemy/emitter.tscn" id="12_iudw3"]
 [ext_resource type="PackedScene" uid="uid://dea3ckmfpjcym" path="res://scenes/Ability/ability_pickup.tscn" id="12_u5kbj"]
 [ext_resource type="PackedScene" uid="uid://dwtrxu3symb3h" path="res://scenes/Enemy/boss_1.tscn" id="13_ibgdi"]
 [ext_resource type="Script" uid="uid://cpbp4ohcaqwle" path="res://scripts/spawn_point.gd" id="13_mqxpw"]
+[ext_resource type="Shader" uid="uid://cqv7cjdn8x0b5" path="res://shaders/flash.tres" id="13_r25ah"]
 [ext_resource type="FontFile" uid="uid://dihhulpjs1064" path="res://assets/fonts/PixelOperator8.ttf" id="14_bhepv"]
+[ext_resource type="Texture2D" uid="uid://dtb2vka5e01d3" path="res://assets/sprites/enemy.png" id="14_kvop5"]
+[ext_resource type="Script" uid="uid://12171bvbqp8w" path="res://scripts/hurt_and_hit_box/hurtbox.gd" id="15_5ar2f"]
 [ext_resource type="PackedScene" uid="uid://cnr36qxaqynbc" path="res://scenes/star_background.tscn" id="15_iudw3"]
+[ext_resource type="Script" uid="uid://dhan5ja6q4fjx" path="res://scripts/hurt_and_hit_box/hitbox.gd" id="16_3dlnw"]
 [ext_resource type="Script" uid="uid://dt1c0f6c5i51q" path="res://scripts/level_manager/multiplayer_spawner.gd" id="16_r25ah"]
 [ext_resource type="PackedScene" uid="uid://de3e204er2eag" path="res://result_menu.tscn" id="17_6qfb6"]
+[ext_resource type="Texture2D" uid="uid://rjf6qb8ty32e" path="res://assets/sprites/eplosion_1.png" id="17_b8am2"]
 [ext_resource type="PackedScene" uid="uid://cw7p0ekjax6t7" path="res://scenes/UI/player_user_interface.tscn" id="17_kvop5"]
 [ext_resource type="Script" uid="uid://84ox43jyptjb" path="res://scenes/Audio/music_auto_trigger.gd" id="18_6mro0"]
 [ext_resource type="AudioStream" uid="uid://cpwdxqxulkiqy" path="res://assets/audio/music/level_music/Fields of Ice.ogg" id="19_dg73d"]
 [ext_resource type="PackedScene" uid="uid://d043xpjj4wac0" path="res://scenes/UI/pause_menu.tscn" id="20_dg73d"]
 
+[sub_resource type="Resource" id="Resource_ixhtt"]
+script = ExtResource("10_yrd5d")
+direction = 1
+distance = 0.3
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_ebm38"]
+script = ExtResource("10_yrd5d")
+direction = 2
+distance = 0.05
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_q0kbr"]
+script = ExtResource("10_yrd5d")
+direction = 3
+distance = 0.05
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_fx0l5"]
+script = ExtResource("8_mqxpw")
+x_percent = 0.05
+y_percent = 0.1
+metadata/_custom_type_script = "uid://beg1vql3x734k"
+
+[sub_resource type="Resource" id="Resource_pg6jp"]
+script = ExtResource("8_mqxpw")
+x_percent = 0.05
+metadata/_custom_type_script = "uid://beg1vql3x734k"
+
+[sub_resource type="Curve" id="Curve_fxkbx"]
+_data = [Vector2(0.15340908, 0.17977536), 0.0, 0.0, 0, 0, Vector2(0.5113637, 0.55056185), 0.0, 0.0, 0, 0, Vector2(1, 0.11235964), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Resource" id="Resource_3e887"]
+script = ExtResource("9_bhepv")
+point_array = Array[ExtResource("8_mqxpw")]([SubResource("Resource_fx0l5"), SubResource("Resource_pg6jp")])
+speed_curve = SubResource("Curve_fxkbx")
+metadata/_custom_type_script = "uid://bho4wgornhjo7"
+
+[sub_resource type="Resource" id="Resource_lkp36"]
+script = ExtResource("10_yrd5d")
+distance = 0.3
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_eacat"]
+script = ExtResource("11_indfc")
+movement_array = Array[ExtResource("9_yvbbh")]([SubResource("Resource_ixhtt"), SubResource("Resource_ebm38"), SubResource("Resource_q0kbr"), SubResource("Resource_3e887"), SubResource("Resource_lkp36")])
+leave_screen = true
+metadata/_custom_type_script = "uid://thlx0gtur2d4"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iywne"]
+resource_local_to_scene = true
+shader = ExtResource("13_r25ah")
+shader_parameter/Color = Color(1, 1, 1, 1)
+shader_parameter/Progress = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8tegq"]
+size = Vector2(14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t4kp2"]
+atlas = ExtResource("17_b8am2")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k06wl"]
+atlas = ExtResource("17_b8am2")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fqx87"]
+atlas = ExtResource("17_b8am2")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j6s03"]
+atlas = ExtResource("17_b8am2")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ipswl"]
+atlas = ExtResource("17_b8am2")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fxkbx"]
+animations = [{
+"frames": [],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t4kp2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k06wl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fqx87")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j6s03")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ipswl")
+}],
+"loop": 0,
+"name": &"explosion",
+"speed": 15.0
+}]
+
+[sub_resource type="Animation" id="Animation_f5wgj"]
+resource_name = "explosion"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_47vae"]
+_data = {
+&"explosion": SubResource("Animation_f5wgj")
+}
+
+[sub_resource type="Curve2D" id="Curve2D_h0di7"]
+
+[sub_resource type="PackedScene" id="PackedScene_pdbvg"]
+_bundled = {
+"conn_count": 2,
+"conns": PackedInt32Array(1073741835, 1073741834, 50, 49, 2, 0, 0, 1073741837, 1073741836, 52, 51, 2, 0, 0),
+"editable_instances": [NodePath("emitter")],
+"id_paths": [PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array()],
+"names": PackedStringArray("Enemy", "Node2D", "enemy", "position", "script", "movement_events", "speed", "health", "power_up_charge", "emitter", "Sprite2D", "Sprite2D", "material", "texture", "Hurtbox", "Area2D", "unique_name_in_owner", "collision_layer", "collision_mask", "monitorable", "script", "metadata/_custom_type_script", "CollisionShape2D", "CollisionShape2D", "shape", "Hitbox", "Area2D", "unique_name_in_owner", "collision_layer", "collision_mask", "monitoring", "script", "damage", "metadata/_custom_type_script", "CollisionShape2D", "CollisionShape2D", "shape", "VisibleOnScreenNotifier2D", "VisibleOnScreenNotifier2D", "AnimatedSprite2D", "AnimatedSprite2D", "sprite_frames", "autoplay", "AnimationPlayer", "AnimationPlayer", "libraries/", "Path2D", "Path2D", "curve", "_on_child_entered_tree", "child_entered_tree", "_on_visible_on_screen_notifier_2d_screen_exited", "screen_exited"),
+"node_count": 11,
+"node_ids": PackedInt32Array(682992089, 1019809325, 1252295741, 725762865, 1199752919, 1414706671, 667564901, 247689940, 1465384279, 857330204, 1460539815),
+"node_paths": [NodePath("."), NodePath("."), NodePath("./Sprite2D"), NodePath("./Sprite2D/Hurtbox"), NodePath("./Sprite2D"), NodePath("./Sprite2D/Hitbox"), NodePath("."), NodePath("."), NodePath("."), NodePath("."), NodePath("."), NodePath("."), NodePath("."), NodePath("VisibleOnScreenNotifier2D")],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 6, 3, 0, 4, 1, 5, 2, 6, 3, 7, 4, 8, 5, 1, 2, 1073741824, 0, 2147483647, 9, 6, 0, 0, 1073741825, 0, 11, 10, -1, 2, 12, 7, 13, 8, 0, 1073741826, 0, 15, 14, -1, 6, 16, 9, 17, 10, 18, 11, 19, 12, 20, 13, 21, 14, 0, 1073741827, 0, 23, 22, -1, 1, 24, 15, 0, 1073741828, 0, 26, 25, -1, 7, 27, 16, 28, 17, 29, 18, 30, 19, 31, 20, 32, 21, 33, 22, 0, 1073741829, 0, 35, 34, -1, 1, 36, 23, 0, 1073741830, 0, 38, 37, -1, 0, 0, 1073741831, 0, 40, 39, -1, 2, 41, 24, 42, 25, 0, 1073741832, 0, 44, 43, -1, 1, 45, 26, 0, 1073741833, 0, 47, 46, -1, 1, 48, 27, 0),
+"variants": [Vector2(507, 227), ExtResource("5_u5kbj"), SubResource("Resource_eacat"), 100, 150, ExtResource("12_u5kbj"), ExtResource("12_iudw3"), SubResource("ShaderMaterial_iywne"), ExtResource("14_kvop5"), true, 8, 129, false, ExtResource("15_5ar2f"), "uid://12171bvbqp8w", SubResource("RectangleShape2D_8tegq"), true, 4, 0, false, ExtResource("16_3dlnw"), 1, "uid://dhan5ja6q4fjx", SubResource("RectangleShape2D_8tegq"), SubResource("SpriteFrames_fxkbx"), "default", SubResource("AnimationLibrary_47vae"), SubResource("Curve2D_h0di7")],
+"version": 3
+}
+
 [sub_resource type="Resource" id="Resource_mobb4"]
 script = ExtResource("10_yrd5d")
 direction = 1
-distance = 0.5
+distance = 0.3
 metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
 
 [sub_resource type="Resource" id="Resource_3cu50"]
@@ -36,9 +174,9 @@ metadata/_custom_type_script = "uid://thlx0gtur2d4"
 
 [sub_resource type="Resource" id="Resource_s8var"]
 script = ExtResource("4_dg73d")
-enemy = ExtResource("5_6qfb6")
+enemy = SubResource("PackedScene_pdbvg")
 enemy_movement_pattern = SubResource("Resource_3cu50")
-enemy_attack_pattern = Array[ExtResource("6_ibgdi")]([ExtResource("7_0u7d8"), ExtResource("8_8dt1a")])
+number_of_enemies = 1
 metadata/_custom_type_script = "uid://c4twyssjo6an2"
 
 [sub_resource type="Resource" id="Resource_yywf3"]
@@ -127,7 +265,7 @@ theme_override_font_sizes/font_size = 16
 text = "Time left: "
 
 [node name="EnemySpawnPoint" type="Node2D" parent="Level_Manager" unique_id=1899267310]
-position = Vector2(0, -142)
+position = Vector2(114, -142)
 script = ExtResource("13_mqxpw")
 metadata/_custom_type_script = "uid://cpbp4ohcaqwle"
 

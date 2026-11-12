@@ -1,0 +1,247 @@
+[gd_scene format=3 uid="uid://bmvo3araobwit"]
+
+[ext_resource type="Script" uid="uid://dkna4bvtvxq32" path="res://scripts/menus/multiplayer_test.gd" id="1_odkr0"]
+[ext_resource type="Script" uid="uid://b2nxf0ct0x4gn" path="res://scripts/level_manager/level_manager.gd" id="2_jvokb"]
+[ext_resource type="Script" uid="uid://bewu02jnvwcgy" path="res://scripts/event/spawn_event_data.gd" id="3_wbk85"]
+[ext_resource type="Script" uid="uid://c4twyssjo6an2" path="res://scripts/event/spawn.gd" id="4_krvt4"]
+[ext_resource type="PackedScene" uid="uid://cp837cm6qinkj" path="res://scenes/Enemy/enemy.tscn" id="5_4ayck"]
+[ext_resource type="Script" uid="uid://baq3m8rspbgqo" path="res://scripts/enemy/enemy_attack_data.gd" id="6_8jlvk"]
+[ext_resource type="Resource" uid="uid://c3odk6bmthjms" path="res://fan_4_10_1_downward.tres" id="7_xxate"]
+[ext_resource type="Resource" uid="uid://bxtpc3ykjuuml" path="res://circle_15_0_1.tres" id="8_sy2e0"]
+[ext_resource type="Script" uid="uid://dmjfjfilssxt6" path="res://scripts/enemy/movement_base.gd" id="9_k0lv0"]
+[ext_resource type="Script" uid="uid://c8u5b5y0i25wp" path="res://scripts/enemy/directional_movement.gd" id="10_u3sf8"]
+[ext_resource type="Script" uid="uid://thlx0gtur2d4" path="res://scripts/enemy/enemy_movement_data.gd" id="11_yuesq"]
+[ext_resource type="PackedScene" uid="uid://dea3ckmfpjcym" path="res://scenes/Ability/ability_pickup.tscn" id="12_l2ix7"]
+[ext_resource type="PackedScene" uid="uid://dwtrxu3symb3h" path="res://scenes/Enemy/boss_1.tscn" id="13_jx7o4"]
+[ext_resource type="FontFile" uid="uid://dihhulpjs1064" path="res://assets/fonts/PixelOperator8.ttf" id="14_ppvvb"]
+[ext_resource type="Script" uid="uid://cpbp4ohcaqwle" path="res://scripts/spawn_point.gd" id="15_sa0m2"]
+[ext_resource type="Script" uid="uid://dt1c0f6c5i51q" path="res://scripts/level_manager/multiplayer_spawner.gd" id="16_0ybe3"]
+[ext_resource type="PackedScene" uid="uid://d043xpjj4wac0" path="res://scenes/UI/pause_menu.tscn" id="17_ob4yx"]
+[ext_resource type="PackedScene" uid="uid://de3e204er2eag" path="res://result_menu.tscn" id="18_qp581"]
+[ext_resource type="PackedScene" uid="uid://cnr36qxaqynbc" path="res://scenes/star_background.tscn" id="19_qlimm"]
+[ext_resource type="PackedScene" uid="uid://cw7p0ekjax6t7" path="res://scenes/UI/player_user_interface.tscn" id="20_x8kvl"]
+[ext_resource type="Script" uid="uid://84ox43jyptjb" path="res://scenes/Audio/music_auto_trigger.gd" id="21_52283"]
+[ext_resource type="AudioStream" uid="uid://cpwdxqxulkiqy" path="res://assets/audio/music/level_music/Fields of Ice.ogg" id="22_iyexj"]
+
+[sub_resource type="Resource" id="Resource_mobb4"]
+script = ExtResource("10_u3sf8")
+direction = 1
+distance = 0.5
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_3cu50"]
+script = ExtResource("11_yuesq")
+movement_array = Array[ExtResource("9_k0lv0")]([SubResource("Resource_mobb4")])
+metadata/_custom_type_script = "uid://thlx0gtur2d4"
+
+[sub_resource type="Resource" id="Resource_s8var"]
+script = ExtResource("4_krvt4")
+enemy = ExtResource("5_4ayck")
+enemy_movement_pattern = SubResource("Resource_3cu50")
+enemy_attack_pattern = Array[ExtResource("6_8jlvk")]([ExtResource("7_xxate"), ExtResource("8_sy2e0")])
+metadata/_custom_type_script = "uid://c4twyssjo6an2"
+
+[sub_resource type="Resource" id="Resource_yywf3"]
+script = ExtResource("3_wbk85")
+time_between_spawns = 1.0
+time_to_occur = 5.0
+spawns = Array[ExtResource("4_krvt4")]([SubResource("Resource_s8var")])
+metadata/_custom_type_script = "uid://bewu02jnvwcgy"
+
+[sub_resource type="Resource" id="Resource_0u7d8"]
+script = ExtResource("6_8jlvk")
+num_spawn_points = 15
+angular_spread = 6.283
+bullet_speed = 400.0
+max_times_to_fire = 5
+fire_rate = 1.0
+max_times_to_rotate = 3
+metadata/_custom_type_script = "uid://baq3m8rspbgqo"
+
+[sub_resource type="Resource" id="Resource_8dt1a"]
+script = ExtResource("6_8jlvk")
+change_in_angle = 3.798
+num_spawn_points = 15
+angular_spread = 2.5
+bullet_speed = 200.0
+max_times_to_fire = 20
+fire_rate = 0.1
+is_rotate = true
+max_times_to_rotate = 1000
+metadata/_custom_type_script = "uid://baq3m8rspbgqo"
+
+[sub_resource type="Resource" id="Resource_se7ul"]
+script = ExtResource("10_u3sf8")
+direction = 1
+distance = 0.1
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_tmpkg"]
+script = ExtResource("11_yuesq")
+movement_array = Array[ExtResource("9_k0lv0")]([SubResource("Resource_se7ul")])
+metadata/_custom_type_script = "uid://thlx0gtur2d4"
+
+[sub_resource type="Resource" id="Resource_yvbbh"]
+script = ExtResource("4_krvt4")
+enemy = ExtResource("13_jx7o4")
+enemy_movement_pattern = SubResource("Resource_tmpkg")
+enemy_attack_pattern = Array[ExtResource("6_8jlvk")]([SubResource("Resource_0u7d8"), SubResource("Resource_8dt1a")])
+number_of_enemies = 1
+metadata/_custom_type_script = "uid://c4twyssjo6an2"
+
+[sub_resource type="Resource" id="Resource_knj3b"]
+script = ExtResource("3_wbk85")
+time_to_occur = 40.0
+spawns = Array[ExtResource("4_krvt4")]([SubResource("Resource_yvbbh")])
+metadata/_custom_type_script = "uid://bewu02jnvwcgy"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8kenn"]
+size = Vector2(536, 21)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_feea6"]
+size = Vector2(536, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6mro0"]
+size = Vector2(20, 284)
+
+[node name="MultiplayerTest" type="Node2D" unique_id=543451976]
+script = ExtResource("1_odkr0")
+
+[node name="Level_Manager" type="Node" parent="." unique_id=1423209566 node_paths=PackedStringArray("spawners")]
+script = ExtResource("2_jvokb")
+spawners = [NodePath("EnemySpawnPoint")]
+events = Array[ExtResource("3_wbk85")]([SubResource("Resource_yywf3")])
+level_time = 60.0
+power_up_charge = ExtResource("12_l2ix7")
+boss_spawn_event = SubResource("Resource_knj3b")
+metadata/_custom_type_script = "uid://b2nxf0ct0x4gn"
+
+[node name="Label" type="Label" parent="Level_Manager" unique_id=257772922]
+z_index = 4
+offset_left = -285.0
+offset_top = -159.0
+offset_right = -155.0
+offset_bottom = -136.0
+theme_override_fonts/font = ExtResource("14_ppvvb")
+theme_override_font_sizes/font_size = 16
+text = "Time left: "
+
+[node name="EnemySpawnPoint" type="Node2D" parent="Level_Manager" unique_id=1899267310]
+position = Vector2(0, -142)
+script = ExtResource("15_sa0m2")
+metadata/_custom_type_script = "uid://cpbp4ohcaqwle"
+
+[node name="LevelTimer" type="Timer" parent="Level_Manager" unique_id=1155754645]
+
+[node name="Enemies" type="Node2D" parent="Level_Manager" unique_id=1082741761]
+
+[node name="Spawner" type="MultiplayerSpawner" parent="Level_Manager" unique_id=1416540720 node_paths=PackedStringArray("player_user_interface")]
+spawn_path = NodePath("../..")
+script = ExtResource("16_0ybe3")
+player_user_interface = NodePath("../../PlayerUserInterface")
+
+[node name="PauseMenu" parent="Level_Manager" unique_id=1058867629 instance=ExtResource("17_ob4yx")]
+visible = false
+
+[node name="ResultMenu" parent="Level_Manager" unique_id=340385810 instance=ExtResource("18_qp581")]
+visible = false
+
+[node name="StarBackground" parent="." unique_id=1934287316 instance=ExtResource("19_qlimm")]
+position = Vector2(-292, -153)
+scale = Vector2(0.495, 0.495)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1383374677]
+unique_name_in_owner = true
+zoom = Vector2(2, 2)
+limit_left = -191
+limit_top = -162
+limit_right = 188
+limit_bottom = 163
+
+[node name="PlayerUserInterface" parent="." unique_id=415349145 instance=ExtResource("20_x8kvl")]
+
+[node name="Borders2" type="Node2D" parent="." unique_id=1235097282]
+
+[node name="top_bottom" type="StaticBody2D" parent="Borders2" unique_id=708678912]
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Borders2/top_bottom" unique_id=1869308401]
+position = Vector2(-1, -152)
+shape = SubResource("RectangleShape2D_8kenn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders2/top_bottom" unique_id=1223086285]
+position = Vector2(-1, 119)
+shape = SubResource("RectangleShape2D_feea6")
+
+[node name="left_right" type="StaticBody2D" parent="Borders2" unique_id=56633015]
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders2/left_right" unique_id=1539260806]
+position = Vector2(-279, 0)
+shape = SubResource("RectangleShape2D_6mro0")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Borders2/left_right" unique_id=1918877062]
+position = Vector2(277, 0)
+shape = SubResource("RectangleShape2D_6mro0")
+
+[node name="ColorRect4" type="ColorRect" parent="Borders2" unique_id=620996353]
+z_index = 1
+offset_left = -268.80737
+offset_top = -162.00098
+offset_right = 55.131287
+offset_bottom = -141.80836
+rotation = 1.5708452
+color = Color(0.29219002, 0.29219005, 0.29219002, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect3" type="ColorRect" parent="Borders2" unique_id=1943067209]
+z_index = 1
+offset_left = 287.0
+offset_top = -162.00098
+offset_right = 610.93866
+offset_bottom = -141.80836
+rotation = 1.5708452
+color = Color(0.29219002, 0.29219005, 0.29219002, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="Borders2" unique_id=268982998]
+z_index = 1
+offset_left = -289.0
+offset_top = -162.0
+offset_right = 286.0
+offset_bottom = -142.0
+color = Color(0.29219002, 0.29219005, 0.29219002, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect2" type="ColorRect" parent="Borders2" unique_id=40566199]
+z_index = 1
+offset_left = -289.0
+offset_top = 109.0
+offset_right = 286.0
+offset_bottom = 162.0
+color = Color(0.29219002, 0.29219005, 0.29219002, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Label2" type="Label" parent="." unique_id=1372614107]
+z_index = 4
+offset_left = -47.0
+offset_top = -158.0
+offset_right = 57.0
+offset_bottom = -141.0
+theme_override_fonts/font = ExtResource("14_ppvvb")
+theme_override_font_sizes/font_size = 16
+text = "Survive!"
+
+[node name="MusicAutoTrigger" type="Node" parent="." unique_id=2073023150]
+script = ExtResource("21_52283")
+track = ExtResource("22_iyexj")
+metadata/_custom_type_script = "uid://84ox43jyptjb"
+
+[node name="PlayArea" type="ColorRect" parent="." unique_id=1270960523 groups=["PlayArea"]]
+visible = false
+offset_left = -269.0
+offset_top = -142.0
+offset_right = 267.0
+offset_bottom = 109.0

@@ -117,6 +117,15 @@ func test_invalid_ability_pickup_request() -> void:
 	assert_bool(ability.is_charged).is_false()
 	
 func test_invalid_enemy_death_request() -> void:
+	# Given the scene's level manager
+	var manager = level_manager
+	
+	# Attempt to kill enemy without server approval
+	manager.request_take_damage(0, 999)
+	
+	# Check if the enemy has been killed
+	assert_object(manager.enemies.get(0)).is_not_null()
+	assert_bool(manager.enemies.get(0).is_dead).is_false()
 	
 
 func test_invalid_player_death_request() -> void:
