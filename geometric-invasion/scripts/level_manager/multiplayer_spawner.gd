@@ -94,6 +94,7 @@ func disable_player(id : int) -> void:
 	else:
 		if multiplayer.is_server():
 			player_user_interface.set_entry_disconnected.rpc(id)
+			player_to_remove.is_dead = true
 	
 	
 	player_to_remove.hide()

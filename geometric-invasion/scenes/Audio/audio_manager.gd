@@ -22,7 +22,7 @@ func _ready() -> void:
 	pass
 
 func setup_ui_button_audio(node : Node) -> void:
-	for button in node.find_children("*", "Button"):
+	for button in node.find_children("*", "Button", true, false):
 		
 		if !button.pressed.is_connected(play_ui_select_audio):
 			# Connect button pressed and focused state

@@ -47,7 +47,8 @@ func _on_host_button_pressed() -> void:
 	NetworkManager.server_dictionary["name"] = server_name_input.text
 	print(NetworkManager.server_dictionary["name"])
 	
-	get_tree().change_scene_to_file("res://scenes/UI/multiplayer_lobby_menu.tscn")
+	#get_tree().change_scene_to_file("res://scenes/UI/multiplayer_lobby_menu.tscn")
+	get_tree().change_scene_to_file("res://scenes/UI/level_selection.tscn")
 
 
 func _on_back_button_pressed() -> void:

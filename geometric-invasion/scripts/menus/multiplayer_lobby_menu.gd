@@ -63,7 +63,7 @@ func _on_start_game_button_pressed() -> void:
 	# Otherwise if host is starting then emit signal 
 	#NetworkManager.server_level_entered.emit()
 	NetworkManager.game_started = true
-	NetworkManager.change_scene_for_all_players.rpc("res://scenes/multiplayer_test.tscn")
+	NetworkManager.change_scene_for_all_players.rpc(NetworkManager.selected_level)
 	
 	# Todo
 	# When start is hit check all player's except hosts, ready state, if everyone is ready start game 

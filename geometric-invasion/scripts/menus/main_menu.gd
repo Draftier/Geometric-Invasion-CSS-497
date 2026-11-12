@@ -13,8 +13,9 @@ func _ready() -> void:
 	AudioManager.setup_ui_button_audio(self)
 
 func _on_start_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/UI/player_customization_menu.tscn")
-	pass
+	#get_tree().change_scene_to_file("res://scenes/UI/player_customization_menu.tscn")
+	get_tree().change_scene_to_file("res://scenes/UI/level_selection.tscn")
+
 
 func change_scene() -> void:
 	get_tree().change_scene_to_file("res://scenes/game.tscn")

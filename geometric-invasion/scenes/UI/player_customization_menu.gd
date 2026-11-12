@@ -11,7 +11,8 @@ func _ready() -> void:
 	AudioManager.setup_ui_button_audio(self)
 
 func change_scene() -> void:
-	get_tree().change_scene_to_file("res://scenes/game.tscn")
+	#get_tree().change_scene_to_file("res://scenes/game.tscn")
+	get_tree().change_scene_to_file(NetworkManager.selected_level)
 
 func _on_start_game_button_pressed() -> void:
 	game_start.emit()

@@ -14,6 +14,8 @@ signal connecting_to_server
 signal connection_to_server_failed
 signal game_started_signal
 
+var selected_level
+
 @export var listen_port : int = 8081
 var listen_peer : PacketPeerUDP
 

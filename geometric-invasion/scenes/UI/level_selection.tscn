@@ -1,5 +1,11 @@
 [gd_scene format=3 uid="uid://domknaaan8mlp"]
 
+[ext_resource type="Script" uid="uid://dgp6f6523xmat" path="res://scenes/UI/level_selection.gd" id="1_2blm6"]
+[ext_resource type="PackedScene" uid="uid://cnr36qxaqynbc" path="res://scenes/star_background.tscn" id="1_6hnvt"]
+[ext_resource type="Script" uid="uid://84ox43jyptjb" path="res://scenes/Audio/music_auto_trigger.gd" id="3_n3e1l"]
+[ext_resource type="AudioStream" uid="uid://8qm86b2b1081" path="res://assets/audio/music/menu_theme/Week 21 - Freefall GLIDE.ogg" id="4_4lv7c"]
+[ext_resource type="FontFile" uid="uid://dihhulpjs1064" path="res://assets/fonts/PixelOperator8.ttf" id="5_2blm6"]
+
 [node name="LevelSelection" type="Control" unique_id=466660614]
 layout_mode = 3
 anchors_preset = 15
@@ -7,3 +13,47 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_2blm6")
+level_dir = "res://scenes/Levels"
+
+[node name="StarBackground" parent="." unique_id=1934287316 instance=ExtResource("1_6hnvt")]
+
+[node name="MusicAutoTrigger" type="Node" parent="." unique_id=1675185671]
+script = ExtResource("3_n3e1l")
+track = ExtResource("4_4lv7c")
+metadata/_custom_type_script = "uid://84ox43jyptjb"
+
+[node name="CenterContainer" type="MarginContainer" parent="." unique_id=1896802096]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=1069764054]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="LevelSelectHeader" type="Label" parent="CenterContainer/VBoxContainer" unique_id=697482559]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_2blm6")
+text = "Level Selection Screen"
+horizontal_alignment = 1
+
+[node name="LevelGrid" type="GridContainer" parent="CenterContainer/VBoxContainer" unique_id=496658552]
+unique_name_in_owner = true
+propagate_maximum_size = false
+layout_mode = 2
+size_flags_vertical = 3
+columns = 7
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CenterContainer/VBoxContainer" unique_id=1849470968]
+layout_mode = 2
+
+[node name="BackToMainMenuButton" type="Button" parent="CenterContainer/VBoxContainer/VBoxContainer2" unique_id=517977891]
+layout_mode = 2
+text = "Back to main menu"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/VBoxContainer2/BackToMainMenuButton" to="." method="_on_back_to_main_menu_button_pressed"]

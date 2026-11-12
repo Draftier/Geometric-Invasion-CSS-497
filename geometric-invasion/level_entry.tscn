@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://c0mchgkqstuc5"]
+
+[ext_resource type="Theme" uid="uid://d21lh0fquueyo" path="res://new_button_theme.tres" id="1_5ewrf"]
+[ext_resource type="Script" uid="uid://bie6wqabjs853" path="res://level_entry.gd" id="1_n0pxi"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xv84o"]
+bg_color = Color(0.6, 0.6, 0.6, 0.07450981)
+
+[node name="LevelEntry" type="Button" unique_id=2107737973]
+custom_minimum_size = Vector2(311, 189)
+anchors_preset = -1
+anchor_right = 0.27
+anchor_bottom = 0.29200003
+offset_right = -0.040008545
+offset_bottom = -0.21601868
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_5ewrf")
+theme_override_styles/normal = SubResource("StyleBoxFlat_xv84o")
+script = ExtResource("1_n0pxi")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
