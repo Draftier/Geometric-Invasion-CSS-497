@@ -28,7 +28,7 @@ func _on_shoot_options_item_selected(index: int) -> void:
 	match shoot_style_dropdown.get_item_text(index):
 		"Shooting forward": Global.player = load("res://scenes/Player/player_default_shooting_style.tscn")
 		"Shooting forward and side": Global.player =  load("res://scenes/Player/player_shooting_style_two.tscn")
-
+		"Shooting side and front": Global.player = load("res://scenes/Player/player_shooting_style_three.tscn")
 
 func _on_back_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/UI/main_menu.tscn")

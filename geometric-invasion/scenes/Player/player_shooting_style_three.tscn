@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://c0n3hflak8pse"]
+
+[ext_resource type="PackedScene" uid="uid://bqcpjm6w37etq" path="res://scenes/Player/player.tscn" id="1_as04i"]
+[ext_resource type="Shader" uid="uid://ccvumau4xgwhx" path="res://shaders/flicker.gdshader" id="2_jhtuj"]
+[ext_resource type="PackedScene" uid="uid://c6x6lwc5i2t0i" path="res://scenes/ShootPoint/ShootPoint.tscn" id="3_5vh7b"]
+[ext_resource type="Script" uid="uid://blj0pgj2esa6o" path="res://scripts/ShootPoint/shoot_point_stats.gd" id="4_um67n"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_of2sc"]
+resource_local_to_scene = true
+shader = ExtResource("2_jhtuj")
+shader_parameter/flash_color = Color(1, 1, 1, 0)
+shader_parameter/flash_pct = 0.0
+
+[sub_resource type="Resource" id="Resource_ystvh"]
+script = ExtResource("4_um67n")
+fire_rate = 0.075
+num_bullets = 1
+metadata/_custom_type_script = "uid://blj0pgj2esa6o"
+
+[node name="Player" unique_id=1651887187 instance=ExtResource("1_as04i")]
+
+[node name="AnimatedSprite2D" parent="." index="2" unique_id=919492480]
+material = SubResource("ShaderMaterial_of2sc")
+
+[node name="ShootPoint3" parent="guns" parent_id_path=PackedInt32Array(1613688656) index="0" unique_id=1529614615 instance=ExtResource("3_5vh7b")]
+position = Vector2(-7, -2)
+rotation = -1.5707964
+stats = SubResource("Resource_ystvh")
+shooter = "player"
+
+[node name="ShootPoint5" parent="guns" parent_id_path=PackedInt32Array(1613688656) index="1" unique_id=469984031 instance=ExtResource("3_5vh7b")]
+position = Vector2(1, -10)
+stats = SubResource("Resource_ystvh")
+shooter = "player"
+
+[node name="ShootPoint4" parent="guns" parent_id_path=PackedInt32Array(1613688656) index="2" unique_id=1830678625 instance=ExtResource("3_5vh7b")]
+position = Vector2(-7, 1)
+rotation = -1.5707964
+stats = SubResource("Resource_ystvh")
+shooter = "player"
+
+[node name="ShootPoint" parent="guns" parent_id_path=PackedInt32Array(1613688656) index="3" unique_id=467858901 instance=ExtResource("3_5vh7b")]
+position = Vector2(7, 0)
+rotation = 1.5707964
+shooter = "player"
+
+[node name="ShootPoint2" parent="guns" parent_id_path=PackedInt32Array(1613688656) index="4" unique_id=1270557997 instance=ExtResource("3_5vh7b")]
+position = Vector2(7, 3)
+rotation = 1.5707964
+shooter = "player"

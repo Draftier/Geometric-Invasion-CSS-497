@@ -71,11 +71,15 @@ layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_2m35m")
 alignment = 1
 selected = 0
-item_count = 2
+item_count = 4
 popup/item_0/text = "Shooting forward"
 popup/item_0/id = 0
 popup/item_1/text = "Shooting forward and side"
 popup/item_1/id = 1
+popup/item_2/text = "Shooting side and front"
+popup/item_2/id = 2
+popup/item_3/text = "Shooting back and front"
+popup/item_3/id = 3
 
 [node name="AbilityLabel" type="Label" parent="MarginContainer/MultiplayerMenu/MarginContainer2/VBoxContainer" unique_id=488306312]
 layout_mode = 2
