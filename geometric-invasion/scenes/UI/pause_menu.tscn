@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dl315r5t2tu8o" path="res://scripts/menus/pause_menu.gd" id="1_n87rw"]
 [ext_resource type="FontFile" uid="uid://dihhulpjs1064" path="res://assets/fonts/PixelOperator8.ttf" id="2_bl585"]
+[ext_resource type="Script" uid="uid://c6mayvsci6gvc" path="res://scenes/UI/animated_button.gd" id="3_feath"]
 [ext_resource type="Theme" uid="uid://d21lh0fquueyo" path="res://new_button_theme.tres" id="3_mko1u"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_feath"]
@@ -22,38 +23,68 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 56
 
-[node name="ResumeButton" type="Button" parent="MarginContainer/RootPauseMenu" unique_id=1202849488]
+[node name="ResumeButton" type="Button" parent="MarginContainer/RootPauseMenu" unique_id=158440896]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("3_mko1u")
 theme_override_fonts/font = ExtResource("2_bl585")
 text = "Resume"
+script = ExtResource("3_feath")
+grow_size = Vector2(1.05, 1.2)
+metadata/_custom_type_script = "uid://c6mayvsci6gvc"
 metadata/_edit_use_anchors_ = true
 
-[node name="SettingsButton" type="Button" parent="MarginContainer/RootPauseMenu" unique_id=1538550226]
+[node name="SettingsButton" type="Button" parent="MarginContainer/RootPauseMenu" unique_id=2127630641]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("3_mko1u")
 theme_override_fonts/font = ExtResource("2_bl585")
 text = "Settings"
+script = ExtResource("3_feath")
+grow_size = Vector2(1.05, 1.2)
+metadata/_custom_type_script = "uid://c6mayvsci6gvc"
 
-[node name="RestartButton" type="Button" parent="MarginContainer/RootPauseMenu" unique_id=1961966633]
+[node name="RestartButton" type="Button" parent="MarginContainer/RootPauseMenu" unique_id=1765863531]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("3_mko1u")
 theme_override_fonts/font = ExtResource("2_bl585")
 text = "Restart"
+script = ExtResource("3_feath")
+grow_size = Vector2(1.05, 1.2)
+metadata/_custom_type_script = "uid://c6mayvsci6gvc"
 metadata/_edit_use_anchors_ = true
 
-[node name="QuitToMenu" type="Button" parent="MarginContainer/RootPauseMenu" unique_id=1493988942]
+[node name="QuitToMenu" type="Button" parent="MarginContainer/RootPauseMenu" unique_id=817266157]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("3_mko1u")
 theme_override_fonts/font = ExtResource("2_bl585")
 text = "Quit to main menu"
+script = ExtResource("3_feath")
+grow_size = Vector2(1.05, 1.2)
+metadata/_custom_type_script = "uid://c6mayvsci6gvc"
 metadata/_edit_use_anchors_ = true
 
-[node name="QuitToDesktop" type="Button" parent="MarginContainer/RootPauseMenu" unique_id=1087707001]
+[node name="QuitToDesktop" type="Button" parent="MarginContainer/RootPauseMenu" unique_id=525962931]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("3_mko1u")
 theme_override_fonts/font = ExtResource("2_bl585")
 text = "Quit to desktop"
+script = ExtResource("3_feath")
+grow_size = Vector2(1.05, 1.2)
+metadata/_custom_type_script = "uid://c6mayvsci6gvc"
 metadata/_edit_use_anchors_ = true
 
 [node name="SettingsMenu" type="VBoxContainer" parent="MarginContainer" unique_id=11262159]
@@ -168,7 +199,7 @@ popup/item_0/id = 1
 popup/item_1/text = "On"
 popup/item_1/id = 0
 
-[node name="BackToPauseMenu" type="Button" parent="MarginContainer/SettingsMenu/VBoxContainer" unique_id=1574968155]
+[node name="BackToPauseMenu" type="Button" parent="MarginContainer/SettingsMenu/VBoxContainer" unique_id=278012072]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -176,17 +207,27 @@ theme = ExtResource("3_mko1u")
 theme_override_fonts/font = ExtResource("2_bl585")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_feath")
 text = "Back to main pause menu"
+script = ExtResource("3_feath")
+grow_size = Vector2(1.05, 1.2)
+metadata/_custom_type_script = "uid://c6mayvsci6gvc"
 
-[node name="FinishLabel" type="Label" parent="." unique_id=1492595742]
+[node name="ErrorLabel" type="Label" parent="." unique_id=1492595742]
+unique_name_in_owner = true
 visible = false
-anchors_preset = 5
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = -35.5
+offset_top = -22.5
 offset_right = 35.5
-offset_bottom = 23.0
+offset_bottom = 22.5
 grow_horizontal = 2
-text = "You won!"
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="pressed" from="MarginContainer/RootPauseMenu/ResumeButton" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="MarginContainer/RootPauseMenu/SettingsButton" to="." method="_on_settings_button_pressed"]

@@ -39,12 +39,13 @@ var ethernet_ip_address : String
 var game_started : bool = false
 
 var max_players : int = 2
+var display_id : int
 
 # Rpc to change scene for all players based on a given path
 @rpc("call_local", "reliable")
 #@rpc("authority", call_local", "reliable")
 func change_scene_for_all_players(scene_path : String) -> void:
-	
+	print("Reloading level", str(multiplayer.get_unique_id()))
 	# Error checking for scene change if error push error to error trace
 	var error := get_tree().change_scene_to_file(scene_path)
 	if error != OK:
@@ -59,17 +60,18 @@ func change_scene_for_all_players(scene_path : String) -> void:
 
 func _ready():
 	# Obtain the ip of the host
-	ip_address = get_host_ip()
-	
-	
-	wifi_ip_address = get_host_wifi_ip()
-	ethernet_ip_address = get_host_ethernet_ip()
+	#ip_address = get_host_ip()
+	#
+	#
+	#wifi_ip_address = get_host_wifi_ip()
+	#ethernet_ip_address = get_host_ethernet_ip()
 	
 	print(wifi_ip_address)
 	print(ethernet_ip_address)
 	# Connect signals to check if connection to server is failed or successful
 	multiplayer.connected_to_server.connect(_on_connection_to_server)
 	multiplayer.connection_failed.connect(_on_connection_to_server_failed)
+	multiplayer.server_disconnected.connect(_on_connection_to_server_lost)
 	
 	
 	# Setup authentication
@@ -89,21 +91,20 @@ func get_host_ip() -> String :
 	#ip_address = IP.resolve_hostname(str(OS.get_environment("COMPUTERNAME"), 1))
 	print("Obtained address: ", ip_address)
 	return ip_address
-	return "host ip cannot be found"
 	
 func get_host_wifi_ip() -> String : 
 	for i in IP.get_local_interfaces():
 		if i["friendly"] == "Wi-Fi":
 			return i["addresses"][0]
 	return "host wifi ip cannot be found"
-	pass
+
 	
 func get_host_ethernet_ip() -> String:
 	for i in IP.get_local_interfaces():
 		if i["friendly"] == "Ethernet":
 			return i["addresses"][0]
 	return "host wifi ip cannot be found"
-	pass
+
 
 # Function to start server
 func start_server() -> bool:
@@ -162,6 +163,7 @@ func stop_server() -> void:
 	peer = null
 	is_solo = true
 	game_started = false
+
 # Function that is called when server is successfully joined
 func _on_connection_to_server() -> void:
 		is_solo = false
@@ -190,7 +192,13 @@ func _on_peer_authenticating(peer_id : int) -> void:
 			multiplayer.send_auth(peer_id, "Approved".to_utf8_buffer())
 			multiplayer.complete_auth(peer_id)
 
+func _on_connection_to_server_lost() -> void:
+	NetworkManager.is_solo = true
+
 func close_multiplayer_connection() -> void:
+	#if multiplayer.is_server():
+		#NetworkManager.stop_broadcast()
+	
 	multiplayer.multiplayer_peer.close()
 	multiplayer.multiplayer_peer = OfflineMultiplayerPeer.new()
 	
@@ -237,6 +245,9 @@ func obtain_server_information() -> ServerInfo:
 	return null
 
 func broadcast_server_information() -> void:
+	if multiplayer.multiplayer_peer is OfflineMultiplayerPeer:
+		return
+	
 	var server_info = ServerInfo.new()
 	
 	server_info.server_dictionary["name"] = server_dictionary["name"]

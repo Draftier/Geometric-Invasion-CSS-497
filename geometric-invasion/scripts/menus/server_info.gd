@@ -6,6 +6,7 @@ extends HBoxContainer
 signal entry_refreshed
 
 func _ready() -> void:
+	AudioManager.setup_ui_button_audio(self)
 	stale_server_timer.start()
 	
 func reset_timer() -> void:

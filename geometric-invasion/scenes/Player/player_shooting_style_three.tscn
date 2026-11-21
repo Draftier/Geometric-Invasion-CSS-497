@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://c6x6lwc5i2t0i" path="res://scenes/ShootPoint/ShootPoint.tscn" id="3_5vh7b"]
 [ext_resource type="Script" uid="uid://blj0pgj2esa6o" path="res://scripts/ShootPoint/shoot_point_stats.gd" id="4_um67n"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_of2sc"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_as04i"]
 resource_local_to_scene = true
 shader = ExtResource("2_jhtuj")
 shader_parameter/flash_color = Color(1, 1, 1, 0)
@@ -20,7 +20,7 @@ metadata/_custom_type_script = "uid://blj0pgj2esa6o"
 [node name="Player" unique_id=1651887187 instance=ExtResource("1_as04i")]
 
 [node name="AnimatedSprite2D" parent="." index="2" unique_id=919492480]
-material = SubResource("ShaderMaterial_of2sc")
+material = SubResource("ShaderMaterial_as04i")
 
 [node name="ShootPoint3" parent="guns" parent_id_path=PackedInt32Array(1613688656) index="0" unique_id=1529614615 instance=ExtResource("3_5vh7b")]
 position = Vector2(-7, -2)

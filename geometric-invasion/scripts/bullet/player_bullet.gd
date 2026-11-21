@@ -1,6 +1,8 @@
 extends Bullet
+class_name PlayerBullet
 
 @onready var bullet_scale : Vector2 = self.scale
+var shooter_id : int
 
 func _ready() -> void:
 	super._ready()
@@ -35,8 +37,11 @@ func activate() -> void:
 	self.is_active = true
 
 func _on_hit() -> void:
-	PoolManager.return_to_player_pool(self)
+	#PoolManager.return_to_player_pool(self)
+	PoolManager.return_to_pool(PoolManager.Pools.PLAYER_BULLET, self)
+	
 
 func _on_tree_exiting() -> void:
-	PoolManager.return_to_player_pool(self)
+	#PoolManager.return_to_player_pool(self)
 	#PoolManager.return_to_enemy_pool(self)
+	PoolManager.return_to_pool(PoolManager.Pools.PLAYER_BULLET, self)

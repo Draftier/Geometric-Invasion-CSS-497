@@ -46,7 +46,9 @@ func activate() -> void:
 	self.is_active = true
 
 func _on_hit() -> void:
-	PoolManager.return_to_enemy_pool(self)
+	#PoolManager.return_to_enemy_pool(self)
+	PoolManager.return_to_pool(PoolManager.Pools.ENEMY_BULLET, self)
 
 func _on_tree_exiting() -> void:
-	PoolManager.return_to_enemy_pool(self)
+	#PoolManager.return_to_enemy_pool(self)
+	PoolManager.return_to_pool(PoolManager.Pools.ENEMY_BULLET, self)

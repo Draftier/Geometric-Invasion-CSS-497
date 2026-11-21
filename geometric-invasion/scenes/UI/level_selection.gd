@@ -1,4 +1,4 @@
-extends Control
+extends BaseMenu
 
 const LEVEL_ENTRY = preload("res://level_entry.tscn")
 
@@ -25,6 +25,7 @@ func obtain_level_files() -> void:
 
 func create_level_button(level_path : String, level_name : String) -> void:
 	var level_entry = LEVEL_ENTRY.instantiate()
+	level_entry.grow_size = Vector2(1.05, 1.05)
 	level_entry.text = level_name.trim_suffix(".tscn").replace("_", " ")
 	level_entry.level_path = level_path
 	level_entry.name = level_entry.text + "Button"

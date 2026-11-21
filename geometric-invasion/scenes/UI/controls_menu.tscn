@@ -4,6 +4,7 @@
 [ext_resource type="Theme" uid="uid://dy2kgmqgonako" path="res://theme_test.tres" id="1_6bw68"]
 [ext_resource type="PackedScene" uid="uid://cnr36qxaqynbc" path="res://scenes/star_background.tscn" id="2_qx6lj"]
 [ext_resource type="Theme" uid="uid://d21lh0fquueyo" path="res://new_button_theme.tres" id="4_lvkkv"]
+[ext_resource type="Script" uid="uid://c6mayvsci6gvc" path="res://scenes/UI/animated_button.gd" id="5_gel6q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qx6lj"]
 size = Vector2(1159, 21)
@@ -64,13 +65,15 @@ layout_mode = 2
 text = "Arrow keys to move"
 horizontal_alignment = 1
 
-[node name="BackButton" type="Button" parent="MarginContainer/ControlsVbox" unique_id=1931551167]
+[node name="BackButton" type="Button" parent="MarginContainer/ControlsVbox" unique_id=39814966]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("4_lvkkv")
 text = "Press escape or click here to return to main menu"
+script = ExtResource("5_gel6q")
+metadata/_custom_type_script = "uid://c6mayvsci6gvc"
 
 [node name="Spawn" type="Marker2D" parent="." unique_id=1503853858]
 unique_name_in_owner = true

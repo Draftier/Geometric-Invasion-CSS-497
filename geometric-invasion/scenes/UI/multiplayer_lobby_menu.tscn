@@ -3,8 +3,10 @@
 [ext_resource type="Script" uid="uid://d31bgscf1dbt" path="res://scripts/menus/multiplayer_lobby_menu.gd" id="1_gty5r"]
 [ext_resource type="PackedScene" uid="uid://cnr36qxaqynbc" path="res://scenes/star_background.tscn" id="2_sk1sy"]
 [ext_resource type="Theme" uid="uid://dy2kgmqgonako" path="res://theme_test.tres" id="3_xv84o"]
+[ext_resource type="Theme" uid="uid://d21lh0fquueyo" path="res://new_button_theme.tres" id="4_40k48"]
 [ext_resource type="StyleBox" uid="uid://dn5gd6byuqut8" path="res://button_theme.tres" id="4_oeyph"]
 [ext_resource type="Script" uid="uid://84ox43jyptjb" path="res://scenes/Audio/music_auto_trigger.gd" id="5_xv84o"]
+[ext_resource type="Script" uid="uid://c6mayvsci6gvc" path="res://scenes/UI/animated_button.gd" id="6_40k48"]
 [ext_resource type="AudioStream" uid="uid://8qm86b2b1081" path="res://assets/audio/music/menu_theme/Week 21 - Freefall GLIDE.ogg" id="6_xv84o"]
 
 [node name="MultiplayerLobbyMenu" type="Control" unique_id=1575445770]
@@ -70,15 +72,25 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="StartGameButton" type="Button" parent="MarginContainer/Lobby/MarginContainer/VBoxContainer" unique_id=1275782273]
+[node name="StartGameButton" type="Button" parent="MarginContainer/Lobby/MarginContainer/VBoxContainer" unique_id=547819761]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("4_40k48")
 theme_override_styles/normal = ExtResource("4_oeyph")
 text = "Start Game"
+script = ExtResource("6_40k48")
+metadata/_custom_type_script = "uid://c6mayvsci6gvc"
 
-[node name="BackButton" type="Button" parent="MarginContainer/Lobby/MarginContainer/VBoxContainer" unique_id=766023731]
+[node name="BackButton" type="Button" parent="MarginContainer/Lobby/MarginContainer/VBoxContainer" unique_id=2082089133]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("4_40k48")
 theme_override_styles/normal = ExtResource("4_oeyph")
 text = "Back"
+script = ExtResource("6_40k48")
+metadata/_custom_type_script = "uid://c6mayvsci6gvc"
 
 [node name="ConnectionErrorLabel" type="Label" parent="MarginContainer/Lobby" unique_id=2024606852]
 unique_name_in_owner = true

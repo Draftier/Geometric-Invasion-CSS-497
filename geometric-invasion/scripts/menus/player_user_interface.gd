@@ -7,7 +7,7 @@ class_name PlayerUserInterface
 var player_info = {}
 
 @rpc("authority", "call_local", "reliable")
-func init_entry(id : int, lives : int, charge_state : bool) -> void:
+func init_entry(id : int, lives : int, charge_state : bool, display_id : int, score : int) -> void:
 	
 	var player_entry = player_info_scene.instantiate()
 	var container = get_node("%LivesContainer") as HBoxContainer
@@ -16,9 +16,10 @@ func init_entry(id : int, lives : int, charge_state : bool) -> void:
 	if !player_entry.is_node_ready():
 		await player_entry.ready
 	
-	player_entry.set_player_id(id)
+	player_entry.set_player_id(id, display_id)
 	player_entry.set_player_health(lives)
 	player_entry.set_ability_state(charge_state)
+	player_entry.set_player_score(score)
 	
 	player_info[id] = player_entry
 
@@ -42,3 +43,8 @@ func set_entry_dead(id : int) -> void:
 func set_entry_disconnected(id : int) -> void:
 	var entry = player_info.get(id) as PlayerUIEntry
 	entry.set_player_disconnected()
+	
+@rpc("authority", "call_local", "reliable")
+func set_player_score(id : int, score : int) -> void:
+	var entry = player_info.get(id) as PlayerUIEntry
+	entry.set_player_score(score)

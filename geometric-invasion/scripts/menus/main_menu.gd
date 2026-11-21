@@ -14,7 +14,7 @@ func _ready() -> void:
 
 func _on_start_button_pressed() -> void:
 	#get_tree().change_scene_to_file("res://scenes/UI/player_customization_menu.tscn")
-	get_tree().change_scene_to_file("res://scenes/UI/level_selection.tscn")
+	pass
 
 
 func change_scene() -> void:
@@ -47,3 +47,7 @@ func _on_multiplayer_not_implemented_pressed() -> void:
 
 func _on_settings_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/UI/settings_menu.tscn")
+
+
+func _on_singleplayer_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/UI/level_selection.tscn")

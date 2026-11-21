@@ -2,7 +2,9 @@
 
 [ext_resource type="Script" uid="uid://x1j72daq30lo" path="res://scripts/menus/server_info.gd" id="1_e5yu4"]
 [ext_resource type="Theme" uid="uid://dy2kgmqgonako" path="res://theme_test.tres" id="2_arsx7"]
+[ext_resource type="Theme" uid="uid://d21lh0fquueyo" path="res://new_button_theme.tres" id="3_8gdlq"]
 [ext_resource type="FontFile" uid="uid://dihhulpjs1064" path="res://assets/fonts/PixelOperator8.ttf" id="3_ejxhj"]
+[ext_resource type="Script" uid="uid://c6mayvsci6gvc" path="res://scenes/UI/animated_button.gd" id="5_rgcb0"]
 
 [node name="ServerInfo" type="HBoxContainer" unique_id=354989575]
 script = ExtResource("1_e5yu4")
@@ -26,11 +28,15 @@ size_flags_horizontal = 3
 theme = ExtResource("2_arsx7")
 text = "0 / 3"
 
-[node name="JoinButton" type="Button" parent="." unique_id=1825947810]
+[node name="JoinButton" type="Button" parent="." unique_id=829138127]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("3_8gdlq")
 theme_override_fonts/font = ExtResource("3_ejxhj")
 text = "Join Server"
+alignment = 0
+script = ExtResource("5_rgcb0")
+metadata/_custom_type_script = "uid://c6mayvsci6gvc"
 
 [node name="StaleServerTimer" type="Timer" parent="." unique_id=1041062561]
 unique_name_in_owner = true

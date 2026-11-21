@@ -1,4 +1,4 @@
-extends Control
+extends BaseMenu
 
 signal found_server
 signal server_removed
@@ -10,6 +10,7 @@ signal server_removed
 @export var listen_check_frequency : float = 3.0
 
 func _ready() -> void:
+	AudioManager.setup_ui_button_audio(self)
 	NetworkManager.set_up_listen_port()
 	
 	NetworkManager.server_joined.connect(_on_server_connected)

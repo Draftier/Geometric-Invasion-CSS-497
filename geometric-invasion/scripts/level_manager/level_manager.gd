@@ -5,6 +5,7 @@ extends Node
 @onready var player_spawner = $Spawner
 @onready var result_menu = $ResultMenu
 
+
 # Variables to set after scene, spawners, events, and time to complete level
 @export var end_change_scene : PackedScene
 @export var spawners : Array[Node]
@@ -40,6 +41,7 @@ func _ready() -> void:
 	#num_enemies = enemies.size()
 	#print(enemies.size())	
 	player_spawner.loss.connect(_on_player_loss)
+	multiplayer.server_disconnected.connect(_on_server_disconnected)
 	
 	if !$LevelTimer.timeout.is_connected(_on_level_timer_timeout):
 		$LevelTimer.timeout.connect(_on_level_timer_timeout)
@@ -117,7 +119,7 @@ func _on_enemy_death() -> void:
 	num_enemies -= 1
 	# print(num_enemies)
 
-func request_take_damage(id : int, damage : float) -> void:
+func request_take_damage(id : int, damage : float, shooter_id : int) -> void:
 	if !multiplayer.is_server():
 		return
 	
@@ -130,19 +132,25 @@ func request_take_damage(id : int, damage : float) -> void:
 	if enemy.is_dead or enemy.is_queued_for_deletion():
 		return
 	
-	enemy.take_damage(damage)
+	enemy.take_damage(damage, shooter_id)
 	
 
 	
-func on_enemy_hit_reported(id : int, damage : float) -> void:
+func on_enemy_hit_reported(id : int, damage : float, shooter_id : int) -> void:
 	if multiplayer.is_server():
-		request_take_damage(id, damage)
+		request_take_damage(id, damage, shooter_id)
 	#else:
 		#request_take_damage.rpc_id(1, id, damage)
 
-func on_enemy_death(id : int) -> void:
+func on_enemy_death(id : int, shooter_id : int) -> void:
 	if !multiplayer.is_server():
 		return
+	
+	if shooter_id != -1:
+		#var player : Player = player_spawner.players.get(shooter_id)
+		#player.score += 10
+		player_spawner.add_score_to_player(shooter_id, 10)
+		#print(player)
 	
 	remove_enemy.rpc(id)
 	
@@ -186,12 +194,14 @@ func spawn_pickup(id : int, position : Vector2) -> void:
 	power_up.id = id
 	power_up.name = "power_up_" + str(power_up.id)
 	
+	
 	get_parent().call_deferred("add_child", power_up)
 
 @rpc("authority", "call_local", "reliable")
 func set_game_state_to_loss() -> void:
 	if multiplayer.is_server() || NetworkManager.is_solo:
 		result_menu.show_loss_menu.rpc()
+		result_menu.pause_game.rpc()
 	
 	
 	#get_tree().quit()
@@ -200,6 +210,7 @@ func set_game_state_to_loss() -> void:
 func set_game_state_to_victory() -> void:
 	if multiplayer.is_server() || NetworkManager.is_solo:
 		result_menu.show_victory_menu.rpc()
+		result_menu.pause_game.rpc()
 
 func prepare_pickup(position : Vector2) -> void:
 	if !multiplayer.is_server():
@@ -227,3 +238,9 @@ func spawn_boss() -> void:
 	for i in spawners:
 		if i.id == boss_spawn_event.spawner:
 			i.execute_spawn_event(boss_spawn_event)
+
+func _on_tree_exiting() -> void:
+	NetworkManager.display_id = 1
+
+func _on_server_disconnected() -> void:
+	self.set_process(false)

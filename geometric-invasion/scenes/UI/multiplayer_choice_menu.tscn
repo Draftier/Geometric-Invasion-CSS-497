@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cnr36qxaqynbc" path="res://scenes/star_background.tscn" id="3_ao0e5"]
 [ext_resource type="Theme" uid="uid://d21lh0fquueyo" path="res://new_button_theme.tres" id="4_ao0e5"]
 [ext_resource type="Script" uid="uid://84ox43jyptjb" path="res://scenes/Audio/music_auto_trigger.gd" id="5_7hghv"]
+[ext_resource type="Script" uid="uid://c6mayvsci6gvc" path="res://scenes/UI/animated_button.gd" id="5_v77ib"]
 [ext_resource type="AudioStream" uid="uid://8qm86b2b1081" path="res://assets/audio/music/menu_theme/Week 21 - Freefall GLIDE.ogg" id="6_v77ib"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2m35m"]
@@ -22,6 +23,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_aoc2s")
 script = ExtResource("2_wt8fv")
+scene_path = "uid://domjpwtkv78nv"
 
 [node name="StarBackground" parent="." unique_id=1934287316 instance=ExtResource("3_ao0e5")]
 
@@ -115,13 +117,15 @@ unique_name_in_owner = true
 layout_mode = 2
 horizontal_alignment = 1
 
-[node name="HostButton" type="Button" parent="MarginContainer/MultiplayerMenu/MarginContainer/VBoxContainer" unique_id=277408626]
+[node name="HostButton" type="Button" parent="MarginContainer/MultiplayerMenu/MarginContainer/VBoxContainer" unique_id=1490350524]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("4_ao0e5")
 text = "Host server"
+script = ExtResource("5_v77ib")
+metadata/_custom_type_script = "uid://c6mayvsci6gvc"
 
 [node name="ServerNameInput" type="LineEdit" parent="MarginContainer/MultiplayerMenu/MarginContainer/VBoxContainer" unique_id=646848237]
 unique_name_in_owner = true
@@ -129,12 +133,14 @@ layout_mode = 2
 placeholder_text = "Enter name of server"
 alignment = 1
 
-[node name="JoinByIp" type="Button" parent="MarginContainer/MultiplayerMenu/MarginContainer/VBoxContainer" unique_id=1979438574]
+[node name="JoinByIp" type="Button" parent="MarginContainer/MultiplayerMenu/MarginContainer/VBoxContainer" unique_id=1007974738]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("4_ao0e5")
 text = "Join Server by ip"
+script = ExtResource("5_v77ib")
+metadata/_custom_type_script = "uid://c6mayvsci6gvc"
 
 [node name="IpInput" type="LineEdit" parent="MarginContainer/MultiplayerMenu/MarginContainer/VBoxContainer" unique_id=1162111617]
 unique_name_in_owner = true
@@ -142,19 +148,23 @@ layout_mode = 2
 placeholder_text = "Enter host IP, e.g. 192.168.***.***"
 alignment = 1
 
-[node name="OpenServerBrowser" type="Button" parent="MarginContainer/MultiplayerMenu/MarginContainer/VBoxContainer" unique_id=332209589]
+[node name="OpenServerBrowser" type="Button" parent="MarginContainer/MultiplayerMenu/MarginContainer/VBoxContainer" unique_id=219231137]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("4_ao0e5")
 text = "Server Browser"
+script = ExtResource("5_v77ib")
+metadata/_custom_type_script = "uid://c6mayvsci6gvc"
 
-[node name="BackButton" type="Button" parent="MarginContainer/MultiplayerMenu/MarginContainer/VBoxContainer" unique_id=988965015]
+[node name="BackButton" type="Button" parent="MarginContainer/MultiplayerMenu/MarginContainer/VBoxContainer" unique_id=307647898]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("4_ao0e5")
 text = "Back to main menu"
+script = ExtResource("5_v77ib")
+metadata/_custom_type_script = "uid://c6mayvsci6gvc"
 
 [node name="MusicAutoTrigger" type="Node" parent="." unique_id=44003178]
 script = ExtResource("5_7hghv")

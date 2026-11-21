@@ -13,6 +13,7 @@ extends Control
 var num_players : int = 0
 
 func _ready() -> void:
+	AudioManager.setup_ui_button_audio(self)
 	# Setup the broadcast port
 	NetworkManager.set_up_broadcast_port(NetworkManager.server_dictionary["name"])
 		
@@ -34,9 +35,12 @@ func _ready() -> void:
 	_update_player_count()
 	
 	# Show the host ip address
-	wifi_ip_label.text += NetworkManager.wifi_ip_address
-	ethernet_ip_label.text += NetworkManager.ethernet_ip_address
-	
+	if multiplayer.is_server():
+		NetworkManager.display_id = 1
+		wifi_ip_label.text += NetworkManager.get_host_wifi_ip()
+		ethernet_ip_label.text += NetworkManager.get_host_ethernet_ip()
+	else:
+		NetworkManager.display_id = num_players
 
 # Logic for what happens when start game button is presed
 func _on_start_game_button_pressed() -> void:
@@ -74,6 +78,9 @@ func _on_start_game_button_pressed() -> void:
 # Peer disconnected and peer connected signals 
 # Require functions to take in a peer's id
 func _on_peer_connected(id : int) -> void:	
+	if multiplayer.is_server():
+		send_ip_address.rpc()
+		
 	_update_player_count()
 
 func _on_peer_disconnected(id : int) -> void:
@@ -95,7 +102,11 @@ func _on_server_disconnected() -> void:
 # Makes multiplayer peer offline, and closes current connection to server
 # Then puts user back to multiplayer choice menu
 func _on_back_button_pressed() -> void:
+	if multiplayer.is_server():
+		NetworkManager.stop_broadcast()
+	
 	NetworkManager.close_multiplayer_connection()
+	
 	get_tree().change_scene_to_file("res://scenes/UI/multiplayer_choice_menu.tscn")
 
 # Updates player count based on number of peers
@@ -104,12 +115,21 @@ func _update_player_count() -> void:
 	player_count_label.text = "Player count : " + str(num_players) + " / 3"
 
 func _on_broadcast_timer_timeout() -> void:
-	NetworkManager.broadcast_server_information()
+	if multiplayer.multiplayer_peer != null && multiplayer.is_server():
+		NetworkManager.broadcast_server_information()
 
 func _exit_tree() -> void:
-	if multiplayer.is_server():
-		NetworkManager.stop_broadcast()
 	pass
+
+@rpc("authority", "call_local", "reliable")
+func send_ip_address() -> void:
+	if NetworkManager.wifi_ip_address != "" || NetworkManager.ethernet_ip_address != "" || multiplayer.is_server():
+		return
+	NetworkManager.wifi_ip_address = NetworkManager.get_host_wifi_ip()
+	NetworkManager.ethernet_ip_address = NetworkManager.get_host_ethernet_ip()
+	wifi_ip_label.text += NetworkManager.wifi_ip_address
+	ethernet_ip_label.text += NetworkManager.ethernet_ip_address
+
 
 # How does the server obtain player name info
 ## If the player is a server then open a listen port and listen for packets from clients

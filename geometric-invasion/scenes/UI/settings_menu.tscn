@@ -6,6 +6,7 @@
 [ext_resource type="FontFile" uid="uid://dihhulpjs1064" path="res://assets/fonts/PixelOperator8.ttf" id="4_t4w0s"]
 [ext_resource type="Theme" uid="uid://d21lh0fquueyo" path="res://new_button_theme.tres" id="5_lwg20"]
 [ext_resource type="Script" uid="uid://84ox43jyptjb" path="res://scenes/Audio/music_auto_trigger.gd" id="6_c5o1q"]
+[ext_resource type="Script" uid="uid://c6mayvsci6gvc" path="res://scenes/UI/animated_button.gd" id="6_uxg4l"]
 [ext_resource type="AudioStream" uid="uid://8qm86b2b1081" path="res://assets/audio/music/menu_theme/Week 21 - Freefall GLIDE.ogg" id="7_uxg4l"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_d8ny1"]
@@ -21,6 +22,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_mlw3h")
+scene_path = "uid://domjpwtkv78nv"
 
 [node name="StarBackground" parent="." unique_id=1934287316 instance=ExtResource("1_0cmel")]
 unique_name_in_owner = true
@@ -154,7 +156,7 @@ popup/item_0/id = 1
 popup/item_1/text = "On"
 popup/item_1/id = 0
 
-[node name="BackButton" type="Button" parent="MarginContainer/RootMenu/VBoxContainer" unique_id=1024788489]
+[node name="BackButton" type="Button" parent="MarginContainer/RootMenu/VBoxContainer" unique_id=28122240]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -162,6 +164,8 @@ theme = ExtResource("5_lwg20")
 theme_override_fonts/font = ExtResource("4_t4w0s")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_bl585")
 text = "Back to main menu"
+script = ExtResource("6_uxg4l")
+metadata/_custom_type_script = "uid://c6mayvsci6gvc"
 
 [node name="MusicAutoTrigger" type="Node" parent="." unique_id=3727854]
 script = ExtResource("6_c5o1q")

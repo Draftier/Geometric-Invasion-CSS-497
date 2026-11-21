@@ -1,9 +1,9 @@
 extends EnemyBullet
-class_name enemy_homing_bullet
+class_name EnemyHomingBullet
 
 var _target
 var already_homed : bool = false
-var id : int = 0
+#var id : int = 0
 
 func _process(delta: float) -> void:
 	if _target == null:

@@ -2,31 +2,50 @@
 
 [ext_resource type="Script" uid="uid://c3kgd6frxxhxc" path="res://scripts/Pooling/pool_manager.gd" id="1_omxlj"]
 [ext_resource type="Script" uid="uid://2p7xdn8rosd7" path="res://scripts/Pooling/pool.gd" id="2_psedc"]
+[ext_resource type="Script" uid="uid://oanyvlrqp0c" path="res://scripts/Pooling/pool_resource.gd" id="2_yjdty"]
 [ext_resource type="PackedScene" uid="uid://iie43arv0boo" path="res://scenes/Player/player_bullet.tscn" id="3_fvd53"]
 [ext_resource type="PackedScene" uid="uid://d02ey725i8t81" path="res://scenes/Enemy/obstacle_bullet_base.tscn" id="4_id1ti"]
 [ext_resource type="PackedScene" uid="uid://c1ap2vhq0urmq" path="res://scenes/Enemy/enemy_homing_bullet.tscn" id="6_yjdty"]
 
+[sub_resource type="Resource" id="Resource_yjdty"]
+script = ExtResource("2_yjdty")
+poolable_scene = ExtResource("3_fvd53")
+max_pool_size = 500
+metadata/_custom_type_script = "uid://oanyvlrqp0c"
+
+[sub_resource type="Resource" id="Resource_55oic"]
+script = ExtResource("2_yjdty")
+poolable_scene = ExtResource("4_id1ti")
+pool_name = 1
+max_pool_size = 1000
+metadata/_custom_type_script = "uid://oanyvlrqp0c"
+
+[sub_resource type="Resource" id="Resource_kfk1w"]
+script = ExtResource("2_yjdty")
+poolable_scene = ExtResource("6_yjdty")
+pool_name = 2
+max_pool_size = 150
+metadata/_custom_type_script = "uid://oanyvlrqp0c"
+
 [node name="PoolManager" type="Node2D" unique_id=365144408]
 z_index = 1000
 script = ExtResource("1_omxlj")
+poolable_array = Array[ExtResource("2_yjdty")]([SubResource("Resource_yjdty"), SubResource("Resource_55oic"), SubResource("Resource_kfk1w")])
 
 [node name="PlayerBulletPool" type="Node" parent="." unique_id=314793696]
 unique_name_in_owner = true
 script = ExtResource("2_psedc")
-bullet_scene = ExtResource("3_fvd53")
-max_bullet_count = 500
+poolable_scene = ExtResource("3_fvd53")
 metadata/_custom_type_script = "uid://2p7xdn8rosd7"
 
 [node name="EnemyBulletPool" type="Node" parent="." unique_id=2098312797]
 unique_name_in_owner = true
 script = ExtResource("2_psedc")
-bullet_scene = ExtResource("4_id1ti")
-max_bullet_count = 500
+poolable_scene = ExtResource("4_id1ti")
 metadata/_custom_type_script = "uid://2p7xdn8rosd7"
 
 [node name="EnemyHomingBulletPool" type="Node" parent="." unique_id=965067731]
 unique_name_in_owner = true
 script = ExtResource("2_psedc")
-bullet_scene = ExtResource("6_yjdty")
-max_bullet_count = 100
+poolable_scene = ExtResource("6_yjdty")
 metadata/_custom_type_script = "uid://2p7xdn8rosd7"

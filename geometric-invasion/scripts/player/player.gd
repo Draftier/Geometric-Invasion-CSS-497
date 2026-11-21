@@ -5,6 +5,7 @@ extends CharacterBody2D
 @onready var hurtbox : Hurtbox = %Hurtbox
 
 @onready var user_interface = %PlayerUserInterface
+@onready var player_id_label = %PlayerLabel
 
 # Check to see if player is in control
 var preview_mode : bool = false
@@ -28,6 +29,7 @@ var direction : Vector2 = Vector2.ZERO
 
 # Lives set to 1000 for testing
 @export var lives : int = 1
+var score : int = 0
 
 # Flag variable to track if the player is invulnerable
 var invulnerable : bool = false
@@ -42,13 +44,17 @@ var is_exploding : bool = false
 var guns : Array[ShootPoint]
 
 var id : int
+var display_id : int
 
 func _enter_tree() -> void:
-	#if is_multiplayer_authority():
 	set_multiplayer_authority(str(name).to_int())
 
 func _ready() -> void:	
-	$CanvasLayer/Label.text = "Lives : " + str(lives)
+	if NetworkManager.is_solo == false:
+		display_id = NetworkManager.display_id
+		$PlayerLabel.text = "P" + str(display_id)
+		$PlayerLabel.show()
+	
 	ability = ability_scene.instantiate()
 	add_child(ability)
 	
@@ -61,7 +67,7 @@ func _ready() -> void:
 	
 # Called every physics tick
 func _process(_delta: float) -> void:
-	if !NetworkManager.is_solo and !is_multiplayer_authority():
+	if multiplayer.multiplayer_peer != OfflineMultiplayerPeer and !NetworkManager.is_solo and !is_multiplayer_authority():
 		return
 
 	# Get an input vector and modify velocity of player based on it
@@ -181,8 +187,6 @@ func report_death() -> void:
 @rpc("any_peer", "call_local", "reliable")
 func flash_player() -> void:
 	is_exploding = true
-	
-	$CanvasLayer/Label.text = "Lives : " + str(lives)
 	var timer = get_tree().create_timer(0.7)
 	$AnimatedSprite2D.play("explosion")
 	$AnimatedSprite2D/Circle1.visible = false

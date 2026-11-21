@@ -31,9 +31,12 @@ func shoot() -> void:
 			#bullet = level_manager.pull_from_pool("enemy")
 		
 		if shooter == "player":
-			bullet = PoolManager.give_player_bullet()
+			bullet = PoolManager.receive_from_pool(PoolManager.Pools.PLAYER_BULLET)
 			bullet.speed = 3000 * get_parent().get_parent().scale
 			bullet.scale *= get_parent().get_parent().scale
+			bullet.id = get_parent().get_parent().id
+			
+			#print("Bullet id: ", bullet.id)
 			
 			AudioManager.play_spatial_sound(preload("res://assets/audio/sfx/player/Shoot.ogg"), global_position)
 		else:

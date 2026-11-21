@@ -8,30 +8,32 @@ class_name ObjectPool
 var current_id : int = 0
 
 # Bullet scene that we pool
-@export var bullet_scene : PackedScene
+#@export var bullet_scene : PackedScene
+@export var poolable_scene : PackedScene
 
 # Variables to store bullets and the max number of objects in pool
-@export var max_bullet_count : int = 1000
-var bullets : Array [ Bullet ]
+var poolables : Array [ Poolable ]
+@export var max_pool_size : int = 1000
 
 func _ready() -> void:
 	get_tree().scene_changed.connect(_on_scene_change)
 
 # Function to add bullets to the object pool
-func add_to_pool(bullet : Node) -> void:
+func add_to_pool(poolable : Node) -> void:
 	#bullet.reset()
 	#get_instance_id()
 	## We reparent the bullet to make sure it appears correctly in scene tree
 	## Without this the bullet is visually invisible
+	#poolable.id = current_id + 1
+	#current_id = poolable.id
+		
 	#bullets.append(bullet)
-	if bullet is enemy_homing_bullet:
-		bullet.id = current_id + 1
-		current_id = bullet.id
-		bullet.name = "Homing_bullet" + str(bullet.id)
+	#if poolable is enemy_homing_bullet:
+		#poolable.name = "Homing_bullet" + str(poolable.id)
 	
-	bullet.reset()
-	bullet.is_active = false
-	bullets.append(bullet)
+	poolable.reset()
+	poolable.is_active = false
+	poolables.append(poolable)
 
 # Function to initialize the pool with max num of objects
 func initialize_pool() -> void:
@@ -39,52 +41,57 @@ func initialize_pool() -> void:
 	destroy_pool()
 	# Loop to initialize the object pool whilst interleaving player and enemy bullets
 	# Check if the array actually changes in size
-	for i in range(0, max_bullet_count):
+	for i in range(0, max_pool_size):
 		# Start adding bullets to the pool
-			var bullet = bullet_scene.instantiate()
-			add_child(bullet)
+			var poolable = poolable_scene.instantiate()
+			
+			poolable.id = current_id + 1
+			current_id = poolable.id
+			
+			poolable.name = poolable.get_script().get_global_name() + str(poolable.id)
+			add_child(poolable)
 			# Connect bullet exit signal to pool so that when bullet exits screen bullet is repooled
-			bullet.connect("exited_screen", _on_bullet_exit_screen)
-			add_to_pool(bullet)
+			poolable.connect("exited_screen", _on_bullet_exit_screen)
+			add_to_pool(poolable)
 
 # Function to pull bullets from the pool
 func pull_from_pool() -> Node:
-	var bullet: Node
+	var poolable: Node
 	# Check if pool is empty or not empty, either way check type of bullet
-	if bullets.is_empty():
-		bullet = bullet_scene.instantiate()
+	if poolables.is_empty():
+		poolable = poolable_scene.instantiate()
 	else:
 		#bullet = bullets[0]
 		#bullets.remove_at(0)
-		for i in bullets:
+		for i in poolables:
 			if i.is_active == false:
-				bullet = i
+				poolable = i
 	
-	if bullet == null:
-		bullet = bullet_scene.instantiate()
-		add_child(bullet)
-		bullet.connect("exited_screen", _on_bullet_exit_screen)
-		add_to_pool(bullet)
+	if poolable is Bullet && poolable == null:
+		poolable = poolable_scene.instantiate()
+		add_child(poolable)
+		poolable.connect("exited_screen", _on_bullet_exit_screen)
+		add_to_pool(poolable)
 	
 	# Unpause calculation from bullet being pulled from pool
-	bullet.activate()
+	poolable.activate()
 	
-	return bullet
+	return poolable
 
 # Function to add bullet to pool when bullet exits screen
-func _on_bullet_exit_screen(bullet : Node) -> void:
-	add_to_pool(bullet)
+func _on_bullet_exit_screen(poolable : Node) -> void:
+	add_to_pool(poolable)
 
 # Function to go through all bullets and get them out of pool
 # Called when exiting scene or when reinitializing pool
 func destroy_pool() -> void:
-	for i in bullets:
+	for i in poolables:
 		if is_instance_valid(i):
 			i.queue_free()
-	bullets.clear()
+	poolables.clear()
 
 func reset_pool() -> void:
-	for i in bullets:
+	for i in poolables:
 		if i.is_active == true:
 			i.reset()
 

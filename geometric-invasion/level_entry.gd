@@ -1,4 +1,4 @@
-extends Button
+extends AnimatedButton
 
 @export_file var level_path
 

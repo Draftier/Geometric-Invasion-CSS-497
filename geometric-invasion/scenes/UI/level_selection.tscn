@@ -5,6 +5,8 @@
 [ext_resource type="Script" uid="uid://84ox43jyptjb" path="res://scenes/Audio/music_auto_trigger.gd" id="3_n3e1l"]
 [ext_resource type="AudioStream" uid="uid://8qm86b2b1081" path="res://assets/audio/music/menu_theme/Week 21 - Freefall GLIDE.ogg" id="4_4lv7c"]
 [ext_resource type="FontFile" uid="uid://dihhulpjs1064" path="res://assets/fonts/PixelOperator8.ttf" id="5_2blm6"]
+[ext_resource type="Theme" uid="uid://d21lh0fquueyo" path="res://new_button_theme.tres" id="6_4lv7c"]
+[ext_resource type="Script" uid="uid://c6mayvsci6gvc" path="res://scenes/UI/animated_button.gd" id="6_n3e1l"]
 
 [node name="LevelSelection" type="Control" unique_id=466660614]
 layout_mode = 3
@@ -15,6 +17,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_2blm6")
 level_dir = "res://scenes/Levels"
+scene_path = "uid://domjpwtkv78nv"
 
 [node name="StarBackground" parent="." unique_id=1934287316 instance=ExtResource("1_6hnvt")]
 
@@ -42,18 +45,31 @@ theme_override_fonts/font = ExtResource("5_2blm6")
 text = "Level Selection Screen"
 horizontal_alignment = 1
 
-[node name="LevelGrid" type="GridContainer" parent="CenterContainer/VBoxContainer" unique_id=496658552]
+[node name="ScrollContainer" type="ScrollContainer" parent="CenterContainer/VBoxContainer" unique_id=167477775]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="LevelGrid" type="GridContainer" parent="CenterContainer/VBoxContainer/ScrollContainer" unique_id=496658552]
 unique_name_in_owner = true
 propagate_maximum_size = false
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
-columns = 7
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 32
+columns = 5
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="CenterContainer/VBoxContainer" unique_id=1849470968]
 layout_mode = 2
 
-[node name="BackToMainMenuButton" type="Button" parent="CenterContainer/VBoxContainer/VBoxContainer2" unique_id=517977891]
+[node name="BackToMainMenuButton" type="Button" parent="CenterContainer/VBoxContainer/VBoxContainer2" unique_id=710088354]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("6_4lv7c")
 text = "Back to main menu"
+script = ExtResource("6_n3e1l")
+metadata/_custom_type_script = "uid://c6mayvsci6gvc"
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/VBoxContainer2/BackToMainMenuButton" to="." method="_on_back_to_main_menu_button_pressed"]

@@ -12,12 +12,15 @@ extends CanvasLayer
 @onready var display_mode = %DisplayMode
 @onready var fps_dropwdown = %FpsSettingDropDown
 
+@onready var error_label = %ErrorLabel
+
 var current_display_mode = DisplayServer.window_get_mode()
 
 func _ready() -> void:
 	AudioManager.setup_ui_button_audio(self)
 	setup_settings_menu()
 	hide()
+	multiplayer.server_disconnected.connect(_on_server_disconnected)
 
 func setup_settings_menu() -> void:
 	music_slider.value = AudioServer.get_bus_volume_linear(2)
@@ -71,8 +74,9 @@ func _on_resume_button_pressed() -> void:
 
 func _on_quit_to_menu_pressed() -> void:
 	get_tree().paused = false
-	#PoolManager.destroy_pools()
-	#PoolManager.reset_pools()
+	if NetworkManager.is_solo == false:
+		NetworkManager.close_multiplayer_connection()
+		NetworkManager.is_solo = true
 	get_tree().call_deferred("change_scene_to_file", "res://scenes/UI/main_menu.tscn")
 
 func _on_quit_to_desktop_pressed() -> void:
@@ -117,3 +121,21 @@ func _on_display_mode_item_selected(index: int) -> void:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 		1:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+
+func _on_server_disconnected() -> void:
+	print("Disconnected from server")
+	error_label.text = "Connection to server lost!"
+	$MarginContainer.hide()
+	
+	error_label.show()
+	show()
+	
+	print(error_label.text)
+	
+	await get_tree().create_timer(7.0).timeout
+	NetworkManager.close_multiplayer_connection()
+	
+	if get_tree().paused == true:
+		get_tree().paused = false
+	
+	get_tree().change_scene_to_file("res://scenes/UI/server_browser.tscn")

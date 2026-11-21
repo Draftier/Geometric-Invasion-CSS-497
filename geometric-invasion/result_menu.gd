@@ -1,29 +1,42 @@
 extends CanvasLayer
 
 @onready var result_label : Label = %ResultMessageLabel
+@onready var retry_button : Button = %RetryButton
 
 func _ready() -> void:
+	AudioManager.setup_ui_button_audio(self)
 	hide()
 
 @rpc("authority", "call_local", "reliable")
 func show_loss_menu() -> void:
 	#AudioManager.stop_cur_player()
 	AudioManager.play_music_track(preload("res://assets/audio/music/level_music/Fallen in Battle.ogg"))
-	pause_game()
+
 	result_label.text = "You lost!"
 	show()
+	
+	if NetworkManager.is_solo == false:
+		retry_button.hide()
 
 @rpc("authority", "call_local", "reliable")
 func show_victory_menu() -> void:
 	#AudioManager.stop_cur_player()
 	AudioManager.play_music_track(preload("res://assets/audio/music/level_music/Victory! All Clear.ogg"))
-	pause_game()
+	
 	result_label.text = "You won!"
 	show()
+	
+	if NetworkManager.is_solo == false:
+		retry_button.hide()
 
+@rpc("authority", "call_local", "reliable")
 func pause_game() -> void:
 	if get_tree().paused == false:
 		get_tree().paused = true
+
+@rpc("authority", "call_local", "reliable")
+func unpause_game() -> void:
+	get_tree().paused = false
 		
 func _on_quit_to_menu_button_pressed() -> void:
 	if multiplayer.multiplayer_peer != OfflineMultiplayerPeer:
@@ -35,3 +48,17 @@ func _on_quit_to_menu_button_pressed() -> void:
 
 func _on_quit_to_desktop_button_pressed() -> void:
 	get_tree().quit()
+
+
+func _on_retry_button_pressed() -> void:
+	if NetworkManager.is_solo == false && multiplayer.multiplayer_peer == null:
+		get_tree().paused = false
+		get_tree().reload_current_scene()
+	else:
+		if multiplayer.is_server():
+			unpause_game.rpc()
+			NetworkManager.change_scene_for_all_players.rpc(NetworkManager.selected_level)
+		else:
+			retry_button.text = "Only host can restart level!"
+			await get_tree().create_timer(3.0).timeout
+			retry_button.text = "Retry"

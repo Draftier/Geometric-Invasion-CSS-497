@@ -4,6 +4,7 @@
 [ext_resource type="Theme" uid="uid://dy2kgmqgonako" path="res://theme_test.tres" id="1_yonvy"]
 [ext_resource type="PackedScene" uid="uid://cnr36qxaqynbc" path="res://scenes/star_background.tscn" id="3_tfcbk"]
 [ext_resource type="Theme" uid="uid://d21lh0fquueyo" path="res://new_button_theme.tres" id="4_tfcbk"]
+[ext_resource type="Script" uid="uid://c6mayvsci6gvc" path="res://scenes/UI/animated_button.gd" id="5_bm8t2"]
 [ext_resource type="Script" uid="uid://84ox43jyptjb" path="res://scenes/Audio/music_auto_trigger.gd" id="5_ngj32"]
 [ext_resource type="AudioStream" uid="uid://8qm86b2b1081" path="res://assets/audio/music/menu_theme/Week 21 - Freefall GLIDE.ogg" id="6_ngj32"]
 
@@ -52,7 +53,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 10
 
-[node name="Singleplayer" type="Button" parent="MarginContainer/RootMenu/ButtonsVbox" unique_id=1638651055]
+[node name="Singleplayer" type="Button" parent="MarginContainer/RootMenu/ButtonsVbox" unique_id=1640160949]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -61,9 +62,11 @@ focus_neighbor_bottom = NodePath("../Multiplayer (Not implemented)")
 theme = ExtResource("4_tfcbk")
 theme_override_styles/hover = SubResource("StyleBoxFlat_t4w0s")
 text = "Singleplayer"
+script = ExtResource("5_bm8t2")
+metadata/_custom_type_script = "uid://c6mayvsci6gvc"
 metadata/_edit_use_anchors_ = true
 
-[node name="Multiplayer (Not implemented)" type="Button" parent="MarginContainer/RootMenu/ButtonsVbox" unique_id=352413974]
+[node name="Multiplayer (Not implemented)" type="Button" parent="MarginContainer/RootMenu/ButtonsVbox" unique_id=1521239625]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -72,9 +75,11 @@ focus_neighbor_bottom = NodePath("../TutorialButton")
 theme = ExtResource("4_tfcbk")
 text = "Multiplayer
 "
+script = ExtResource("5_bm8t2")
+metadata/_custom_type_script = "uid://c6mayvsci6gvc"
 metadata/_edit_use_anchors_ = true
 
-[node name="TutorialButton" type="Button" parent="MarginContainer/RootMenu/ButtonsVbox" unique_id=1411541682]
+[node name="TutorialButton" type="Button" parent="MarginContainer/RootMenu/ButtonsVbox" unique_id=1602112745]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -82,8 +87,10 @@ focus_neighbor_top = NodePath("../Multiplayer (Not implemented)")
 focus_neighbor_bottom = NodePath("../ControlsButton")
 theme = ExtResource("4_tfcbk")
 text = "Tutorial"
+script = ExtResource("5_bm8t2")
+metadata/_custom_type_script = "uid://c6mayvsci6gvc"
 
-[node name="ControlsButton" type="Button" parent="MarginContainer/RootMenu/ButtonsVbox" unique_id=1898276927]
+[node name="ControlsButton" type="Button" parent="MarginContainer/RootMenu/ButtonsVbox" unique_id=85567006]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -91,8 +98,10 @@ focus_neighbor_top = NodePath("../TutorialButton")
 focus_neighbor_bottom = NodePath("../SettingsButton")
 theme = ExtResource("4_tfcbk")
 text = "Controls"
+script = ExtResource("5_bm8t2")
+metadata/_custom_type_script = "uid://c6mayvsci6gvc"
 
-[node name="SettingsButton" type="Button" parent="MarginContainer/RootMenu/ButtonsVbox" unique_id=1510851176]
+[node name="SettingsButton" type="Button" parent="MarginContainer/RootMenu/ButtonsVbox" unique_id=27844019]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -100,8 +109,10 @@ focus_neighbor_top = NodePath("../ControlsButton")
 focus_neighbor_bottom = NodePath("../QuitButton")
 theme = ExtResource("4_tfcbk")
 text = "Settings"
+script = ExtResource("5_bm8t2")
+metadata/_custom_type_script = "uid://c6mayvsci6gvc"
 
-[node name="QuitButton" type="Button" parent="MarginContainer/RootMenu/ButtonsVbox" unique_id=595023204]
+[node name="QuitButton" type="Button" parent="MarginContainer/RootMenu/ButtonsVbox" unique_id=1331868354]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -110,6 +121,8 @@ focus_neighbor_bottom = NodePath("../Singleplayer")
 focus_next = NodePath("../Singleplayer")
 theme = ExtResource("4_tfcbk")
 text = "Quit to desktop"
+script = ExtResource("5_bm8t2")
+metadata/_custom_type_script = "uid://c6mayvsci6gvc"
 metadata/_edit_use_anchors_ = true
 
 [node name="MusicAutoTrigger" type="Node" parent="." unique_id=954532159]
@@ -117,7 +130,7 @@ script = ExtResource("5_ngj32")
 track = ExtResource("6_ngj32")
 metadata/_custom_type_script = "uid://84ox43jyptjb"
 
-[connection signal="pressed" from="MarginContainer/RootMenu/ButtonsVbox/Singleplayer" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="MarginContainer/RootMenu/ButtonsVbox/Singleplayer" to="." method="_on_singleplayer_pressed"]
 [connection signal="pressed" from="MarginContainer/RootMenu/ButtonsVbox/Multiplayer (Not implemented)" to="." method="_on_multiplayer_not_implemented_pressed"]
 [connection signal="pressed" from="MarginContainer/RootMenu/ButtonsVbox/TutorialButton" to="." method="_on_tutorial_button_pressed"]
 [connection signal="pressed" from="MarginContainer/RootMenu/ButtonsVbox/ControlsButton" to="." method="_on_controls_button_pressed"]

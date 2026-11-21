@@ -7,9 +7,9 @@ var path_start_pos
 var is_at_path_start : bool = false
 
 # Temp death signal for playatest
-signal death
+signal death(enemy_id : int, shooter_id : int)
 signal movement_finished
-signal hit_report(id : int, damage : float)
+signal hit_report(id : int, damage : float, shooter_id : int)
 
 
 #@onready var screen : Vector2 = get_viewport_rect().size
@@ -130,7 +130,7 @@ func _physics_process(delta: float) -> void:
 
 
 # Function to calculate health and hit upon getting hit by player bullet
-func take_damage(damage : int) -> void:
+func take_damage(damage : int, shooter_id : int) -> void:
 	if !multiplayer.is_server():
 		return
 	
@@ -152,7 +152,7 @@ func take_damage(damage : int) -> void:
 		explode_enemy.rpc()
 		await animated_sprite_2d.animation_finished
 		
-		death.emit(id)
+		death.emit(id, shooter_id)
 		
 		print("dying")
 		return
@@ -166,7 +166,7 @@ func explode_enemy() -> void:
 
 # If the enemy exits the screen then free it
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
-	death.emit(id)
+	death.emit(id, -1)
 	#queue_free()
 
 
@@ -255,8 +255,8 @@ func leave_screen() -> void:
 	# Move using previous direction vector until out of screen
 	function_direction = direction_vector
 	
-func report_hit(damage : float) -> void:
-	hit_report.emit(id, damage)
+func report_hit(damage : float, shooter_id : int) -> void:
+	hit_report.emit(id, damage, shooter_id)
 
 @rpc("any_peer", "call_local", "reliable")
 func flash_enemy() -> void:

@@ -1,4 +1,4 @@
-extends Control
+extends BaseMenu
 
 @onready var display_mode = %DisplayMode
 
@@ -10,6 +10,7 @@ extends Control
 var current_display_mode = DisplayServer.window_get_mode()
 
 func _ready() -> void:
+	AudioManager.setup_ui_button_audio(self)
 	setup_settings_menu()
 
 func setup_settings_menu() -> void:

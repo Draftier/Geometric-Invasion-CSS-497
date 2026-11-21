@@ -4,7 +4,11 @@
 [ext_resource type="PackedScene" uid="uid://bnqykgdlppqo1" path="res://scenes/UI/server_info.tscn" id="2_per65"]
 [ext_resource type="PackedScene" uid="uid://cnr36qxaqynbc" path="res://scenes/star_background.tscn" id="3_1ukpd"]
 [ext_resource type="Theme" uid="uid://dy2kgmqgonako" path="res://theme_test.tres" id="4_gpbnt"]
+[ext_resource type="Theme" uid="uid://d21lh0fquueyo" path="res://new_button_theme.tres" id="5_1ukpd"]
 [ext_resource type="FontFile" uid="uid://dihhulpjs1064" path="res://assets/fonts/PixelOperator8.ttf" id="5_eweai"]
+[ext_resource type="Script" uid="uid://c6mayvsci6gvc" path="res://scenes/UI/animated_button.gd" id="6_per65"]
+[ext_resource type="Script" uid="uid://84ox43jyptjb" path="res://scenes/Audio/music_auto_trigger.gd" id="8_eweai"]
+[ext_resource type="AudioStream" uid="uid://8qm86b2b1081" path="res://assets/audio/music/menu_theme/Week 21 - Freefall GLIDE.ogg" id="9_ktlm2"]
 
 [node name="ServerBrowser" type="Control" unique_id=1590385312]
 layout_mode = 3
@@ -15,6 +19,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_86pot")
 server_info_scene = ExtResource("2_per65")
+scene_path = "uid://cckvlxp6lp7t0"
 
 [node name="StarBackground" parent="." unique_id=1934287316 instance=ExtResource("3_1ukpd")]
 unique_name_in_owner = true
@@ -69,10 +74,15 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="BackToButton" type="Button" parent="MarginContainer/VBoxContainer2" unique_id=349531707]
+[node name="BackToButton" type="Button" parent="MarginContainer/VBoxContainer2" unique_id=1320747240]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("5_1ukpd")
 theme_override_fonts/font = ExtResource("5_eweai")
 text = "Exit Server Browser"
+script = ExtResource("6_per65")
+metadata/_custom_type_script = "uid://c6mayvsci6gvc"
 
 [node name="ConnectionStatusLabel" type="Label" parent="." unique_id=154034977]
 unique_name_in_owner = true
@@ -81,5 +91,10 @@ offset_left = 869.0
 offset_top = 10.0
 offset_right = 1129.0
 offset_bottom = 48.0
+
+[node name="MusicAutoTrigger" type="Node" parent="." unique_id=866643085]
+script = ExtResource("8_eweai")
+track = ExtResource("9_ktlm2")
+metadata/_custom_type_script = "uid://84ox43jyptjb"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer2/BackToButton" to="." method="_on_back_to_menu_button_pressed"]

@@ -1,4 +1,4 @@
-extends Control
+extends BaseMenu
 
 @onready var host_button = %HostButton
 @onready var ip_input = %IpInput

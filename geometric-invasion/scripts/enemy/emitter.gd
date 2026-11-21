@@ -43,10 +43,12 @@ func _on_timer_timeout() -> void:
 	for i in range (1, attack_event.num_spawn_points+1):
 		var bullet	
 		if is_home == true:
-			bullet = PoolManager.give_enemy_homing_bullet()
+			#bullet = PoolManager.give_enemy_homing_bullet()
+			bullet = PoolManager.receive_from_pool(PoolManager.Pools.ENEMY_HOMING_BULLET)
 			print("Obtaining homing bullet")
 		else:
-			bullet = PoolManager.give_enemy_bullet()		
+			#bullet = PoolManager.give_enemy_bullet()
+			bullet = PoolManager.receive_from_pool(PoolManager.Pools.ENEMY_BULLET)		
 		
 		#var bullet = bullet_scene.instantiate()
 		

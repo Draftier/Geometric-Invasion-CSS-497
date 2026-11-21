@@ -19,7 +19,7 @@ func _ready() -> void:
 		print("Connected: ", NetworkManager.server_level_entered.is_connected(_on_server_level_entered))
 	else:
 		spawn_player(1)
-		player_user_interface.init_entry(multiplayer.get_unique_id(), 3, true)
+		player_user_interface.init_entry(multiplayer.get_unique_id(), 3, true, NetworkManager.display_id, 0)
 	
 func _on_server_level_entered():
 	print("Players are spawning")
@@ -28,13 +28,13 @@ func _on_server_level_entered():
 		return
 	
 	spawn_player(multiplayer.get_unique_id())
-	player_user_interface.init_entry.rpc(multiplayer.get_unique_id(), 3, true)
+	player_user_interface.init_entry.rpc(multiplayer.get_unique_id(), 3, true, 1, 0)
 	
 	
 	for id in multiplayer.get_peers():
 		spawn_player(id)
-		player_user_interface.init_entry.rpc(id, 3, true)
-	
+		player_user_interface.init_entry.rpc(id, 3, true, players.size(), 0)
+
 	all_players_spawned.emit()
 
 func spawn_player(id : int) -> void:
@@ -46,12 +46,17 @@ func spawn_player(id : int) -> void:
 	var player : Node = network_player.instantiate()
 	player.ability_scene = Global.ability
 	player.name = str(id)
-	
+	players[id] = player
+	#player.display_id = NetworkManager.display_id
+	#if multiplayer.is_server():
+		#player.display_id = 1
+	#else:
+		#player.display_id = players.size()
 	
 	get_node(spawn_path).call_deferred("add_child", player)
 
-	players[id] = player
 	
+		
 	print("spawned player with id of: " + player.name)
 
 func on_player_hit_reported(id : int, damage : float) -> void:
@@ -147,4 +152,10 @@ func on_charge_state_change(id : int, status : bool) -> void:
 	if !multiplayer.is_server():
 		return
 	player_user_interface.update_entry_charge_state.rpc(id, status)
+
+@rpc("authority", "call_local", "reliable")
+func add_score_to_player(id : int, score : int) -> void:
+	var player : Player = players.get(id)
+	player.score += score
 	
+	player_user_interface.set_player_score.rpc(id, player.score)

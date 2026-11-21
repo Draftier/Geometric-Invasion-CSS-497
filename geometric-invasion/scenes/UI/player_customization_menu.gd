@@ -1,4 +1,4 @@
-extends Control
+extends BaseMenu
 
 @onready var start_button : Button = %StartGameButton
 @onready var shoot_style_dropdown : OptionButton = %ShootOptions
@@ -8,6 +8,9 @@ signal game_start
 
 func _ready() -> void:
 	shoot_style_dropdown.grab_focus()
+	Global.player = load("res://scenes/Player/player_default_shooting_style.tscn")
+	Global.ability = load("res://scenes/Ability/ability_laser.tscn")
+	
 	AudioManager.setup_ui_button_audio(self)
 
 func change_scene() -> void:

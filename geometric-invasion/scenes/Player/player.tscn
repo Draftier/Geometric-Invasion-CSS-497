@@ -136,6 +136,9 @@ radius = 9.0
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
+properties/1/path = NodePath("PlayerLabel:text")
+properties/1/spawn = true
+properties/1/replication_mode = 1
 
 [node name="Player" type="CharacterBody2D" unique_id=1651887187]
 collision_layer = 64
@@ -191,17 +194,6 @@ libraries/ = SubResource("AnimationLibrary_smehm")
 
 [node name="guns" type="Node2D" parent="." unique_id=1613688656]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2130673927]
-visible = false
-follow_viewport_enabled = true
-
-[node name="Label" type="Label" parent="CanvasLayer" unique_id=562683868]
-offset_left = -282.0
-offset_top = -154.0
-offset_right = -234.0
-offset_bottom = -131.0
-theme_override_fonts/font = ExtResource("10_uxo23")
-
 [node name="PlayerCollisionShape" type="CollisionShape2D" parent="." unique_id=1555844515]
 shape = SubResource("CircleShape2D_uxo23")
 
@@ -210,6 +202,16 @@ replication_config = SubResource("SceneReplicationConfig_uxo23")
 
 [node name="PlayerUserInterface" parent="." unique_id=415349145 instance=ExtResource("11_n7rn1")]
 unique_name_in_owner = true
+
+[node name="PlayerLabel" type="Label" parent="." unique_id=1606227764]
+unique_name_in_owner = true
+visible = false
+offset_left = -13.0
+offset_top = 7.0
+offset_right = 13.0
+offset_bottom = 13.0
+theme_override_fonts/font = ExtResource("10_uxo23")
+theme_override_font_sizes/font_size = 8
 
 [connection signal="body_entered" from="AbilityPickUpCollisionShape" to="." method="_on_whole_collision_box_body_entered"]
 [connection signal="timeout" from="InvulnerabilityTimer" to="." method="_on_invulnerability_timer_timeout"]

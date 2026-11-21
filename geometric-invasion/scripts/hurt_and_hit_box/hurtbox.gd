@@ -23,7 +23,10 @@ func _on_area_entered(hitbox: Hitbox) -> void:
 	# If owner of hitbox is not ability then check if it can take damage if so dish out damage
 	if owner.has_method("report_hit") and hitbox.owner is not Ability:
 		if multiplayer.is_server():
-			owner.report_hit(hitbox.damage)
+			if hitbox.owner is PlayerBullet:
+				owner.report_hit(hitbox.damage, hitbox.owner.id)
+			else:
+				owner.report_hit(hitbox.damage)
 		else:
 			return
 
@@ -33,8 +36,9 @@ func _on_area_entered(hitbox: Hitbox) -> void:
 		if hitbox.owner.data.ability_name == "laser" or hitbox.owner.data.ability_name == "shield":
 			# If ability comes into contact with bullet then add bullet back to pool
 			if owner is Bullet:
-				PoolManager.return_to_enemy_pool(owner)
+				#PoolManager.return_to_enemy_pool(owner)
+				PoolManager.return_to_pool(PoolManager.Pools.ENEMY_BULLET, owner)
 			print(hitbox.owner.data.ability_name)
 			# If ability comes into contact with enemy then instantly kill enemy
 			if owner is basic_enemy:
-				owner.take_damage(999)
+				owner.take_damage(999, hitbox.owner.player_id)
