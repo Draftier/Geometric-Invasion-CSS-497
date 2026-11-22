@@ -23,7 +23,7 @@ func _on_area_entered(hitbox: Hitbox) -> void:
 	# If owner of hitbox is not ability then check if it can take damage if so dish out damage
 	if owner.has_method("report_hit") and hitbox.owner is not Ability:
 		if multiplayer.is_server():
-			if hitbox.owner is PlayerBullet:
+			if hitbox.owner is PlayerBullet || hitbox.owner is Player:
 				owner.report_hit(hitbox.damage, hitbox.owner.id)
 			else:
 				owner.report_hit(hitbox.damage)

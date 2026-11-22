@@ -138,14 +138,14 @@ func take_damage(damage : int, shooter_id : int) -> void:
 	if health - damage < 0:
 		health = 0
 	else:
-		AudioManager.play_spatial_sound(preload("res://assets/audio/sfx/enemy/Hit17.ogg"), self.position)
+		#AudioManager.play_spatial_sound(preload("res://assets/audio/sfx/enemy/Hit17.ogg"), self.position)
 		health -= damage
 	
 	## If health zero then free
 	if health == 0 and is_dead == false:
 		is_dead = true
 		
-		AudioManager.play_spatial_sound(preload("res://assets/audio/sfx/enemy/Boom4.ogg"), position)
+		#AudioManager.play_spatial_sound(preload("res://assets/audio/sfx/enemy/Boom4.ogg"), position)
 		
 		#sprite_2d.hide()
 		#animated_sprite_2d.play("explosion")
@@ -161,6 +161,7 @@ func take_damage(damage : int, shooter_id : int) -> void:
 
 @rpc("any_peer", "call_local", "reliable")
 func explode_enemy() -> void:
+	AudioManager.play_spatial_sound(preload("res://assets/audio/sfx/enemy/Boom4.ogg"), position)
 	sprite_2d.hide()
 	animated_sprite_2d.play("explosion")
 

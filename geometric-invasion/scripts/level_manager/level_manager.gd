@@ -72,6 +72,8 @@ func _process(_delta: float) -> void:
 				execute_event.rpc(event_index)
 			#execute_event(events[event_index])
 			event_index += 1
+		
+		
 	
 	$Label.text = "Time left: " + str($LevelTimer.time_left as int)
 	# Debug to print out framerate
@@ -106,6 +108,7 @@ func execute_event(event_index : int) -> void:
 		if i.id == event.spawner:
 			i.execute_spawn_event(event)
 	print(event.time_to_occur)
+	#event_index += 1
 	pass
 	
 # To use custom sort to sort events I create a custom callable

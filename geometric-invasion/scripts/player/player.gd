@@ -128,7 +128,7 @@ func take_damage(damage : int) -> void:
 	#print("hit")
 	if invulnerable == false and lives > 0:
 		lives -= damage
-		AudioManager.play_spatial_sound(preload("res://assets/audio/sfx/enemy/Boom4.ogg"), self.position)
+		
 		if lives <= 0 and is_dead == false:
 			report_death()
 		
@@ -186,6 +186,7 @@ func report_death() -> void:
 
 @rpc("any_peer", "call_local", "reliable")
 func flash_player() -> void:
+	AudioManager.play_spatial_sound(preload("res://assets/audio/sfx/enemy/Boom4.ogg"), self.position)
 	is_exploding = true
 	var timer = get_tree().create_timer(0.7)
 	$AnimatedSprite2D.play("explosion")
