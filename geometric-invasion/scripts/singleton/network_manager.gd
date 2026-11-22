@@ -39,7 +39,7 @@ var ethernet_ip_address : String
 var game_started : bool = false
 
 var max_players : int = 2
-var display_id : int
+var display_id : int = 1
 
 # Rpc to change scene for all players based on a given path
 @rpc("call_local", "reliable")

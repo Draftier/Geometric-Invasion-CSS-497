@@ -112,11 +112,12 @@ func _unhandled_input(event: InputEvent) -> void:
 		state = States.ACTIVATE
 		_on_text_finished_display()
 	
-func _on_tutorial_enemy_death(id : int) -> void:
+func _on_tutorial_enemy_death(id : int, shooter_id : int) -> void:
 	state = States.DEAD_ENEMY
 	_on_text_finished_display()
 	
 	spawn_pickup(id, spawned_enemy.global_position)
+	player_ui.set_player_score(1, 10)
 	
 	spawned_enemy.queue_free()
 
@@ -133,8 +134,8 @@ func spawn_pickup(id : int, position : Vector2):
 
 	get_parent().call_deferred("add_child", power_up)
 
-func _on_tutorial_enemy_hit(id : int, damage : float) -> void:
-	spawned_enemy.take_damage(damage)
+func _on_tutorial_enemy_hit(id : int, damage : float, player_id : int) -> void:
+	spawned_enemy.take_damage(damage, player_id)
 
 func _on_pickup_removed() -> void:
 	state = States.USE_PICKUP

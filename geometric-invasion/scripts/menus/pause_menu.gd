@@ -15,12 +15,16 @@ extends CanvasLayer
 @onready var error_label = %ErrorLabel
 
 var current_display_mode = DisplayServer.window_get_mode()
+var can_pause : bool = true
 
 func _ready() -> void:
 	AudioManager.setup_ui_button_audio(self)
 	setup_settings_menu()
 	hide()
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
+	
+	if NetworkManager.is_solo == false:
+		restart_button.queue_free()
 
 func setup_settings_menu() -> void:
 	music_slider.value = AudioServer.get_bus_volume_linear(2)
@@ -54,7 +58,7 @@ func _on_ui_slider_changed(volume : float) -> void:
 	AudioManager.play_ui_focus_audio()
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("pause"):
+	if event.is_action_pressed("pause") && can_pause == true:
 		pause_game()
 
 func pause_game() -> void:
@@ -123,6 +127,7 @@ func _on_display_mode_item_selected(index: int) -> void:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 
 func _on_server_disconnected() -> void:
+	can_pause = false
 	print("Disconnected from server")
 	error_label.text = "Connection to server lost!"
 	$MarginContainer.hide()
