@@ -8,7 +8,7 @@ class_name EnemySpawnPoint
 var level_manager : Level_Manager
 
 var num = 0
-
+var time_start : float
 
 func _ready() -> void:
 	level_manager = get_parent()
@@ -22,6 +22,8 @@ func execute_spawn_event(event : Spawn_Event) -> void:
 	# Loop through array of spawns and spawn related enemies
 	for i in event.spawns:
 		for j in i.number_of_enemies:
+			if j == 1:
+				time_start = Time.get_ticks_msec()
 			var enemy = i.enemy.instantiate()
 			enemy.movement_events = i.enemy_movement_pattern
 			enemy.global_position = global_position
@@ -40,6 +42,8 @@ func execute_spawn_event(event : Spawn_Event) -> void:
 			
 			var timer = get_tree().create_timer(event.time_between_spawns)
 			await timer.timeout
+			
+			print("Number in wave", str(j), " Time after start of wave: ", str(Time.get_ticks_msec() - time_start) )
 		pass
 	print("spawning")
 
