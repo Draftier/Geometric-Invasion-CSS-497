@@ -11,6 +11,7 @@ extends Poolable
 
 #var is_active : bool = false
 
+
 signal exited_screen
 
 func _ready() -> void:

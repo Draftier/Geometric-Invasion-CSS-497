@@ -163,12 +163,14 @@ _bundled = {
 
 [sub_resource type="Resource" id="Resource_s5ig4"]
 script = ExtResource("18_bfhbd")
-num_spawn_points = 4
-angular_spread = 1.309
+change_in_angle = 3.798
+num_spawn_points = 15
+angular_spread = 2.5
 bullet_speed = 200.0
-max_times_to_fire = 20
-fire_rate = 1.0
-initial_theta = 0.785
+max_times_to_fire = 999999
+fire_rate = 0.1
+is_rotate = true
+max_times_to_rotate = 1000
 metadata/_custom_type_script = "uid://baq3m8rspbgqo"
 
 [sub_resource type="Resource" id="Resource_mobb4"]

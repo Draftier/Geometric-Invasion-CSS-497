@@ -35,7 +35,8 @@ func reset() -> void:
 	
 	self.is_active = false
 
-func activate() -> void:	
+func activate() -> void:
+	
 	self.set_process(true)
 	self.set_physics_process(true)
 	self.visible = true
