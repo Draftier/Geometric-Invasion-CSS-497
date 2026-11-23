@@ -2,9 +2,9 @@
 extends Node2D
 
 # These are the pools that the manager is managing
-@onready var player_bullet_pool : ObjectPool = %PlayerBulletPool
-@onready var enemy_bullet_pool : ObjectPool = %EnemyBulletPool
-@onready var enemy_homing_bullet_pool : ObjectPool = %EnemyHomingBulletPool
+#@onready var player_bullet_pool : ObjectPool = %PlayerBulletPool
+#@onready var enemy_bullet_pool : ObjectPool = %EnemyBulletPool
+#@onready var enemy_homing_bullet_pool : ObjectPool = %EnemyHomingBulletPool
 
 # Enum to represent each pool inside a dictionary enum used to prevent spelling mistakes when obtaining from pool
 enum Pools {
@@ -31,7 +31,6 @@ func return_to_pool(Pool : Pools, poolable : Poolable) -> void:
 func receive_from_pool(Pool : Pools) -> Poolable:
 	var pool : ObjectPool = pool_dictionary.get(Pool)
 	return pool.pull_from_pool()
-
 
 
 # These functions are utilized to destroy and initiailize pools upon level loading

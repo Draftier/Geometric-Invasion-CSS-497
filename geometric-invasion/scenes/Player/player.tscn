@@ -90,7 +90,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u8vuu"]
-radius = 4.0
+radius = 2.5
 
 [sub_resource type="Animation" id="Animation_tuyoq"]
 length = 0.001

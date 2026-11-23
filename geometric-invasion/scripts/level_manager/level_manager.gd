@@ -4,6 +4,7 @@ extends Node
 @onready var enemy_node = $Enemies
 @onready var player_spawner = $Spawner
 @onready var result_menu = $ResultMenu
+@onready var pause_menu = $PauseMenu
 
 
 # Variables to set after scene, spawners, events, and time to complete level
@@ -205,7 +206,7 @@ func set_game_state_to_loss() -> void:
 	if multiplayer.is_server() || NetworkManager.is_solo:
 		result_menu.show_loss_menu.rpc()
 		result_menu.pause_game.rpc()
-	
+		pause_menu.can_pause = false
 	
 	#get_tree().quit()
 
@@ -214,6 +215,7 @@ func set_game_state_to_victory() -> void:
 	if multiplayer.is_server() || NetworkManager.is_solo:
 		result_menu.show_victory_menu.rpc()
 		result_menu.pause_game.rpc()
+		pause_menu.can_pause = false
 
 func prepare_pickup(position : Vector2) -> void:
 	if !multiplayer.is_server():

@@ -118,6 +118,11 @@ func _on_settings_button_pressed() -> void:
 	music_slider.grab_focus()
 	settings_menu.visible = true
 	
+	if current_display_mode == DisplayServer.WINDOW_MODE_FULLSCREEN:
+		display_mode.select(0)
+	else:
+		display_mode.select(1)
+	
 
 func _on_back_to_pause_menu_pressed() -> void:
 	settings_menu.hide()
