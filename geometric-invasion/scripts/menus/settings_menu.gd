@@ -29,6 +29,7 @@ func setup_settings_menu() -> void:
 	
 	fps_dropwdown.select(0)
 		
+	music_slider.grab_focus()
 	AudioManager.setup_ui_button_audio(self)
 
 func _on_music_slider_changed(volume : float) -> void:

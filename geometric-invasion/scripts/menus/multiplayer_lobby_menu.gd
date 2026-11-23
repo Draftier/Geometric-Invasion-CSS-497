@@ -8,11 +8,13 @@ extends Control
 @onready var ethernet_ip_label = %EthernetIpLabel
 
 @onready var broad_cast_timer : Timer = %BroadcastTimer
+@onready var start_button : Button = %StartGameButton
 
 # Variable to keep track of the number of players
 var num_players : int = 0
 
 func _ready() -> void:
+	start_button.grab_focus()
 	AudioManager.setup_ui_button_audio(self)
 	# Setup the broadcast port
 	NetworkManager.set_up_broadcast_port(NetworkManager.server_dictionary["name"])

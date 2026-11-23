@@ -2,6 +2,8 @@ extends CanvasLayer
 
 @onready var result_label : Label = %ResultMessageLabel
 @onready var retry_button : Button = %RetryButton
+@onready var quit_menu_button : Button = %QuitToMenuButton
+@onready var quit_to_desktop_button : Button = %QuitToDesktopButton
 
 func _ready() -> void:
 	AudioManager.setup_ui_button_audio(self)
@@ -17,6 +19,12 @@ func show_loss_menu() -> void:
 	
 	if NetworkManager.is_solo == false:
 		retry_button.hide()
+		
+	if retry_button.visible == true:
+		retry_button.grab_focus()
+	else:
+		quit_menu_button.focus_neighbor_top = quit_menu_button.get_path_to(quit_to_desktop_button)
+		quit_menu_button.grab_focus()
 
 @rpc("authority", "call_local", "reliable")
 func show_victory_menu() -> void:
@@ -28,6 +36,12 @@ func show_victory_menu() -> void:
 	
 	if NetworkManager.is_solo == false:
 		retry_button.hide()
+	
+	if retry_button.visible == true:
+		retry_button.grab_focus()
+	else:
+		quit_menu_button.focus_neighbor_top = quit_menu_button.get_path_to(quit_to_desktop_button)
+		quit_menu_button.grab_focus()
 
 @rpc("authority", "call_local", "reliable")
 func pause_game() -> void:

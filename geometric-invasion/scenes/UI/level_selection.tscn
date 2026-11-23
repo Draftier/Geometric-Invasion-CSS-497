@@ -42,6 +42,7 @@ theme_override_constants/separation = 30
 [node name="LevelSelectHeader" type="Label" parent="CenterContainer/VBoxContainer" unique_id=697482559]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_2blm6")
+theme_override_font_sizes/font_size = 48
 text = "Level Selection Screen"
 horizontal_alignment = 1
 
@@ -56,6 +57,7 @@ propagate_maximum_size = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+focus_mode = 2
 theme_override_constants/h_separation = 16
 theme_override_constants/v_separation = 32
 columns = 5
@@ -64,6 +66,7 @@ columns = 5
 layout_mode = 2
 
 [node name="BackToMainMenuButton" type="Button" parent="CenterContainer/VBoxContainer/VBoxContainer2" unique_id=710088354]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4

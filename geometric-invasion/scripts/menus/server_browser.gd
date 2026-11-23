@@ -4,12 +4,15 @@ signal found_server
 signal server_removed
 
 @onready var connection_status_label : Label = %ConnectionStatusLabel
+@onready var back_button : Button = %BackToButton
 
 @export var listen_port : int = 8081
 @export var server_info_scene : PackedScene
 @export var listen_check_frequency : float = 3.0
 
+
 func _ready() -> void:
+	back_button.grab_focus()
 	AudioManager.setup_ui_button_audio(self)
 	NetworkManager.set_up_listen_port()
 	

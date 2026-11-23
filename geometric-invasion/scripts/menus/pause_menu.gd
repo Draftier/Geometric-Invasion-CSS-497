@@ -11,6 +11,7 @@ extends CanvasLayer
 @onready var ui_slider = %UiSoundSlider
 @onready var display_mode = %DisplayMode
 @onready var fps_dropwdown = %FpsSettingDropDown
+@onready var settings_button = %SettingsButton
 
 @onready var error_label = %ErrorLabel
 
@@ -24,6 +25,8 @@ func _ready() -> void:
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
 	
 	if NetworkManager.is_solo == false:
+		settings_button.focus_neighbor_bottom = settings_button.get_path_to(quit_menu_button)
+		quit_menu_button.focus_neighbor_top = quit_menu_button.get_path_to(settings_button)
 		restart_button.queue_free()
 
 func setup_settings_menu() -> void:
@@ -62,15 +65,31 @@ func _unhandled_input(event: InputEvent) -> void:
 		pause_game()
 
 func pause_game() -> void:
-	if get_tree().paused == false:
-		if NetworkManager.is_solo == true:
-			get_tree().paused = true
-		show()
-		#get_node("FinishLabel").hide()
-		#get_node("RestartButton").hide()
-	else:
+	#if get_tree().paused == false:
+		#if NetworkManager.is_solo == true:
+			#get_tree().paused = true
+		#show()
+		#resume_button.grab_focus()
+		##get_node("FinishLabel").hide()
+		##get_node("RestartButton").hide()
+	#else:
+		#hide()
+		#get_tree().paused = false
+		#
+	if self.visible == true:
 		hide()
-		get_tree().paused = false
+	else:
+		self.show()
+		root_pause_menu.show()
+		settings_menu.hide()
+		resume_button.grab_focus()
+	
+	if NetworkManager.is_solo == true:
+		if get_tree().paused == false:
+			get_tree().paused = true
+		else:
+			get_tree().paused = false
+		
 
 func _on_resume_button_pressed() -> void:
 	get_tree().paused = false
@@ -96,11 +115,13 @@ func _on_restart_button_pressed() -> void:
 
 func _on_settings_button_pressed() -> void:
 	root_pause_menu.hide()
+	music_slider.grab_focus()
 	settings_menu.visible = true
 	
 
 func _on_back_to_pause_menu_pressed() -> void:
 	settings_menu.hide()
+	resume_button.grab_focus()
 	root_pause_menu.visible = true
 	
 

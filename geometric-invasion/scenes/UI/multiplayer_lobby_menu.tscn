@@ -73,9 +73,12 @@ unique_name_in_owner = true
 layout_mode = 2
 
 [node name="StartGameButton" type="Button" parent="MarginContainer/Lobby/MarginContainer/VBoxContainer" unique_id=547819761]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+focus_neighbor_top = NodePath("../BackButton")
+focus_neighbor_bottom = NodePath("../BackButton")
 theme = ExtResource("4_40k48")
 theme_override_styles/normal = ExtResource("4_oeyph")
 text = "Start Game"
@@ -86,6 +89,8 @@ metadata/_custom_type_script = "uid://c6mayvsci6gvc"
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+focus_neighbor_top = NodePath("../StartGameButton")
+focus_neighbor_bottom = NodePath("../StartGameButton")
 theme = ExtResource("4_40k48")
 theme_override_styles/normal = ExtResource("4_oeyph")
 text = "Back"

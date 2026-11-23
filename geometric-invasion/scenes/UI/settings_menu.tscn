@@ -2,15 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://cnr36qxaqynbc" path="res://scenes/star_background.tscn" id="1_0cmel"]
 [ext_resource type="Script" uid="uid://dj7bmx275e27u" path="res://scripts/menus/settings_menu.gd" id="1_mlw3h"]
-[ext_resource type="Theme" uid="uid://dy2kgmqgonako" path="res://theme_test.tres" id="2_d0eu6"]
 [ext_resource type="FontFile" uid="uid://dihhulpjs1064" path="res://assets/fonts/PixelOperator8.ttf" id="4_t4w0s"]
 [ext_resource type="Theme" uid="uid://d21lh0fquueyo" path="res://new_button_theme.tres" id="5_lwg20"]
 [ext_resource type="Script" uid="uid://84ox43jyptjb" path="res://scenes/Audio/music_auto_trigger.gd" id="6_c5o1q"]
 [ext_resource type="Script" uid="uid://c6mayvsci6gvc" path="res://scenes/UI/animated_button.gd" id="6_uxg4l"]
 [ext_resource type="AudioStream" uid="uid://8qm86b2b1081" path="res://assets/audio/music/menu_theme/Week 21 - Freefall GLIDE.ogg" id="7_uxg4l"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_d8ny1"]
-font_size = 100
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bl585"]
 
@@ -34,20 +30,20 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 32
+theme_override_constants/margin_left = 64
 theme_override_constants/margin_top = 32
-theme_override_constants/margin_right = 32
-theme_override_constants/margin_bottom = 32
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
 
 [node name="RootMenu" type="VBoxContainer" parent="MarginContainer" unique_id=1753786380]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="TitleLabel" type="Label" parent="MarginContainer/RootMenu" unique_id=621242930]
+[node name="TitleLabel" type="Label" parent="MarginContainer/RootMenu" unique_id=1029591725]
 layout_mode = 2
-theme = ExtResource("2_d0eu6")
+theme_override_fonts/font = ExtResource("4_t4w0s")
+theme_override_font_sizes/font_size = 48
 text = "Settings"
-label_settings = SubResource("LabelSettings_d8ny1")
 horizontal_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/RootMenu" unique_id=1541278271]
@@ -69,6 +65,8 @@ horizontal_alignment = 1
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+focus_neighbor_top = NodePath("../../BackButton")
+focus_neighbor_bottom = NodePath("../../SfxVolume/SfxSlider")
 max_value = 1.0
 step = 0.05
 value = 0.5
@@ -88,6 +86,8 @@ horizontal_alignment = 1
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+focus_neighbor_top = NodePath("../../MusicVolume/MusicSlider")
+focus_neighbor_bottom = NodePath("../../UiVolume/UiSoundSlider")
 max_value = 1.0
 step = 0.05
 value = 0.5
@@ -107,6 +107,8 @@ horizontal_alignment = 1
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+focus_neighbor_top = NodePath("../../SfxVolume/SfxSlider")
+focus_neighbor_bottom = NodePath("../../Displaymode/DisplayMode")
 max_value = 1.0
 step = 0.05
 value = 0.5
@@ -121,12 +123,15 @@ size_flags_vertical = 1
 theme_override_fonts/font = ExtResource("4_t4w0s")
 text = "Display Mode"
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="DisplayMode" type="OptionButton" parent="MarginContainer/RootMenu/VBoxContainer/Displaymode" unique_id=691270751]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 2.3
+size_flags_stretch_ratio = 2.2
+focus_neighbor_top = NodePath("../../UiVolume/UiSoundSlider")
+focus_neighbor_bottom = NodePath("../../FpsCounter/FpsSettingDropDown")
 alignment = 1
 item_count = 2
 popup/item_0/text = "Fullscreen"
@@ -140,15 +145,20 @@ layout_mode = 2
 [node name="FpsCounterLabel" type="Label" parent="MarginContainer/RootMenu/VBoxContainer/FpsCounter" unique_id=681741764]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 1
 size_flags_stretch_ratio = 0.45
 theme_override_fonts/font = ExtResource("4_t4w0s")
 text = "FPS Counter"
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="FpsSettingDropDown" type="OptionButton" parent="MarginContainer/RootMenu/VBoxContainer/FpsCounter" unique_id=1362277290]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.99
+focus_neighbor_top = NodePath("../../Displaymode/DisplayMode")
+focus_neighbor_bottom = NodePath("../../BackButton")
 alignment = 1
 item_count = 2
 popup/item_0/text = "Off"
@@ -160,6 +170,8 @@ popup/item_1/id = 0
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+focus_neighbor_top = NodePath("../FpsCounter/FpsSettingDropDown")
+focus_neighbor_bottom = NodePath("../MusicVolume/MusicSlider")
 theme = ExtResource("5_lwg20")
 theme_override_fonts/font = ExtResource("4_t4w0s")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_bl585")

@@ -6,9 +6,11 @@ const LEVEL_ENTRY = preload("res://level_entry.tscn")
 @export var test_mode : bool = false
 
 @onready var level_grid = %LevelGrid
+@onready var back_button = %BackToMainMenuButton
 
 func _ready() -> void:
 	obtain_level_files()
+	set_button_neigbors()
 	AudioManager.setup_ui_button_audio(self)
 
 
@@ -45,3 +47,18 @@ func create_level_button(level_path : String, level_name : String) -> void:
 	
 	# Add the button to the tree
 	level_grid.add_child(level_entry) 
+	
+func set_button_neigbors() -> void:
+	var buttons = level_grid.find_children("*", "Button", true, false)
+	buttons.get(0).grab_focus()
+	
+	back_button.focus_neighbor_top = back_button.get_path_to(buttons.get(0))
+	
+	for i in range(1, buttons.size()):
+		var previous_button : Button = buttons.get(i-1)
+		var current_button : Button = buttons.get(i)
+		if (i - 1) == 0:
+			previous_button.focus_neighbor_right = previous_button.get_path_to(current_button)
+		previous_button.focus_neighbor_right = previous_button.get_path_to(current_button)
+		current_button.focus_neighbor_left = current_button.get_path_to(previous_button)
+	pass

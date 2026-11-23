@@ -11,6 +11,7 @@ extends BaseMenu
 var error
 
 func _ready() -> void:
+	shoot_style_dropdown.grab_focus()
 	AudioManager.setup_ui_button_audio(self)
 	NetworkManager.server_joined.connect(_on_server_connected)
 	NetworkManager.connecting_to_server.connect(_connecting_to_server)

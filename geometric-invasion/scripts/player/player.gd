@@ -46,6 +46,7 @@ var guns : Array[ShootPoint]
 var id : int
 var display_id : int
 
+
 func _enter_tree() -> void:
 	set_multiplayer_authority(str(name).to_int())
 
