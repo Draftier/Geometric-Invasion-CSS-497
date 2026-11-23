@@ -1,0 +1,396 @@
+[gd_scene format=3 uid="uid://eeofv758mwrp"]
+
+[ext_resource type="Script" uid="uid://dkna4bvtvxq32" path="res://scripts/menus/multiplayer_test.gd" id="1_s5ig4"]
+[ext_resource type="Script" uid="uid://b2nxf0ct0x4gn" path="res://scripts/level_manager/level_manager.gd" id="2_njm6c"]
+[ext_resource type="Script" uid="uid://bewu02jnvwcgy" path="res://scripts/event/spawn_event_data.gd" id="3_os5dr"]
+[ext_resource type="Script" uid="uid://c4twyssjo6an2" path="res://scripts/event/spawn.gd" id="4_8snjf"]
+[ext_resource type="Script" uid="uid://pqste00swnss" path="res://scripts/enemy/base_enemy.gd" id="5_2ppk3"]
+[ext_resource type="Script" uid="uid://dmjfjfilssxt6" path="res://scripts/enemy/movement_base.gd" id="6_nuh7a"]
+[ext_resource type="Script" uid="uid://c8u5b5y0i25wp" path="res://scripts/enemy/directional_movement.gd" id="7_mpxo7"]
+[ext_resource type="Script" uid="uid://beg1vql3x734k" path="res://scripts/enemy/point.gd" id="8_f1hor"]
+[ext_resource type="Script" uid="uid://bho4wgornhjo7" path="res://scripts/enemy/curve_movement.gd" id="9_jp8v8"]
+[ext_resource type="Script" uid="uid://thlx0gtur2d4" path="res://scripts/enemy/enemy_movement_data.gd" id="10_nayop"]
+[ext_resource type="PackedScene" uid="uid://dea3ckmfpjcym" path="res://scenes/Ability/ability_pickup.tscn" id="11_5hyhr"]
+[ext_resource type="PackedScene" uid="uid://lha1c308vq6j" path="res://scenes/Enemy/emitter.tscn" id="12_1jlwo"]
+[ext_resource type="Shader" uid="uid://cqv7cjdn8x0b5" path="res://shaders/flash.tres" id="13_nxons"]
+[ext_resource type="Texture2D" uid="uid://dtb2vka5e01d3" path="res://assets/sprites/enemy.png" id="14_qq71x"]
+[ext_resource type="Script" uid="uid://12171bvbqp8w" path="res://scripts/hurt_and_hit_box/hurtbox.gd" id="15_liui8"]
+[ext_resource type="Script" uid="uid://dhan5ja6q4fjx" path="res://scripts/hurt_and_hit_box/hitbox.gd" id="16_3uupw"]
+[ext_resource type="Texture2D" uid="uid://rjf6qb8ty32e" path="res://assets/sprites/eplosion_1.png" id="17_b6ta5"]
+[ext_resource type="Script" uid="uid://baq3m8rspbgqo" path="res://scripts/enemy/enemy_attack_data.gd" id="18_bfhbd"]
+[ext_resource type="PackedScene" uid="uid://dwtrxu3symb3h" path="res://scenes/Enemy/boss_1.tscn" id="19_mggqb"]
+[ext_resource type="FontFile" uid="uid://dihhulpjs1064" path="res://assets/fonts/PixelOperator8.ttf" id="20_bhrlq"]
+[ext_resource type="Script" uid="uid://cpbp4ohcaqwle" path="res://scripts/spawn_point.gd" id="21_u1146"]
+[ext_resource type="Script" uid="uid://dt1c0f6c5i51q" path="res://scripts/level_manager/multiplayer_spawner.gd" id="22_rggpl"]
+[ext_resource type="PackedScene" uid="uid://d043xpjj4wac0" path="res://scenes/UI/pause_menu.tscn" id="23_4vjud"]
+[ext_resource type="PackedScene" uid="uid://de3e204er2eag" path="res://result_menu.tscn" id="24_7v355"]
+[ext_resource type="PackedScene" uid="uid://cnr36qxaqynbc" path="res://scenes/star_background.tscn" id="25_ytns6"]
+[ext_resource type="PackedScene" uid="uid://cw7p0ekjax6t7" path="res://scenes/UI/player_user_interface.tscn" id="26_ijhqu"]
+[ext_resource type="Script" uid="uid://84ox43jyptjb" path="res://scenes/Audio/music_auto_trigger.gd" id="27_xi4ur"]
+[ext_resource type="AudioStream" uid="uid://cpwdxqxulkiqy" path="res://assets/audio/music/level_music/Fields of Ice.ogg" id="28_oevwm"]
+
+[sub_resource type="Resource" id="Resource_ixhtt"]
+script = ExtResource("7_mpxo7")
+direction = 1
+distance = 0.3
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_ebm38"]
+script = ExtResource("7_mpxo7")
+direction = 2
+distance = 0.05
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_q0kbr"]
+script = ExtResource("7_mpxo7")
+direction = 3
+distance = 0.05
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_fx0l5"]
+script = ExtResource("8_f1hor")
+x_percent = 0.05
+y_percent = 0.1
+metadata/_custom_type_script = "uid://beg1vql3x734k"
+
+[sub_resource type="Resource" id="Resource_pg6jp"]
+script = ExtResource("8_f1hor")
+x_percent = 0.05
+metadata/_custom_type_script = "uid://beg1vql3x734k"
+
+[sub_resource type="Curve" id="Curve_fxkbx"]
+_data = [Vector2(0.15340908, 0.17977536), 0.0, 0.0, 0, 0, Vector2(0.5113637, 0.55056185), 0.0, 0.0, 0, 0, Vector2(1, 0.11235964), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Resource" id="Resource_3e887"]
+script = ExtResource("9_jp8v8")
+point_array = Array[ExtResource("8_f1hor")]([SubResource("Resource_fx0l5"), SubResource("Resource_pg6jp")])
+speed_curve = SubResource("Curve_fxkbx")
+metadata/_custom_type_script = "uid://bho4wgornhjo7"
+
+[sub_resource type="Resource" id="Resource_lkp36"]
+script = ExtResource("7_mpxo7")
+distance = 0.3
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_eacat"]
+script = ExtResource("10_nayop")
+movement_array = Array[ExtResource("6_nuh7a")]([SubResource("Resource_ixhtt"), SubResource("Resource_ebm38"), SubResource("Resource_q0kbr"), SubResource("Resource_3e887"), SubResource("Resource_lkp36")])
+leave_screen = true
+metadata/_custom_type_script = "uid://thlx0gtur2d4"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iywne"]
+resource_local_to_scene = true
+shader = ExtResource("13_nxons")
+shader_parameter/Color = Color(1, 1, 1, 1)
+shader_parameter/Progress = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8tegq"]
+size = Vector2(14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t4kp2"]
+atlas = ExtResource("17_b6ta5")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k06wl"]
+atlas = ExtResource("17_b6ta5")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fqx87"]
+atlas = ExtResource("17_b6ta5")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j6s03"]
+atlas = ExtResource("17_b6ta5")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ipswl"]
+atlas = ExtResource("17_b6ta5")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fxkbx"]
+animations = [{
+"frames": [],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t4kp2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k06wl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fqx87")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j6s03")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ipswl")
+}],
+"loop": 0,
+"name": &"explosion",
+"speed": 15.0
+}]
+
+[sub_resource type="Animation" id="Animation_f5wgj"]
+resource_name = "explosion"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_47vae"]
+_data = {
+&"explosion": SubResource("Animation_f5wgj")
+}
+
+[sub_resource type="Curve2D" id="Curve2D_h0di7"]
+
+[sub_resource type="PackedScene" id="PackedScene_pdbvg"]
+_bundled = {
+"conn_count": 2,
+"conns": PackedInt32Array(1073741835, 1073741834, 50, 49, 2, 0, 0, 1073741837, 1073741836, 52, 51, 2, 0, 0),
+"editable_instances": [NodePath("emitter")],
+"id_paths": [PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array()],
+"names": PackedStringArray("Enemy", "Node2D", "enemy", "position", "script", "movement_events", "speed", "health", "power_up_charge", "emitter", "Sprite2D", "Sprite2D", "material", "texture", "Hurtbox", "Area2D", "unique_name_in_owner", "collision_layer", "collision_mask", "monitorable", "script", "metadata/_custom_type_script", "CollisionShape2D", "CollisionShape2D", "shape", "Hitbox", "Area2D", "unique_name_in_owner", "collision_layer", "collision_mask", "monitoring", "script", "damage", "metadata/_custom_type_script", "CollisionShape2D", "CollisionShape2D", "shape", "VisibleOnScreenNotifier2D", "VisibleOnScreenNotifier2D", "AnimatedSprite2D", "AnimatedSprite2D", "sprite_frames", "autoplay", "AnimationPlayer", "AnimationPlayer", "libraries/", "Path2D", "Path2D", "curve", "_on_child_entered_tree", "child_entered_tree", "_on_visible_on_screen_notifier_2d_screen_exited", "screen_exited"),
+"node_count": 11,
+"node_ids": PackedInt32Array(682992089, 1019809325, 1252295741, 725762865, 1199752919, 1414706671, 667564901, 247689940, 1465384279, 857330204, 1460539815),
+"node_paths": [NodePath("."), NodePath("."), NodePath("./Sprite2D"), NodePath("./Sprite2D/Hurtbox"), NodePath("./Sprite2D"), NodePath("./Sprite2D/Hitbox"), NodePath("."), NodePath("."), NodePath("."), NodePath("."), NodePath("."), NodePath("."), NodePath("."), NodePath("VisibleOnScreenNotifier2D")],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 6, 3, 0, 4, 1, 5, 2, 6, 3, 7, 4, 8, 5, 1, 2, 1073741824, 0, 2147483647, 9, 6, 0, 0, 1073741825, 0, 11, 10, -1, 2, 12, 7, 13, 8, 0, 1073741826, 0, 15, 14, -1, 6, 16, 9, 17, 10, 18, 11, 19, 12, 20, 13, 21, 14, 0, 1073741827, 0, 23, 22, -1, 1, 24, 15, 0, 1073741828, 0, 26, 25, -1, 7, 27, 16, 28, 17, 29, 18, 30, 19, 31, 20, 32, 21, 33, 22, 0, 1073741829, 0, 35, 34, -1, 1, 36, 23, 0, 1073741830, 0, 38, 37, -1, 0, 0, 1073741831, 0, 40, 39, -1, 2, 41, 24, 42, 25, 0, 1073741832, 0, 44, 43, -1, 1, 45, 26, 0, 1073741833, 0, 47, 46, -1, 1, 48, 27, 0),
+"variants": [Vector2(507, 227), ExtResource("5_2ppk3"), SubResource("Resource_eacat"), 100, 150, ExtResource("11_5hyhr"), ExtResource("12_1jlwo"), SubResource("ShaderMaterial_iywne"), ExtResource("14_qq71x"), true, 8, 129, false, ExtResource("15_liui8"), "uid://12171bvbqp8w", SubResource("RectangleShape2D_8tegq"), true, 4, 0, false, ExtResource("16_3uupw"), 1, "uid://dhan5ja6q4fjx", SubResource("RectangleShape2D_8tegq"), SubResource("SpriteFrames_fxkbx"), "default", SubResource("AnimationLibrary_47vae"), SubResource("Curve2D_h0di7")],
+"version": 3
+}
+
+[sub_resource type="Resource" id="Resource_s5ig4"]
+script = ExtResource("18_bfhbd")
+num_spawn_points = 4
+angular_spread = 1.309
+bullet_speed = 200.0
+max_times_to_fire = 20
+fire_rate = 1.0
+initial_theta = 0.785
+metadata/_custom_type_script = "uid://baq3m8rspbgqo"
+
+[sub_resource type="Resource" id="Resource_mobb4"]
+script = ExtResource("7_mpxo7")
+direction = 1
+distance = 0.3
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_3cu50"]
+script = ExtResource("10_nayop")
+movement_array = Array[ExtResource("6_nuh7a")]([SubResource("Resource_mobb4")])
+metadata/_custom_type_script = "uid://thlx0gtur2d4"
+
+[sub_resource type="Resource" id="Resource_s8var"]
+script = ExtResource("4_8snjf")
+enemy = SubResource("PackedScene_pdbvg")
+enemy_movement_pattern = SubResource("Resource_3cu50")
+enemy_attack_pattern = Array[ExtResource("18_bfhbd")]([SubResource("Resource_s5ig4")])
+number_of_enemies = 1
+metadata/_custom_type_script = "uid://c4twyssjo6an2"
+
+[sub_resource type="Resource" id="Resource_yywf3"]
+script = ExtResource("3_os5dr")
+time_between_spawns = 1.0
+time_to_occur = 5.0
+spawns = Array[ExtResource("4_8snjf")]([SubResource("Resource_s8var")])
+metadata/_custom_type_script = "uid://bewu02jnvwcgy"
+
+[sub_resource type="Resource" id="Resource_0u7d8"]
+script = ExtResource("18_bfhbd")
+num_spawn_points = 15
+angular_spread = 6.283
+bullet_speed = 400.0
+max_times_to_fire = 5
+fire_rate = 1.0
+max_times_to_rotate = 3
+metadata/_custom_type_script = "uid://baq3m8rspbgqo"
+
+[sub_resource type="Resource" id="Resource_8dt1a"]
+script = ExtResource("18_bfhbd")
+change_in_angle = 3.798
+num_spawn_points = 15
+angular_spread = 2.5
+bullet_speed = 200.0
+max_times_to_fire = 20
+fire_rate = 0.1
+is_rotate = true
+max_times_to_rotate = 1000
+metadata/_custom_type_script = "uid://baq3m8rspbgqo"
+
+[sub_resource type="Resource" id="Resource_se7ul"]
+script = ExtResource("7_mpxo7")
+direction = 1
+distance = 0.1
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_tmpkg"]
+script = ExtResource("10_nayop")
+movement_array = Array[ExtResource("6_nuh7a")]([SubResource("Resource_se7ul")])
+metadata/_custom_type_script = "uid://thlx0gtur2d4"
+
+[sub_resource type="Resource" id="Resource_yvbbh"]
+script = ExtResource("4_8snjf")
+enemy = ExtResource("19_mggqb")
+enemy_movement_pattern = SubResource("Resource_tmpkg")
+enemy_attack_pattern = Array[ExtResource("18_bfhbd")]([SubResource("Resource_0u7d8"), SubResource("Resource_8dt1a")])
+number_of_enemies = 1
+metadata/_custom_type_script = "uid://c4twyssjo6an2"
+
+[sub_resource type="Resource" id="Resource_knj3b"]
+script = ExtResource("3_os5dr")
+time_to_occur = 40.0
+spawns = Array[ExtResource("4_8snjf")]([SubResource("Resource_yvbbh")])
+metadata/_custom_type_script = "uid://bewu02jnvwcgy"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8kenn"]
+size = Vector2(536, 21)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_feea6"]
+size = Vector2(536, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6mro0"]
+size = Vector2(20, 284)
+
+[node name="MultiplayerTest" type="Node2D" unique_id=543451976]
+script = ExtResource("1_s5ig4")
+
+[node name="Level_Manager" type="Node" parent="." unique_id=1423209566 node_paths=PackedStringArray("spawners")]
+script = ExtResource("2_njm6c")
+spawners = [NodePath("EnemySpawnPoint")]
+events = Array[ExtResource("3_os5dr")]([SubResource("Resource_yywf3")])
+level_time = 60.0
+power_up_charge = ExtResource("11_5hyhr")
+boss_spawn_event = SubResource("Resource_knj3b")
+metadata/_custom_type_script = "uid://b2nxf0ct0x4gn"
+
+[node name="Label" type="Label" parent="Level_Manager" unique_id=257772922]
+z_index = 4
+offset_left = -285.0
+offset_top = -159.0
+offset_right = -155.0
+offset_bottom = -136.0
+theme_override_fonts/font = ExtResource("20_bhrlq")
+theme_override_font_sizes/font_size = 16
+text = "Time left: "
+
+[node name="EnemySpawnPoint" type="Node2D" parent="Level_Manager" unique_id=1899267310]
+position = Vector2(114, -142)
+script = ExtResource("21_u1146")
+metadata/_custom_type_script = "uid://cpbp4ohcaqwle"
+
+[node name="LevelTimer" type="Timer" parent="Level_Manager" unique_id=1155754645]
+
+[node name="Enemies" type="Node2D" parent="Level_Manager" unique_id=1082741761]
+
+[node name="Spawner" type="MultiplayerSpawner" parent="Level_Manager" unique_id=1416540720 node_paths=PackedStringArray("player_user_interface")]
+spawn_path = NodePath("../..")
+script = ExtResource("22_rggpl")
+player_user_interface = NodePath("../../PlayerUserInterface")
+
+[node name="PauseMenu" parent="Level_Manager" unique_id=1058867629 instance=ExtResource("23_4vjud")]
+visible = false
+
+[node name="ResultMenu" parent="Level_Manager" unique_id=340385810 instance=ExtResource("24_7v355")]
+visible = false
+
+[node name="StarBackground" parent="." unique_id=1934287316 instance=ExtResource("25_ytns6")]
+position = Vector2(-292, -153)
+scale = Vector2(0.495, 0.495)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1383374677]
+unique_name_in_owner = true
+zoom = Vector2(2, 2)
+limit_left = -191
+limit_top = -162
+limit_right = 188
+limit_bottom = 163
+
+[node name="PlayerUserInterface" parent="." unique_id=415349145 instance=ExtResource("26_ijhqu")]
+
+[node name="Borders2" type="Node2D" parent="." unique_id=1235097282]
+
+[node name="top_bottom" type="StaticBody2D" parent="Borders2" unique_id=708678912]
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Borders2/top_bottom" unique_id=1869308401]
+position = Vector2(-1, -152)
+shape = SubResource("RectangleShape2D_8kenn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders2/top_bottom" unique_id=1223086285]
+position = Vector2(-1, 119)
+shape = SubResource("RectangleShape2D_feea6")
+
+[node name="left_right" type="StaticBody2D" parent="Borders2" unique_id=56633015]
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders2/left_right" unique_id=1539260806]
+position = Vector2(-279, 0)
+shape = SubResource("RectangleShape2D_6mro0")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Borders2/left_right" unique_id=1918877062]
+position = Vector2(277, 0)
+shape = SubResource("RectangleShape2D_6mro0")
+
+[node name="ColorRect4" type="ColorRect" parent="Borders2" unique_id=620996353]
+z_index = 1
+offset_left = -268.80737
+offset_top = -162.00098
+offset_right = 55.131287
+offset_bottom = -141.80836
+rotation = 1.5708452
+color = Color(0.29219002, 0.29219005, 0.29219002, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect3" type="ColorRect" parent="Borders2" unique_id=1943067209]
+z_index = 1
+offset_left = 287.0
+offset_top = -162.00098
+offset_right = 610.93866
+offset_bottom = -141.80836
+rotation = 1.5708452
+color = Color(0.29219002, 0.29219005, 0.29219002, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="Borders2" unique_id=268982998]
+z_index = 1
+offset_left = -289.0
+offset_top = -162.0
+offset_right = 286.0
+offset_bottom = -142.0
+color = Color(0.29219002, 0.29219005, 0.29219002, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect2" type="ColorRect" parent="Borders2" unique_id=40566199]
+z_index = 1
+offset_left = -289.0
+offset_top = 109.0
+offset_right = 286.0
+offset_bottom = 162.0
+color = Color(0.29219002, 0.29219005, 0.29219002, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Label2" type="Label" parent="." unique_id=1372614107]
+z_index = 4
+offset_left = -47.0
+offset_top = -158.0
+offset_right = 57.0
+offset_bottom = -141.0
+theme_override_fonts/font = ExtResource("20_bhrlq")
+theme_override_font_sizes/font_size = 16
+text = "Survive!"
+
+[node name="MusicAutoTrigger" type="Node" parent="." unique_id=2073023150]
+script = ExtResource("27_xi4ur")
+track = ExtResource("28_oevwm")
+metadata/_custom_type_script = "uid://84ox43jyptjb"
+
+[node name="PlayArea" type="ColorRect" parent="." unique_id=1270960523 groups=["PlayArea"]]
+visible = false
+offset_left = -269.0
+offset_top = -142.0
+offset_right = 267.0
+offset_bottom = 109.0

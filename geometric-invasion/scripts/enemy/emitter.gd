@@ -29,9 +29,11 @@ func set_attack_event(attack : EnemyAttackData) -> void:
 	theta = $Marker2D.rotation
 	$Timer.wait_time = attack.fire_rate
 	$Timer.start()
+	#execute_spawn_event(attack)
 	attack_event = attack
 
 func _on_timer_timeout() -> void:
+	print("Time fired: ", str(Time.get_ticks_msec()))
 	$Timer.stop()
 	
 	if num_times_fired < attack_event.max_times_to_fire:
@@ -68,3 +70,4 @@ func _on_timer_timeout() -> void:
 			theta += attack_event.change_in_angle
 	
 	num_times_fired += 1
+	pass

@@ -17,6 +17,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_2blm6")
 level_dir = "res://scenes/Levels"
+test_mode = true
 scene_path = "uid://domjpwtkv78nv"
 
 [node name="StarBackground" parent="." unique_id=1934287316 instance=ExtResource("1_6hnvt")]
