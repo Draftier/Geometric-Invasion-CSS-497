@@ -4,10 +4,9 @@
 
 [resource]
 script = ExtResource("1_ilp24")
-num_spawn_points = 4
 angular_spread = 1.309
-bullet_speed = 200.0
-max_times_to_fire = 10
-fire_rate = 1.0
+bullet_speed = 250.0
+max_times_to_fire = 40
+fire_rate = 0.5
 initial_theta = 0.785
 metadata/_custom_type_script = "uid://baq3m8rspbgqo"

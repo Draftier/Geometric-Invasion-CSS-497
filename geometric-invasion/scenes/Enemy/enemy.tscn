@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://pqste00swnss" path="res://scripts/enemy/base_enemy.gd" id="1_5uy6h"]
 [ext_resource type="Texture2D" uid="uid://dtb2vka5e01d3" path="res://assets/sprites/enemy.png" id="1_7p1mj"]
+[ext_resource type="Script" uid="uid://bi7tvg5jn0udf" path="res://scenes/Enemy/enemy_stat.gd" id="2_3e887"]
 [ext_resource type="Shader" uid="uid://cqv7cjdn8x0b5" path="res://shaders/flash.tres" id="2_4ra3w"]
 [ext_resource type="Script" uid="uid://dmjfjfilssxt6" path="res://scripts/enemy/movement_base.gd" id="2_ixhtt"]
 [ext_resource type="Script" uid="uid://c8u5b5y0i25wp" path="res://scripts/enemy/directional_movement.gd" id="3_ebm38"]
@@ -13,6 +14,10 @@
 [ext_resource type="PackedScene" uid="uid://dea3ckmfpjcym" path="res://scenes/Ability/ability_pickup.tscn" id="6_fx0l5"]
 [ext_resource type="PackedScene" uid="uid://lha1c308vq6j" path="res://scenes/Enemy/emitter.tscn" id="11_fxkbx"]
 [ext_resource type="Texture2D" uid="uid://rjf6qb8ty32e" path="res://assets/sprites/eplosion_1.png" id="16_h0di7"]
+
+[sub_resource type="Resource" id="Resource_fxkbx"]
+script = ExtResource("2_3e887")
+metadata/_custom_type_script = "uid://bi7tvg5jn0udf"
 
 [sub_resource type="Resource" id="Resource_ixhtt"]
 script = ExtResource("3_ebm38")
@@ -134,6 +139,7 @@ _data = {
 [node name="Enemy" type="Node2D" unique_id=682992089 groups=["enemy"]]
 position = Vector2(507, 227)
 script = ExtResource("1_5uy6h")
+enemy_stats = SubResource("Resource_fxkbx")
 movement_events = SubResource("Resource_eacat")
 speed = 100
 health = 150

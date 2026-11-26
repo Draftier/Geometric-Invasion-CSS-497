@@ -8,8 +8,6 @@
 [ext_resource type="Script" uid="uid://c6mayvsci6gvc" path="res://scenes/UI/animated_button.gd" id="6_uxg4l"]
 [ext_resource type="AudioStream" uid="uid://8qm86b2b1081" path="res://assets/audio/music/menu_theme/Week 21 - Freefall GLIDE.ogg" id="7_uxg4l"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bl585"]
-
 [node name="SettingsMenu" type="Control" unique_id=505777350]
 layout_mode = 3
 anchors_preset = 15
@@ -132,6 +130,7 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.2
 focus_neighbor_top = NodePath("../../UiVolume/UiSoundSlider")
 focus_neighbor_bottom = NodePath("../../FpsCounter/FpsSettingDropDown")
+theme_override_fonts/font = ExtResource("4_t4w0s")
 alignment = 1
 item_count = 2
 popup/item_0/text = "Fullscreen"
@@ -159,6 +158,7 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.99
 focus_neighbor_top = NodePath("../../Displaymode/DisplayMode")
 focus_neighbor_bottom = NodePath("../../BackButton")
+theme_override_fonts/font = ExtResource("4_t4w0s")
 alignment = 1
 item_count = 2
 popup/item_0/text = "Off"
@@ -174,7 +174,6 @@ focus_neighbor_top = NodePath("../FpsCounter/FpsSettingDropDown")
 focus_neighbor_bottom = NodePath("../MusicVolume/MusicSlider")
 theme = ExtResource("5_lwg20")
 theme_override_fonts/font = ExtResource("4_t4w0s")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_bl585")
 text = "Back to main menu"
 script = ExtResource("6_uxg4l")
 metadata/_custom_type_script = "uid://c6mayvsci6gvc"

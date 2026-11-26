@@ -74,6 +74,11 @@ func execute_spawn_event(event : Spawn_Event) -> void:
 			enemy.hit_report.connect(get_parent().on_enemy_hit_reported)
 			enemy.death.connect(get_parent().on_enemy_death)
 			
+			if i.enemy_stats != null:
+				enemy.enemy_stats = i.enemy_stats
+				enemy.health = i.enemy_stats.health
+				enemy.speed = i.enemy_stats.speed
+			
 			# Add enemy to be a child of a "Enemies" node which is a child of level manager
 			get_node("../Enemies").add_child.call_deferred(enemy)
 			

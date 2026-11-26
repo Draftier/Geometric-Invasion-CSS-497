@@ -62,4 +62,3 @@ func _on_fps_setting_drop_down_item_selected(index: int) -> void:
 			Overlay.disable_fps_overlay()
 		1:
 			Overlay.enable_fps_overlay()
-			

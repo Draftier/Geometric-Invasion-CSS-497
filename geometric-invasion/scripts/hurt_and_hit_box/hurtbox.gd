@@ -41,4 +41,4 @@ func _on_area_entered(hitbox: Hitbox) -> void:
 			print(hitbox.owner.data.ability_name)
 			# If ability comes into contact with enemy then instantly kill enemy
 			if owner is basic_enemy:
-				owner.take_damage(999, hitbox.owner.player_id)
+				owner.take_damage(250, hitbox.owner.player_id)

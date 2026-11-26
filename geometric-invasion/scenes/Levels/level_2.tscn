@@ -1,85 +1,1028 @@
-[gd_scene format=3 uid="uid://dpsxwr0ruu2ly"]
+[gd_scene format=3 uid="uid://bthhd2fixlfxp"]
 
-[ext_resource type="PackedScene" uid="uid://cu4vxxsdf4l7r" path="res://scenes/Enemy/rotater_shoot_enemy.tscn" id="3_yye74"]
-[ext_resource type="PackedScene" uid="uid://bpouseiggfiit" path="res://scenes/Enemy/fixed_shoot_enemy.tscn" id="4_v740s"]
+[ext_resource type="Script" uid="uid://cejwab54dw4r5" path="res://scripts/singleton/game.gd" id="1_a0dj8"]
+[ext_resource type="PackedScene" uid="uid://cnr36qxaqynbc" path="res://scenes/star_background.tscn" id="2_gtx2w"]
+[ext_resource type="PackedScene" uid="uid://cjye6s0e01omf" path="res://scenes/Managers/level_manager.tscn" id="3_1a52t"]
+[ext_resource type="Script" uid="uid://bewu02jnvwcgy" path="res://scripts/event/spawn_event_data.gd" id="4_wxjxf"]
+[ext_resource type="Script" uid="uid://c4twyssjo6an2" path="res://scripts/event/spawn.gd" id="5_2ewt3"]
+[ext_resource type="Script" uid="uid://baq3m8rspbgqo" path="res://scripts/enemy/enemy_attack_data.gd" id="6_2ewt3"]
+[ext_resource type="PackedScene" uid="uid://cp837cm6qinkj" path="res://scenes/Enemy/enemy.tscn" id="6_2hpwu"]
+[ext_resource type="Script" uid="uid://cpbp4ohcaqwle" path="res://scripts/spawn_point.gd" id="6_e4h20"]
+[ext_resource type="FontFile" uid="uid://dihhulpjs1064" path="res://assets/fonts/PixelOperator8.ttf" id="7_2hpwu"]
+[ext_resource type="Script" uid="uid://dmjfjfilssxt6" path="res://scripts/enemy/movement_base.gd" id="7_e4h20"]
+[ext_resource type="PackedScene" uid="uid://cw7p0ekjax6t7" path="res://scenes/UI/player_user_interface.tscn" id="8_0lf7e"]
+[ext_resource type="Script" uid="uid://byofbiiwp016c" path="res://scenes/Enemy/path_movement_data.gd" id="8_2hpwu"]
+[ext_resource type="Script" uid="uid://thlx0gtur2d4" path="res://scripts/enemy/enemy_movement_data.gd" id="9_0lf7e"]
+[ext_resource type="Script" uid="uid://c8u5b5y0i25wp" path="res://scripts/enemy/directional_movement.gd" id="9_2hpwu"]
+[ext_resource type="Script" uid="uid://84ox43jyptjb" path="res://scenes/Audio/music_auto_trigger.gd" id="9_410d2"]
+[ext_resource type="Script" uid="uid://bi7tvg5jn0udf" path="res://scenes/Enemy/enemy_stat.gd" id="11_2hpwu"]
+[ext_resource type="Script" uid="uid://pqste00swnss" path="res://scripts/enemy/base_enemy.gd" id="13_u84qy"]
+[ext_resource type="Script" uid="uid://beg1vql3x734k" path="res://scripts/enemy/point.gd" id="14_godws"]
+[ext_resource type="Script" uid="uid://bho4wgornhjo7" path="res://scripts/enemy/curve_movement.gd" id="15_5crkq"]
+[ext_resource type="AudioStream" uid="uid://bfa2q24febr6e" path="res://assets/audio/music/level_music/Sunstrider.ogg" id="16_2hpwu"]
+[ext_resource type="PackedScene" uid="uid://dea3ckmfpjcym" path="res://scenes/Ability/ability_pickup.tscn" id="16_c6w1e"]
+[ext_resource type="PackedScene" uid="uid://lha1c308vq6j" path="res://scenes/Enemy/emitter.tscn" id="17_4c4jv"]
+[ext_resource type="Shader" uid="uid://cqv7cjdn8x0b5" path="res://shaders/flash.tres" id="18_l61k0"]
+[ext_resource type="Texture2D" uid="uid://dtb2vka5e01d3" path="res://assets/sprites/enemy.png" id="19_5ytgs"]
+[ext_resource type="Script" uid="uid://12171bvbqp8w" path="res://scripts/hurt_and_hit_box/hurtbox.gd" id="20_moj4v"]
+[ext_resource type="Script" uid="uid://dhan5ja6q4fjx" path="res://scripts/hurt_and_hit_box/hitbox.gd" id="21_04xhx"]
+[ext_resource type="Texture2D" uid="uid://rjf6qb8ty32e" path="res://assets/sprites/eplosion_1.png" id="22_y6tmf"]
+[ext_resource type="PackedScene" uid="uid://dwtrxu3symb3h" path="res://scenes/Enemy/boss_1.tscn" id="23_godws"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4p1o3"]
-size = Vector2(646, 21)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d8ny1"]
+size = Vector2(536, 21)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_14nfc"]
-size = Vector2(20, 618)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1tcrw"]
+size = Vector2(536, 20)
 
-[node name="Level_1" type="Node" unique_id=1807701013]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iywne"]
+size = Vector2(20, 284)
 
-[node name="DirectionalLight2D" type="DirectionalLight2D" parent="." unique_id=440412465]
-color = Color(0.6509804, 0.64705884, 0.6313726, 1)
+[sub_resource type="Resource" id="Resource_0lf7e"]
+script = ExtResource("6_2ewt3")
+num_spawn_points = 4
+angular_spread = 1.309
+bullet_speed = 250.0
+max_times_to_fire = 10
+fire_rate = 0.5
+is_rotate = true
+initial_theta = 5.414
+metadata/_custom_type_script = "uid://baq3m8rspbgqo"
 
-[node name="Borders" type="Node2D" parent="." unique_id=1525376519]
+[sub_resource type="Resource" id="Resource_410d2"]
+script = ExtResource("9_2hpwu")
+direction = 3
+distance = 1.1
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
 
-[node name="top_bottom" type="StaticBody2D" parent="Borders" unique_id=1198471600]
+[sub_resource type="Resource" id="Resource_6qxha"]
+script = ExtResource("9_0lf7e")
+movement_array = Array[ExtResource("7_e4h20")]([SubResource("Resource_410d2")])
+metadata/_custom_type_script = "uid://thlx0gtur2d4"
+
+[sub_resource type="Resource" id="Resource_4i6gi"]
+script = ExtResource("11_2hpwu")
+health = 30.0
+speed = 150.0
+metadata/_custom_type_script = "uid://bi7tvg5jn0udf"
+
+[sub_resource type="Resource" id="Resource_xi46r"]
+script = ExtResource("5_2ewt3")
+enemy = ExtResource("6_2hpwu")
+enemy_movement_pattern = SubResource("Resource_6qxha")
+enemy_attack_pattern = Array[ExtResource("6_2ewt3")]([SubResource("Resource_0lf7e")])
+number_of_enemies = 2
+enemy_stats = SubResource("Resource_4i6gi")
+metadata/_custom_type_script = "uid://c4twyssjo6an2"
+
+[sub_resource type="Resource" id="Resource_ttcij"]
+script = ExtResource("4_wxjxf")
+spawner = 2
+time_between_spawns = 0.5
+time_to_occur = 0.1
+spawns = Array[ExtResource("5_2ewt3")]([SubResource("Resource_xi46r")])
+metadata/_custom_type_script = "uid://bewu02jnvwcgy"
+
+[sub_resource type="Resource" id="Resource_2hpwu"]
+script = ExtResource("6_2ewt3")
+num_spawn_points = 4
+angular_spread = 1.309
+bullet_speed = 250.0
+max_times_to_fire = 10
+fire_rate = 0.5
+is_rotate = true
+initial_theta = 5.414
+metadata/_custom_type_script = "uid://baq3m8rspbgqo"
+
+[sub_resource type="Resource" id="Resource_rbuvs"]
+script = ExtResource("9_2hpwu")
+direction = 2
+distance = 1.1
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_452xl"]
+script = ExtResource("9_0lf7e")
+movement_array = Array[ExtResource("7_e4h20")]([SubResource("Resource_rbuvs")])
+metadata/_custom_type_script = "uid://thlx0gtur2d4"
+
+[sub_resource type="Resource" id="Resource_u84qy"]
+script = ExtResource("11_2hpwu")
+health = 30.0
+speed = 150.0
+metadata/_custom_type_script = "uid://bi7tvg5jn0udf"
+
+[sub_resource type="Resource" id="Resource_f2tki"]
+script = ExtResource("5_2ewt3")
+enemy = ExtResource("6_2hpwu")
+enemy_movement_pattern = SubResource("Resource_452xl")
+enemy_attack_pattern = Array[ExtResource("6_2ewt3")]([SubResource("Resource_2hpwu")])
+number_of_enemies = 2
+enemy_stats = SubResource("Resource_u84qy")
+metadata/_custom_type_script = "uid://c4twyssjo6an2"
+
+[sub_resource type="Resource" id="Resource_ki2ik"]
+script = ExtResource("4_wxjxf")
+spawner = 4
+time_between_spawns = 0.5
+time_to_occur = 1.5
+spawns = Array[ExtResource("5_2ewt3")]([SubResource("Resource_f2tki")])
+metadata/_custom_type_script = "uid://bewu02jnvwcgy"
+
+[sub_resource type="Curve2D" id="Curve2D_0lf7e"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -1, -142, -160.77151, -24.674765, 160.77151, 24.674765, 0, 160)
+}
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_5crkq"]
+script = ExtResource("8_2hpwu")
+curve = SubResource("Curve2D_0lf7e")
+metadata/_custom_type_script = "uid://byofbiiwp016c"
+
+[sub_resource type="Resource" id="Resource_iwmtn"]
+script = ExtResource("9_2hpwu")
+direction = 1
+distance = 1.5
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_c6w1e"]
+script = ExtResource("9_0lf7e")
+movement_array = Array[ExtResource("7_e4h20")]([SubResource("Resource_5crkq"), SubResource("Resource_iwmtn")])
+metadata/_custom_type_script = "uid://thlx0gtur2d4"
+
+[sub_resource type="Resource" id="Resource_l61k0"]
+script = ExtResource("11_2hpwu")
+health = 20.0
+speed = 300.0
+metadata/_custom_type_script = "uid://bi7tvg5jn0udf"
+
+[sub_resource type="Resource" id="Resource_4c4jv"]
+script = ExtResource("5_2ewt3")
+enemy = ExtResource("6_2hpwu")
+enemy_movement_pattern = SubResource("Resource_c6w1e")
+number_of_enemies = 10
+enemy_stats = SubResource("Resource_l61k0")
+metadata/_custom_type_script = "uid://c4twyssjo6an2"
+
+[sub_resource type="Resource" id="Resource_godws"]
+script = ExtResource("4_wxjxf")
+spawner = 1
+time_between_spawns = 0.25
+time_to_occur = 7.0
+spawns = Array[ExtResource("5_2ewt3")]([SubResource("Resource_4c4jv")])
+metadata/_custom_type_script = "uid://bewu02jnvwcgy"
+
+[sub_resource type="Curve2D" id="Curve2D_6qxha"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -1, -142, 160.772, -24.675, 160.77151, 24.674765, 0, 160)
+}
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_y6tmf"]
+script = ExtResource("8_2hpwu")
+curve = SubResource("Curve2D_6qxha")
+metadata/_custom_type_script = "uid://byofbiiwp016c"
+
+[sub_resource type="Resource" id="Resource_chutj"]
+script = ExtResource("9_2hpwu")
+direction = 1
+distance = 1.5
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_5ytgs"]
+script = ExtResource("9_0lf7e")
+movement_array = Array[ExtResource("7_e4h20")]([SubResource("Resource_y6tmf"), SubResource("Resource_chutj")])
+metadata/_custom_type_script = "uid://thlx0gtur2d4"
+
+[sub_resource type="Resource" id="Resource_r0w8p"]
+script = ExtResource("11_2hpwu")
+health = 20.0
+speed = 300.0
+metadata/_custom_type_script = "uid://bi7tvg5jn0udf"
+
+[sub_resource type="Resource" id="Resource_moj4v"]
+script = ExtResource("5_2ewt3")
+enemy = ExtResource("6_2hpwu")
+enemy_movement_pattern = SubResource("Resource_5ytgs")
+number_of_enemies = 10
+enemy_stats = SubResource("Resource_r0w8p")
+metadata/_custom_type_script = "uid://c4twyssjo6an2"
+
+[sub_resource type="Resource" id="Resource_04xhx"]
+script = ExtResource("4_wxjxf")
+spawner = 1
+time_between_spawns = 0.25
+time_to_occur = 7.0
+spawns = Array[ExtResource("5_2ewt3")]([SubResource("Resource_moj4v")])
+metadata/_custom_type_script = "uid://bewu02jnvwcgy"
+
+[sub_resource type="Resource" id="Resource_pv7xf"]
+script = ExtResource("6_2ewt3")
+change_in_angle = 2.0
+num_spawn_points = 10
+angular_spread = 2.0
+bullet_speed = 300.0
+max_times_to_fire = 999999
+fire_rate = 0.1
+is_rotate = true
+max_times_to_rotate = 1000
+metadata/_custom_type_script = "uid://baq3m8rspbgqo"
+
+[sub_resource type="Resource" id="Resource_f4msn"]
+script = ExtResource("9_2hpwu")
+direction = 1
+distance = 0.1
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_yd0ew"]
+script = ExtResource("9_2hpwu")
+direction = 1
+distance = 1.1
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_40h3w"]
+script = ExtResource("9_0lf7e")
+movement_array = Array[ExtResource("7_e4h20")]([SubResource("Resource_f4msn"), SubResource("Resource_yd0ew")])
+time_between_movements = 15.0
+metadata/_custom_type_script = "uid://thlx0gtur2d4"
+
+[sub_resource type="Resource" id="Resource_tbcna"]
+script = ExtResource("11_2hpwu")
+health = 500.0
+speed = 150.0
+metadata/_custom_type_script = "uid://bi7tvg5jn0udf"
+
+[sub_resource type="Resource" id="Resource_gv2sh"]
+script = ExtResource("5_2ewt3")
+enemy = ExtResource("6_2hpwu")
+enemy_movement_pattern = SubResource("Resource_40h3w")
+enemy_attack_pattern = Array[ExtResource("6_2ewt3")]([SubResource("Resource_pv7xf")])
+number_of_enemies = 1
+enemy_stats = SubResource("Resource_tbcna")
+metadata/_custom_type_script = "uid://c4twyssjo6an2"
+
+[sub_resource type="Resource" id="Resource_7abrx"]
+script = ExtResource("4_wxjxf")
+spawner = 1
+time_to_occur = 12.0
+spawns = Array[ExtResource("5_2ewt3")]([SubResource("Resource_gv2sh")])
+metadata/_custom_type_script = "uid://bewu02jnvwcgy"
+
+[sub_resource type="Curve2D" id="Curve2D_4i6gi"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -272, -13, -63.78988, -8.061358, 63.78988, 8.061358, -154, -79, -101.292725, 4.55642, 101.292725, -4.55642, -75, 51, -84.46902, 22.7821, 84.46902, -22.7821, 29, -79, -81.314575, 1.7524693, 81.314575, -1.7524693, 136, 54, -50.12062, 1.7524693, 50.12062, -1.7524693, 213, -79, 0, 0, 0, 0, 277, -18)
+}
+point_count = 7
+
+[sub_resource type="Resource" id="Resource_n24u3"]
+script = ExtResource("8_2hpwu")
+curve = SubResource("Curve2D_4i6gi")
+metadata/_custom_type_script = "uid://byofbiiwp016c"
+
+[sub_resource type="Resource" id="Resource_x3nhi"]
+script = ExtResource("9_2hpwu")
+direction = 3
+distance = 0.2
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_b5w1l"]
+script = ExtResource("9_0lf7e")
+movement_array = Array[ExtResource("7_e4h20")]([SubResource("Resource_n24u3"), SubResource("Resource_x3nhi")])
+metadata/_custom_type_script = "uid://thlx0gtur2d4"
+
+[sub_resource type="Resource" id="Resource_acmhb"]
+script = ExtResource("11_2hpwu")
+health = 35.0
+speed = 200.0
+metadata/_custom_type_script = "uid://bi7tvg5jn0udf"
+
+[sub_resource type="Resource" id="Resource_5rf45"]
+script = ExtResource("5_2ewt3")
+enemy = ExtResource("6_2hpwu")
+enemy_movement_pattern = SubResource("Resource_b5w1l")
+number_of_enemies = 20
+enemy_stats = SubResource("Resource_acmhb")
+metadata/_custom_type_script = "uid://c4twyssjo6an2"
+
+[sub_resource type="Resource" id="Resource_48gr3"]
+script = ExtResource("4_wxjxf")
+spawner = 7
+time_between_spawns = 0.5
+time_to_occur = 13.0
+spawns = Array[ExtResource("5_2ewt3")]([SubResource("Resource_5rf45")])
+metadata/_custom_type_script = "uid://bewu02jnvwcgy"
+
+[sub_resource type="Resource" id="Resource_ihabe"]
+script = ExtResource("6_2ewt3")
+num_spawn_points = 15
+angular_spread = 6.283
+bullet_speed = 400.0
+max_times_to_fire = 20
+fire_rate = 0.75
+max_times_to_rotate = 3
+metadata/_custom_type_script = "uid://baq3m8rspbgqo"
+
+[sub_resource type="Resource" id="Resource_ju1hv"]
+script = ExtResource("9_2hpwu")
+direction = 3
+distance = 1.1
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_kow50"]
+script = ExtResource("9_0lf7e")
+movement_array = Array[ExtResource("7_e4h20")]([SubResource("Resource_ju1hv")])
+metadata/_custom_type_script = "uid://thlx0gtur2d4"
+
+[sub_resource type="Resource" id="Resource_4x7gr"]
+script = ExtResource("11_2hpwu")
+health = 75.0
+speed = 100.0
+metadata/_custom_type_script = "uid://bi7tvg5jn0udf"
+
+[sub_resource type="Resource" id="Resource_mxjqm"]
+script = ExtResource("5_2ewt3")
+enemy = ExtResource("6_2hpwu")
+enemy_movement_pattern = SubResource("Resource_kow50")
+enemy_attack_pattern = Array[ExtResource("6_2ewt3")]([SubResource("Resource_ihabe")])
+number_of_enemies = 2
+enemy_stats = SubResource("Resource_4x7gr")
+metadata/_custom_type_script = "uid://c4twyssjo6an2"
+
+[sub_resource type="Resource" id="Resource_ruw1c"]
+script = ExtResource("4_wxjxf")
+spawner = 2
+time_between_spawns = 1.0
+time_to_occur = 26.0
+spawns = Array[ExtResource("5_2ewt3")]([SubResource("Resource_mxjqm")])
+metadata/_custom_type_script = "uid://bewu02jnvwcgy"
+
+[sub_resource type="Resource" id="Resource_fxkbx"]
+script = ExtResource("11_2hpwu")
+metadata/_custom_type_script = "uid://bi7tvg5jn0udf"
+
+[sub_resource type="Resource" id="Resource_ixhtt"]
+script = ExtResource("9_2hpwu")
+direction = 1
+distance = 0.3
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_ebm38"]
+script = ExtResource("9_2hpwu")
+direction = 2
+distance = 0.05
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_q0kbr"]
+script = ExtResource("9_2hpwu")
+direction = 3
+distance = 0.05
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_fx0l5"]
+script = ExtResource("14_godws")
+x_percent = 0.05
+y_percent = 0.1
+metadata/_custom_type_script = "uid://beg1vql3x734k"
+
+[sub_resource type="Resource" id="Resource_pg6jp"]
+script = ExtResource("14_godws")
+x_percent = 0.05
+metadata/_custom_type_script = "uid://beg1vql3x734k"
+
+[sub_resource type="Curve" id="Curve_fxkbx"]
+_data = [Vector2(0.15340908, 0.17977536), 0.0, 0.0, 0, 0, Vector2(0.5113637, 0.55056185), 0.0, 0.0, 0, 0, Vector2(1, 0.11235964), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Resource" id="Resource_3e887"]
+script = ExtResource("15_5crkq")
+point_array = Array[ExtResource("14_godws")]([SubResource("Resource_fx0l5"), SubResource("Resource_pg6jp")])
+speed_curve = SubResource("Curve_fxkbx")
+metadata/_custom_type_script = "uid://bho4wgornhjo7"
+
+[sub_resource type="Resource" id="Resource_lkp36"]
+script = ExtResource("9_2hpwu")
+distance = 0.3
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_eacat"]
+script = ExtResource("9_0lf7e")
+movement_array = Array[ExtResource("7_e4h20")]([SubResource("Resource_ixhtt"), SubResource("Resource_ebm38"), SubResource("Resource_q0kbr"), SubResource("Resource_3e887"), SubResource("Resource_lkp36")])
+leave_screen = true
+metadata/_custom_type_script = "uid://thlx0gtur2d4"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iywne"]
+resource_local_to_scene = true
+shader = ExtResource("18_l61k0")
+shader_parameter/Color = Color(1, 1, 1, 1)
+shader_parameter/Progress = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8tegq"]
+size = Vector2(14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t4kp2"]
+atlas = ExtResource("22_y6tmf")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k06wl"]
+atlas = ExtResource("22_y6tmf")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fqx87"]
+atlas = ExtResource("22_y6tmf")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j6s03"]
+atlas = ExtResource("22_y6tmf")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ipswl"]
+atlas = ExtResource("22_y6tmf")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fxkbx"]
+animations = [{
+"frames": [],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t4kp2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k06wl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fqx87")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j6s03")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ipswl")
+}],
+"loop": 0,
+"name": &"explosion",
+"speed": 15.0
+}]
+
+[sub_resource type="Animation" id="Animation_f5wgj"]
+resource_name = "explosion"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_47vae"]
+_data = {
+&"explosion": SubResource("Animation_f5wgj")
+}
+
+[sub_resource type="Curve2D" id="Curve2D_h0di7"]
+
+[sub_resource type="PackedScene" id="PackedScene_r0w8p"]
+_bundled = {
+"conn_count": 2,
+"conns": PackedInt32Array(0, 0, 37, 36, 2, 0, 0, 7, 0, 39, 38, 2, 0, 0),
+"editable_instances": [NodePath("emitter")],
+"id_paths": [],
+"names": PackedStringArray("Enemy", "position", "script", "enemy_stats", "movement_events", "speed", "health", "power_up_charge", "enemy", "Node2D", "emitter", "Timer", "Marker2D", "Sprite2D", "material", "texture", "Hurtbox", "unique_name_in_owner", "collision_layer", "collision_mask", "monitorable", "metadata/_custom_type_script", "Area2D", "CollisionShape2D", "shape", "Hitbox", "monitoring", "damage", "VisibleOnScreenNotifier2D", "AnimatedSprite2D", "sprite_frames", "autoplay", "AnimationPlayer", "libraries/", "Path2D", "curve", "_on_child_entered_tree", "child_entered_tree", "_on_visible_on_screen_notifier_2d_screen_exited", "screen_exited"),
+"node_count": 11,
+"node_ids": PackedInt32Array(682992089, 1019809325, 1252295741, 725762865, 1199752919, 1414706671, 667564901, 247689940, 1465384279, 857330204, 1460539815),
+"node_paths": [],
+"nodes": PackedInt32Array(-1, -1, 9, 0, -1, 7, 1, 0, 2, 1, 3, 2, 4, 3, 5, 4, 6, 5, 7, 6, 1, 8, 0, 0, 2147483647, 10, 7, 0, 0, 0, 0, 13, 13, -1, 2, 14, 8, 15, 9, 0, 2, 0, 22, 16, -1, 6, 17, 10, 18, 11, 19, 12, 20, 13, 2, 14, 21, 15, 0, 3, 0, 23, 23, -1, 1, 24, 16, 0, 2, 0, 22, 25, -1, 7, 17, 10, 18, 17, 19, 18, 26, 13, 2, 19, 27, 20, 21, 21, 0, 5, 0, 23, 23, -1, 1, 24, 16, 0, 0, 0, 28, 28, -1, 0, 0, 0, 0, 29, 29, -1, 2, 30, 22, 31, 23, 0, 0, 0, 32, 32, -1, 1, 33, 24, 0, 0, 0, 34, 34, -1, 1, 35, 25, 0),
+"variants": [Vector2(507, 227), ExtResource("13_u84qy"), SubResource("Resource_fxkbx"), SubResource("Resource_eacat"), 100, 150, ExtResource("16_c6w1e"), ExtResource("17_4c4jv"), SubResource("ShaderMaterial_iywne"), ExtResource("19_5ytgs"), true, 8, 129, false, ExtResource("20_moj4v"), "uid://12171bvbqp8w", SubResource("RectangleShape2D_8tegq"), 4, 0, ExtResource("21_04xhx"), 1, "uid://dhan5ja6q4fjx", SubResource("SpriteFrames_fxkbx"), "default", SubResource("AnimationLibrary_47vae"), SubResource("Curve2D_h0di7")],
+"version": 3
+}
+
+[sub_resource type="Resource" id="Resource_xlxpm"]
+script = ExtResource("6_2ewt3")
+num_spawn_points = 15
+angular_spread = 6.283
+bullet_speed = 400.0
+max_times_to_fire = 20
+fire_rate = 0.75
+max_times_to_rotate = 3
+metadata/_custom_type_script = "uid://baq3m8rspbgqo"
+
+[sub_resource type="Resource" id="Resource_0l8cn"]
+script = ExtResource("9_2hpwu")
+direction = 2
+distance = 1.1
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_e8h3q"]
+script = ExtResource("9_0lf7e")
+movement_array = Array[ExtResource("7_e4h20")]([SubResource("Resource_0l8cn")])
+metadata/_custom_type_script = "uid://thlx0gtur2d4"
+
+[sub_resource type="Resource" id="Resource_j1q8e"]
+script = ExtResource("11_2hpwu")
+health = 75.0
+speed = 100.0
+metadata/_custom_type_script = "uid://bi7tvg5jn0udf"
+
+[sub_resource type="Resource" id="Resource_q4nah"]
+script = ExtResource("5_2ewt3")
+enemy = SubResource("PackedScene_r0w8p")
+enemy_movement_pattern = SubResource("Resource_e8h3q")
+enemy_attack_pattern = Array[ExtResource("6_2ewt3")]([SubResource("Resource_xlxpm")])
+number_of_enemies = 2
+enemy_stats = SubResource("Resource_j1q8e")
+metadata/_custom_type_script = "uid://c4twyssjo6an2"
+
+[sub_resource type="Resource" id="Resource_etbbg"]
+script = ExtResource("4_wxjxf")
+spawner = 4
+time_between_spawns = 1.0
+time_to_occur = 33.0
+spawns = Array[ExtResource("5_2ewt3")]([SubResource("Resource_q4nah")])
+metadata/_custom_type_script = "uid://bewu02jnvwcgy"
+
+[sub_resource type="Resource" id="Resource_2ktrx"]
+script = ExtResource("6_2ewt3")
+angular_spread = 6.283
+bullet_speed = 300.0
+max_times_to_fire = 10
+fire_rate = 1.5
+max_times_to_rotate = 3
+metadata/_custom_type_script = "uid://baq3m8rspbgqo"
+
+[sub_resource type="Resource" id="Resource_linht"]
+script = ExtResource("9_2hpwu")
+distance = 0.8
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_b0ono"]
+script = ExtResource("9_2hpwu")
+direction = 3
+distance = 0.8
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_0si8n"]
+script = ExtResource("9_2hpwu")
+direction = 1
+distance = 0.7
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_4raru"]
+script = ExtResource("9_2hpwu")
+direction = 2
+distance = 1.1
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_m7xns"]
+script = ExtResource("9_0lf7e")
+movement_array = Array[ExtResource("7_e4h20")]([SubResource("Resource_linht"), SubResource("Resource_b0ono"), SubResource("Resource_0si8n"), SubResource("Resource_4raru")])
+metadata/_custom_type_script = "uid://thlx0gtur2d4"
+
+[sub_resource type="Resource" id="Resource_wn285"]
+script = ExtResource("11_2hpwu")
+health = 700.0
+speed = 130.0
+metadata/_custom_type_script = "uid://bi7tvg5jn0udf"
+
+[sub_resource type="Resource" id="Resource_7uf0i"]
+script = ExtResource("5_2ewt3")
+enemy = ExtResource("6_2hpwu")
+enemy_movement_pattern = SubResource("Resource_m7xns")
+enemy_attack_pattern = Array[ExtResource("6_2ewt3")]([SubResource("Resource_2ktrx")])
+number_of_enemies = 2
+enemy_stats = SubResource("Resource_wn285")
+metadata/_custom_type_script = "uid://c4twyssjo6an2"
+
+[sub_resource type="Resource" id="Resource_n36b2"]
+script = ExtResource("4_wxjxf")
+spawner = 6
+time_between_spawns = 2.0
+time_to_occur = 38.0
+spawns = Array[ExtResource("5_2ewt3")]([SubResource("Resource_7uf0i")])
+metadata/_custom_type_script = "uid://bewu02jnvwcgy"
+
+[sub_resource type="Curve2D" id="Curve2D_u84qy"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -188, 108, -142.26544, -5.783148, 142.26544, 5.783148, -1, 2, 0, 0, 0, 0, 240, -157)
+}
+point_count = 3
+
+[sub_resource type="Resource" id="Resource_vllh1"]
+script = ExtResource("8_2hpwu")
+curve = SubResource("Curve2D_u84qy")
+metadata/_custom_type_script = "uid://byofbiiwp016c"
+
+[sub_resource type="Resource" id="Resource_f4m0s"]
+script = ExtResource("9_2hpwu")
+distance = 1.1
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_t278x"]
+script = ExtResource("9_0lf7e")
+movement_array = Array[ExtResource("7_e4h20")]([SubResource("Resource_vllh1"), SubResource("Resource_f4m0s")])
+metadata/_custom_type_script = "uid://thlx0gtur2d4"
+
+[sub_resource type="Resource" id="Resource_bh6ci"]
+script = ExtResource("11_2hpwu")
+health = 15.0
+speed = 300.0
+metadata/_custom_type_script = "uid://bi7tvg5jn0udf"
+
+[sub_resource type="Resource" id="Resource_ek1fr"]
+script = ExtResource("5_2ewt3")
+enemy = ExtResource("6_2hpwu")
+enemy_movement_pattern = SubResource("Resource_t278x")
+number_of_enemies = 20
+enemy_stats = SubResource("Resource_bh6ci")
+metadata/_custom_type_script = "uid://c4twyssjo6an2"
+
+[sub_resource type="Resource" id="Resource_rsybt"]
+script = ExtResource("4_wxjxf")
+spawner = 6
+time_between_spawns = 0.5
+time_to_occur = 50.0
+spawns = Array[ExtResource("5_2ewt3")]([SubResource("Resource_ek1fr")])
+metadata/_custom_type_script = "uid://bewu02jnvwcgy"
+
+[sub_resource type="Curve2D" id="Curve2D_5crkq"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -170, -142, -205.10898, -14.265099, 205.10898, 14.265099, 1, 1, 0, 0, 0, 0, 230, 133)
+}
+point_count = 3
+
+[sub_resource type="Resource" id="Resource_ens40"]
+script = ExtResource("8_2hpwu")
+curve = SubResource("Curve2D_5crkq")
+metadata/_custom_type_script = "uid://byofbiiwp016c"
+
+[sub_resource type="Resource" id="Resource_jkmcm"]
+script = ExtResource("9_2hpwu")
+direction = 1
+distance = 0.5
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_mt6f3"]
+script = ExtResource("9_0lf7e")
+movement_array = Array[ExtResource("7_e4h20")]([SubResource("Resource_ens40"), SubResource("Resource_jkmcm")])
+metadata/_custom_type_script = "uid://thlx0gtur2d4"
+
+[sub_resource type="Resource" id="Resource_hyb0y"]
+script = ExtResource("11_2hpwu")
+speed = 300.0
+metadata/_custom_type_script = "uid://bi7tvg5jn0udf"
+
+[sub_resource type="Resource" id="Resource_ybabc"]
+script = ExtResource("5_2ewt3")
+enemy = ExtResource("6_2hpwu")
+enemy_movement_pattern = SubResource("Resource_mt6f3")
+number_of_enemies = 20
+enemy_stats = SubResource("Resource_hyb0y")
+metadata/_custom_type_script = "uid://c4twyssjo6an2"
+
+[sub_resource type="Resource" id="Resource_l0ubj"]
+script = ExtResource("4_wxjxf")
+spawner = 3
+time_between_spawns = 0.5
+time_to_occur = 57.0
+spawns = Array[ExtResource("5_2ewt3")]([SubResource("Resource_ybabc")])
+metadata/_custom_type_script = "uid://bewu02jnvwcgy"
+
+[sub_resource type="Resource" id="Resource_pveyg"]
+script = ExtResource("6_2ewt3")
+num_spawn_points = 4
+angular_spread = 1.309
+bullet_speed = 400.0
+max_times_to_fire = 10
+fire_rate = 0.5
+initial_theta = 0.785
+metadata/_custom_type_script = "uid://baq3m8rspbgqo"
+
+[sub_resource type="Resource" id="Resource_rtovb"]
+script = ExtResource("9_2hpwu")
+direction = 1
+distance = 1.5
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_aoa55"]
+script = ExtResource("9_0lf7e")
+movement_array = Array[ExtResource("7_e4h20")]([SubResource("Resource_rtovb")])
+metadata/_custom_type_script = "uid://thlx0gtur2d4"
+
+[sub_resource type="Resource" id="Resource_0awwu"]
+script = ExtResource("11_2hpwu")
+speed = 100.0
+metadata/_custom_type_script = "uid://bi7tvg5jn0udf"
+
+[sub_resource type="Resource" id="Resource_41prl"]
+script = ExtResource("5_2ewt3")
+enemy = ExtResource("6_2hpwu")
+enemy_movement_pattern = SubResource("Resource_aoa55")
+enemy_attack_pattern = Array[ExtResource("6_2ewt3")]([SubResource("Resource_pveyg")])
+number_of_enemies = 10
+enemy_stats = SubResource("Resource_0awwu")
+metadata/_custom_type_script = "uid://c4twyssjo6an2"
+
+[sub_resource type="Resource" id="Resource_81b7e"]
+script = ExtResource("4_wxjxf")
+spawner = 3
+time_between_spawns = 1.0
+time_to_occur = 66.0
+spawns = Array[ExtResource("5_2ewt3")]([SubResource("Resource_41prl")])
+metadata/_custom_type_script = "uid://bewu02jnvwcgy"
+
+[sub_resource type="PackedScene" id="PackedScene_u84qy"]
+_bundled = {
+"conn_count": 2,
+"conns": PackedInt32Array(0, 0, 37, 36, 2, 0, 0, 7, 0, 39, 38, 2, 0, 0),
+"editable_instances": [NodePath("emitter")],
+"id_paths": [],
+"names": PackedStringArray("Enemy", "position", "script", "enemy_stats", "movement_events", "speed", "health", "power_up_charge", "enemy", "Node2D", "emitter", "Timer", "Marker2D", "Sprite2D", "material", "texture", "Hurtbox", "unique_name_in_owner", "collision_layer", "collision_mask", "monitorable", "metadata/_custom_type_script", "Area2D", "CollisionShape2D", "shape", "Hitbox", "monitoring", "damage", "VisibleOnScreenNotifier2D", "AnimatedSprite2D", "sprite_frames", "autoplay", "AnimationPlayer", "libraries/", "Path2D", "curve", "_on_child_entered_tree", "child_entered_tree", "_on_visible_on_screen_notifier_2d_screen_exited", "screen_exited"),
+"node_count": 11,
+"node_ids": PackedInt32Array(682992089, 1019809325, 1252295741, 725762865, 1199752919, 1414706671, 667564901, 247689940, 1465384279, 857330204, 1460539815),
+"node_paths": [],
+"nodes": PackedInt32Array(-1, -1, 9, 0, -1, 7, 1, 0, 2, 1, 3, 2, 4, 3, 5, 4, 6, 5, 7, 6, 1, 8, 0, 0, 2147483647, 10, 7, 0, 0, 0, 0, 13, 13, -1, 2, 14, 8, 15, 9, 0, 2, 0, 22, 16, -1, 6, 17, 10, 18, 11, 19, 12, 20, 13, 2, 14, 21, 15, 0, 3, 0, 23, 23, -1, 1, 24, 16, 0, 2, 0, 22, 25, -1, 7, 17, 10, 18, 17, 19, 18, 26, 13, 2, 19, 27, 20, 21, 21, 0, 5, 0, 23, 23, -1, 1, 24, 16, 0, 0, 0, 28, 28, -1, 0, 0, 0, 0, 29, 29, -1, 2, 30, 22, 31, 23, 0, 0, 0, 32, 32, -1, 1, 33, 24, 0, 0, 0, 34, 34, -1, 1, 35, 25, 0),
+"variants": [Vector2(507, 227), ExtResource("13_u84qy"), SubResource("Resource_fxkbx"), SubResource("Resource_eacat"), 100, 150, ExtResource("16_c6w1e"), ExtResource("17_4c4jv"), SubResource("ShaderMaterial_iywne"), ExtResource("19_5ytgs"), true, 8, 129, false, ExtResource("20_moj4v"), "uid://12171bvbqp8w", SubResource("RectangleShape2D_8tegq"), 4, 0, ExtResource("21_04xhx"), 1, "uid://dhan5ja6q4fjx", SubResource("SpriteFrames_fxkbx"), "default", SubResource("AnimationLibrary_47vae"), SubResource("Curve2D_h0di7")],
+"version": 3
+}
+
+[sub_resource type="Resource" id="Resource_wt882"]
+script = ExtResource("6_2ewt3")
+num_spawn_points = 4
+angular_spread = 1.309
+bullet_speed = 400.0
+max_times_to_fire = 10
+fire_rate = 0.5
+initial_theta = 0.785
+metadata/_custom_type_script = "uid://baq3m8rspbgqo"
+
+[sub_resource type="Resource" id="Resource_8aa4l"]
+script = ExtResource("9_2hpwu")
+direction = 1
+distance = 2.0
+metadata/_custom_type_script = "uid://c8u5b5y0i25wp"
+
+[sub_resource type="Resource" id="Resource_t4g3o"]
+script = ExtResource("9_0lf7e")
+movement_array = Array[ExtResource("7_e4h20")]([SubResource("Resource_8aa4l")])
+metadata/_custom_type_script = "uid://thlx0gtur2d4"
+
+[sub_resource type="Resource" id="Resource_xqf82"]
+script = ExtResource("11_2hpwu")
+speed = 100.0
+metadata/_custom_type_script = "uid://bi7tvg5jn0udf"
+
+[sub_resource type="Resource" id="Resource_41lv2"]
+script = ExtResource("5_2ewt3")
+enemy = SubResource("PackedScene_u84qy")
+enemy_movement_pattern = SubResource("Resource_t4g3o")
+enemy_attack_pattern = Array[ExtResource("6_2ewt3")]([SubResource("Resource_wt882")])
+number_of_enemies = 10
+enemy_stats = SubResource("Resource_xqf82")
+metadata/_custom_type_script = "uid://c4twyssjo6an2"
+
+[sub_resource type="Resource" id="Resource_ce5gj"]
+script = ExtResource("4_wxjxf")
+spawner = 1
+time_between_spawns = 0.5
+time_to_occur = 70.0
+spawns = Array[ExtResource("5_2ewt3")]([SubResource("Resource_41lv2")])
+metadata/_custom_type_script = "uid://bewu02jnvwcgy"
+
+[sub_resource type="Resource" id="Resource_45ajv"]
+script = ExtResource("4_wxjxf")
+spawner = 8
+time_between_spawns = 0.5
+time_to_occur = 73.0
+spawns = Array[ExtResource("5_2ewt3")]([SubResource("Resource_41prl")])
+metadata/_custom_type_script = "uid://bewu02jnvwcgy"
+
+[sub_resource type="Resource" id="Resource_c8cd4"]
+script = ExtResource("6_2ewt3")
+num_spawn_points = 8
+angular_spread = 1.309
+bullet_speed = 250.0
+max_times_to_fire = 10
+fire_rate = 0.5
+initial_theta = 0.785
+metadata/_custom_type_script = "uid://baq3m8rspbgqo"
+
+[sub_resource type="Resource" id="Resource_b3mwt"]
+script = ExtResource("6_2ewt3")
+change_in_angle = 3.798
+num_spawn_points = 15
+angular_spread = 2.5
+bullet_speed = 150.0
+max_times_to_fire = 80
+fire_rate = 0.1
+is_rotate = true
+max_times_to_rotate = 1000
+metadata/_custom_type_script = "uid://baq3m8rspbgqo"
+
+[sub_resource type="Resource" id="Resource_2ibm0"]
+script = ExtResource("6_2ewt3")
+num_spawn_points = 30
+angular_spread = 6.283
+bullet_speed = 200.0
+max_times_to_fire = 20
+fire_rate = 1.0
+max_times_to_rotate = 3
+metadata/_custom_type_script = "uid://baq3m8rspbgqo"
+
+[sub_resource type="Resource" id="Resource_quib2"]
+script = ExtResource("11_2hpwu")
+health = 10000.0
+metadata/_custom_type_script = "uid://bi7tvg5jn0udf"
+
+[sub_resource type="Resource" id="Resource_2skr7"]
+script = ExtResource("5_2ewt3")
+enemy = ExtResource("23_godws")
+enemy_attack_pattern = Array[ExtResource("6_2ewt3")]([SubResource("Resource_c8cd4"), SubResource("Resource_b3mwt"), SubResource("Resource_2ibm0")])
+number_of_enemies = 1
+enemy_stats = SubResource("Resource_quib2")
+metadata/_custom_type_script = "uid://c4twyssjo6an2"
+
+[sub_resource type="Resource" id="Resource_kv8r3"]
+script = ExtResource("4_wxjxf")
+spawner = 1
+time_to_occur = 1.0
+spawns = Array[ExtResource("5_2ewt3")]([SubResource("Resource_2skr7")])
+metadata/_custom_type_script = "uid://bewu02jnvwcgy"
+
+[node name="Game" type="Node" unique_id=717147830]
+script = ExtResource("1_a0dj8")
+metadata/_edit_vertical_guides_ = [-289.0, 239.0]
+metadata/_edit_horizontal_guides_ = [-162.0, 163.0]
+
+[node name="StarBackground" parent="." unique_id=1934287316 instance=ExtResource("2_gtx2w")]
+position = Vector2(-289, -154)
+scale = Vector2(0.5190562, 0.49451283)
+
+[node name="Bullets" type="Node2D" parent="." unique_id=666204858]
+
+[node name="Borders" type="Node2D" parent="." unique_id=83428441]
+
+[node name="top_bottom" type="StaticBody2D" parent="Borders" unique_id=1700781145]
 collision_layer = 32
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/top_bottom" unique_id=483473855]
-position = Vector2(0, -174)
-shape = SubResource("RectangleShape2D_4p1o3")
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Borders/top_bottom" unique_id=98704334]
+position = Vector2(-1, -152)
+shape = SubResource("RectangleShape2D_d8ny1")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Borders/top_bottom" unique_id=990776145]
-position = Vector2(-12, 175)
-shape = SubResource("RectangleShape2D_4p1o3")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/top_bottom" unique_id=1746567068]
+position = Vector2(-1, 119)
+shape = SubResource("RectangleShape2D_1tcrw")
 
-[node name="left_right" type="StaticBody2D" parent="Borders" unique_id=1769153136]
+[node name="left_right" type="StaticBody2D" parent="Borders" unique_id=2066459629]
 collision_layer = 32
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/left_right" unique_id=779376320]
-position = Vector2(-300, 9)
-shape = SubResource("RectangleShape2D_14nfc")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/left_right" unique_id=408583383]
+position = Vector2(-282, 0)
+shape = SubResource("RectangleShape2D_iywne")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Borders/left_right" unique_id=1075284905]
-position = Vector2(300, 9)
-shape = SubResource("RectangleShape2D_14nfc")
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Borders/left_right" unique_id=1460387018]
+position = Vector2(280, 0)
+shape = SubResource("RectangleShape2D_iywne")
 
-[node name="Rotater_Shoot_Enemy" parent="." unique_id=1367146779 instance=ExtResource("3_yye74")]
-position = Vector2(-6, -11)
-rotate_speed = 20
-shooter_timer_wait_time = 0.2
-spawn_point_count = 8
+[node name="ColorRect4" type="ColorRect" parent="Borders" unique_id=1298630426]
+z_index = 1
+offset_left = -272.0
+offset_top = -163.0
+offset_right = 51.93866
+offset_bottom = -142.80739
+rotation = 1.5708452
+color = Color(0.29219002, 0.29219005, 0.29219002, 1)
+metadata/_edit_use_anchors_ = true
 
-[node name="Enemy" parent="." unique_id=1705421253 instance=ExtResource("4_v740s")]
-position = Vector2(159, -108)
-rotation = -3.1415925
-shoot_timer_wait_time = 1.1
-health = 20
+[node name="ColorRect3" type="ColorRect" parent="Borders" unique_id=763061406]
+z_index = 1
+offset_left = 290.0
+offset_top = -162.00098
+offset_right = 613.93866
+offset_bottom = -141.80836
+rotation = 1.5708452
+color = Color(0.29219002, 0.29219005, 0.29219002, 1)
+metadata/_edit_use_anchors_ = true
 
-[node name="Enemy2" parent="." unique_id=185557157 instance=ExtResource("4_v740s")]
-position = Vector2(78, -113)
-rotation = -3.1415925
-shoot_timer_wait_time = 1.2
-health = 20
+[node name="ColorRect" type="ColorRect" parent="Borders" unique_id=83602436]
+z_index = 1
+offset_left = -289.0
+offset_top = -162.0
+offset_right = 286.0
+offset_bottom = -142.0
+color = Color(0.29219002, 0.29219005, 0.29219002, 1)
+metadata/_edit_use_anchors_ = true
 
-[node name="Enemy3" parent="." unique_id=110745697 instance=ExtResource("4_v740s")]
-position = Vector2(-60, -118)
-rotation = -3.1415925
-shoot_timer_wait_time = 1.3
-health = 20
+[node name="ColorRect2" type="ColorRect" parent="Borders" unique_id=1931852487]
+z_index = 1
+offset_left = -289.0
+offset_top = 109.0
+offset_right = 286.0
+offset_bottom = 162.0
+color = Color(0.29219002, 0.29219005, 0.29219002, 1)
+metadata/_edit_use_anchors_ = true
 
-[node name="Enemy4" parent="." unique_id=684650965 instance=ExtResource("4_v740s")]
-position = Vector2(-180, -122)
-rotation = -3.1415925
-shoot_timer_wait_time = 1.4
-health = 20
+[node name="SpawnPoint" type="Marker2D" parent="." unique_id=732362670]
+position = Vector2(-6, 69)
 
-[node name="Enemy5" parent="." unique_id=119037337 instance=ExtResource("4_v740s")]
-position = Vector2(-233, -124)
-rotation = 1.5707964
-shoot_timer_wait_time = 0.8
-speed = 20
-health = 20
+[node name="LevelManager" parent="." unique_id=1305954196 node_paths=PackedStringArray("spawners") instance=ExtResource("3_1a52t")]
+spawners = [NodePath("EnemySpawnPoint"), NodePath("EnemySpawnPoint2"), NodePath("EnemySpawnPoint4"), NodePath("EnemySpawnPoint5"), NodePath("EnemySpawnPoint3"), NodePath("EnemySpawnPoint6"), NodePath("EnemySpawnPoint7"), NodePath("EnemySpawnPoint8")]
+events = Array[ExtResource("4_wxjxf")]([SubResource("Resource_ttcij"), SubResource("Resource_ki2ik"), SubResource("Resource_godws"), SubResource("Resource_04xhx"), SubResource("Resource_7abrx"), SubResource("Resource_48gr3"), SubResource("Resource_ruw1c"), SubResource("Resource_etbbg"), SubResource("Resource_n36b2"), SubResource("Resource_rsybt"), SubResource("Resource_l0ubj"), SubResource("Resource_81b7e"), SubResource("Resource_ce5gj"), SubResource("Resource_45ajv")])
+level_time = 90.0
+boss_spawn_event = SubResource("Resource_kv8r3")
 
-[node name="Enemy6" parent="." unique_id=572858134 instance=ExtResource("4_v740s")]
-position = Vector2(203, -111)
-rotation = -1.5707964
-shoot_timer_wait_time = 0.88
-speed = 20
-health = 20
+[node name="Label" parent="LevelManager" index="2" unique_id=405150559]
+z_index = 4
+offset_left = -285.0
+offset_top = -159.0
+offset_right = -155.0
+offset_bottom = -136.0
+
+[node name="Spawner" parent="LevelManager" index="5" unique_id=787316282 node_paths=PackedStringArray("player_user_interface")]
+player_user_interface = NodePath("../../PlayerUserInterface")
+
+[node name="EnemySpawnPoint" type="Node2D" parent="LevelManager" unique_id=966124853]
+position = Vector2(1, -142)
+script = ExtResource("6_e4h20")
+id = 1
+spawn_interval = 1.0
+metadata/_custom_type_script = "uid://cpbp4ohcaqwle"
+
+[node name="EnemySpawnPoint4" type="Node2D" parent="LevelManager" unique_id=961822767]
+position = Vector2(270, -88)
+script = ExtResource("6_e4h20")
+id = 4
+spawn_interval = 1.0
+metadata/_custom_type_script = "uid://cpbp4ohcaqwle"
+
+[node name="EnemySpawnPoint5" type="Node2D" parent="LevelManager" unique_id=1344813384]
+position = Vector2(197, 110)
+script = ExtResource("6_e4h20")
+id = 5
+spawn_interval = 1.0
+metadata/_custom_type_script = "uid://cpbp4ohcaqwle"
+
+[node name="EnemySpawnPoint2" type="Node2D" parent="LevelManager" unique_id=916848794]
+position = Vector2(-272, 48)
+script = ExtResource("6_e4h20")
+id = 2
+spawn_interval = 1.0
+metadata/_custom_type_script = "uid://cpbp4ohcaqwle"
+
+[node name="EnemySpawnPoint3" type="Node2D" parent="LevelManager" unique_id=1311989074]
+position = Vector2(-170, -142)
+script = ExtResource("6_e4h20")
+id = 3
+spawn_interval = 1.0
+metadata/_custom_type_script = "uid://cpbp4ohcaqwle"
+
+[node name="EnemySpawnPoint6" type="Node2D" parent="LevelManager" unique_id=1884373698]
+position = Vector2(-188, 109)
+script = ExtResource("6_e4h20")
+id = 6
+spawn_interval = 1.0
+metadata/_custom_type_script = "uid://cpbp4ohcaqwle"
+
+[node name="EnemySpawnPoint7" type="Node2D" parent="LevelManager" unique_id=940565125]
+position = Vector2(-272, -15)
+script = ExtResource("6_e4h20")
+id = 7
+spawn_interval = 1.0
+metadata/_custom_type_script = "uid://cpbp4ohcaqwle"
+
+[node name="EnemySpawnPoint8" type="Node2D" parent="LevelManager" unique_id=1042175672]
+position = Vector2(160, -142)
+script = ExtResource("6_e4h20")
+id = 8
+spawn_interval = 1.0
+metadata/_custom_type_script = "uid://cpbp4ohcaqwle"
+
+[node name="Label" type="Label" parent="." unique_id=675057189]
+z_index = 4
+offset_left = -47.0
+offset_top = -158.0
+offset_right = 57.0
+offset_bottom = -141.0
+theme_override_fonts/font = ExtResource("7_2hpwu")
+theme_override_font_sizes/font_size = 16
+text = "Survive!"
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1122154381]
+unique_name_in_owner = true
+zoom = Vector2(2, 2)
+limit_left = -191
+limit_top = -162
+limit_right = 188
+limit_bottom = 163
+
+[node name="PlayerUserInterface" parent="." unique_id=330220776 instance=ExtResource("8_0lf7e")]
+
+[node name="MusicAutoTrigger" type="Node" parent="." unique_id=1110296939]
+script = ExtResource("9_410d2")
+track = ExtResource("16_2hpwu")
+metadata/_custom_type_script = "uid://84ox43jyptjb"
+
+[node name="PlayArea" type="ColorRect" parent="." unique_id=1288047611 groups=["PlayArea"]]
+visible = false
+offset_left = -272.0
+offset_top = -142.0
+offset_right = 270.0
+offset_bottom = 109.0
+
+[editable path="LevelManager"]

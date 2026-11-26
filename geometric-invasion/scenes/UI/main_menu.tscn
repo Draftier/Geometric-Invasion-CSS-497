@@ -8,9 +8,6 @@
 [ext_resource type="Script" uid="uid://84ox43jyptjb" path="res://scenes/Audio/music_auto_trigger.gd" id="5_ngj32"]
 [ext_resource type="AudioStream" uid="uid://8qm86b2b1081" path="res://assets/audio/music/menu_theme/Week 21 - Freefall GLIDE.ogg" id="6_ngj32"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t4w0s"]
-bg_color = Color(0.50638676, 0.50638676, 0.50638676, 0.34901962)
-
 [node name="Main menu" type="Control" unique_id=1321061727]
 layout_mode = 3
 anchors_preset = 15
@@ -60,7 +57,6 @@ size_flags_vertical = 4
 focus_neighbor_top = NodePath("../QuitButton")
 focus_neighbor_bottom = NodePath("../Multiplayer (Not implemented)")
 theme = ExtResource("4_tfcbk")
-theme_override_styles/hover = SubResource("StyleBoxFlat_t4w0s")
 text = "Singleplayer"
 script = ExtResource("5_bm8t2")
 metadata/_custom_type_script = "uid://c6mayvsci6gvc"

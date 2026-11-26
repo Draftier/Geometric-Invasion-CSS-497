@@ -1,0 +1,208 @@
+[gd_scene format=3 uid="uid://y8ywv772wm83"]
+
+[ext_resource type="Script" uid="uid://cejwab54dw4r5" path="res://scripts/singleton/game.gd" id="1_ww6c6"]
+[ext_resource type="PackedScene" uid="uid://cnr36qxaqynbc" path="res://scenes/star_background.tscn" id="2_0hnb7"]
+[ext_resource type="PackedScene" uid="uid://cjye6s0e01omf" path="res://scenes/Managers/level_manager.tscn" id="3_elqjt"]
+[ext_resource type="Script" uid="uid://bewu02jnvwcgy" path="res://scripts/event/spawn_event_data.gd" id="4_30k8l"]
+[ext_resource type="Script" uid="uid://c4twyssjo6an2" path="res://scripts/event/spawn.gd" id="5_tb6ve"]
+[ext_resource type="Script" uid="uid://cpbp4ohcaqwle" path="res://scripts/spawn_point.gd" id="26_wngj0"]
+[ext_resource type="FontFile" uid="uid://dihhulpjs1064" path="res://assets/fonts/PixelOperator8.ttf" id="27_j1rxw"]
+[ext_resource type="PackedScene" uid="uid://cw7p0ekjax6t7" path="res://scenes/UI/player_user_interface.tscn" id="28_nkkrq"]
+[ext_resource type="Script" uid="uid://84ox43jyptjb" path="res://scenes/Audio/music_auto_trigger.gd" id="29_v8iha"]
+[ext_resource type="AudioStream" uid="uid://cpwdxqxulkiqy" path="res://assets/audio/music/level_music/Fields of Ice.ogg" id="30_x6n16"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d8ny1"]
+size = Vector2(536, 21)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1tcrw"]
+size = Vector2(536, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iywne"]
+size = Vector2(20, 284)
+
+[sub_resource type="Resource" id="Resource_kv8r3"]
+script = ExtResource("4_30k8l")
+spawner = 1
+time_to_occur = 1.0
+metadata/_custom_type_script = "uid://bewu02jnvwcgy"
+
+[sub_resource type="Curve2D" id="Curve2D_b6fd1"]
+
+[node name="Game" type="Node" unique_id=717147830]
+script = ExtResource("1_ww6c6")
+metadata/_edit_vertical_guides_ = [-289.0, 239.0]
+metadata/_edit_horizontal_guides_ = [-162.0, 163.0]
+
+[node name="StarBackground" parent="." unique_id=1934287316 instance=ExtResource("2_0hnb7")]
+position = Vector2(-292, -153.00005)
+scale = Vector2(0.5190562, 0.49451283)
+
+[node name="Bullets" type="Node2D" parent="." unique_id=666204858]
+
+[node name="Borders" type="Node2D" parent="." unique_id=83428441]
+
+[node name="top_bottom" type="StaticBody2D" parent="Borders" unique_id=1700781145]
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Borders/top_bottom" unique_id=98704334]
+position = Vector2(-1, -152)
+shape = SubResource("RectangleShape2D_d8ny1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/top_bottom" unique_id=1746567068]
+position = Vector2(-1, 119)
+shape = SubResource("RectangleShape2D_1tcrw")
+
+[node name="left_right" type="StaticBody2D" parent="Borders" unique_id=2066459629]
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/left_right" unique_id=408583383]
+position = Vector2(-282, 0)
+shape = SubResource("RectangleShape2D_iywne")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Borders/left_right" unique_id=1460387018]
+position = Vector2(280, 0)
+shape = SubResource("RectangleShape2D_iywne")
+
+[node name="ColorRect4" type="ColorRect" parent="Borders" unique_id=1298630426]
+z_index = 1
+offset_left = -272.0
+offset_top = -163.0
+offset_right = 51.93866
+offset_bottom = -142.80739
+rotation = 1.5708452
+color = Color(0.29219002, 0.29219005, 0.29219002, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect3" type="ColorRect" parent="Borders" unique_id=763061406]
+z_index = 1
+offset_left = 290.0
+offset_top = -162.00098
+offset_right = 613.93866
+offset_bottom = -141.80836
+rotation = 1.5708452
+color = Color(0.29219002, 0.29219005, 0.29219002, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="Borders" unique_id=83602436]
+z_index = 1
+offset_left = -289.0
+offset_top = -162.0
+offset_right = 286.0
+offset_bottom = -142.0
+color = Color(0.29219002, 0.29219005, 0.29219002, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect2" type="ColorRect" parent="Borders" unique_id=1931852487]
+z_index = 1
+offset_left = -289.0
+offset_top = 109.0
+offset_right = 286.0
+offset_bottom = 162.0
+color = Color(0.29219002, 0.29219005, 0.29219002, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="SpawnPoint" type="Marker2D" parent="." unique_id=732362670]
+position = Vector2(-6, 69)
+
+[node name="LevelManager" parent="." unique_id=1305954196 node_paths=PackedStringArray("spawners") instance=ExtResource("3_elqjt")]
+spawners = [NodePath("EnemySpawnPoint"), NodePath("EnemySpawnPoint2"), NodePath("EnemySpawnPoint4"), NodePath("EnemySpawnPoint5"), NodePath("EnemySpawnPoint3"), NodePath("EnemySpawnPoint6"), NodePath("EnemySpawnPoint7")]
+level_time = 75.0
+boss_spawn_event = SubResource("Resource_kv8r3")
+
+[node name="Label" parent="LevelManager" index="2" unique_id=405150559]
+z_index = 4
+offset_left = -285.0
+offset_top = -159.0
+offset_right = -155.0
+offset_bottom = -136.0
+
+[node name="Spawner" parent="LevelManager" index="5" unique_id=787316282 node_paths=PackedStringArray("player_user_interface")]
+player_user_interface = NodePath("../../PlayerUserInterface")
+
+[node name="EnemySpawnPoint" type="Node2D" parent="LevelManager" unique_id=966124853]
+position = Vector2(1, -142)
+script = ExtResource("26_wngj0")
+id = 1
+spawn_interval = 1.0
+metadata/_custom_type_script = "uid://cpbp4ohcaqwle"
+
+[node name="EnemySpawnPoint4" type="Node2D" parent="LevelManager" unique_id=961822767]
+position = Vector2(-269, -72)
+script = ExtResource("26_wngj0")
+id = 4
+spawn_interval = 1.0
+metadata/_custom_type_script = "uid://cpbp4ohcaqwle"
+
+[node name="EnemySpawnPoint5" type="Node2D" parent="LevelManager" unique_id=1344813384]
+position = Vector2(197, 110)
+script = ExtResource("26_wngj0")
+id = 5
+spawn_interval = 1.0
+metadata/_custom_type_script = "uid://cpbp4ohcaqwle"
+
+[node name="EnemySpawnPoint2" type="Node2D" parent="LevelManager" unique_id=916848794]
+position = Vector2(-268, 0)
+script = ExtResource("26_wngj0")
+id = 2
+spawn_interval = 1.0
+metadata/_custom_type_script = "uid://cpbp4ohcaqwle"
+
+[node name="EnemySpawnPoint3" type="Node2D" parent="LevelManager" unique_id=1311989074]
+position = Vector2(-170, -142)
+script = ExtResource("26_wngj0")
+id = 3
+spawn_interval = 1.0
+metadata/_custom_type_script = "uid://cpbp4ohcaqwle"
+
+[node name="EnemySpawnPoint6" type="Node2D" parent="LevelManager" unique_id=1884373698]
+position = Vector2(-188, 109)
+script = ExtResource("26_wngj0")
+id = 6
+spawn_interval = 1.0
+metadata/_custom_type_script = "uid://cpbp4ohcaqwle"
+
+[node name="EnemySpawnPoint7" type="Node2D" parent="LevelManager" unique_id=940565125]
+position = Vector2(140, -140)
+script = ExtResource("26_wngj0")
+id = 7
+spawn_interval = 1.0
+metadata/_custom_type_script = "uid://cpbp4ohcaqwle"
+
+[node name="Label" type="Label" parent="." unique_id=675057189]
+z_index = 4
+offset_left = -47.0
+offset_top = -158.0
+offset_right = 57.0
+offset_bottom = -141.0
+theme_override_fonts/font = ExtResource("27_j1rxw")
+theme_override_font_sizes/font_size = 16
+text = "Survive!"
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1122154381]
+unique_name_in_owner = true
+zoom = Vector2(2, 2)
+limit_left = -191
+limit_top = -162
+limit_right = 188
+limit_bottom = 163
+
+[node name="PlayerUserInterface" parent="." unique_id=330220776 instance=ExtResource("28_nkkrq")]
+
+[node name="MusicAutoTrigger" type="Node" parent="." unique_id=1110296939]
+script = ExtResource("29_v8iha")
+track = ExtResource("30_x6n16")
+metadata/_custom_type_script = "uid://84ox43jyptjb"
+
+[node name="PlayArea" type="ColorRect" parent="." unique_id=1288047611 groups=["PlayArea"]]
+visible = false
+offset_left = -272.0
+offset_top = -142.0
+offset_right = 270.0
+offset_bottom = 109.0
+
+[node name="Path2D" type="Path2D" parent="." unique_id=826466117]
+curve = SubResource("Curve2D_b6fd1")
+
+[editable path="LevelManager"]

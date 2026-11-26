@@ -89,7 +89,9 @@ func _on_text_finished_display() -> void:
 		await get_tree().create_timer(3.0).timeout
 		set_state(States.WAIT)
 		change_label_text("Congratulations on finishing the tutorial!")
+		quit_button.grab_focus()
 		quit_button.visible = true
+		
 		
 
 func _unhandled_input(event: InputEvent) -> void:

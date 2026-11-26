@@ -21,6 +21,8 @@ signal hit_report(id : int, damage : float, shooter_id : int)
 @onready var hitbox : Hitbox = %Hitbox
 @onready var hurtbox : Hurtbox = %Hurtbox
 
+@export var enemy_stats : EnemyStatResource
+
 # Movement and attack resources that enemies will utilize
 @export var movement_events : EnemyMovementData
 @export var attack_events : Array[EnemyAttackData]
@@ -192,6 +194,7 @@ func execute_movement_events() -> void:
 		await movement_finished
 		print("Ending position: ", self.global_position)
 		cur_event = null
+		#print("Time beteween movement events: ", movement_events.time_between_movements)
 		await get_tree().create_timer(movement_events.time_between_movements).timeout
 
 	# Stop moving
